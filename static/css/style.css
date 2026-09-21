@@ -1,0 +1,187 @@
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#fff;
+}
+
+/* Header */
+
+header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:15px 50px;
+background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+nav{
+display:flex;
+gap:30px;
+}
+
+nav a{
+text-decoration:none;
+color:#1f2937;
+font-weight:600;
+}
+
+.btn-primary{
+background:#138c45;
+color:#fff;
+padding:12px 22px;
+border-radius:10px;
+text-decoration:none;
+}
+
+.btn-outline{
+border:2px solid #138c45;
+color:#138c45;
+padding:10px 20px;
+border-radius:10px;
+text-decoration:none;
+}
+
+/* Hero */
+
+.hero{
+height:420px;
+background:url('/static/images/hero.jpg')
+center center/cover no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.overlay{
+text-align:center;
+color:white;
+}
+
+.overlay h1{
+font-size:5rem;
+font-weight:800;
+}
+
+.overlay span{
+color:#21d46b;
+}
+
+.overlay p{
+font-size:1.3rem;
+}
+
+/* Cards */
+
+.cards{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+padding:30px;
+margin-top:-90px;
+}
+
+.card{
+height:350px;
+border-radius:20px;
+overflow:hidden;
+position:relative;
+color:white;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.business{
+background:
+linear-gradient(
+rgba(0,110,45,.85),
+rgba(0,110,45,.85)
+),
+url('/static/images/business.jpg')
+center/cover;
+}
+
+.property{
+background:
+linear-gradient(
+rgba(0,103,190,.75),
+rgba(0,103,190,.75)
+),
+url('/static/images/property.jpg')
+center/cover;
+}
+
+.card-content{
+padding:40px;
+}
+
+.card-content i{
+font-size:60px;
+margin-bottom:20px;
+}
+
+.card-content h2{
+font-size:3rem;
+margin-bottom:10px;
+}
+
+.card-content a{
+margin-top:20px;
+display:inline-block;
+background:white;
+color:#138c45;
+padding:14px 25px;
+border-radius:50px;
+text-decoration:none;
+font-weight:700;
+}
+
+/* Feature Section */
+
+.features{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+padding:50px;
+text-align:center;
+}
+
+.features i{
+color:#138c45;
+font-size:35px;
+margin-bottom:15px;
+}
+
+/* App Banner */
+
+.app-banner{
+margin:40px;
+padding:30px;
+border-radius:20px;
+background:#f0f7f3;
+display:flex;
+align-items:center;
+gap:30px;
+}
+
+/* Footer */
+
+footer{
+background:
+linear-gradient(90deg,#0c5a32,#022b17);
+color:white;
+padding:50px;
+display:flex;
+justify-content:space-between;
+}
+
+footer a{
+display:block;
+color:white;
+text-decoration:none;
+margin-top:8px;
+}

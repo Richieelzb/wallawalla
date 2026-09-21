@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="icon"
+          type="image/png"
+          sizes="40x40"
+          href="{{ url_for('static', filename='images/wallawalla-circular.png') }}">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Find It On Wallawalla</title>
+
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    <!-- Google Analytics -->
+    <script async
+        src="https://www.googletagmanager.com/gtag/js?id=G-X2V1XS75J9">
+    </script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-X2V1XS75J9');
+    </script>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        <img
+            src="{{ url_for('static', filename='images/wallawalla-circular.png') }}"
+            alt="Wallawalla Logo"
+        >
+
+    </div>
+
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/about">About Us</a>
+
+        <a href="/contact">Contact Us</a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <a href="/login">
+            Login
+        </a>
+
+        <a href="/register" class="btn">
+            Register
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="overlay">
+
+        <h1>
+            Find It <span>Near You</span>
+        </h1>
+
+        <p>
+            Discover local businesses and properties
+            in your area.
+        </p>
+
+        <p>
+            Shop. Search. Connect.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     BUSINESS & PROPERTY
+========================= -->
+
+<section class="cards">
+
+
+    <!-- Business -->
+
+    <div class="card business">
+
+        <div class="card-content">
+
+            <i class="fa-solid fa-store"></i>
+
+            <h2>
+                Business
+            </h2>
+
+            <p>
+                Find local businesses and services near you.
+            </p>
+
+            <a href="/">
+                Explore Businesses
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Property -->
+
+    <div class="card property">
+
+        <div class="card-content">
+
+            <i class="fa-solid fa-house"></i>
+
+            <h2>
+                Property
+            </h2>
+
+            <p>
+                Find and list homes, rentals and land.
+            </p>
+
+            <a href="/property">
+                Explore Property
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section class="features">
+
+
+    <div>
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        <h4>
+            Local Focus
+        </h4>
+
+        <p>
+            Find what you need, near you
+        </p>
+
+    </div>
+
+
+
+    <div>
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <h4>
+            Verified Listings
+        </h4>
+
+        <p>
+            Trusted businesses and properties
+        </p>
+
+    </div>
+
+
+
+    <div>
+
+        <i class="fa-solid fa-users"></i>
+
+        <h4>
+            Community Driven
+        </h4>
+
+        <p>
+            Support local, grow together
+        </p>
+
+    </div>
+
+
+
+    <div>
+
+        <i class="fa-solid fa-leaf"></i>
+
+        <h4>
+            A Better Tomorrow
+        </h4>
+
+        <p>
+            More local opportunities
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     APP BANNER
+========================= -->
+
+<section class="app-banner">
+
+
+    <img
+        src="{{ url_for('static', filename='images/wallawalla-app.png') }}"
+        alt="Wallawalla App"
+    >
+
+
+    <div>
+
+        <h2>
+            Download the Wallawalla App
+        </h2>
+
+        <p>
+            Get the best local businesses and properties
+            right at your fingertips.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+
+    <div class="footer-logo">
+
+        WALLAWALLA
+
+    </div>
+
+
+
+    <div>
+
+        <h4>
+            Quick Links
+        </h4>
+
+        <a href="/">
+            Home
+        </a>
+        <br>
+
+        <a href="/about">
+            About
+        </a>
+        <br>
+
+        <a href="/contact">
+            Contact
+        </a>
+
+    </div>
+
+
+
+    <div>
+
+        <h4>
+            Follow Us
+        </h4>
+
+
+        <a href="#"
+           aria-label="Facebook">
+
+            <i class="fab fa-facebook"></i>
+
+        </a>
+
+
+        <a href="#"
+           aria-label="Instagram">
+
+            <i class="fab fa-instagram"></i>
+
+        </a>
+
+
+        <a href="#"
+           aria-label="LinkedIn">
+
+            <i class="fab fa-linkedin"></i>
+
+        </a>
+
+
+        <a href="#"
+           aria-label="YouTube">
+
+            <i class="fab fa-youtube"></i>
+
+        </a>
+
+    </div>
+
+
+</footer>
+
+
+</body>
+
+</html>
