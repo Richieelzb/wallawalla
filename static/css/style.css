@@ -1617,6 +1617,27 @@ body{
         margin-top:0;
     }
 
+    .hero{
+        margin-top:-20px;
+        padding:120px 15px 50px;
+    }
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    .hero p{
+        font-size:0.95rem;
+        padding:0 10px;
+    }
+
+    .hero-content{
+        width: 100%;
+        padding: 0 5px;
+        margin-top: 40px;
+    }
+
+
     .logo img{
         height:32px;
     }
@@ -1624,10 +1645,6 @@ body{
     .logo-text{
         font-size:16px;
         letter-spacing:0;
-    }
-
-    .tagline{
-        display:none;
     }
 
     .cards{
