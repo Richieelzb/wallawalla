@@ -343,7 +343,68 @@
 
 </footer>
 
+<div id="floating-arrow" class="floating-arrow">
+    <i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<script>
+
+const sections = [
+    ".hero",
+    ".cards",
+    ".features",
+    ".app-banner",
+    "footer"
+];
+
+document.getElementById("floating-arrow")
+.addEventListener("click", function () {
+
+    const currentPosition = window.scrollY;
+
+    for (let i = 0; i < sections.length; i++) {
+
+        const section =
+            document.querySelector(sections[i]);
+
+        if (section.offsetTop > currentPosition + 100) {
+
+            section.scrollIntoView({
+                behavior: "smooth"
+            });
+
+            return;
+        }
+    }
+
+    // Back to top when footer reached
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
+window.addEventListener("scroll", function () {
+
+    const footer = document.querySelector("footer");
+    const arrow = document.getElementById("floating-arrow");
+
+    if (
+        window.scrollY + window.innerHeight >=
+        footer.offsetTop
+    ) {
+        arrow.innerHTML =
+            '<i class="fa-solid fa-chevron-up"></i>';
+    } else {
+        arrow.innerHTML =
+            '<i class="fa-solid fa-chevron-down"></i>';
+    }
+
+});
+
+</script>
 
 </body>
 
 </html>
+
