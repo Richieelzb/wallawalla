@@ -1638,13 +1638,18 @@ body{
     }
 
 
-    .logo img{
-        height:32px;
+   .logo{
+        font-size:24px;
     }
 
+    .logo img{
+        height:40px;
+        width:auto;
+    }
+    
     .logo-text{
-        font-size:16px;
-        letter-spacing:0;
+        font-size:20px;
+        letter-spacing:1px;
     }
 
     .cards{
