@@ -68,6 +68,25 @@ border-radius:10px;
 text-decoration:none;
 }
 
+.hero-location {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 10px 18px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.hero-location i {
+    color: #ef4444;
+    font-size: 16px;
+}
+
 /* Hero */
 
 .hero{

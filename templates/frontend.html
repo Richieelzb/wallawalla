@@ -116,6 +116,13 @@
             Shop. Search. Connect.
         </p>
 
+        <div class="hero-location">
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="current-location">
+                Detecting location...
+            </span>
+        </div>
+
     </div>
 
 </section>
@@ -363,6 +370,8 @@ window.addEventListener("scroll", function () {
 
 });
 </script>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>
 
