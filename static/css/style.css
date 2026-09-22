@@ -178,24 +178,24 @@ center/cover;
 }
 
 .card-content i{
-font-size:60px;
+font-size:40px;
 margin-bottom:20px;
 }
 
 .card-content h2{
-font-size:3rem;
+font-size:2rem;
 margin-bottom:10px;
 }
 
 .card-content a{
-margin-top:20px;
-display:inline-block;
-background:white;
-color:#138c45;
-padding:14px 25px;
-border-radius:50px;
-text-decoration:none;
-font-weight:700;
+    margin-top:20px;
+    display:inline-block;
+    background:white;
+    color:#138c45;
+    padding:14px 25px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:700;
 }
 
 /* Feature Section */
@@ -1741,7 +1741,7 @@ body{
     }
 
     .card-content h2{
-        font-size:2rem;
+        font-size:1rem;
     }
 
     .features{
