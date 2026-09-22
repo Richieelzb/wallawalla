@@ -1618,6 +1618,7 @@ body{
     }
 
     .hero{
+        min-height:55vh;
         margin-top:-20px;
         padding:120px 15px 10px;
     }
