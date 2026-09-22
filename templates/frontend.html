@@ -53,6 +53,47 @@
 <body>
 
 
+    <div id="location-required" class="location-required">
+    <div class="location-box">
+        <i class="fa-solid fa-location-crosshairs"></i>
+        <h2>Location Required</h2>
+        <p>
+            Wallawalla requires access to your location to find businesses and services near you.
+        </p>
+
+        <button
+            type="button"
+            onclick="requestLocation()"
+            class="register-btn">
+            Enable Location
+        </button>
+    </div>
+</div>
+
+<nav class="navbar">
+    <a href="https://wallawalla.co.za" style="text-decoration:none; color:inherit;">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='/images/walla-w.png') }}" alt="WallaWalla Logo">
+        <span class="logo-text">
+            <span class="green">WALLA</span>WALLA
+        </span>
+        <span class="tagline">
+          find it<span class="tagline-green"> near you...</span>
+        </span>
+    </div>
+    </a>
+
+   <button class="location-btn" type="button">
+    <img
+        src="https://www.google.com/favicon.ico"
+        alt="Google"
+        class="google-icon"
+    >
+        Powered By Google
+   </button>
+
+</nav>
+
 <!-- =========================
      HEADER
 ========================= -->
