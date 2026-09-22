@@ -1573,6 +1573,12 @@ body{
         padding:12px;
     }
 
+     .navbar{
+        padding:15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
     .nav-links{
         width:100%;
         justify-content:center;
