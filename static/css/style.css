@@ -87,6 +87,24 @@ text-decoration:none;
     font-size: 16px;
 }
 
+.card-btn {
+    display:inline-block;
+
+    margin-top:25px;
+    padding:15px 30px;
+
+    background:greenyellow;
+    color:white;
+
+    border-radius:8px;
+
+    font-weight:bold;
+    letter-spacing:1px;
+}
+.property-btn {
+    background:blue;
+}
+
 /* Hero */
 
 .hero{
