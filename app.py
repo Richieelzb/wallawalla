@@ -11,6 +11,8 @@ from flask import (
 
 app = Flask(__name__)
 
+API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
+
 @app.route("/")
 def home():
  return render_template("frontend.html")
