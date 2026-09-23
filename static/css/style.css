@@ -1758,7 +1758,7 @@ body{
         letter-spacing:1px;
     }
 
-    .cards{
+    /* .cards{
         grid-template-columns:1fr;
         margin-top:20px;
         padding:15px;
@@ -1770,7 +1770,7 @@ body{
 
     .card-content h2{
         font-size:2rem;
-    }
+    } */
 
     .features{
         grid-template-columns:repeat(2,1fr);
