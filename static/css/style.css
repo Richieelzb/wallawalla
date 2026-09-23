@@ -108,12 +108,12 @@ text-decoration:none;
 /* Hero */
 
 .hero{
-height:420px;
-background:url('/static/images/hero.jpg')
-center center/cover no-repeat;
-display:flex;
-justify-content:center;
-align-items:center;
+    height:420px;
+    background:url('/static/images/hero.jpg')
+    center center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .overlay{
@@ -1726,7 +1726,7 @@ body{
     .hero{
         min-height:55vh;
         margin-top:-20px;
-        padding:120px 15px 10px;
+        padding:120px 15px 30px;
     }
 
     .hero h1{
