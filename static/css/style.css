@@ -266,6 +266,19 @@ display:flex;
 justify-content:space-between;
 }
 
+footer{
+    background:linear-gradient(90deg,#0c5a32,#022b17);
+    color:white;
+    padding:50px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:80px;
+    flex-wrap:wrap;
+    text-align:center;
+}
+
+
 footer a{
 display:block;
 color:white;
@@ -1698,6 +1711,7 @@ body{
 
 .location-label{
     color:#99d420;
+    text-align: center;
     font-size:12px;
     font-weight:700;
 }
@@ -1708,7 +1722,7 @@ body{
 }
 
 .tagline-blue{
-    color:#2563eb; /* Blue */
+    color:#2563eb !important; /* Blue */
 }
 
 .social-icons{
