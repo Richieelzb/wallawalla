@@ -249,7 +249,7 @@ margin-bottom:15px;
 margin:40px;
 padding:30px;
 border-radius:20px;
-background:#f0f7f3;
+background:blue;
 display:flex;
 align-items:center;
 gap:30px;
@@ -1724,6 +1724,11 @@ body{
 .tagline-blue{
     color:#2563eb !important; /* Blue */
 }
+
+.tagline-red{
+    color: red !important; /* Blue */
+}
+
 
 .social-icons{
     display:flex;
