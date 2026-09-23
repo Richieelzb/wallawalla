@@ -1789,6 +1789,8 @@ body{
 ========================= */
  @media (max-width:768px){
 
+
+
     .navbar{
         flex-wrap:wrap;
         padding:12px;
@@ -1893,4 +1895,28 @@ body{
         padding:30px 20px;
     }
 
+    footer{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        gap:30px;
+        padding:30px 20px;
+    }
+
+    footer > div{
+        width:100%;
+        text-align:center;
+    }
+
+    .social-icons{
+        justify-content:center;
+    }
+
+    .footer-logo{
+        text-align:center;
+    }
+
 }
+
