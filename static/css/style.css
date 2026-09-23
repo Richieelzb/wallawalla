@@ -1909,5 +1909,67 @@ body{
         text-align:center;
     }
 
+    footer{
+    background: linear-gradient(90deg,#0c5a32,#022b17);
+    color:white;
+    padding:50px;
+}
+
+.footer-container{
+    display:flex;
+    justify-content:space-around;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:50px;
+}
+
+.footer-brand h3,
+.footer-links h3{
+    font-size:28px;
+    margin-bottom:20px;
+    color:#fff;
+}
+
+.footer-links ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.footer-links li{
+    margin:10px 0;
+}
+
+.footer-links a{
+    color:#d9d9d9;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:400;
+    transition:all .3s ease;
+}
+
+.footer-links a:hover{
+    color:#99d420;
+    padding-left:5px;
+}
+
+.social-icons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:20px;
+}
+
+.social-icons a{
+    color:white;
+    font-size:42px;
+    transition:transform .3s ease,color .3s ease;
+}
+
+.social-icons a:hover{
+    color:#99d420;
+    transform:translateY(-3px);
+}
+
 }
 
