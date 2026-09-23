@@ -967,33 +967,6 @@ body{
     white-space: nowrap;
 }
 
-.featured-badge {
-    color: #6b4f00;
-    background: #fff3bf;
-    border: 1px solid #ffd43b;
-}
-
-.premium-badge {
-    color: #ffffff;
-    background: #111827;
-    border: 1px solid #111827;
-}
-
-.verified-badge {
-    color: #075985;
-    background: #e0f2fe;
-    border: 1px solid #38bdf8;
-}
-
-@media (max-width: 600px) {
-    .featured-badge,
-    .premium-badge,
-    .verified-badge {
-        font-size: 0.7rem;
-        padding: 5px 8px;
-    }
-}
-
 .premium-businesses-section {
     width: min(1100px, 95%);
     margin: 45px auto;
@@ -1748,6 +1721,18 @@ body{
 .social-icons a:hover{
     color:#99d420;
     transform:translateY(-3px);
+}
+
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 220px;      /* reduce from current height */
+    object-fit: contain;
+    background: #fff;  /* optional */
 }
 
 @keyframes bounce {
