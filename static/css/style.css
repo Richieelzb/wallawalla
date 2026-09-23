@@ -1657,11 +1657,11 @@ body{
     transform:translateY(-5px);
 }
 
-.card-image{
+/* .card-image{
     width:100%;
     height:auto;
     display:block;
-}
+} */
 
 .location-area{
     display:flex;
@@ -1724,17 +1724,18 @@ body{
 }
 
 .card {
-    border-radius: 20px;
+    border-radius: 25px;
     overflow: hidden;
+    background: #fff;
 }
 
 .card-image {
     width: 90%;
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 15px auto;
+    border-radius: 20px; /* rounded corners on image */
 }
-
 @keyframes bounce {
     0%,20%,50%,80%,100% {
         transform: translateY(0);
