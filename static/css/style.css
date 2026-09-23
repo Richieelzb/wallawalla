@@ -1647,22 +1647,6 @@ body{
     display:block;
 }
 
-.card{
-    border-radius:20px;
-    overflow:hidden;
-    transition:transform .3s ease;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.card-image{
-    width:auto;
-    max-width:100%;
-    height:auto;
-    display:block;
-    object-fit:contain;
-}
 
 
 @keyframes bounce {
