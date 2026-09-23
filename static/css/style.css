@@ -1634,6 +1634,7 @@ body{
     border-radius:20px;
     overflow:hidden;
     transition:transform .3s ease;
+    height:auto;
 }
 
 .card:hover{
@@ -1642,10 +1643,10 @@ body{
 
 .card-image{
     width:100%;
-    height:100%;
-    object-fit:cover;
+    height:auto;
     display:block;
 }
+
 
 @keyframes bounce {
     0%,20%,50%,80%,100% {
