@@ -1,12 +1,40 @@
 import os
 import requests
-from flask import Flask, render_template
+from flask import (
+    Flask,
+    render_template,
+    request,
+    jsonify,
+    redirect,
+    session
+)
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
  return render_template("frontend.html")
+
+@app.route("/location")
+def location():
+    lat = request.args.get("lat")
+    lng = request.args.get("lng")
+
+    url = (
+        "https://maps.googleapis.com/maps/api/geocode/json"
+        f"?latlng={lat},{lng}"
+        f"&key={API_KEY}"
+    )
+
+    response = requests.get(url)
+    data = response.json()
+
+    if data["results"]:
+        address = data["results"][0]["formatted_address"]
+    else:
+        address = "Location not found"
+
+    return {"address": address}
 
 @app.route("/health")
 def health():
