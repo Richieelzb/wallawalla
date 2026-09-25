@@ -113,7 +113,7 @@
         </p>
 
         <p class="tagline-blue">
-            Shop. Search. Connect.
+            Search. Shop. Connect.
         </p>
         
         <input type="hidden" id="latitude" name="latitude">
@@ -278,53 +278,112 @@
 
 <footer class="footer">
 
-    <div class="footer-container">
+    <div class="footer-container" id="footer-main-content">
 
-        <div class="footer-brand">
-            <h2>WALLAWALLA</h2>
-            <p>Shop. Search. Connect.</p>
-        </div>
+        <div id="footer-default">
+            <div class="footer-brand">
+                <h2>WALLAWALLA</h2>
+                <p>Search. Shop. Connect.</p>
+            </div>
 
-        <div class="footer-links">
-            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
 
-            <a href="/">
-                Home
-            </a>
-            <br>
-
-            <a href="/about">
-                About
-            </a>
-            <br>
-
-            <a href="/contact">
-                Contact
-            </a>
-        </div>
-
-        <div class="footer-social">
-            <h3>Follow Us</h3>
-
-            <div class="social-icons">
-                 <a href="https://www.facebook.com/profile.php?id=61594234263434" target="_blank">
-                    <i class="fab fa-facebook-f"></i>
+                <a href="/">
+                    Home
                 </a>
+                <br>
 
-                 <a href="https://x.com/wallawallaSA" targer="_blank">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
+                <a href="#" id="about-link">
+    
+                <br>
 
-                <a href="#" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
+                <a href="/contact">
+                    Contact
                 </a>
+            </div>
 
-                 <a href="https://www.tiktok.com/@wallawalla.co.za" target="_blank">
-                    <i class="fa-brands fa-tiktok"></i>
-                </a>
-                
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=61594234263434" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="https://x.com/wallawallaSA" targer="_blank">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+
+                    <a href="#" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@wallawalla.co.za" target="_blank">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                    
+                </div>
             </div>
         </div>
+        <div id="about-panel" class="about-panel">
+
+            <h2>About Wallawalla</h2>
+
+            <p>
+                Wallawalla is a proudly South African location-based platform
+                designed to help people discover businesses, services, properties,
+                opportunities and essential information near them.
+            </p>
+
+            <p>
+                Our mission is simple:
+                <strong>Connect communities by making local discovery easier.</strong>
+            </p>
+
+            <h3>What You Can Do On Wallawalla</h3>
+
+            <ul>
+                <li>Search for nearby businesses and services.</li>
+                <li>Find restaurants, hotels, pharmacies, shops and more.</li>
+                <li>Discover rental and sale properties in your area.</li>
+                <li>Promote your business to local customers.</li>
+                <li>List properties and reach interested buyers or tenants.</li>
+                <li>Use real-time location features powered by Google Maps.</li>
+            </ul>
+
+            <h3>For Businesses</h3>
+
+            <p>
+                Wallawalla helps businesses increase their visibility online,
+                attract nearby customers and showcase products and services
+                to a targeted local audience.
+            </p>
+
+            <h3>For Property Owners</h3>
+
+            <p>
+                Property owners, agencies and landlords can advertise rentals,
+                houses for sale, apartments, commercial properties and vacant land,
+                making it easier for people to find suitable properties nearby.
+            </p>
+
+            <h3>Our Vision</h3>
+
+            <p>
+                We believe communities grow stronger when local businesses,
+                property owners and customers are connected through a simple,
+                trusted and accessible platform.
+            </p>
+
+            <h3>Wallawalla Motto</h3>
+
+            <p>
+                <strong>Search. Shop. Connect.</strong>
+            </p>
+
+        </div>
+
 
     </div>
 
@@ -356,6 +415,37 @@ window.addEventListener("scroll", function () {
 </script>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<script>
+
+const aboutLink = document.getElementById("about-link");
+const aboutPanel = document.getElementById("about-panel");
+const footerDefault = document.getElementById("footer-default");
+const footer = document.querySelector(".footer");
+
+aboutLink.addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    footerDefault.style.display = "none";
+    aboutPanel.style.display = "block";
+
+});
+
+document.addEventListener("click", function(e){
+
+    const clickedInsideFooter = footer.contains(e.target);
+
+    if(!clickedInsideFooter){
+
+        aboutPanel.style.display = "none";
+        footerDefault.style.display = "flex";
+
+    }
+
+});
+
+</script>
 
 </body>
 
