@@ -284,6 +284,7 @@
                 <h2>WALLAWALLA</h2>
                 <p>Search. Shop. Connect.</p>
             </div>
+            <br>
 
             <div class="footer-links">
                 <h3>Quick Links</h3>
@@ -296,12 +297,101 @@
                 <a href="#" id="about-link">
                     About
                 </a>
+
+                 <div id="about-panel" class="about-panel">
+
+                    <h2>About Wallawalla</h2>
+
+                    <p>
+                        Wallawalla is a proudly South African location-based platform
+                        designed to help people discover businesses, services, properties,
+                        opportunities and essential information near them.
+                    </p>
+
+                    <p>
+                        Our mission is simple:
+                        <strong>Connect communities by making local discovery easier.</strong>
+                    </p>
+
+                    <h3>What You Can Do On Wallawalla</h3>
+
+                    <ul>
+                        <li>Search for nearby businesses and services.</li>
+                        <li>Find restaurants, hotels, pharmacies, shops and more.</li>
+                        <li>Discover rental and sale properties in your area.</li>
+                        <li>Promote your business to local customers.</li>
+                        <li>List properties and reach interested buyers or tenants.</li>
+                        <li>Use real-time location features powered by Google Maps.</li>
+                    </ul>
+
+                    <h3>For Businesses</h3>
+
+                    <p>
+                        Wallawalla helps businesses increase their visibility online,
+                        attract nearby customers and showcase products and services
+                        to a targeted local audience.
+                    </p>
+
+                    <h3>For Property Owners</h3>
+
+                    <p>
+                        Property owners, agencies and landlords can advertise rentals,
+                        houses for sale, apartments, commercial properties and vacant land,
+                        making it easier for people to find suitable properties nearby.
+                    </p>
+
+                    <h3>Our Vision</h3>
+
+                    <p>
+                        We believe communities grow stronger when local businesses,
+                        property owners and customers are connected through a simple,
+                        trusted and accessible platform.
+                    </p>
+
+                    <h3>Wallawalla Motto</h3>
+
+                    <p>
+                        <strong>Search. Shop. Connect.</strong>
+                    </p>
+
+                </div>
     
                 <br>
 
-                <a href="/contact">
+                <a href="#" id="contact-link">
                     Contact
                 </a>
+
+                <div id="contact-panel" class="about-panel">
+
+                    <h2>Contact Wallawalla</h2>
+
+                    <p>
+                        We'd love to hear from you.
+                    </p>
+
+                    <p>
+                        Whether you have a question, need assistance,
+                        want to register your business or property,
+                        or would like to provide feedback, our team is here to help.
+                    </p>
+
+                    <p>
+                        Email us at:
+                    </p>
+
+                    <h3>
+                        <a href="mailto:support@wallawalla.co.za"
+                        style="color:#99d420;text-decoration:none;">
+                            support@wallawalla.co.za
+                        </a>
+                    </h3>
+
+                    <p>
+                        The Wallawalla team will respond to your enquiry as soon as possible.
+                    </p>
+
+                </div>
             </div>
 
             <div class="footer-social">
@@ -312,7 +402,7 @@
                         <i class="fab fa-facebook-f"></i>
                     </a>
 
-                    <a href="https://x.com/wallawallaSA" targer="_blank">
+                    <a href="https://x.com/wallawallaSA" target="_blank">
                         <i class="fa-brands fa-x-twitter"></i>
                     </a>
 
@@ -326,63 +416,7 @@
                     
                 </div>
             </div>
-            <div id="about-panel" class="about-panel">
-
-                <h2>About Wallawalla</h2>
-
-                <p>
-                    Wallawalla is a proudly South African location-based platform
-                    designed to help people discover businesses, services, properties,
-                    opportunities and essential information near them.
-                </p>
-
-                <p>
-                    Our mission is simple:
-                    <strong>Connect communities by making local discovery easier.</strong>
-                </p>
-
-                <h3>What You Can Do On Wallawalla</h3>
-
-                <ul>
-                    <li>Search for nearby businesses and services.</li>
-                    <li>Find restaurants, hotels, pharmacies, shops and more.</li>
-                    <li>Discover rental and sale properties in your area.</li>
-                    <li>Promote your business to local customers.</li>
-                    <li>List properties and reach interested buyers or tenants.</li>
-                    <li>Use real-time location features powered by Google Maps.</li>
-                </ul>
-
-                <h3>For Businesses</h3>
-
-                <p>
-                    Wallawalla helps businesses increase their visibility online,
-                    attract nearby customers and showcase products and services
-                    to a targeted local audience.
-                </p>
-
-                <h3>For Property Owners</h3>
-
-                <p>
-                    Property owners, agencies and landlords can advertise rentals,
-                    houses for sale, apartments, commercial properties and vacant land,
-                    making it easier for people to find suitable properties nearby.
-                </p>
-
-                <h3>Our Vision</h3>
-
-                <p>
-                    We believe communities grow stronger when local businesses,
-                    property owners and customers are connected through a simple,
-                    trusted and accessible platform.
-                </p>
-
-                <h3>Wallawalla Motto</h3>
-
-                <p>
-                    <strong>Search. Shop. Connect.</strong>
-                </p>
-
-            </div>
+           
         </div>
         
     </div>
@@ -438,6 +472,41 @@ document.addEventListener("click", function(e){
         !e.target.closest("#about-panel") &&
         !e.target.closest("#about-link")
     ){
+        aboutPanel.style.display = "none";
+    }
+
+});
+
+</script>
+
+<script>
+
+const contactLink = document.getElementById("contact-link");
+const contactPanel = document.getElementById("contact-panel");
+
+contactLink.addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    aboutPanel.style.display = "none";
+
+    if(contactPanel.style.display === "block"){
+        contactPanel.style.display = "none";
+    } else {
+        contactPanel.style.display = "block";
+    }
+
+});
+
+document.addEventListener("click", function(e){
+
+    if(
+        !e.target.closest("#contact-panel") &&
+        !e.target.closest("#contact-link") &&
+        !e.target.closest("#about-panel") &&
+        !e.target.closest("#about-link")
+    ){
+        contactPanel.style.display = "none";
         aboutPanel.style.display = "none";
     }
 
