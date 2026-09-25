@@ -1814,7 +1814,7 @@ body{
 .about-panel{
     display:none;
     color:white;
-    text-align:left;
+    text-align:center;
     max-width:900px;
     margin:30px auto 0;
     padding:25px;
@@ -1843,6 +1843,25 @@ body{
 .about-panel ul{
     padding-left:20px;
 }
+
+.about-panel{
+    display:none;
+    width:100%;
+    text-align:center;
+    color:white;
+}
+
+.about-panel h2,
+.about-panel h3{
+    color:#99d420;
+}
+
+.about-panel p{
+    max-width:800px;
+    margin:10px auto;
+    line-height:1.7;
+}
+
 
 @keyframes fadeIn{
     from{
