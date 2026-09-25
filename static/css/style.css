@@ -481,6 +481,14 @@ body{
 .green{
     color:#99d420;
 }
+.logo-blue{
+    color:#2563eb; /* blue */
+}
+
+.logo-white{
+    color:#ffffff; /* white */
+}
+
 .navbar ul{
     display:flex;
     list-style:none;
