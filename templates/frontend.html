@@ -295,6 +295,7 @@
                 <br>
 
                 <a href="#" id="about-link">
+                </a>
     
                 <br>
 
@@ -326,7 +327,10 @@
                 </div>
             </div>
         </div>
-        <div id="about-panel" class="about-panel">
+        
+    </div>
+
+    <div id="about-panel" class="about-panel">
 
             <h2>About Wallawalla</h2>
 
@@ -384,9 +388,6 @@
 
         </div>
 
-
-    </div>
-
     <div class="footer-bottom">
         © 2026 WALLAWALLA. All Rights Reserved.
     </div>
@@ -415,32 +416,30 @@ window.addEventListener("scroll", function () {
 </script>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
 <script>
 
 const aboutLink = document.getElementById("about-link");
 const aboutPanel = document.getElementById("about-panel");
-const footerDefault = document.getElementById("footer-default");
-const footer = document.querySelector(".footer");
 
 aboutLink.addEventListener("click", function(e){
 
     e.preventDefault();
 
-    footerDefault.style.display = "none";
-    aboutPanel.style.display = "block";
+    if(aboutPanel.style.display === "block"){
+        aboutPanel.style.display = "none";
+    }else{
+        aboutPanel.style.display = "block";
+    }
 
 });
 
 document.addEventListener("click", function(e){
 
-    const clickedInsideFooter = footer.contains(e.target);
-
-    if(!clickedInsideFooter){
-
+    if(
+        !e.target.closest("#about-panel") &&
+        !e.target.closest("#about-link")
+    ){
         aboutPanel.style.display = "none";
-        footerDefault.style.display = "flex";
-
     }
 
 });
