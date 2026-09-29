@@ -28,15 +28,21 @@ def location():
         f"&key={API_KEY}"
     )
 
-    response = requests.get(url)
-    data = response.json()
+    try:
+        response = requests.get(url, timeout=5)
+        data = response.json()
 
-    if data["results"]:
-        address = data["results"][0]["formatted_address"]
-    else:
-        address = "Location not found"
+        if data["results"]:
+            address = data["results"][0]["formatted_address"]
+        else:
+            address = "Location not found"
 
-    return {"address": address}
+        return {"address": address}
+    except requests.exceptions.Timeout:
+        return {"address": "Location lookup timeout"}, 504
+    
+    except Exception as e:
+        return {"address": str(e)}, 500
 
 @app.route("/health")
 def health():
