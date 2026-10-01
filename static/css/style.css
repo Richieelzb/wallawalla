@@ -150,6 +150,12 @@ text-decoration:none;
 text-align:center;
 color:white;
 }
+.overlay{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
 
 .overlay h1{
 font-size:5rem;
@@ -1720,6 +1726,12 @@ body{
     color:white;
     padding:60px 8%;
 }
+.footer{
+    background:linear-gradient(135deg,#0c5a32,#022b17);
+    color:white;
+    padding:60px 8%;
+    text-align:center;
+}
 
 .footer-container{
     display:flex;
@@ -1727,6 +1739,14 @@ body{
     align-items:flex-start;
     flex-wrap:wrap;
     gap:50px;
+}
+.footer-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:30px;
 }
 
 .footer-brand h2{
@@ -2016,6 +2036,55 @@ body{
     .app-banner img{
         width:180px;
         max-width:100%;
+    }
+
+    .footer{
+        background:linear-gradient(135deg,#0c5a32,#022b17);
+        color:white;
+        padding:60px 8%;
+        text-align:center;
+    }
+
+    .footer-container{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        gap:30px;
+    }
+
+    .footer-links,
+    .footer-social,
+    .footer-brand{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+    .social-icons{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:15px;
+    }
+
+    .about-panel{
+        display:none;
+        max-width:900px;
+        margin:30px auto 0;
+        padding:25px;
+        text-align:center;
+        color:white;
+    }
+
+    #footer-default{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
     }
 
     /* .social-icons{
