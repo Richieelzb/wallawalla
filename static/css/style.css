@@ -148,6 +148,7 @@ text-decoration:none;
 
 .overlay{
     display:flex;
+    flex-direction:column;
     text-align:center;
     align-items:center;
     color:white;
