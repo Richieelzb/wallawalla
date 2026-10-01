@@ -2108,14 +2108,16 @@ body{
     align-items: center;
 }
 
-.overlay {
-    width: 100%;
-    max-width: 900px; /* adjust as needed */
+.overlay,
+.location-area {
+    width: fit-content;
+    max-width: 900px;
 }
 
 .location-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 15px;
-    width: 100%;
-    max-width: 900px; /* same as overlay */
+    text-align: center;
 }
-
