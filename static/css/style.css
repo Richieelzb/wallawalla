@@ -1650,14 +1650,6 @@ body{
     color:white;
 }
 
-.location-area {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
-}
-
 .location-area i{
     color:#ef4444;
     font-size:18px;
@@ -2108,5 +2100,22 @@ body{
         transform:translateY(-3px);
     } */
 
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.overlay {
+    width: 100%;
+    max-width: 900px; /* adjust as needed */
+}
+
+.location-area {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 900px; /* same as overlay */
 }
 
