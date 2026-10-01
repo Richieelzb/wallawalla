@@ -147,19 +147,10 @@ text-decoration:none;
 }
 
 .overlay{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
     text-align:center;
     align-items:center;
     color:white;
 }
-/* .overlay{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-} */
 
 .overlay h1{
 font-size:5rem;
