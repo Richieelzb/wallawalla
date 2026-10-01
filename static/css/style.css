@@ -147,10 +147,11 @@ text-decoration:none;
 }
 
 .overlay{
+    display:flex;
     text-align:center;
     align-items:center;
     color:white;
-    }
+}
 /* .overlay{
     display:flex;
     flex-direction:column;
