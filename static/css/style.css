@@ -2123,14 +2123,15 @@ body{
 }
 
 .location-stats{
-    display:block;
-    margin-top:6px;
-    font-size:14px;
-    color:#ffffff;
-    line-height:1.4;
-}
+    display: block;
+    margin-top: 12px;
+    padding-top: 12px;
+    width: fit-content;
 
-.location-stats strong{
-    color:#99d420;
-    font-weight:700;
+
+    border-top: 2px solid #38bdf8;
+
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 1.5;
 }
