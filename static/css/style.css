@@ -2182,3 +2182,137 @@ body{
     display:block;
     border-radius:20px;
 }
+
+body{
+    background:#f8f9fb;
+    color:#111827;
+}
+
+.hero{
+
+    min-height:auto;
+
+    padding:180px 20px 80px;
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.95),
+            rgba(255,255,255,.98)
+        ),
+        url("../images/cape-town.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    text-align:center;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    bottom:-40px;
+    left:0;
+
+    width:100%;
+    height:80px;
+
+    background:white;
+
+    border-radius:50% 50% 0 0;
+}
+
+.hero h1{
+
+    font-size:6rem;
+    font-weight:900;
+    line-height:0.9;
+
+    color:#0f2747;
+}
+
+.hero h1 span{
+    color:#22c55e;
+}
+
+.hero p{
+    color:#1f2937;
+    font-size:1.8rem;
+}
+
+.location-area{
+
+    max-width:1100px;
+
+    margin:30px auto;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #02543d,
+            #032c25
+        );
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:20px;
+}
+
+.location-area i{
+
+    font-size:4rem;
+    color:#ef4444;
+}
+
+.location-stats{
+
+    max-width:1100px;
+
+    margin:25px auto;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    background:#eef9ee;
+
+    border:none;
+
+    color:#111827;
+
+    font-size:1.8rem;
+
+    text-align:center;
+}
+
+.location-stats strong{
+    color:#15803d;
+}
+
+.navbar{
+
+    background:#ffffff;
+
+    padding:18px 7%;
+
+    border-bottom:1px solid #e5e7eb;
+}
+
+.logo-text{
+    color:#111827;
+}
+
+.tagline{
+    color:#475569;
+}
