@@ -2121,3 +2121,16 @@ body{
     margin-top: 15px;
     text-align: center;
 }
+
+.location-stats{
+    display:block;
+    margin-top:6px;
+    font-size:14px;
+    color:#ffffff;
+    line-height:1.4;
+}
+
+.location-stats strong{
+    color:#99d420;
+    font-weight:700;
+}
