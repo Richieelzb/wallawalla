@@ -2158,16 +2158,27 @@ body{
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:1rem;
-    width:85%;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    width:90%;
+    max-width:900px;
     margin:0 auto;
 }
 
+.card{
+    border-radius:20px;
+    overflow:hidden;
+    transition:.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
 .card-image{
-    width:70%;
-    height:auto;
+    width:100%;
+    height:250px;
+    object-fit:cover;
     display:block;
-    margin:10px auto;
     border-radius:20px;
 }
