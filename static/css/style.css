@@ -2155,3 +2155,19 @@ body{
     margin-top:5px;
     color:white;
 }
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:1rem;
+    width:85%;
+    margin:0 auto;
+}
+
+.card-image{
+    width:70%;
+    height:auto;
+    display:block;
+    margin:10px auto;
+    border-radius:20px;
+}
