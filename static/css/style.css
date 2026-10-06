@@ -2137,6 +2137,10 @@ body{
     line-height:1.5;
 }
 
+.location-stats strong{
+    color: #99d420;
+}
+
 .hero p{
     margin:12px auto;
     max-width:700px;
