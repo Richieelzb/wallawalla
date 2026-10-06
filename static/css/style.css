@@ -2123,15 +2123,31 @@ body{
 }
 
 .location-stats{
-    display: block;
-    margin-top: 12px;
-    padding-top: 12px;
-    width: fit-content;
+    display:block;
+    margin-top:12px;
+    margin-bottom:35px; /* adds space below */
 
+    padding-top:12px;
+    width:fit-content;
 
-    border-top: 2px solid #38bdf8;
+    border-top:2px solid #38bdf8;
 
-    color: #ffffff;
-    font-size: 14px;
-    line-height: 1.5;
+    color:#ffffff;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.hero p{
+    margin:12px auto;
+    max-width:700px;
+    font-size:clamp(0.9rem,1.5vw,1.1rem);
+    color:#d9d9d9;
+}
+
+.location-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:5px;
+    color:white;
 }
