@@ -134,10 +134,12 @@
             </div>
         </div>
         <span class="location-stats">
-                    🎯 You have <strong>20 businesses</strong> and
-                    <strong>11 properties</strong> in your area.
-                    Explore below.
-                </span>
+            🎯 You have
+            <strong id="business-count-hero">0 businesses</strong>
+            and
+            <strong id="property-count-hero">0 properties</strong> in your area.
+            Explore below.
+        </span>
 
 </section>
 
@@ -434,6 +436,102 @@
 <div id="floating-arrow" class="floating-arrow">
     <i class="fa-solid fa-chevron-down"></i>
 </div>
+
+<script>
+
+async function loadBusinessCount(lat, lng){
+
+    try{
+
+        const response = await fetch(
+            `https://search.wallawalla.co.za/api/business-count?lat=${lat}&lng=${lng}`
+        );
+
+        const data = await response.json();
+
+        document.getElementById(
+            "business-count-hero"
+        ).innerText = `${data.count} businesses`;
+
+    }catch(error){
+
+        console.error(
+            "Business count error",
+            error
+        );
+    }
+}
+
+async function loadPropertyCount(lat, lng){
+
+    try{
+
+        const response = await fetch(
+            `https://property.wallawalla.co.za/api/property-count?lat=${lat}&lng=${lng}`
+        );
+
+        const data = await response.json();
+
+        document.getElementById(
+            "property-count-hero"
+        ).innerText = `${data.count} properties`;
+
+    }catch(error){
+
+        console.error(
+            "Property count error",
+            error
+        );
+    }
+}
+
+</script>
+
+<script>
+
+function loadNearbyCounts(){
+
+    if(!navigator.geolocation){
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            const lat =
+                position.coords.latitude;
+
+            const lng =
+                position.coords.longitude;
+
+            loadBusinessCount(
+                lat,
+                lng
+            );
+
+            loadPropertyCount(
+                lat,
+                lng
+            );
+        },
+
+        function(error){
+
+            console.log(error);
+
+        }
+
+    );
+}
+
+window.addEventListener(
+    "load",
+    loadNearbyCounts
+);
+
+</script>
+
 
 <script>
 window.addEventListener("scroll", function () {
