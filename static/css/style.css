@@ -2259,7 +2259,7 @@ body{
 }
 
 .location-stats{
-    display:block;
+    display:flex;
     max-width:1100px;
     margin:25px auto;
     padding:20px 30px;
@@ -2367,15 +2367,50 @@ body{
     color:#07130a;
 }
 
-.business-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(132,204,22,.35);
+.business-btn{
+    min-width:250px;
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    border-radius:18px;
+
+    background:#99d420;
+
+    color:#04131d;
+    text-decoration:none;
+
+    font-size:1.1rem;
+    font-weight:700;
 }
 
 .property-btn{
-    background:rgba(0,0,0,.2);
-    color:#fff;
+    min-width:250px;
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    border-radius:18px;
+
+    background:transparent;
+
     border:2px solid #2563eb;
+
+    color:#fff;
+    text-decoration:none;
+
+    font-size:1.1rem;
+    font-weight:700;
+}
+
+.business-btn:hover{
+    transform:translateY(-2px);
 }
 
 .property-btn:hover{
@@ -2387,11 +2422,7 @@ body{
 
     .banner-content{
         flex-direction:column;
-        text-align:center;
-    }
-
-    .banner-info{
-        flex-direction:column;
+        align-items:flex-start;
     }
 
     .banner-actions{
@@ -2399,10 +2430,16 @@ body{
         flex-direction:column;
     }
 
-    .banner-btn{
+    .business-btn,
+    .property-btn{
         width:100%;
         min-width:100%;
     }
+
+    .banner-text h2{
+        font-size:1.4rem;
+    }
+
 }
 
 @media (max-width:768px){
