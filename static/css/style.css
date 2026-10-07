@@ -2192,7 +2192,7 @@ body{
     text-align:center;
 }
 
-.hero::after{
+/* .hero::after{
     content:"";
 
     position:absolute;
@@ -2206,7 +2206,7 @@ body{
     background:white;
 
     border-radius:50% 50% 0 0;
-}
+} */
 
 .hero h1{
 
@@ -2259,13 +2259,14 @@ body{
 }
 
 .location-stats{
-    display:flex;
-    max-width:1100px;
+    display:block;
+    width:fit-content;
+    max-width:90%;
     margin:25px auto;
+
     padding:20px 30px;
 
     background:#eef9ee;
-
     border-radius:20px;
 
     color:#111827;
@@ -2273,6 +2274,9 @@ body{
     text-align:center;
 
     box-shadow:0 4px 20px rgba(0,0,0,.08);
+
+    position:relative;
+    z-index:5;
 }
 
 .location-stats strong{
