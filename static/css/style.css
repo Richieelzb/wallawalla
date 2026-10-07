@@ -1877,6 +1877,10 @@ body{
     line-height:1.7;
 }
 
+.cards{
+    margin-top:0 !important;
+}
+
 
 @keyframes fadeIn{
     from{
@@ -2262,7 +2266,7 @@ body{
     display:block;
     width:fit-content;
     max-width:90%;
-    margin:25px auto;
+    margin:25px auto 50px auto;
 
     padding:20px 30px;
 
