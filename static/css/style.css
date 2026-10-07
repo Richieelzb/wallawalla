@@ -1972,7 +1972,7 @@ body{
     }
 
     .hero h1{
-        font-size:2.2rem;
+        font-size:1.2rem;
     }
 
     .hero p{
@@ -2436,7 +2436,7 @@ body{
     background:#2563eb;
     transform:translateY(-2px);
 }
-/* 
+
 @media (max-width:768px){
 
     .banner-content{
@@ -2457,4 +2457,4 @@ body{
         width:100%;
         min-width:100%;
     }
-} */
+}
