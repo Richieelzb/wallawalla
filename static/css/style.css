@@ -483,7 +483,7 @@ body{
     color:#99d420;
 }
 .logo-blue{
-    color:#2563eb; /* blue */
+    color:#2563eb !important; /* blue */
 }
 
 .logo-white{
@@ -1964,15 +1964,9 @@ body{
     }
 
     .hero{
-        min-height:auto;
-        padding:140px 15px 60px;
-        margin-top:-120px;
-    }
-
-    .hero{
         min-height:55vh;
         margin-top:100px;
-        padding:120px 15px 60px;
+        padding:120px 40px 60px;
     }
 
     .hero h1{
