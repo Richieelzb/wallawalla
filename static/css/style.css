@@ -2316,3 +2316,145 @@ body{
 .tagline{
     color:#475569;
 }
+
+.app-banner{
+    position:relative;
+    padding:40px 30px;
+    margin:30px 0;
+    border-radius:20px;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at top left,
+        rgba(34,197,94,.15),
+        transparent 40%),
+        linear-gradient(
+        135deg,
+        #031420,
+        #041f2e,
+        #02131d);
+
+    border:1px solid rgba(59,130,246,.25);
+
+    box-shadow:
+        0 0 30px rgba(0,150,255,.15),
+        inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.app-banner::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:20px;
+    right:20px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #22c55e,
+        #3b82f6,
+        transparent);
+}
+
+.banner-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+}
+
+.banner-info{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.banner-icon{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:36px;
+    color:#84ff5d;
+    background:rgba(132,255,93,.12);
+}
+
+.banner-text h2{
+    color:#fff;
+    font-size:2rem;
+    line-height:1.2;
+    margin:0 0 8px;
+    font-weight:700;
+}
+
+.banner-text p{
+    margin:0;
+    color:#b7c6d8;
+    font-size:1rem;
+}
+
+.banner-actions{
+    display:flex;
+    gap:15px;
+}
+
+.banner-btn{
+    min-width:220px;
+    height:60px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-weight:700;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.business-btn{
+    background:linear-gradient(
+        135deg,
+        #a3f53a,
+        #84cc16);
+    color:#07130a;
+}
+
+.business-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(132,204,22,.35);
+}
+
+.property-btn{
+    background:rgba(0,0,0,.2);
+    color:#fff;
+    border:2px solid #2563eb;
+}
+
+.property-btn:hover{
+    background:#2563eb;
+    transform:translateY(-2px);
+}
+
+@media (max-width:768px){
+
+    .banner-content{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .banner-info{
+        flex-direction:column;
+    }
+
+    .banner-actions{
+        width:100%;
+        flex-direction:column;
+    }
+
+    .banner-btn{
+        width:100%;
+        min-width:100%;
+    }
+}
