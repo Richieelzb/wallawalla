@@ -2179,7 +2179,7 @@ body{
 
     min-height:auto;
 
-    padding:180px 20px 80px;
+    padding:180px 20px 140px;
 
     position:relative;
 
@@ -2284,7 +2284,7 @@ body{
 }
 
 .location-stats strong{
-    color:#15803d;
+    color:yellowgreen;
     font-weight:800;
 }
 
