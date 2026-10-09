@@ -2278,7 +2278,7 @@ body{
     width:90%;
     max-width:900px;
 
-    margin: 0 auto; /* move cards down */
+    margin:50px auto 0 auto; /* move cards down */
 }
 
 .card{
@@ -2308,7 +2308,7 @@ body{
 
     min-height:auto;
 
-    padding:240px 40px 60px;
+    padding:240px 40px 140px;
 
     position:relative;
 
@@ -2395,7 +2395,7 @@ body{
     display:block;
     width:fit-content;
     max-width:90%;
-    margin:10px auto 15px auto;
+    margin:25px auto 40px auto;
 
     padding:20px 30px;
 
