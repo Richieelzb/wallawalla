@@ -2362,7 +2362,7 @@ body{
 
     max-width:1100px;
 
-    margin:30px auto;
+    margin:15px auto 8px auto;
 
     padding:30px;
 
@@ -2394,7 +2394,7 @@ body{
     display:block;
     width:fit-content;
     max-width:90%;
-    margin:25px auto 120px auto;
+    margin:25px auto 20px auto;
 
     padding:20px 30px;
 
