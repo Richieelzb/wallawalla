@@ -1355,6 +1355,33 @@ body{
     }
 }
 
+@media (max-width: 480px) {
+
+    .hero-motto{
+        gap:4px;
+    }
+
+    .motto-pill{
+        padding:6px 8px;
+        gap:5px;
+    }
+
+    .pill-icon{
+        width:28px;
+        height:28px;
+        font-size:12px;
+    }
+
+    .pill-text span{
+        font-size:12px;
+    }
+
+    .pill-line{
+        width:14px;
+        height:2px;
+    }
+}
+
 @keyframes sideGlow {
     0%, 100% {
         box-shadow:
