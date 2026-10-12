@@ -650,26 +650,26 @@ def search():
         results=results
     )
 
-@app.route("/location")
-def location():
-    lat = request.args.get("lat")
-    lng = request.args.get("lng")
+# @app.route("/location")
+# def location():
+#     lat = request.args.get("lat")
+#     lng = request.args.get("lng")
 
-    url = (
-        "https://maps.googleapis.com/maps/api/geocode/json"
-        f"?latlng={lat},{lng}"
-        f"&key={API_KEY}"
-    )
+#     url = (
+#         "https://maps.googleapis.com/maps/api/geocode/json"
+#         f"?latlng={lat},{lng}"
+#         f"&key={API_KEY}"
+#     )
 
-    response = requests.get(url)
-    data = response.json()
+#     response = requests.get(url)
+#     data = response.json()
 
-    if data["results"]:
-        address = data["results"][0]["formatted_address"]
-    else:
-        address = "Location not found"
+#     if data["results"]:
+#         address = data["results"][0]["formatted_address"]
+#     else:
+#         address = "Location not found"
 
-    return {"address": address}
+#     return {"address": address}
 
 @app.route("/business-search")
 def business_search():
