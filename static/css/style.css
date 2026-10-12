@@ -1769,7 +1769,7 @@ body{
 } */
 
 .location-area{
-    color:#444;
+    color:#444 !important;
     display:flex;
     align-items:center;
     gap:10px;
