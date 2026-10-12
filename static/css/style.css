@@ -525,7 +525,8 @@ body{
 ========================= */
 
 .hero{
-    padding:2200px 20px 40px;
+    margin-top: 120px; /* move hero down */
+    padding: 120px 20px 40px;
     min-height:auto;
 
     background:
