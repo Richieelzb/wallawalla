@@ -286,7 +286,7 @@ gap:30px;
 
 .logo img{
     width:auto;
-    height:100px;
+    height:60px;
 }
 
 .logo-text {
@@ -421,16 +421,16 @@ body{
 
 .logo img{
     width:auto;
-    height:100px;
+    height:60px;
 }
 
 .logo-text {
-    font-size: 2rem; /* adjust as needed */
+    font-size: 28px; /* adjust as needed */
     font-weight: bold;
 }
 
 .logo-text{
-    font-size:40px;
+    font-size:28px;
     font-weight:600;
     letter-spacing:3px;
     color:white;
@@ -525,23 +525,20 @@ body{
 ========================= */
 
 .hero{
-    min-height:60vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    margin-top: 140px;
+    padding:120px 20px 40px;
+    min-height:auto;
 
     background:
         linear-gradient(
-            rgba(5,18,20,.85),
-            rgba(5,18,20,.92)
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.15)
         ),
-        url("../images/wallawalla.jpg");
+        url("../images/cape-town.jpg");
 
     background-size:cover;
     background-position:center;
-    background-repeat:no-repeat;
+
+    text-align:center;
 }
 
 .hero-content{
@@ -572,73 +569,72 @@ body{
    SEARCH BOX
 ========================= */
 .location-area{
-    color:#444;
+
+    height:58px;
+
+    border:1px solid #ddd;
+
+    border-radius:16px;
+
+    padding:0 20px;
+
+    background:white;
+
     display:flex;
     align-items:center;
-    gap:10px;
+
+    margin-bottom:10px;
 }
 
-/* .search-box{
-    max-width:1000px;
-    margin:50px auto 0;
+.search-box{
+
+    width:100%;
+    max-width:750px;
+
     background:white;
+
+    margin:25px auto 0;
+
+    padding:18px;
+
     border-radius:24px;
-    padding:20px;
-    display:flex;
-    align-items:center;
-    gap:20px;
-    border:3px solid rgba(255,255,255,.2);
-    box-shadow:0 25px 60px rgba(0,0,0,.35);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
+
 }
 
 .search-box input{
-    flex:1;
-    border:none;
-    outline:none;
-    font-size:15px;
+
+    width:100%;
+
+    height:58px;
+
+    border:1px solid #ddd;
+
+    border-radius:16px;
+
+    padding:0 20px;
+
+    margin-bottom:10px;
+
 }
 
 .search-box button{
-    padding:16px 35px;
-    border:none;
-    background:#99d420;
+
+    width:100%;
+    height:58px;
+
+    border-radius:30px;
+
+    background:#0b8c43;
+
     color:white;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-    white-space:nowrap;
-    font-size:14px;
-} */
-.search-box {
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    border-radius: 25px;
-    padding: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
-}
 
-.search-box input {
-    width: 100%;
-    padding: 18px;
-    border-radius: 15px;
-    border: 1px solid #ddd;
-    font-size: 1.1rem;
-}
+    font-weight:700;
 
-.search-box button {
-    width: 100%;
-    margin-top: 15px;
-    border: none;
-    background: #8cd321;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 18px;
-    border-radius: 12px;
-    cursor: pointer;
+    border:none;
 }
-
 
 /* =========================
    CATEGORIES
@@ -2247,6 +2243,16 @@ body{
 
     margin:0 auto; /* move cards down */
 }
+.cards{
+
+    margin-top:25px;
+
+    width:90%;
+    max-width:1000px;
+
+    margin-left:auto;
+    margin-right:auto;
+}
 
 .card{
     border-radius:20px;
@@ -2309,11 +2315,10 @@ body{
 } */
 
 .hero h1{
-
-    font-size:6rem;
+    font-size:4rem;
     font-weight:900;
-    line-height:0.9;
-
+    line-height:1;
+    margin-bottom:10px;
     color:#0f2747;
 }
 
@@ -2327,16 +2332,21 @@ body{
 }
 
 .location-area{
-    color:#444;
+
+    height:58px;
+
+    border:1px solid #ddd;
+
+    border-radius:16px;
+
+    padding:0 20px;
+
+    background:white;
+
     display:flex;
     align-items:center;
-    gap:10px;
-}
 
-.location-area i{
-
-    font-size:4rem;
-    color:#ef4444;
+    margin-bottom:10px;
 }
 
 .location-stats{
@@ -2369,7 +2379,7 @@ body{
 
     background:#ffffff;
 
-    padding:18px 7%;
+    padding:12px 5%;
 
     border-bottom:1px solid #e5e7eb;
 }
@@ -2537,7 +2547,7 @@ body{
 @media (max-width:768px){
 
     .hero h1{
-        font-size:2.3rem;
+        font-size:2.8rem;
         line-height:1.1;
     }
 
