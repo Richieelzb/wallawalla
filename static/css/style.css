@@ -1314,6 +1314,16 @@ body{
         margin-top:15px;
     }
 
+    .categories{
+        gap:8px;
+    }
+
+    .chip{
+        font-size:12px;
+        padding:10px 14px;
+    }
+
+
     .motto-pill{
         padding:8px 10px;
         border-radius:12px;
