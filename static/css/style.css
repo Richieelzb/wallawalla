@@ -569,23 +569,7 @@ body{
 /* =========================
    SEARCH BOX
 ========================= */
-.location-area{
 
-    height:58px;
-
-    border:1px solid #ddd;
-
-    border-radius:16px;
-
-    padding:0 20px;
-
-    background:white;
-
-    display:flex;
-    align-items:center;
-
-    margin-bottom:10px;
-}
 
 .search-box{
 
@@ -1784,12 +1768,18 @@ body{
     display:block;
 } */
 
+.location-area{
+    color:#444;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
 
-
+/* 
 .location-area i{
     color:#ef4444;
     font-size:8px;
-}
+} */
 
 .location-details{
     display:flex;
@@ -2333,24 +2323,6 @@ body{
 .hero p{
     color:#1f2937;
     font-size:1.8rem;
-}
-
-.location-area{
-
-    height:58px;
-
-    border:1px solid #ddd;
-
-    border-radius:16px;
-
-    padding:0 20px;
-
-    background:white;
-
-    display:flex;
-    align-items:center;
-
-    margin-bottom:10px;
 }
 
 .location-stats{
