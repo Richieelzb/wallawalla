@@ -147,19 +147,49 @@
         <input type="hidden" id="longitude" name="longitude">
 
     </div>
-    <div class="location-area">
-        <i class="fa-solid fa-location-dot"></i>
+        <p>
+            Search Google for restaurants, hotels, pharmacies, malls and other nearby places near you.
+        </p>
+    
+        <form class="search-box" id="google-search-form" action="/search" method="GET">
 
-        <div class="location-details">
-            <span class="location-label">
-                Your Current Location:
-            </span>
+            <input
+                type="text"
+                id="search-input"
+                aria-label="Search for nearby places"
+                placeholder="Search Google Results"
+                name="query"
+                required
+            >
+            <button type="submit" id="search-btn">Search</button>
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            
+             <div class="location-area">
+                <i class="fa-solid fa-location-dot" style="color: red;"></i>
+                <span id="current-location">
+                    Detecting location...
+                </span>
+            </div>
+        </form>
+       
 
-            <span id="current-location">
-                Detecting location...
-            </span>
+        <div class="categories">
+           <div class="chip" onclick="setSearch('Restaurants,eatery')">🍔 Restaurants</div>
+           <div class="chip" onclick="setSearch('Fuel Stations')">
+                ⛽ Fuel Stations
+           </div>
+           <div class="chip" onclick="setSearch('Hotels,Bnb,')">🏨 Hotels</div>
+           <div class="chip" onclick="setSearch('Shops')">🛒 Shops</div>
+           <div class="chip" onclick="setSearch('Pharmacies')">💊 Pharmacies</div>
+           <div class="chip" onclick="setSearch('ATMs')">🏦 ATMs</div>
+           <div class="chip more-chip">...More</div>
         </div>
+        <!-- <div class="scroll-down" onclick="scrollToSection('features')">
+           <i class="fa-solid fa-chevron-down"></i>
+        </div> -->
     </div>
+  
     <div class="location-stats">
         🎯 You have
         <strong id="business-count-hero">0 local businesses</strong>
