@@ -2109,8 +2109,8 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: #1e293b; /* Dark background */
-        width: 90%;
+        background: #444; /* Dark background */
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         margin-top: 90px;
