@@ -10,6 +10,13 @@ body{
 background:#fff;
 }
 
+.results-page {
+    background: #0f172a;
+    color: white;
+    min-height: 100vh;
+}
+
+
 /* Header */
 
 header{
@@ -392,7 +399,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    background: #1e293b; /* Dark background */
     width: 90%;
     margin-left: auto;
     margin-right: auto;
@@ -2102,7 +2109,7 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
-
+        background: #1e293b; /* Dark background */
         width: 90%;
         margin-left: auto;
         margin-right: auto;
