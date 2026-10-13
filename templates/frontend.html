@@ -596,7 +596,6 @@ window.addEventListener(
 
 
 <script>
-
 const arrow = document.getElementById("floating-arrow");
 const arrowIcon = document.getElementById("arrow-icon");
 
@@ -605,7 +604,7 @@ arrow.addEventListener("click", () => {
     const footer = document.querySelector("footer");
 
     const nearFooter =
-        window.scrollY + window.innerHeight >= footer.offsetTop;
+        window.scrollY + window.innerHeight >= footer.offsetTop - 50;
 
     if (nearFooter) {
 
@@ -616,8 +615,8 @@ arrow.addEventListener("click", () => {
 
     } else {
 
-        window.scrollTo({
-            top: document.body.scrollHeight,
+        window.scrollBy({
+            top: window.innerHeight,
             behavior: "smooth"
         });
 
