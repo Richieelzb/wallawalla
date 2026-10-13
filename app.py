@@ -17,16 +17,6 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-from flask_cors import CORS
-
-CORS(
-    app,
-    supports_credentials=True,
-    origins=[
-        "https://wallawalla.co.za"
-    ]
-)
-
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
