@@ -223,9 +223,6 @@
 
 </section>
 
-<div class="scroll-down">
-    <i class="fa-solid fa-chevron-down"></i>
-</div>
 
 <!-- =========================
      FEATURES
@@ -298,9 +295,6 @@
 
 </section>
 
-<div class="scroll-down">
-    <i class="fa-solid fa-chevron-down"></i>
-</div>
 
 <!-- =========================
      APP BANNER
@@ -501,10 +495,9 @@
 
 </footer>
 
-<!-- <div id="floating-arrow" class="floating-arrow">
-    <i class="fa-solid fa-chevron-down"></i>
-</div> -->
-
+<div id="floating-arrow" class="floating-arrow">
+    <i id="arrow-icon" class="fa-solid fa-chevron-down"></i>
+</div>
 
 <script>
 
@@ -603,20 +596,56 @@ window.addEventListener(
 
 
 <script>
-window.addEventListener("scroll", function () {
+
+const arrow = document.getElementById("floating-arrow");
+const arrowIcon = document.getElementById("arrow-icon");
+
+arrow.addEventListener("click", () => {
 
     const footer = document.querySelector("footer");
-    const arrow = document.getElementById("floating-arrow");
 
-    if (
-        window.scrollY + window.innerHeight >= footer.offsetTop
-    ) {
-        arrow.style.display = "none";
+    const nearFooter =
+        window.scrollY + window.innerHeight >= footer.offsetTop;
+
+    if (nearFooter) {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
     } else {
-        arrow.style.display = "flex";
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+
     }
 
 });
+
+window.addEventListener("scroll", () => {
+
+    const footer = document.querySelector("footer");
+
+    const nearFooter =
+        window.scrollY + window.innerHeight >= footer.offsetTop - 50;
+
+    if (nearFooter) {
+
+        arrowIcon.classList.remove("fa-chevron-down");
+        arrowIcon.classList.add("fa-chevron-up");
+
+    } else {
+
+        arrowIcon.classList.remove("fa-chevron-up");
+        arrowIcon.classList.add("fa-chevron-down");
+
+    }
+
+});
+
 </script>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
