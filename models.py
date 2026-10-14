@@ -152,6 +152,17 @@ class Business(db.Model):
         nullable=True
     )
 
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
+
+    updated_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow
+    )
+
     # ------------------------------
     # FEATURED LISTING
     # ------------------------------
