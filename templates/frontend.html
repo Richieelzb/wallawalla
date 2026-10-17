@@ -192,7 +192,10 @@
         <strong id="business-count-hero">0 local businesses</strong>
         and
         <strong id="property-count-hero">0 properties</strong>
-        in your area.<strong class="logo-blue"> Explore below.</strong>
+        in your area.
+        <strong class="logo-blue" onclick="scrollToCards()" style="cursor:pointer;">
+            Explore below.
+        </strong>
     </div>
 
 </section>
@@ -201,7 +204,7 @@
      BUSINESS & PROPERTY
 =================================== -->
 
-<section class="cards">
+<section class="cards" id="cards-section">
 
     <a href="https://search.wallawalla.co.za" class="card-link">
         <div class="card">
@@ -709,6 +712,14 @@ document.addEventListener("click", function(e){
 
 });
 
+</script>
+
+<script>
+function scrollToCards() {
+    document.getElementById("cards-section").scrollIntoView({
+        behavior: "smooth"
+    });
+}
 </script>
 
 </body>
