@@ -1748,6 +1748,25 @@ body{
     background: #16a34a;
 }
 
+.floating-arrow{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    color:greenyellow;
+    font-size:2rem;
+
+    cursor:pointer;
+    z-index:9999;
+
+    animation:bounce 1.5s infinite;
+}
+
+.floating-arrow i{
+    text-shadow:0 2px 10px rgba(0,0,0,.4);
+}
+
 .cards{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
