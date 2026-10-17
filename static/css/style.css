@@ -1712,11 +1712,6 @@ body{
     gap: 6px;
 }
 
-.floating-arrow:hover {
-    transform: scale(1.1);
-    background: #16a34a;
-}
-
 .floating-arrow{
     position:fixed;
     bottom:20px;
