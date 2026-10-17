@@ -1712,37 +1712,6 @@ body{
     gap: 6px;
 }
 
-.floating-arrow{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-
-    width:55px;
-    height:55px;
-
-    background:#22c55e;
-    color:white;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    z-index:9999;
-
-    box-shadow:0 4px 15px rgba(0,0,0,.25);
-
-    animation:bounce 1.5s infinite;
-}
-
-.floating-arrow i{
-    font-size:22px;
-}
-
 .floating-arrow:hover {
     transform: scale(1.1);
     background: #16a34a;
