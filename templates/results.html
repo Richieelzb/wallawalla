@@ -47,7 +47,10 @@
     </nav>
 
     <div class="results-container">
-        <h1 class="results-title">Results for "{{ query }}" ({{ results|length }})</h1>
+        <h1 class="results-title">
+            <span style="color:#1565c0;">Results for</span>
+            "{{ query }}" ({{ results|length }})
+        </h1>
         
         {% if results %}
             <p class="results-subtitle">
