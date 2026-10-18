@@ -101,7 +101,7 @@ class Business(db.Model):
     phone = db.Column(db.String(20))
     whatsapp = db.Column(db.String(20))
     email = db.Column(db.String(120))
-    address = db.Column(db.String(255))
+    address = db.Column(db.Text, nullable=True)
 
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
@@ -529,10 +529,7 @@ class Property(db.Model):
     )
 
     # Address
-    address = db.Column(
-        db.String(500),
-        nullable=False
-    )
+    address = db.Column(db.Text, nullable=True)
 
     suburb = db.Column(
         db.String(100),
