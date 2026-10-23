@@ -52,7 +52,7 @@
             <i class="fa-solid fa-location-crosshairs"></i>
             <h2>Location Required</h2>
             <p>
-                Wallawalla requires access to your location to find businesses and services near you.
+                Wallawalla requires access to your location to find businesses and properties near you.
             </p>
 
             <button
@@ -721,6 +721,179 @@ function scrollToCards() {
     });
 }
 </script>
+
+
+<script>
+async function checkLocationPermission() {
+
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by this browser.");
+        return;
+    }
+
+    try {
+
+        const permission = await navigator.permissions.query({
+            name: "geolocation"
+        });
+
+        if (permission.state === "granted") {
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    document.getElementById("latitude").value = lat;
+                    document.getElementById("longitude").value = lng;
+
+                    document.getElementById("latitude-bottom").value = lat;
+                    document.getElementById("longitude-bottom").value = lng;
+                    
+                    loadPropertyCount(lat, lng);
+
+                    document.getElementById(
+                        "location-required"
+                    ).style.display = "none";
+                },
+                function() {
+                    document.getElementById(
+                        "location-required"
+                    ).style.display = "flex";
+                }
+            );
+        } else {
+
+            document.getElementById(
+                "location-required"
+            ).style.display = "flex";
+        }
+
+    } catch (e) {
+
+        document.getElementById(
+            "location-required"
+        ).style.display = "flex";
+    }
+}
+</script>
+
+<script>
+function requestLocation() {
+
+    if (!navigator.geolocation) {
+        alert("Your browser does not support location services.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            document.getElementById("latitude").value = lat;
+            document.getElementById("longitude").value = lng;
+
+            document.getElementById("latitude-bottom").value = lat;
+            document.getElementById("longitude-bottom").value = lng;
+
+            document.getElementById(
+                "property-latitude"
+            ).value = lat;
+
+            document.getElementById(
+                "property-longitude"
+            ).value = lng;
+
+            loadPropertyCount(lat, lng);
+
+            document.getElementById("location-required").style.display = "none";
+
+            document.body.style.overflow = "auto";
+        },
+
+        function(error) {
+
+            alert(
+                "Location access is required to use Wallawalla. Please enable location services and allow access."
+            );
+
+            document.getElementById("location-required").style.display = "flex";
+
+            document.body.style.overflow = "hidden";
+
+            console.log(error);
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+
+window.onload = function () {
+
+    if (!navigator.geolocation) {
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            document.getElementById("latitude").value = lat;
+            document.getElementById("longitude").value = lng;
+
+            document.getElementById("latitude-bottom").value = lat;
+            document.getElementById("longitude-bottom").value = lng;
+
+            loadPropertyCount(lat, lng);
+
+            document.getElementById("location-required").style.display = "none";
+            document.body.style.overflow = "auto";
+        },
+
+        function() {
+
+            document.getElementById("location-required").style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+    );
+};
+</script>
+<script>
+function validateLocationRequired() {
+
+    const lat =
+        document.getElementById("latitude").value ||
+        document.getElementById("latitude-bottom").value;
+
+    const lng =
+        document.getElementById("longitude").value ||
+        document.getElementById("longitude-bottom").value;
+
+    if (!lat || !lng) {
+
+        alert(
+            "Please enable location before using Wallawalla."
+        );
+
+        return false;
+    }
+
+    return true;
+}
+</script>
+
 
 </body>
 
