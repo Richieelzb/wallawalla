@@ -27,7 +27,46 @@ API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
 @app.route("/")
 def home():
- return render_template("frontend.html")
+
+    email = session.get("email")
+
+    property = None
+
+    if email:
+        property = Property.query.filter_by(
+            email=email
+        ).first()
+
+    featured_property_count = (
+        Property.query
+        .filter(
+            Property.status == "approved",
+            Property.is_featured.is_(True),
+            or_(
+                Property.featured_expires_at.is_(None),
+                Property.featured_expires_at > utc_now()
+            )
+        )
+        .count()
+    )
+
+    premium_category_counts = (
+        get_premium_category_counts()
+    )
+
+    premium_property_count = sum(
+        item["count"]
+        for item in premium_category_counts
+    )
+
+    return render_template(
+        "frontend.html",
+        email=email,
+        property=property,
+        featured_property_count=featured_property_count,
+        premium_property_count=premium_property_count,
+        premium_category_counts=premium_category_counts
+    )
 
 
 COGNITO_USER_POOL_ID = os.getenv(

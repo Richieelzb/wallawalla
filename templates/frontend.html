@@ -200,6 +200,83 @@
 
 </section>
 
+{% if featured_property_count > 0 %}
+
+<section class="promoted-directory featured-directory">
+
+    <button
+        type="button"
+        class="promoted-directory-header"
+        id="featured-directory-button"
+        aria-expanded="false"
+        aria-controls="featured-property-content"
+        onclick="toggleFeaturedProperties(this)"
+    >
+
+        <span class="promoted-directory-title">
+
+            <span class="promoted-directory-icon featured-icon">
+                <i class="fa-solid fa-star"></i>
+            </span>
+
+            <span>
+                <strong>Featured Properties</strong>
+
+                <small>
+                    Featured properties near you
+                </small>
+            </span>
+
+        </span>
+
+        <span class="promoted-directory-summary">
+
+            <span class="promoted-property-count">
+                {{ featured_property_count }}
+            </span>
+
+            <span class="promoted-count-label">
+                properties
+            </span>
+
+            <i class="fa-solid fa-chevron-down promoted-toggle-icon"></i>
+
+        </span>
+
+    </button>
+
+    <div
+        id="featured-property-content"
+        class="promoted-directory-content"
+        data-loaded="false"
+        style="display:none;"
+    >
+
+        <div
+            id="featured-property-loading"
+            class="promoted-loading"
+            style="display:none;"
+        >
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Loading Featured properties...
+        </div>
+
+        <div
+            id="featured-property-message"
+            class="promoted-message"
+        ></div>
+
+        <div
+            id="featured-property-results"
+            class="promoted-property-grid"
+        ></div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
 <!-- =============================
      BUSINESS & PROPERTY
 =================================== -->
@@ -893,6 +970,189 @@ function validateLocationRequired() {
     return true;
 }
 </script>
+
+<script>
+
+let featuredPropertiesLoading = false;
+
+async function toggleFeaturedProperties(button){
+
+    const content =
+        document.getElementById(
+            "featured-property-content"
+        );
+
+    const isOpen =
+        content.style.display === "block";
+
+    if(isOpen){
+
+        content.style.display = "none";
+
+        button.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        return;
+    }
+
+    content.style.display = "block";
+
+    button.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+    if(content.dataset.loaded !== "true"){
+        await loadFeaturedProperties();
+    }
+}
+
+</script>
+
+<script>
+
+async function loadFeaturedProperties(){
+
+    if(featuredPropertiesLoading){
+        return;
+    }
+
+    const latitude =
+        document.getElementById("latitude").value;
+
+    const longitude =
+        document.getElementById("longitude").value;
+
+    const loading =
+        document.getElementById(
+            "featured-property-loading"
+        );
+
+    const message =
+        document.getElementById(
+            "featured-property-message"
+        );
+
+    const results =
+        document.getElementById(
+            "featured-property-results"
+        );
+
+    if(!latitude || !longitude){
+
+        message.textContent =
+            "Enable location to view nearby Featured properties.";
+
+        return;
+    }
+
+    featuredPropertiesLoading = true;
+
+    loading.style.display = "block";
+
+    results.innerHTML = "";
+
+    try{
+
+        const response = await fetch(
+            `https://property.wallawalla.co.za/api/featured-properties?latitude=${latitude}&longitude=${longitude}`
+        );
+
+        const data =
+            await response.json();
+
+        data.properties.forEach(function(property){
+
+            results.insertAdjacentHTML(
+                "beforeend",
+                createPromotedPropertyCard(property)
+            );
+
+        });
+
+        document.getElementById(
+            "featured-property-content"
+        ).dataset.loaded = "true";
+
+        message.textContent =
+            `Showing ${data.total} featured properties nearest to you`;
+
+    }catch(error){
+
+        console.error(error);
+
+        message.textContent =
+            "Unable to load Featured properties.";
+
+    }finally{
+
+        loading.style.display = "none";
+
+        featuredPropertiesLoading = false;
+    }
+
+}
+
+</script>
+
+<script>
+
+function createPromotedPropertyCard(property){
+
+    return `
+
+    <article class="promoted-property-card">
+
+        <div class="promoted-property-badges">
+
+            <span class="featured-badge">
+                <i class="fa-solid fa-star"></i>
+                Featured
+            </span>
+
+        </div>
+
+        <h3>${property.title}</h3>
+
+        <p class="promoted-property-category">
+            ${property.category}
+        </p>
+
+        <p class="promoted-property-distance">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            ${Number(property.distance).toFixed(1)}
+            km away
+
+        </p>
+
+        <p class="promoted-property-description">
+            ${property.description}
+        </p>
+
+        <button
+            class="promoted-view-button"
+            onclick="
+                window.open(
+                    'https://property.wallawalla.co.za/property-search?query=${encodeURIComponent(property.title)}',
+                    '_blank'
+                )
+            "
+        >
+            View Property
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+    </article>
+
+    `;
+}
+
+</script>
+
 
 
 </body>
