@@ -2969,3 +2969,20 @@ body{
     }
 }
 
+.promoted-business-count{
+    display:grid;
+    place-items:center;
+
+    min-width:36px;
+    height:28px;
+
+    padding:0 10px;
+
+    border-radius:999px;
+
+    background:#16a34a;
+    color:#fff;
+
+    font-size:.82rem;
+    font-weight:900;
+}
