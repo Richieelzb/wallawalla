@@ -30,23 +30,16 @@ def home():
 
     email = session.get("email")
 
+    business = None
     property = None
 
     if email:
-        property = Property.query.filter_by(
+
+        business = Business.query.filter_by(
             email=email
         ).first()
 
-    
-@app.route("/")
-def home():
-
-    email = session.get("email")
-
-    business = None
-
-    if email:
-        business = Business.query.filter_by(
+        property = Property.query.filter_by(
             email=email
         ).first()
 
@@ -62,7 +55,6 @@ def home():
         )
         .count()
     )
-
 
     featured_property_count = (
         Property.query
@@ -80,12 +72,11 @@ def home():
     return render_template(
         "frontend.html",
         email=email,
-        property=property,
         business=business,
+        property=property,
         featured_business_count=featured_business_count,
         featured_property_count=featured_property_count
-    )
-
+)
 
 COGNITO_USER_POOL_ID = os.getenv(
     "COGNITO_USER_POOL_ID"
@@ -200,9 +191,6 @@ def business_status_helpers():
         "is_verified_business": is_verified_business
     }
 
-# @app.route("/")
-# def home():
-#  return render_template("index.html")
 
 
 def distance_km(lat1, lon1, lat2, lon2):
