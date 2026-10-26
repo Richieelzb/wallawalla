@@ -11,7 +11,7 @@ from flask import (
 from sqlalchemy import or_, func
 from sqlalchemy import cast, String
 from flask_sqlalchemy import SQLAlchemy
-from models import db, Business
+from models import db, Business, Property
 from math import radians, sin, cos, sqrt, atan2
 from datetime import datetime, timedelta
 
