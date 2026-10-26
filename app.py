@@ -37,6 +37,33 @@ def home():
             email=email
         ).first()
 
+    
+@app.route("/")
+def home():
+
+    email = session.get("email")
+
+    business = None
+
+    if email:
+        business = Business.query.filter_by(
+            email=email
+        ).first()
+
+    featured_business_count = (
+        Business.query
+        .filter(
+            Business.status == "approved",
+            Business.is_featured.is_(True),
+            or_(
+                Business.featured_expires_at.is_(None),
+                Business.featured_expires_at > utc_now()
+            )
+        )
+        .count()
+    )
+
+
     featured_property_count = (
         Property.query
         .filter(
@@ -50,22 +77,13 @@ def home():
         .count()
     )
 
-    premium_category_counts = (
-        get_premium_category_counts()
-    )
-
-    premium_property_count = sum(
-        item["count"]
-        for item in premium_category_counts
-    )
-
     return render_template(
         "frontend.html",
         email=email,
         property=property,
-        featured_property_count=featured_property_count,
-        premium_property_count=premium_property_count,
-        premium_category_counts=premium_category_counts
+        business=business,
+        featured_business_count=featured_business_count,
+        featured_property_count=featured_property_count
     )
 
 
