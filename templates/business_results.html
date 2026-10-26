@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="40x40" href="static/images/wallawalla-circular.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find It On Wallawalla</title>
+
+    <link 
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2V1XS75J9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-X2V1XS75J9');
+    </script>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a href="https://search.wallawalla.co.za" style="text-decoration:none; color:inherit;">
+    <div class="logo">
+        <span class="back-arrow">
+            <i class="fa-solid fa-arrow-left"></i>
+        </span>
+        <img src="{{ url_for('static', filename='/images/walla-w.png') }}" alt="WallaWalla Logo">
+        <span class="logo-text">
+            <span class="green">WALLA</span><span class="logo-blue">W</span><span class="logo-white">ALLA</span>
+        </span>
+        <span class="tagline">
+          find it<span class="tagline-green"> near you...</span>
+        </span>
+    </div>
+    </a>
+
+    <button class="location-btn" type="button">
+
+        <i
+            class="fa-solid fa-store"
+            style="color:#22c55e;"
+        ></i>
+
+        <i
+            class="fa-solid fa-magnifying-glass"
+            style="color:#ffffff;"
+        ></i>
+
+        Search Results
+
+    </button>
+
+
+</nav>
+
+<div class="results-container">
+
+    <h1 class="results-title">
+        "{{ query }}" Near You...({{ businesses|length }})
+    </h1>
+
+    {% if businesses %}
+       <p class="results-subtitle">
+            <i class="fa-solid fa-location-arrow"></i>
+            Click on a business name to view images
+        </p>
+
+    {% for business in businesses %}
+
+    <div
+        class="
+            place-card
+            {% if business.featured_active %}
+                featured-card
+            {% endif %}
+            {% if business.premium_active %}
+                premium-card
+            {% endif %}
+        "
+        id="business-card-{{ business.id }}"
+       >
+
+        <!-- Featured label at the top of the card -->
+        {% if business.featured_active %}
+
+            <div class="featured-ribbon">
+
+                <i class="fa-solid fa-star"></i>
+
+                Featured Listing
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- Business name and badges -->
+        <div class="business-result-heading">
+
+            <div class="business-title-section">
+
+                <h2
+                    class="result-business-name"
+                    onclick="toggleBusiness('{{ business.id }}'); countBusinessView('{{ business.id }}'); return false;"
+                >
+                    {{ business.business_name }}
+                </h2>
+
+                <div class="business-id">
+                    Business ID: {{ business.id }}
+                </div>
+
+            </div>
+
+            <div class="business-badges">
+
+                {% if business.verified_active %}
+
+                    <span
+                        class="verified-badge"
+                        title="This business has been verified by Wallawalla"
+                    >
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Verified
+
+                    </span>
+
+                {% endif %}
+
+
+                {% if business.premium_active %}
+
+                    <span
+                        class="premium-badge"
+                        title="Premium Wallawalla business profile"
+                    >
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                        Premium
+
+                    </span>
+
+                {% endif %}
+
+
+                {% if business.featured_active %}
+
+                    <span
+                        class="featured-badge"
+                        title="Featured Wallawalla business listing"
+                    >
+
+                        <i class="fa-solid fa-star"></i>
+
+                        Featured
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- Business image gallery -->
+        <div
+            id="business-gallery-{{ business.id }}"
+            style="display: none; margin: 15px 0;">
+
+            {% if business.dashboard_images %}
+               
+                <div class="gallery">
+ 
+                   {% for image in business.dashboard_images %}
+                        <img 
+                            src="{{ image.image_url }}" 
+                            alt="{{ business.business_name }}"
+                            style="width:300px; height:auto; display:block;"
+                    >
+                     {% endfor %}
+                </div>
+
+            {% else %}
+
+                <p> No images available.</p>
+
+            {% endif %}
+
+        </div>
+
+        <p
+            class="
+                business-distance
+                {% if not business.featured_active and not business.premium_active %}
+                    normal-distance
+                {% endif %}
+            "
+        >
+            <i class="fa-solid fa-location-dot" style="color:red;"></i>
+            <strong>{{ business.distance }} km away</strong>
+        </p>
+
+        <button
+            class="description-btn"
+            onclick="toggleSection(this, 'details-{{ business.id }}')">
+            View Contact Details and Directions
+        </button>
+
+        <!-- Hidden details -->
+        <div
+            id="details-{{ business.id }}"
+            class="details-box"
+            style="display:none;">
+
+            {% if business.show_address %}
+            <p>
+                <a href="https://www.google.com/maps/dir/?api=1&destination={{ business.address|urlencode }}" target="_blank">
+
+                    📍 {{ business.address }}
+
+                </a>
+            </p>
+            {% else %}
+
+                <p> 📍: disabled by the owner.</p>
+
+            {% endif %}
+
+            {% if business.show_phone %}
+            <p>
+                <a href="tel:{{ business.phone|replace(' ', '') }}"
+                onclick="recordBusinessClick('{{ business.id }}', 'phone')"
+                style="text-decoration:none; color:inherit;">
+                    📞 {{ business.phone }}
+                </a>
+            </p>
+            {% else %}
+
+                <p> 📞 : disabled by the owner.</p>
+
+            {% endif %}
+
+            {% if business.show_whatsapp %}
+            <p>
+                <span class="label contact-row">
+                    <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i>
+                <a href="{{ whatsapp_link(business.whatsapp) }}"
+                onclick="recordBusinessClick('{{ business.id }}', 'whatsapp')"
+                target="_blank"
+                rel="noopener noreferrer">
+                    {{ business.whatsapp }}
+                </a>
+                 </span>
+            </p>
+            {% else %}
+                <p> 
+                    <span class="label">
+                    <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i>: disabled by the owner.
+                </p>
+
+            {% endif %}
+        </div>
+
+       <button
+            class="description-btn"
+            onclick="toggleSection(this, 'hours-{{ business.id }}')">
+            View Operating Hours
+       </button>
+
+        <div id="hours-{{ business.id }}" class="hours-box" style="display:none;">
+            <h4>
+                <i class="fa-regular fa-clock"></i>
+                Opening Hours
+            </h4>
+
+                {% if
+                    business.mon_thu_open
+                    and business.mon_thu_close
+                    and business.fri_open
+                    and business.fri_close
+                    and business.mon_thu_open.strftime('%H:%M') == '00:00'
+                    and business.mon_thu_close.strftime('%H:%M') == '00:00'
+                    and business.fri_open.strftime('%H:%M') == '00:00'
+                    and business.fri_close.strftime('%H:%M') == '00:00'
+                %}
+
+                    <p>🟢 <strong>Open 24 Hours</strong></p>
+
+                {% else %}
+
+                    <p>
+                        <strong>Mon - Thu:</strong>
+                        {% if business.mon_thu_open and business.mon_thu_close %}
+                            {{ business.mon_thu_open.strftime('%H:%M') }} -
+                            {{ business.mon_thu_close.strftime('%H:%M') }}
+                        {% else %}
+                            Closed
+                        {% endif %}
+                    </p>
+
+                    <p>
+                        <strong>Friday:</strong>
+                        {% if business.fri_open and business.fri_close %}
+                            {{ business.fri_open.strftime('%H:%M') }} -
+                            {{ business.fri_close.strftime('%H:%M') }}
+                        {% else %}
+                            Closed
+                        {% endif %}
+                    </p>
+
+                    <p>
+                        <strong>Saturday:</strong>
+                        {% if business.sat_open and business.sat_close %}
+                            {{ business.sat_open.strftime('%H:%M') }} -
+                            {{ business.sat_close.strftime('%H:%M') }}
+                        {% else %}
+                            Closed
+                        {% endif %}
+                    </p>
+
+                    <p>
+                        <strong>Sunday:</strong>
+                        {% if business.sun_open and business.sun_close %}
+                            {{ business.sun_open.strftime('%H:%M') }} -
+                            {{ business.sun_close.strftime('%H:%M') }}
+                        {% else %}
+                            Closed
+                        {% endif %}
+                    </p>
+
+                    <p>
+                        <strong>Public Holidays:</strong>
+                        {% if business.holiday_open and business.holiday_close %}
+                            {{ business.holiday_open.strftime('%H:%M') }} -
+                            {{ business.holiday_close.strftime('%H:%M') }}
+                        {% else %}
+                            Closed
+                        {% endif %}
+                    </p>
+
+                {% endif %}
+                
+        </div>
+
+        <button
+            class="description-btn"
+            onclick="toggleSection(this, 'desc-{{ business.id }}')">
+            View Description
+        </button>
+
+        <div
+            id="desc-{{ business.id }}"
+            class="description-box"
+            style="display:none;">
+            <p>{{ business.description }}</p>
+        </div>
+
+         {% if business.special_offer and business.subscription_plan in ["premium", "featured"] %}
+
+            <div class="business-special-offer">
+
+                <div class="special-offer-title">
+                    🔥 Special Offer
+                </div>
+
+                <div class="special-offer-text">
+                    {{ business.special_offer }}
+                </div>
+
+            </div>
+
+        {% endif %}
+
+        {% set plan = business.subscription_plan|default('', true)|lower|trim %}
+
+        {% if plan in "featured" and (
+                business.website
+                or business.facebook
+                or business.instagram
+                or business.linkedin
+                or business.tiktok
+                or business.youtube
+                or business.x_twitter
+            ) %}
+
+            <section class="business-online-links">
+
+                <h3>
+                    <i class="fa-solid fa-link"></i>
+                    Website and Social Media
+                </h3>
+
+                <div class="business-link-buttons">
+
+                    {% if business.website %}
+                        <a href="{{ business.website }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="recordBusinessClick('{{ business.id }}', 'website')">
+                            <i class="fa-solid fa-globe"></i>
+                            {{ business.website
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                                }}
+                        </a>
+                    {% endif %}
+
+                    {% if business.facebook %}
+                        <a href="{{ business.facebook }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-facebook"></i>
+                            {{ business.facebook
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if business.instagram %}
+                        <a href="{{ business.instagram }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-instagram"></i>
+                        {{ business.instagram
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if business.linkedin %}
+                        <a href="{{ business.linkedin }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-linkedin"></i>
+                            {{ business.linkedin
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if business.tiktok %}
+                        <a href="{{ business.tiktok }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-tiktok"></i>
+                            {{ business.tiktok
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if business.youtube %}
+                        <a href="{{ business.youtube }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-youtube"></i>
+                            {{ business.youtube
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if business.x_twitter %}
+                        <a href="{{ business.x_twitter }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-x-twitter"></i>
+                            {{ business.x_twitter
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </section>
+
+        {% endif %}
+
+
+    </div>
+    {% endfor %}
+
+ {% else %}
+    <p style="text-align:center;color:greenyellow;">No businesses found close to you...check back later.</p>
+ {% endif %}
+
+</div>
+
+<script>
+
+function toggleDescription(id) {
+
+    const description = document.getElementById(id);
+
+    if (description.style.display === "none" || description.style.display === "") {
+        description.style.display = "block";
+    } else {
+        description.style.display = "none";
+    }
+}
+
+</script>
+
+<script>
+    function toggleDetails(id) {
+        const details = document.getElementById(id);
+
+        if (details.style.display === "none" || details.style.display === "") {
+            details.style.display = "block";
+        } else {
+            details.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    const viewedBusinesses = new Set();
+
+    async function viewBusiness(businessId, detailsId) {
+
+        if (!viewedBusinesses.has(businessId)) {
+            await fetch(`/business-view/${businessId}`, {
+                method: "POST"
+            });
+            viewedBusinesses.add(businessId);
+        }
+
+        toggleDetails(detailsId);
+    }
+</script>
+
+<!-- <script>
+async function viewBusiness(businessId, detailsId) {
+
+    await fetch(`/business-view/${businessId}`, {
+        method: "POST"
+    });
+
+    toggleDetails(detailsId);
+}
+
+</script> -->
+<script>
+function toggleSection(button, id) {
+
+    const section = document.getElementById(id);
+
+    if (
+        section.style.display === "none" ||
+        section.style.display === ""
+    ) {
+        section.style.display = "block";
+        button.classList.add("active");
+    } else {
+        section.style.display = "none";
+        button.classList.remove("active");
+    }
+}
+</script>
+<script>
+function toggleHours(id) {
+
+    const hours = document.getElementById(id);
+
+    if (hours.style.display === "none" || hours.style.display === "") {
+        hours.style.display = "block";
+    } else {
+        hours.style.display = "none";
+    }
+}
+</script>
+
+<script>
+const countedBusinessViews = new Set();
+
+async function countBusinessView(businessId) {
+
+    if (countedBusinessViews.has(businessId)) {
+        return;
+    }
+
+    countedBusinessViews.add(businessId);
+
+    try {
+
+        await fetch(
+            `/business-view/${businessId}`,
+            {
+                method: "POST",
+                keepalive: true
+            }
+        );
+
+        if (typeof gtag === "function") {
+
+            gtag(
+                "event",
+                "business_profile_view",
+                {
+                    business_id:
+                        String(businessId),
+
+                    search_results_page:
+                        true
+                }
+            );
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to count business view:",
+            error
+        );
+
+        countedBusinessViews.delete(
+            businessId
+        );
+    }
+}
+
+
+function toggleBusiness(businessId) {
+
+    const gallery =
+        document.getElementById(
+            `business-gallery-${businessId}`
+        );
+
+    if (!gallery) {
+        return;
+    }
+
+    const isHidden =
+        gallery.style.display === "none" ||
+        gallery.style.display === "";
+
+    gallery.style.display =
+        isHidden
+            ? "block"
+            : "none";
+}
+
+</script>
+
+<script>
+function trackBusinessAction(
+    eventName,
+    businessId
+) {
+
+    if (typeof gtag !== "function") {
+        return;
+    }
+
+    gtag(
+        "event",
+        eventName,
+        {
+            business_id:
+                String(businessId),
+
+            page_location_type:
+                "business_search_results"
+        }
+    );
+}
+</script>
+
+<script>
+function recordBusinessClick(
+    businessId,
+    action
+) {
+
+    fetch(
+        `/business-click/${businessId}/${action}`,
+        {
+            method: "POST",
+            keepalive: true
+        }
+    ).catch(error => {
+        console.error(
+            "Unable to record click:",
+            error
+        );
+    });
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" sizes="40x40" href="static/images/wallawalla-circular.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find It On Wallawalla</title>
+
+    <link 
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2V1XS75J9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-X2V1XS75J9');
+    </script>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a href="https://property.wallawalla.co.za" style="text-decoration:none; color:inherit;">
+    <div class="logo">
+        <span class="back-arrow">
+            <i class="fa-solid fa-arrow-left"></i>
+        </span>
+        <img src="{{ url_for('static', filename='/images/walla-w.png') }}" alt="WallaWalla Logo">
+        <span class="logo-text">
+            <span class="logo-blue">WALLA</span><span class="green">W</span><span class="logo-white">ALLA</span>
+        </span>
+        <span class="tagline">
+          find it<span class="tagline-blue"> near you...</span>
+        </span>
+    </div>
+    </a>
+
+    <button class="location-btn" type="button">
+
+        <i
+            class="fa-solid fa-house-chimney"
+            style="color:aqua;"
+        ></i>
+
+        <i
+            class="fa-solid fa-magnifying-glass"
+            style="color:#ffffff;"
+        ></i>
+
+        Search Results
+
+    </button>
+
+
+</nav>
+
+<div class="results-container">
+
+    <h1 class="results-title">
+        "{{ query }}" Near You...({{ properties|length }})
+    </h1>
+
+    {% if properties %}
+       <p class="results-subtitle">
+            <i class="fa-solid fa-location-arrow"></i>
+            Click on a property name to view images
+        </p>
+
+    {% for property in properties %}
+
+    <div
+        class="
+            place-card
+            {% if property.featured_active %}
+                featured-card
+            {% endif %}
+            {% if property.premium_active %}
+                premium-card
+            {% endif %}
+        "
+        id="property-card-{{ property.id }}"
+       >
+
+        <!-- Featured label at the top of the card -->
+        {% if property.featured_active %}
+
+            <div class="featured-ribbon">
+
+                <i class="fa-solid fa-star"></i>
+
+                Featured Listing
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- Property name and badges -->
+        <div class="property-result-heading">
+
+            <h2
+                class="result-property-name"
+                onclick="
+                    recordPropertyClick('{{ property.id }}', 'title');
+                    toggleProperty('{{ property.id }}');
+                    return false;
+                
+                 ">
+                {{ property.title }}
+            </h2>
+
+            {% if property.reference_number %}
+            <p class="property-reference">
+                Ref: {{ property.reference_number }}
+            </p>
+            {% endif %}
+
+            {% if property.listing_status == "available" %}
+
+            <span class="status-badge available">
+                ✅ Available
+            </span>
+
+            {% elif property.listing_status == "sold" %}
+
+            <span class="status-badge sold">
+                🏠 Sold
+            </span>
+
+            {% elif property.listing_status == "rented" %}
+
+            <span class="status-badge rented">
+                🔑 Rented
+            </span>
+
+            {% endif %}
+
+            <div class="property-badges">
+
+                {% if property.verified_active %}
+
+                    <span
+                        class="verified-badge"
+                        title="This property has been verified by Wallawalla"
+                    >
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Verified
+
+                    </span>
+
+                {% endif %}
+
+
+                {% if property.premium_active %}
+
+                    <span
+                        class="premium-badge"
+                        title="Premium Wallawalla property profile"
+                    >
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                        Premium
+
+                    </span>
+
+                {% endif %}
+
+
+                {% if property.featured_active %}
+
+                    <span
+                        class="featured-badge"
+                        title="Featured Wallawalla property listing"
+                    >
+
+                        <i class="fa-solid fa-star"></i>
+
+                        Featured
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% if property.listing_type %}
+        <div class="property-info-item">
+            <i class="fa-solid fa-tags"></i>
+            <strong>Listing Type:</strong>
+            {{ property.listing_type|replace(',', ', ') }}
+        </div>
+        {% endif %}
+
+        {% if property.property_type %}
+        <div class="property-info-item">
+            <i class="fa-solid fa-house"></i>
+            <strong>Category:</strong>
+            {{ property.property_type }}
+        </div>
+        {% endif %}
+
+        {% if property.sale_or_rent %}
+        <div class="property-info-item">
+            <i class="fa-solid fa-tag"></i>
+            <strong>Sale or Rent:</strong>
+            {{ property.sale_or_rent }}
+        </div>
+        {% endif %}
+
+        <div class="property-summary">
+
+            {% if property.bedrooms %}
+                <span>🛏 {{ property.bedrooms }} Beds</span>
+            {% endif %}
+
+            {% if property.bathrooms %}
+                <span>🛁 {{ property.bathrooms }} Baths</span>
+            {% endif %}
+
+            {% if property.parking_spaces %}
+                <span>🚗 {{ property.parking_spaces }} Parking</span>
+            {% endif %}
+
+        </div>
+
+        <!-- Property image gallery -->
+        <div
+            id="property-gallery-{{ property.id }}"
+            style="display: none; margin: 15px 0;">
+
+            {% if property.dashboard_images %}
+               
+                <div class="gallery">
+ 
+                   {% for image in property.dashboard_images %}
+                        <img 
+                            src="{{ image.image_url }}" 
+                            alt="{{ property.title }}"
+                            style="width:300px; height:auto; display:block;"
+                    >
+                     {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p> No images available.</p>
+
+            {% endif %}
+
+        </div>
+         <br>
+        {% if property.suburb or property.city or property.province %}
+        <p class="property-location" style="color:#38bdf8;">
+
+            <i class="fa-solid fa-location-dot"
+            style="color:#e63946;">
+            </i>
+
+            {{ property.suburb }}
+            {% if property.suburb and property.city %}, {% endif %}
+
+            {{ property.city }}
+            {% if property.city and property.province %}, {% endif %}
+
+            {{ property.province }}
+
+        </p>
+        {% endif %}
+
+        <p
+            class="
+                property-distance
+                {% if not property.featured_active and not property.premium_active %}
+                    normal-distance
+                {% endif %}
+            "
+        >
+            <i class="fa-solid fa-person-walking" style="color:#007bff;"></i>
+            <strong>{{ property.distance }} km away</strong>
+        </p>
+
+        {% if property.monthly_rent %}
+            <p class="property-price">
+                R{{ "{:,.0f}".format(property.monthly_rent|float) }}/month
+            </p>
+
+        {% else %}
+            <p class="property-price">
+                R{{ "{:,.0f}".format(property.price|float) }}
+            </p>
+        {% endif %}
+
+        <div class="property-info-grid">
+
+            {% if property.floor_size %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-ruler-combined"></i>
+                <strong>Floor Size:</strong>
+                {{ property.floor_size }} m²
+            </div>
+            {% endif %}
+
+            {% if property.land_size %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-map"></i>
+                <strong>Land Size:</strong>
+                {{ property.land_size }} m²
+            </div>
+            {% endif %}
+
+            {% if property.deposit_amount %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-money-bill"></i>
+                <strong>Deposit:</strong>
+                R{{ "{:,.0f}".format(property.deposit_amount|float) }}
+            </div>
+            {% endif %}
+
+            {% if property.available_from %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-calendar"></i>
+                <strong>Available From:</strong>
+                {{ property.available_from.strftime('%d %b %Y') }}
+            </div>
+            {% endif %}
+
+            {% if property.owner_type %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-user"></i>
+                <strong>Listed By:</strong>
+                {{ property.owner_type|title }}
+            </div>
+            {% endif %}
+
+            {% if property.agent_name %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-user-tie"></i>
+                <strong>Agent:</strong>
+                {{ property.agent_name }}
+            </div>
+            {% endif %}
+
+            {% if property.agency_name %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-building"></i>
+                <strong>Agency:</strong>
+                {{ property.agency_name }}
+            </div>
+            {% endif %}
+
+            {% if property.property_condition %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-house-circle-check"></i>
+                <strong>Condition:</strong>
+                {{ property.property_condition|replace('_', ' ')|title }}
+            </div>
+            {% endif %}
+
+            {% if property.furnished %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-couch"></i>
+                <strong>Furnished</strong>
+            </div>
+            {% endif %}
+
+            {% if property.pet_friendly %}
+            <div class="property-info-item">
+                <i class="fa-solid fa-paw"></i>
+                <strong>Pet Friendly</strong>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <button
+            class="description-btn"
+            onclick="toggleSection(this, 'details-{{ property.id }}')">
+            View Contact Details and Directions
+        </button>
+
+        <!-- Hidden details -->
+        <div
+            id="details-{{ property.id }}"
+            class="details-box"
+            style="display:none;">
+
+            {% if property.show_address %}
+            <p>
+                <a
+                    href="https://www.google.com/maps/dir/?api=1&destination={{ property.address|urlencode }}"
+                    target="_blank"
+                    onclick="recordPropertyClick('{{ property.id }}', 'directions')">
+
+                    📍 {{ property.address }}
+
+                </a>
+            </p>
+            {% else %}
+
+                <p> 📍: disabled by the owner.</p>
+
+            {% endif %}
+
+            {% if property.show_phone %}
+            <p>
+                <a href="tel:{{ property.phone|replace(' ', '') }}"
+                onclick="recordPropertyClick('{{ property.id }}', 'phone')"
+                style="text-decoration:none; color:inherit;">
+                    📞 {{ property.phone }}
+                </a>
+            </p>
+            {% else %}
+
+                <p> 📞 : disabled by the owner.</p>
+
+            {% endif %}
+
+            {% if property.show_whatsapp %}
+            <p>
+                <span class="label contact-row">
+                    <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i>
+                <a href="{{ whatsapp_link(property.whatsapp) }}"
+                onclick="recordPropertyClick('{{ property.id }}', 'whatsapp')"
+                target="_blank"
+                rel="noopener noreferrer">
+                    {{ property.whatsapp }}
+                </a>
+                 </span>
+            </p>
+            {% else %}
+                <p> 
+                    <span class="label">
+                    <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i>: disabled by the owner.
+                </p>
+
+            {% endif %}
+        </div>
+
+        <button
+            class="description-btn"
+            onclick="toggleSection(this, 'desc-{{ property.id }}')">
+            View Description
+        </button>
+
+        <div
+            id="desc-{{ property.id }}"
+            class="description-box"
+            style="display:none;">
+            <p>{{ property.description }}</p>
+        </div>
+
+         {% if property.special_offer and property.subscription_plan in ["premium", "featured"] %}
+
+            <div class="property-special-offer">
+
+                <div class="special-offer-title">
+                    🔥 Special Offer
+                </div>
+
+                <div class="special-offer-text">
+                    {{ property.special_offer }}
+                </div>
+
+            </div>
+
+        {% endif %}
+
+        {% set plan = property.subscription_plan|default('', true)|lower|trim %}
+
+        {% if plan == "featured" and (
+                property.website
+                or property.youtube
+                or property.facebook
+                or property.instagram
+                or property.linkedin
+                or property.tiktok
+                or property.x_twitter
+            ) %}
+
+            <section class="property-online-links">
+
+                <h3>
+                    <i class="fa-solid fa-link"></i>
+                    Website and Social Media
+                </h3>
+
+                <div class="property-link-buttons">
+
+                    {% if property.website %}
+                        <a href="{{ property.website }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="recordPropertyClick('{{ property.id }}', 'website')">
+                            <i class="fa-solid fa-globe"></i>
+                            {{ property.website
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                                }}
+                        </a>
+                    {% endif %}
+
+                    {% if property.facebook %}
+                        <a href="{{ property.facebook }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-facebook"></i>
+                            {{ property.facebook
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if property.instagram %}
+                        <a href="{{ property.instagram }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-instagram"></i>
+                        {{ property.instagram
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if property.linkedin %}
+                        <a href="{{ property.linkedin }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-linkedin"></i>
+                            {{ property.linkedin
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if property.tiktok %}
+                        <a href="{{ property.tiktok }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-tiktok"></i>
+                            {{ property.tiktok
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if property.youtube %}
+                        <a href="{{ property.youtube }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-youtube"></i>
+                            {{ property.youtube
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                    {% if property.x_twitter %}
+                        <a href="{{ property.x_twitter }}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <i class="fa-brands fa-x-twitter"></i>
+                            {{ property.x_twitter
+                                | replace('https://', '')
+                                | replace('http://', '')
+                                | replace('www.', '')
+                            }}
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </section>
+
+        {% endif %}
+
+
+    </div>
+    {% endfor %}
+
+ {% else %}
+    <p style="text-align:center;color:skyblue;">No properties found close to you...check back later.</p>
+ {% endif %}
+
+</div>
+
+<script>
+
+function toggleDescription(id) {
+
+    const description = document.getElementById(id);
+
+    if (description.style.display === "none" || description.style.display === "") {
+        description.style.display = "block";
+    } else {
+        description.style.display = "none";
+    }
+}
+
+</script>
+
+<script>
+    function toggleDetails(id) {
+        const details = document.getElementById(id);
+
+        if (details.style.display === "none" || details.style.display === "") {
+            details.style.display = "block";
+        } else {
+            details.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    const viewedProperties = new Set();
+
+    async function viewProperty(propertyId, detailsId) {
+
+        if (!viewedProperties.has(propertyId)) {
+            await fetch(`/property-view/${propertyId}`, {
+                method: "POST"
+            });
+            viewedProperties.add(propertyId);
+        }
+
+        toggleDetails(detailsId);
+    }
+</script>
+
+<!-- <script>
+async function viewProperty(propertyId, detailsId) {
+
+    await fetch(`/property-view/${propertyId}`, {
+        method: "POST"
+    });
+
+    toggleDetails(detailsId);
+}
+
+</script> -->
+<script>
+function toggleSection(button, id) {
+
+    const section = document.getElementById(id);
+
+    if (
+        section.style.display === "none" ||
+        section.style.display === ""
+    ) {
+        section.style.display = "block";
+        button.classList.add("active");
+    } else {
+        section.style.display = "none";
+        button.classList.remove("active");
+    }
+}
+</script>
+<script>
+function toggleHours(id) {
+
+    const hours = document.getElementById(id);
+
+    if (hours.style.display === "none" || hours.style.display === "") {
+        hours.style.display = "block";
+    } else {
+        hours.style.display = "none";
+    }
+}
+</script>
+
+<script>
+const countedPropertyViews = new Set();
+
+async function countPropertyView(propertyId) {
+
+    if (countedPropertyViews.has(propertyId)) {
+        return;
+    }
+
+    countedPropertyViews.add(propertyId);
+
+    try {
+
+        await fetch(
+            `/property-view/${propertyId}`,
+            {
+                method: "POST",
+                keepalive: true
+            }
+        );
+
+        if (typeof gtag === "function") {
+
+            gtag(
+                "event",
+                "property_profile_view",
+                {
+                    property_id:
+                        String(propertyId),
+
+                    search_results_page:
+                        true
+                }
+            );
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to count property view:",
+            error
+        );
+
+        countedPropertyViews.delete(
+            propertyId
+        );
+    }
+}
+
+
+function toggleProperty(propertyId) {
+
+    const gallery =
+        document.getElementById(
+            `property-gallery-${propertyId}`
+        );
+
+    if (!gallery) {
+        return;
+    }
+
+    const isHidden =
+        gallery.style.display === "none" ||
+        gallery.style.display === "";
+
+    if (isHidden) {
+
+        recordPropertyClick(
+            propertyId,
+            "gallery"
+        );
+
+        countPropertyView(
+            propertyId
+        );
+    }
+
+    gallery.style.display =
+        isHidden
+            ? "block"
+            : "none";
+}
+
+</script>
+
+<script>
+function trackPropertyAction(
+    eventName,
+    propertyId
+) {
+
+    if (typeof gtag !== "function") {
+        return;
+    }
+
+    gtag(
+        "event",
+        eventName,
+        {
+            property_id:
+                String(propertyId),
+
+            page_location_type:
+                "property_search_results"
+        }
+    );
+}
+</script>
+
+<script>
+function recordPropertyClick(
+    propertyId,
+    action
+) {
+
+    fetch(
+        `/property-click/${propertyId}/${action}`,
+        {
+            method: "POST",
+            keepalive: true
+        }
+    ).catch(error => {
+        console.error(
+            "Unable to record click:",
+            error
+        );
+    });
+}
+</script>
+<!-- <script>
+
+function openImage(imageUrl, referenceNumber){
+
+    fetch(
+        `/property-gallery-view/${referenceNumber}`,
+        {
+            method: "POST"
+        }
+    );
+
+    // existing modal code
+}
+</script> -->
+
+
+
+</body>
+</html>

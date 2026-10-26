@@ -706,6 +706,193 @@ def search():
 
 #     return {"address": address}
 
+@app.route("/property-search")
+def property_search():
+
+    query = request.args.get(
+        "query",
+        ""
+    ).strip()
+
+    latitude = request.args.get(
+        "latitude",
+        type=float
+    )
+
+    longitude = request.args.get(
+        "longitude",
+        type=float
+    )
+
+    if latitude is None or longitude is None:
+        return render_template(
+            "property_results.html",
+            properties=[],
+            query=query,
+            error=(
+                "Location access is required to find "
+                "properties near you."
+            )
+        )
+
+    keywords = query.split()
+    conditions = []
+
+    for keyword in keywords:
+
+        search_term = f"%{keyword}%"
+
+        conditions.extend([
+            Property.title.ilike(
+                search_term
+            ),
+            Property.property_type.ilike(
+                search_term
+            ),
+            Property.listing_type.ilike(
+                search_term
+            ),
+            Property.description.ilike(
+                search_term
+            ),
+            Property.address.ilike(
+                search_term
+            ),
+            Property.city.ilike(
+                search_term
+            ),
+            Property.suburb.ilike(
+                search_term
+            ),
+            Property.province.ilike(
+                search_term
+            ),
+            Property.reference_number.ilike(
+                search_term 
+            ),
+
+            cast(Property.price, String).ilike(search_term),
+
+            cast(Property.monthly_rent, String).ilike(search_term),
+            
+            Property.agency_name.ilike(
+                search_term
+            ),
+            Property.agent_name.ilike(
+                search_term
+            ),
+            Property.status.ilike(
+                search_term
+            ),
+            Property.sale_or_rent.ilike(
+                search_term
+            ),
+
+        ])
+
+    # Do not apply the old latitude +/- 0.5 and
+    # longitude +/- 0.5 restriction here.
+    #
+    # That restriction prevented Premium properties
+    # within 300 km and distant Featured properties
+    # from reaching the distance visibility check.
+    property_query = Property.query.filter(
+        Property.status == "approved",
+        Property.latitude.isnot(None),
+        Property.longitude.isnot(None)
+    )
+
+    if conditions:
+        property_query = property_query.filter(
+            or_(*conditions)
+        )
+    matching_properties = property_query.all()
+  
+    properties = []
+
+    for property in matching_properties:
+
+        distance = calculate_distance(
+            latitude,
+            longitude,
+            property.latitude,
+            property.longitude
+        )
+
+        property.featured_active = (
+            has_active_featured_listing(
+                property
+            )
+        )
+
+        property.premium_active = (
+            has_active_premium(
+                property
+            )
+        )
+
+        property.verified_active = (
+            is_verified_property(
+                property
+            )
+        )
+
+        if not is_property_visible_by_distance(
+            property,
+            distance
+        ):
+            continue
+
+        property.distance = distance
+
+        property.search_appearances = (
+            property.search_appearances or 0
+        ) + 1
+
+        properties.append(
+            property
+        )
+
+    # Sorting priority:
+    #
+    # 1. Featured
+    # 2. Featured position
+    # 3. Premium
+    # 4. Distance
+    properties.sort(
+        key=lambda property: (
+            0
+            if property.featured_active
+            else 1,
+
+            property.featured_position
+            if property.featured_active
+            and property.featured_position
+            is not None
+            else 999999,
+
+            0
+            if property.premium_active
+            else 1,
+
+            property.distance
+        )
+    )
+
+    try:
+
+        db.session.commit()
+
+    except Exception:
+
+        db.session.rollback()
+
+    return render_template(
+        "property_results.html",
+        properties=properties,
+        query=query
+    )
+
 @app.route("/business-search")
 def business_search():
 
