@@ -2969,6 +2969,84 @@ body{
     }
 }
 
+/* =====================================================
+   FEATURED BUSINESS DIRECTORY
+===================================================== */
+
+.promoted-business-grid{
+    display:grid;
+    grid-template-columns:repeat(
+        auto-fit,
+        minmax(260px,1fr)
+    );
+    gap:18px;
+}
+
+.promoted-business-card{
+
+    background:#fff;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+
+    text-align:center;
+}
+
+.promoted-business-badges{
+
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.promoted-business-card h3{
+    color:#16a34a;
+    margin:15px 0 8px;
+}
+
+.promoted-business-category{
+    color:#2563eb;
+    font-weight:600;
+}
+
+.promoted-business-distance{
+    color:#374151;
+    font-weight:700;
+    margin:10px 0;
+}
+
+.promoted-business-distance i{
+    color:red;
+}
+
+.promoted-business-description{
+    color:#6b7280;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.promoted-business-card .featured-badge{
+    background:#fff3bf;
+    border:1px solid #ffd43b;
+    color:#856404;
+}
+
+.promoted-business-card .promoted-view-button{
+    margin-top:auto;
+    background:#16a34a;
+}
+
+.promoted-business-card .promoted-view-button:hover{
+    background:#15803d;
+}
+
 .promoted-business-count{
     display:grid;
     place-items:center;
@@ -2986,3 +3064,32 @@ body{
     font-size:.82rem;
     font-weight:900;
 }
+
+.promoted-business-count,
+.promoted-business-total {
+    display: inline-grid;
+    place-items: center;
+    min-width: 36px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #1c8f4f;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 900;
+}
+
+.featured-directory .promoted-business-count {
+    background: #d99a00;
+}
+
+@media (max-width:768px){
+
+    .featured-directory{
+        margin-top:40px;
+    }
+
+}
+
+
+
