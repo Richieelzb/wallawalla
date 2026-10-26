@@ -1378,59 +1378,145 @@ async function loadFeaturedProperties(){
 
 <script>
 
-function createPromotedPropertyCard(property){
 
-    return `
+function createPromotedPropertyCard(property) {
 
-    <article class="promoted-property-card">
+    const propertyName =
+        escapePropertyText(
+            property.title ||
+            "Property"
+        );
 
-        <div class="promoted-property-badges">
+    const category =
+        escapePropertyText(
+            property.category ||
+            "Other"
+        );
 
+    const subcategory =
+        escapePropertyText(
+            property.subcategory ||
+            ""
+        );
+
+    const description =
+        escapePropertyText(
+            property.description ||
+            "No description is currently available."
+        );
+
+    let badges = "";
+
+    if (property.is_featured) {
+
+        badges += `
             <span class="featured-badge">
                 <i class="fa-solid fa-star"></i>
                 Featured
             </span>
+        `;
+    }
 
-        </div>
+    if (property.is_premium) {
 
-        <h3>${property.title}</h3>
+        badges += `
+            <span class="premium-badge">
+                <i class="fa-solid fa-briefcase"></i>
+                Premium
+            </span>
+        `;
+    }
 
-        <p class="promoted-property-category">
-            ${property.category}
-        </p>
+    if (property.is_verified) {
 
-        <p class="promoted-property-distance">
+        badges += `
+            <span class="verified-badge">
+                <i class="fa-solid fa-circle-check"></i>
+                Verified
+            </span>
+        `;
+    }
 
-            <i class="fa-solid fa-location-dot"></i>
+    const distanceText =
+        property.distance !== null
+            ? `
+                <p class="promoted-property-distance">
+                    <i class="fa-solid fa-location-dot"></i>
+                    ${Number(property.distance).toFixed(1)} km away
+                </p>
+            `
+            : `
+                <p class="promoted-property-distance">
+                    Distance unavailable
+                </p>
+            `;
 
-            ${Number(property.distance).toFixed(1)}
-            km away
+    const subcategoryText =
+        subcategory
+            ? `<span> · ${subcategory}</span>`
+            : "";
 
-        </p>
+    return `
+        <article class="promoted-property-card">
 
-        <p class="promoted-property-description">
-            ${property.description}
-        </p>
+            <div class="promoted-property-badges">
+                ${badges}
+            </div>
 
-        <button
-            class="promoted-view-button"
-            onclick="
-                window.open(
-                    'https://property.wallawalla.co.za/property-search?query=' +
-                    encodeURIComponent(property.title) +
-                    '&latitude=' + document.getElementById('latitude').value +
-                    '&longitude=' + document.getElementById('longitude').value,
-                    '_blank'
-                )
-            "
-        >
-            View Property
-            <i class="fa-solid fa-chevron-right"></i>
-        </button>
+            <h3>${propertyName}</h3>
 
-    </article>
+            <p class="promoted-property-category">
+                ${category}
+                ${subcategoryText}
+            </p>
 
+            ${distanceText}
+
+            <p class="promoted-property-description">
+                ${description}
+            </p>
+
+            <button
+                type="button"
+                class="promoted-view-button"
+                data-property-name="${escapePropertyAttribute(
+                    property.title || ""
+                )}"
+                onclick="openPromotedProperty(this)"
+            >
+                View Property
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </article>
     `;
+}
+
+
+function openPromotedProperty(button) {
+
+    const propertyName =
+        button.dataset.propertyName;
+
+    const latitude =
+        document.getElementById("latitude-bottom").value;
+
+    const longitude =
+        document.getElementById("longitude-bottom").value;
+
+    if (!latitude || !longitude) {
+        showLocationRequired();
+        return;
+    }
+
+    const query = new URLSearchParams({
+        query: propertyName,
+        latitude: latitude,
+        longitude: longitude
+    });
+
+    window.location.href =
+        `/property-search?${query.toString()}`;
 }
 
 </script>
