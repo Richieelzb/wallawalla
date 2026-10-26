@@ -2612,25 +2612,45 @@ body{
     color:#1e90ff;
 }
 
-@media(max-width:768px){
+@media (max-width: 768px){
+
+    .hero-motto{
+        display:flex;
+        gap:10px;
+        flex-wrap:nowrap;
+    }
 
     .hero-card{
-        width:100%;
-        padding:14px;
+        width:48%;
+        padding:10px;
+        border-radius:18px;
     }
 
     .hero-card-icon{
-        width:60px;
-        height:60px;
-        min-width:60px;
-        font-size:26px;
+        width:42px;
+        height:42px;
+        min-width:42px;
+        font-size:18px;
+    }
+
+    .hero-card-text{
+        margin-left:8px;
     }
 
     .hero-card-text span{
-        font-size:1.2rem;
+        font-size:0.95rem;
+        font-weight:700;
+        line-height:1.1;
+    }
+
+    .hero-card-line{
+        width:35px;
+        height:4px;
+        margin-top:4px;
     }
 
     .hero-arrow{
-        font-size:28px;
+        font-size:18px;
+        margin-left:5px;
     }
 }
