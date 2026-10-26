@@ -1104,10 +1104,10 @@ async function loadFeaturedBusinesses(){
     }
 
     const latitude =
-        document.getElementById("latitude").value;
+        document.getElementById("latitude-bottom").value;
 
     const longitude =
-        document.getElementById("longitude").value;
+        document.getElementById("longitude-bottom").value;
 
     const loading =
         document.getElementById(
@@ -1230,8 +1230,8 @@ function createFeaturedBusinessCard(business){
                 window.open(
                     'https://search.wallawalla.co.za/business-search?query=' +
                     encodeURIComponent(business.business_name) +
-                    '&latitude=' + document.getElementById('latitude').value +
-                    '&longitude=' + document.getElementById('longitude').value,
+                    '&latitude=' + document.getElementById('latitude-bottom').value +
+                    '&longitude=' + document.getElementById('longitude-bottom').value,
                     '_blank'
                 )
             "
@@ -1299,10 +1299,10 @@ async function loadFeaturedProperties(){
     }
 
     const latitude =
-        document.getElementById("latitude").value;
+        document.getElementById("latitude-bottom").value;
 
     const longitude =
-        document.getElementById("longitude").value;
+        document.getElementById("longitude-bottom").value;
 
     const loading =
         document.getElementById(
