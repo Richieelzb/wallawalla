@@ -530,7 +530,7 @@ body{
 ========================= */
 
 .hero{
-    margin-top: 220px; /* move hero down */
+    margin-top: 180px; /* move hero down */
     padding: 120px 20px 40px;
     min-height:auto;
 
@@ -2032,7 +2032,7 @@ body{
 
     .hero{
         min-height:55vh;
-        margin-top:220px;
+        margin-top:180px;
         padding:140px 80px 60px;
     }
 
