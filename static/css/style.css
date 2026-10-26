@@ -645,7 +645,7 @@ body{
 }
 
 .chip{
-    background: skyblue;
+    background:blue;
     border:1px solid rgba(153,212,32,.15);
     color:white;
     padding:12px 20px;
