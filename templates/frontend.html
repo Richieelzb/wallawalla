@@ -1228,7 +1228,10 @@ function createFeaturedBusinessCard(business){
             class="promoted-view-button"
             onclick="
                 window.open(
-                    'https://search.wallawalla.co.za/business-search?query=${encodeURIComponent(business.business_name)}',
+                    'https://search.wallawalla.co.za/business-search?query=' +
+                    encodeURIComponent(business.business_name) +
+                    '&latitude=' + document.getElementById('latitude').value +
+                    '&longitude=' + document.getElementById('longitude').value,
                     '_blank'
                 )
             "
@@ -1413,7 +1416,10 @@ function createPromotedPropertyCard(property){
             class="promoted-view-button"
             onclick="
                 window.open(
-                    'https://property.wallawalla.co.za/property-search?query=${encodeURIComponent(property.title)}',
+                    'https://property.wallawalla.co.za/property-search?query=' +
+                    encodeURIComponent(property.title) +
+                    '&latitude=' + document.getElementById('latitude').value +
+                    '&longitude=' + document.getElementById('longitude').value,
                     '_blank'
                 )
             "
