@@ -1375,7 +1375,7 @@ async function loadFeaturedProperties(){
 function createPromotedPropertyCard(property){
     
   const searchUrl =
-        `https://search.wallawalla.co.za/business-search?query=${encodeURIComponent(business.business_name)}` +
+        `https://search.wallawalla.co.za/property-search?query=${encodeURIComponent(property.title)}` +
         `&latitude=${document.getElementById('latitude').value}` +
         `&longitude=${document.getElementById('longitude').value}`;
     return `
