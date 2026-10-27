@@ -1187,6 +1187,12 @@ async function loadFeaturedBusinesses(){
 
 function createFeaturedBusinessCard(business){
 
+
+   const searchUrl =
+        `https://search.wallawalla.co.za/business-search?query=${encodeURIComponent(business.business_name)}` +
+        `&latitude=${document.getElementById('latitude').value}` +
+        `&longitude=${document.getElementById('longitude').value}`;
+
     return `
 
     <article class="promoted-business-card">
@@ -1223,25 +1229,13 @@ function createFeaturedBusinessCard(business){
             ${business.description || ""}
 
         </p>
-
-        <button
-            class="promoted-view-button"
-            onclick="
-                window.open(
-                    'https://search.wallawalla.co.za/business-search?query=' +
-                    encodeURIComponent(business.business_name) +
-                    '&latitude=' + document.getElementById('latitude').value +
-                    '&longitude=' + document.getElementById('longitude').value,
-                    '_blank'
-                )
-            "
-        >
-
-            View Business
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </button>
+               <button
+                    class="promoted-view-button"
+                    onclick="window.open('${searchUrl}', '_blank')"
+                >
+                    View Business
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
 
     </article>
 
