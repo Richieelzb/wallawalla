@@ -391,14 +391,9 @@ body{
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
-    color: green;
+    color: white;
 }
-.results-title-property {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    color: blue;
-}
+
 .results-container {
     display: flex;
     flex-direction: column;
