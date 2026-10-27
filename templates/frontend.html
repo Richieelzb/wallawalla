@@ -1373,7 +1373,11 @@ async function loadFeaturedProperties(){
 <script>
 
 function createPromotedPropertyCard(property){
-
+    
+  const searchUrl =
+        `https://search.wallawalla.co.za/business-search?query=${encodeURIComponent(business.business_name)}` +
+        `&latitude=${document.getElementById('latitude').value}` +
+        `&longitude=${document.getElementById('longitude').value}`;
     return `
 
     <article class="promoted-property-card">
@@ -1403,20 +1407,13 @@ function createPromotedPropertyCard(property){
         </p>
 
         <p class="promoted-property-description">
-            ${property.description}
+            ${property.description || ""}
         </p>
 
         <button
             class="promoted-view-button"
             onclick="
-                window.open(
-                    'https://property.wallawalla.co.za/property-search?query=' +
-                    encodeURIComponent(property.title) +
-                    '&latitude=' + document.getElementById('latitude').value +
-                    '&longitude=' + document.getElementById('longitude').value,
-                    '_blank'
-                )
-            "
+                window.open('${searchUrl}', '_blank')"
         >
             View Property
             <i class="fa-solid fa-chevron-right"></i>
