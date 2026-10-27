@@ -391,7 +391,13 @@ body{
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
-    color: white;
+    color: green;
+}
+.results-title-property {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: blue;
 }
 .results-container {
     display: flex;
