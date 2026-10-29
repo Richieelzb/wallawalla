@@ -143,7 +143,7 @@
 
         </div>
 
-        <div class="location-stats">
+        <div class="location-stats" id="location-stats" style="display:none;">
             🎯 You have
             <strong id="business-count-hero">0 local businesses</strong>
             and
@@ -661,11 +661,29 @@
     <i id="arrow-icon" class="fa-solid fa-chevron-down"></i>
 </div>
 
+
 <script>
 
-async function loadBusinessCount(lat, lng){
+let nearbyBusinessCount = 0;
+let nearbyPropertyCount = 0;
 
-    try{
+function updateLocationStatsVisibility() {
+
+    const stats = document.getElementById("location-stats");
+
+    if (!stats) return;
+
+    if (nearbyBusinessCount >= 1 || nearbyPropertyCount >= 1) {
+        stats.style.display = "";
+    } else {
+        stats.style.display = "none";
+    }
+}
+
+
+async function loadBusinessCount(lat, lng) {
+
+    try {
 
         const response = await fetch(
             `https://search.wallawalla.co.za/api/business-count?lat=${lat}&lng=${lng}`
@@ -673,11 +691,16 @@ async function loadBusinessCount(lat, lng){
 
         const data = await response.json();
 
+        nearbyBusinessCount = Number(data.count) || 0;
+
         document.getElementById(
             "business-count-hero"
-        ).innerText = `${data.count} local businesses`;
+        ).innerText =
+            `${nearbyBusinessCount} local ${nearbyBusinessCount === 1 ? "business" : "businesses"}`;
 
-    }catch(error){
+        updateLocationStatsVisibility();
+
+    } catch (error) {
 
         console.error(
             "Business count error",
@@ -686,9 +709,10 @@ async function loadBusinessCount(lat, lng){
     }
 }
 
-async function loadPropertyCount(lat, lng){
 
-    try{
+async function loadPropertyCount(lat, lng) {
+
+    try {
 
         const response = await fetch(
             `https://property.wallawalla.co.za/api/property-count?lat=${lat}&lng=${lng}`
@@ -696,11 +720,16 @@ async function loadPropertyCount(lat, lng){
 
         const data = await response.json();
 
+        nearbyPropertyCount = Number(data.count) || 0;
+
         document.getElementById(
             "property-count-hero"
-        ).innerText = `${data.count} properties`;
+        ).innerText =
+            `${nearbyPropertyCount} ${nearbyPropertyCount === 1 ? "property" : "properties"}`;
 
-    }catch(error){
+        updateLocationStatsVisibility();
+
+    } catch (error) {
 
         console.error(
             "Property count error",
@@ -710,7 +739,53 @@ async function loadPropertyCount(lat, lng){
 }
 
 </script>
+<script>
+// async function loadBusinessCount(lat, lng){
 
+//     try{
+
+//         const response = await fetch(
+//             `https://search.wallawalla.co.za/api/business-count?lat=${lat}&lng=${lng}`
+//         );
+
+//         const data = await response.json();
+
+//         document.getElementById(
+//             "business-count-hero"
+//         ).innerText = `${data.count} local businesses`;
+
+//     }catch(error){
+
+//         console.error(
+//             "Business count error",
+//             error
+//         );
+//     }
+// }
+
+// async function loadPropertyCount(lat, lng){
+
+//     try{
+
+//         const response = await fetch(
+//             `https://property.wallawalla.co.za/api/property-count?lat=${lat}&lng=${lng}`
+//         );
+
+//         const data = await response.json();
+
+//         document.getElementById(
+//             "property-count-hero"
+//         ).innerText = `${data.count} properties`;
+
+//     }catch(error){
+
+//         console.error(
+//             "Property count error",
+//             error
+//         );
+//     }
+// }
+</script>
 <script>
 
 function loadNearbyCounts(){
