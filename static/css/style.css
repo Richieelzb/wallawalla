@@ -2285,7 +2285,7 @@ body{
     width:fit-content;
     max-width:90%;
 
-    margin:0px auto 40px auto;
+    margin:0 auto 10px auto;
 
     padding:20px 30px;
 
@@ -2540,7 +2540,7 @@ body{
         width:90%;
         font-size:0.95rem;
         padding:15px;
-        margin-top:0px;
+        margin:0 auto 10px auto;
     }
 
 }
