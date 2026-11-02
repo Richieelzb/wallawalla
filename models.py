@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime, timedelta
-from sqlalchemy import Time, Date
+from datetime import datetime
 
 
 db = SQLAlchemy()
@@ -32,36 +31,62 @@ class ActivationToken(db.Model):
     )
 
 class User(db.Model):
+    __tablename__ = "user"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
 
     cognito_sub = db.Column(
         db.String(255),
-        unique=True
+        unique=True,
+        nullable=True,
+        index=True
     )
 
     email = db.Column(
         db.String(255),
-        unique=True
+        unique=True,
+        nullable=False,
+        index=True
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow,
+        nullable=False
     )
 
     businesses = db.relationship(
         "Business",
         backref="owner",
-        lazy=True
+        lazy=True,
+        foreign_keys="Business.user_id"
     )
 
     properties = db.relationship(
         "Property",
         backref="owner",
-        lazy=True
-)
+        lazy=True,
+        foreign_keys="Property.user_id"
+    )
 
+    business_claims = db.relationship(
+        "BusinessClaim",
+        backref="claimant",
+        lazy=True,
+        foreign_keys="BusinessClaim.claimant_user_id"
+    )
 
 class Business(db.Model):
     __tablename__ = "business"
 
     id = db.Column(db.Integer, primary_key=True)
+
+    # owner_cognito_sub = db.Column(
+    #     db.String(255)
+    # )
 
     user_id = db.Column(
         db.Integer,
@@ -69,9 +94,35 @@ class Business(db.Model):
         nullable=True
     )
 
-    # owner_cognito_sub = db.Column(
-    #     db.String(255)
-    # )
+    # ------------------------------
+    # LISTING OWNERSHIP / CLAIM
+    # ------------------------------
+
+    claim_status = db.Column(
+        db.String(30),
+        nullable=False,
+        default="unclaimed",
+        server_default="unclaimed",
+        index=True
+    )
+
+    claimed_at = db.Column(
+        db.DateTime,
+        nullable=True
+    )
+
+    created_by_admin = db.Column(
+        db.Boolean,
+        nullable=False,
+        default=False,
+        server_default="false"
+    )
+
+    listing_source = db.Column(
+        db.String(100),
+        nullable=True
+    )
+
 
     business_name = db.Column(db.String(200))
     category = db.Column(db.String(100))
@@ -115,6 +166,11 @@ class Business(db.Model):
         default="pending"
     )
 
+    approved_at = db.Column(
+        db.DateTime,
+        nullable=True
+    )
+
     views = db.Column(
         db.Integer,
         default=0,
@@ -152,17 +208,6 @@ class Business(db.Model):
         nullable=True
     )
 
-    created_at = db.Column(
-        db.DateTime,
-        default=datetime.utcnow
-    )
-
-    updated_at = db.Column(
-        db.DateTime,
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow
-    )
-
     # ------------------------------
     # FEATURED LISTING
     # ------------------------------
@@ -179,8 +224,7 @@ class Business(db.Model):
 
     featured_expires_at = db.Column(
         db.DateTime,
-        nullable=True,
-        index=True
+        nullable=True
     )
 
     # Lower number means a higher featured position.
@@ -214,6 +258,17 @@ class Business(db.Model):
         nullable=True
     )
 
+    created_at = db.Column(
+            db.DateTime,
+            default=datetime.utcnow
+        )
+    
+    updated_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow
+    )
+
     # ------------------------------
     # ANALYTICS
     # ------------------------------
@@ -221,19 +276,22 @@ class Business(db.Model):
     whatsapp_clicks = db.Column(
         db.Integer,
         nullable=False,
-        default=0
+        default=0,
+        server_default="0"
     )
 
     phone_clicks = db.Column(
         db.Integer,
         nullable=False,
-        default=0
+        default=0,
+        server_default="0"
     )
 
     website_clicks = db.Column(
         db.Integer,
         nullable=False,
-        default=0
+        default=0,
+        server_default="0"
     )
 
     website = db.Column(
@@ -279,6 +337,20 @@ class Business(db.Model):
     # -------------------------------------------------
     # SUBSCRIPTION HELPERS
     # -------------------------------------------------
+
+    @property
+    def is_claimed(self):
+        return (
+            self.claim_status == "claimed"
+            and self.user_id is not None
+        )
+
+    @property
+    def is_unclaimed(self):
+        return (
+            self.claim_status == "unclaimed"
+            and self.user_id is None
+        )
 
     @property
     def has_active_premium(self):
@@ -388,6 +460,145 @@ class BusinessImage(db.Model):
         nullable=False
     )
 
+class BusinessClaim(db.Model):
+    __tablename__ = "business_claims"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    business_id = db.Column(
+        db.Integer,
+        db.ForeignKey(
+            "business.id",
+            ondelete="CASCADE"
+        ),
+        nullable=False,
+        index=True
+    )
+
+    claimant_user_id = db.Column(
+        db.Integer,
+        db.ForeignKey(
+            "user.id",
+            ondelete="SET NULL"
+        ),
+        nullable=True,
+        index=True
+    )
+
+    claimant_email = db.Column(
+        db.String(255),
+        nullable=True,
+        index=True
+    )
+
+    claimant_whatsapp = db.Column(
+        db.String(30),
+        nullable=False
+    )
+
+    token_hash = db.Column(
+        db.String(64),
+        nullable=False,
+        unique=True,
+        index=True
+    )
+
+    status = db.Column(
+        db.String(30),
+        nullable=False,
+        default="invited",
+        server_default="invited",
+        index=True
+    )
+
+    expires_at = db.Column(
+        db.DateTime,
+        nullable=False
+    )
+
+    claimed_at = db.Column(
+        db.DateTime,
+        nullable=True
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow
+    )
+
+    business = db.relationship(
+        "Business",
+        backref=db.backref(
+            "claim_requests",
+            lazy=True,
+            cascade="all, delete-orphan"
+        )
+    )
+
+    @property
+    def is_expired(self):
+        return datetime.utcnow() > self.expires_at
+
+    @property
+    def is_available(self):
+        return (
+            self.status == "invited"
+            and not self.is_expired
+        )
+
+class BusinessUpgradeRequest(db.Model):
+
+    __tablename__ = "business_upgrade_requests"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    business_id = db.Column(
+        db.Integer,
+        db.ForeignKey(
+            "business.id",
+            ondelete="CASCADE"
+        ),
+        nullable=False
+    )
+
+    owner_email = db.Column(
+        db.String(120),
+        nullable=False
+    )
+
+    requested_plan = db.Column(
+        db.String(30),
+        nullable=False
+    )
+
+    status = db.Column(
+        db.String(20),
+        default="pending",
+        nullable=False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+
+    business = db.relationship(
+        "Business",
+        backref=db.backref(
+            "upgrade_requests",
+            cascade="all, delete-orphan",
+            passive_deletes=True
+        )
+    )
+
 class Property(db.Model):
     __tablename__ = "properties"
 
@@ -403,9 +614,10 @@ class Property(db.Model):
         nullable=True
     )
 
-    email = db.Column(
+    owner_email = db.Column(
         db.String(255),
-        nullable=False
+        nullable=False,
+        index=True
     )
 
     # Property Information
@@ -581,7 +793,11 @@ class Property(db.Model):
         nullable=True
     )
 
-   
+    featured_impressions = db.Column(
+        db.Integer,
+        nullable=False,
+        default=0
+    )
 
     created_at = db.Column(
         db.DateTime,
@@ -647,7 +863,8 @@ class Property(db.Model):
 
     featured_expires_at = db.Column(
         db.DateTime,
-        nullable=True
+        nullable=True,
+        index=True
     )
 
     featured_position = db.Column(
@@ -677,6 +894,11 @@ class Property(db.Model):
     )
 
     instagram = db.Column(
+        db.String(500),
+        nullable=True
+    )
+
+    linkedin = db.Column(
         db.String(500),
         nullable=True
     )
@@ -731,7 +953,8 @@ class Property(db.Model):
     reference_number = db.Column(
         db.String(50),
         unique=True,
-        nullable=True
+        nullable=True,
+        index=True
     )
 
     show_phone = db.Column(
@@ -789,6 +1012,16 @@ class Property(db.Model):
         nullable=False
     )
 
+    approved_at = db.Column(
+        db.DateTime,
+        nullable=True
+    )
+
+    special_offer = db.Column(
+        db.Text,
+        nullable=True
+    )
+
     @property
     def featured(self):
         return self.has_active_featured
@@ -805,6 +1038,9 @@ class Property(db.Model):
 
         if self.has_active_premium:
             return "premium"
+
+        if self.verified:
+                    return "verified"
 
         return "free"
 
@@ -844,6 +1080,26 @@ class Property(db.Model):
     @property
     def verified(self):
         return self.verification_status == "verified"
+
+    @property
+    def can_manage_listing(self):
+        """
+        Premium and Featured users can edit listing details,
+        manage images and view analytics.
+        """
+
+        return (
+            self.has_active_premium
+            or self.has_active_featured
+        )
+
+    @property
+    def can_add_property(self):
+        """
+        Premium and Featured users can add another business.
+        """
+
+        return self.can_manage_listing
 
     @property
     def dashboard_images(self):
@@ -905,4 +1161,54 @@ class PropertyFeature(db.Model):
     feature_name = db.Column(
         db.String(100),
         nullable=False
+    )
+
+
+class PropertyUpgradeRequest(db.Model):
+
+    __tablename__ = "property_upgrade_requests"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    property_id = db.Column(
+        db.Integer,
+        db.ForeignKey(
+            "properties.id",
+            ondelete="CASCADE"
+        ),
+        nullable=False
+    )
+
+    owner_email = db.Column(
+        db.String(120),
+        nullable=False
+    )
+
+    requested_plan = db.Column(
+        db.String(30),
+        nullable=False
+    )
+
+    status = db.Column(
+        db.String(20),
+        default="pending",
+        nullable=False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+
+    property = db.relationship(
+        "Property",
+        backref=db.backref(
+            "upgrade_requests",
+            cascade="all, delete-orphan",
+            passive_deletes=True
+        )
     )
