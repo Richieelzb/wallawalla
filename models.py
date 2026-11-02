@@ -79,6 +79,13 @@ class User(db.Model):
         foreign_keys="BusinessClaim.claimant_user_id"
     )
 
+    property_claims = db.relationship(
+        "PropertyClaim",
+        backref="claimant",
+        lazy=True,
+        foreign_keys="PropertyClaim.claimant_user_id"
+    )
+
 class Business(db.Model):
     __tablename__ = "business"
 
@@ -614,9 +621,38 @@ class Property(db.Model):
         nullable=True
     )
 
+    # ------------------------------
+    # LISTING OWNERSHIP / CLAIM
+    # ------------------------------
+
+    claim_status = db.Column(
+        db.String(30),
+        nullable=False,
+        default="unclaimed",
+        server_default="unclaimed",
+        index=True
+    )
+
+    claimed_at = db.Column(
+        db.DateTime,
+        nullable=True
+    )
+
+    created_by_admin = db.Column(
+        db.Boolean,
+        nullable=False,
+        default=False,
+        server_default="false"
+    )
+
+    listing_source = db.Column(
+        db.String(100),
+        nullable=True
+    )
+
     owner_email = db.Column(
         db.String(255),
-        nullable=False,
+        nullable=True,
         index=True
     )
 
@@ -1027,6 +1063,20 @@ class Property(db.Model):
         return self.has_active_featured
 
     @property
+    def is_claimed(self):
+        return (
+            self.claim_status == "claimed"
+            and self.user_id is not None
+        )
+
+    @property
+    def is_unclaimed(self):
+        return (
+            self.claim_status == "unclaimed"
+            and self.user_id is None
+        )
+
+    @property
     def premium(self):
         return self.has_active_premium
 
@@ -1096,7 +1146,7 @@ class Property(db.Model):
     @property
     def can_add_property(self):
         """
-        Premium and Featured users can add another business.
+        Premium and Featured users can add another property.
         """
 
         return self.can_manage_listing
@@ -1163,6 +1213,98 @@ class PropertyFeature(db.Model):
         nullable=False
     )
 
+class PropertyClaim(db.Model):
+    __tablename__ = "property_claims"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    property_id = db.Column(
+        db.Integer,
+        db.ForeignKey(
+            "properties.id",
+            ondelete="CASCADE"
+        ),
+        nullable=False,
+        index=True
+    )
+
+    claimant_user_id = db.Column(
+        db.Integer,
+        db.ForeignKey(
+            "user.id",
+            ondelete="SET NULL"
+        ),
+        nullable=True,
+        index=True
+    )
+
+    claimant_email = db.Column(
+        db.String(255),
+        nullable=True,
+        index=True
+    )
+
+    claimant_whatsapp = db.Column(
+        db.String(30),
+        nullable=False
+    )
+
+    token_hash = db.Column(
+        db.String(64),
+        nullable=False,
+        unique=True,
+        index=True
+    )
+
+    status = db.Column(
+        db.String(30),
+        nullable=False,
+        default="invited",
+        server_default="invited",
+        index=True
+    )
+
+    expires_at = db.Column(
+        db.DateTime,
+        nullable=False
+    )
+
+    claimed_at = db.Column(
+        db.DateTime,
+        nullable=True
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow
+    )
+
+    property = db.relationship(
+        "Property",
+        backref=db.backref(
+            "claim_requests",
+            lazy=True,
+            cascade="all, delete-orphan"
+        )
+    )
+
+    @property
+    def is_expired(self):
+        return (
+            datetime.utcnow()
+            > self.expires_at
+        )
+
+    @property
+    def is_available(self):
+        return (
+            self.status == "invited"
+            and not self.is_expired
+        )
 
 class PropertyUpgradeRequest(db.Model):
 
