@@ -1283,7 +1283,7 @@ class PropertyClaim(db.Model):
         default=datetime.utcnow
     )
 
-    property = db.relationship(
+    property_listing = db.relationship(
         "Property",
         backref=db.backref(
             "claim_requests",
@@ -1294,6 +1294,7 @@ class PropertyClaim(db.Model):
 
     @property
     def is_expired(self):
+
         return (
             datetime.utcnow()
             > self.expires_at
@@ -1301,13 +1302,13 @@ class PropertyClaim(db.Model):
 
     @property
     def is_available(self):
+
         return (
             self.status == "invited"
             and not self.is_expired
         )
 
 class PropertyUpgradeRequest(db.Model):
-
     __tablename__ = "property_upgrade_requests"
 
     id = db.Column(
@@ -1346,7 +1347,7 @@ class PropertyUpgradeRequest(db.Model):
         nullable=False
     )
 
-    property = db.relationship(
+    property_listing = db.relationship(
         "Property",
         backref=db.backref(
             "upgrade_requests",
