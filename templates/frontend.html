@@ -116,9 +116,20 @@
                 </div>
 
                 <div class="hero-card-text">
+
                     <span>Local</span>
                     <span>Businesses</span>
+
                     <div class="hero-card-line green"></div>
+
+                    <span
+                        id="business-count-hero"
+                        class="hero-local-count business-local-count"
+                        style="display:none;"
+                    >
+                        0
+                    </span>
+
                 </div>
 
                 <i class="fa-solid fa-arrow-right hero-arrow business-arrow"></i>
@@ -133,8 +144,19 @@
                 </div>
 
                 <div class="hero-card-text">
+
                     <span>Properties</span>
+
                     <div class="hero-card-line blue"></div>
+
+                    <span
+                        id="property-count-hero"
+                        class="hero-local-count property-local-count"
+                        style="display:none;"
+                    >
+                        0
+                    </span>
+
                 </div>
 
                 <i class="fa-solid fa-arrow-right hero-arrow property-arrow"></i>
@@ -143,7 +165,7 @@
 
         </div>
 
-        <div class="location-stats" id="location-stats" style="display:none;">
+        <!-- <div class="location-stats" id="location-stats" style="display:none;">
             🎯 You have
             <strong id="business-count-hero">0 local businesses</strong>
             and
@@ -152,7 +174,7 @@
             <strong class="logo-blue" onclick="scrollToCards()" style="cursor:pointer; text-decoration:underline;">
                 Click above.
             </strong>
-        </div>
+        </div> -->
 
    
         <!-- <p>
@@ -682,21 +704,11 @@
 let nearbyBusinessCount = 0;
 let nearbyPropertyCount = 0;
 
-function updateLocationStatsVisibility() {
 
-    const stats = document.getElementById("location-stats");
-
-    if (!stats) return;
-
-    if (nearbyBusinessCount >= 1 || nearbyPropertyCount >= 1) {
-        stats.style.display = "";
-    } else {
-        stats.style.display = "none";
-    }
-}
-
-
-async function loadBusinessCount(lat, lng) {
+async function loadBusinessCount(
+    lat,
+    lng
+) {
 
     try {
 
@@ -706,14 +718,36 @@ async function loadBusinessCount(lat, lng) {
 
         const data = await response.json();
 
-        nearbyBusinessCount = Number(data.count) || 0;
+        nearbyBusinessCount =
+            Number(data.count) || 0;
 
-        document.getElementById(
-            "business-count-hero"
-        ).innerText =
-            `${nearbyBusinessCount} local ${nearbyBusinessCount === 1 ? "business" : "businesses"}`;
+        const countElement =
+            document.getElementById(
+                "business-count-hero"
+            );
 
-        updateLocationStatsVisibility();
+        if (!countElement) {
+            return;
+        }
+
+
+        if (nearbyBusinessCount >= 1) {
+
+            countElement.textContent =
+                nearbyBusinessCount;
+
+            countElement.style.display =
+                "inline-flex";
+
+        } else {
+
+            countElement.textContent =
+                "";
+
+            countElement.style.display =
+                "none";
+
+        }
 
     } catch (error) {
 
@@ -721,11 +755,27 @@ async function loadBusinessCount(lat, lng) {
             "Business count error",
             error
         );
+
+        const countElement =
+            document.getElementById(
+                "business-count-hero"
+            );
+
+        if (countElement) {
+
+            countElement.style.display =
+                "none";
+        }
+
     }
+
 }
 
 
-async function loadPropertyCount(lat, lng) {
+async function loadPropertyCount(
+    lat,
+    lng
+) {
 
     try {
 
@@ -735,14 +785,36 @@ async function loadPropertyCount(lat, lng) {
 
         const data = await response.json();
 
-        nearbyPropertyCount = Number(data.count) || 0;
+        nearbyPropertyCount =
+            Number(data.count) || 0;
 
-        document.getElementById(
-            "property-count-hero"
-        ).innerText =
-            `${nearbyPropertyCount} ${nearbyPropertyCount === 1 ? "property" : "properties"}`;
+        const countElement =
+            document.getElementById(
+                "property-count-hero"
+            );
 
-        updateLocationStatsVisibility();
+        if (!countElement) {
+            return;
+        }
+
+
+        if (nearbyPropertyCount >= 1) {
+
+            countElement.textContent =
+                nearbyPropertyCount;
+
+            countElement.style.display =
+                "inline-flex";
+
+        } else {
+
+            countElement.textContent =
+                "";
+
+            countElement.style.display =
+                "none";
+
+        }
 
     } catch (error) {
 
@@ -750,8 +822,96 @@ async function loadPropertyCount(lat, lng) {
             "Property count error",
             error
         );
+
+        const countElement =
+            document.getElementById(
+                "property-count-hero"
+            );
+
+        if (countElement) {
+
+            countElement.style.display =
+                "none";
+        }
+
     }
+
 }
+
+
+// let nearbyBusinessCount = 0;
+// let nearbyPropertyCount = 0;
+
+// // function updateLocationStatsVisibility() {
+
+// //     const stats = document.getElementById("location-stats");
+
+// //     if (!stats) return;
+
+// //     if (nearbyBusinessCount >= 1 || nearbyPropertyCount >= 1) {
+// //         stats.style.display = "";
+// //     } else {
+// //         stats.style.display = "none";
+// //     }
+// // }
+
+
+// async function loadBusinessCount(lat, lng) {
+
+//     try {
+
+//         const response = await fetch(
+//             `https://search.wallawalla.co.za/api/business-count?lat=${lat}&lng=${lng}`
+//         );
+
+//         const data = await response.json();
+
+//         nearbyBusinessCount = Number(data.count) || 0;
+
+//         document.getElementById(
+//             "business-count-hero"
+//         ).innerText =
+//             `${nearbyBusinessCount} local ${nearbyBusinessCount === 1 ? "business" : "businesses"}`;
+
+//         updateLocationStatsVisibility();
+
+//     } catch (error) {
+
+//         console.error(
+//             "Business count error",
+//             error
+//         );
+//     }
+// }
+
+
+// async function loadPropertyCount(lat, lng) {
+
+//     try {
+
+//         const response = await fetch(
+//             `https://property.wallawalla.co.za/api/property-count?lat=${lat}&lng=${lng}`
+//         );
+
+//         const data = await response.json();
+
+//         nearbyPropertyCount = Number(data.count) || 0;
+
+//         document.getElementById(
+//             "property-count-hero"
+//         ).innerText =
+//             `${nearbyPropertyCount} ${nearbyPropertyCount === 1 ? "property" : "properties"}`;
+
+//         updateLocationStatsVisibility();
+
+//     } catch (error) {
+
+//         console.error(
+//             "Property count error",
+//             error
+//         );
+//     }
+// }
 
 </script>
 <script>

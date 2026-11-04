@@ -3093,3 +3093,42 @@ body{
 
 }
 
+.hero-local-count {
+    margin-top: 6px;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 28px;
+    height: 28px;
+
+    padding: 2px 9px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+
+    color: #ffffff;
+}
+
+
+/* Business count */
+.business-local-count {
+    background: #22c55e;
+
+    box-shadow:
+        0 3px 8px
+        rgba(34, 197, 94, 0.25);
+}
+
+
+/* Property count */
+.property-local-count {
+    background: #2563eb;
+
+    box-shadow:
+        0 3px 8px
+        rgba(37, 99, 235, 0.25);
+}
