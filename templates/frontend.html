@@ -2640,19 +2640,31 @@ function openPropertySearch() {
         openLocationModal();
 
         return;
-
     }
 
 
-    const url =
-        "https://property.wallawalla.co.za"
-        + "/property-search?query=Properties"
-        + `&latitude=${encodeURIComponent(selectedLatitude)}`
-        + `&longitude=${encodeURIComponent(selectedLongitude)}`;
+    const selectedAddress =
+        localStorage.getItem(
+            "wallawallaAddress"
+        ) || "Selected location";
+
+
+    const parameters =
+        new URLSearchParams({
+            latitude:
+                String(selectedLatitude),
+
+            longitude:
+                String(selectedLongitude),
+
+            address:
+                selectedAddress
+        });
 
 
     window.location.href =
-        url;
+        "https://property.wallawalla.co.za/"
+        + `?${parameters.toString()}`;
 
 }
 
