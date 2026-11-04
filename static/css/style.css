@@ -3815,7 +3815,7 @@ body{
     }
 
     .home-listing-image {
-        height: 145px;
+        height: 125px;
     }
 
     .home-listing-icon {
@@ -3827,24 +3827,26 @@ body{
 
     .home-listing-body {
         padding:
-            34px
-            9px
-            12px;
+            31px
+            8px
+            10px;
     }
 
     .home-listing-body h2 {
-        font-size: 19px;
-    }
-
-    .home-listing-body p {
-        min-height: 50px;
-        font-size: 12px;
+        margin-bottom: 8px;
+        font-size: 17px;
     }
 
     .home-count-pill {
-        min-width: 115px;
-        padding: 6px 9px;
-        font-size: 12px;
+        min-width: 72px;
+        margin-bottom: 9px;
+        padding: 4px 8px 4px 5px;
+    }
+
+    .home-count-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
     }
 
     .home-count-pill strong {
