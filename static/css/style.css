@@ -3236,7 +3236,7 @@ body{
 .home-listing-image {
     position: relative;
     height: 170px;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .home-listing-image img {
