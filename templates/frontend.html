@@ -46,12 +46,6 @@
         );
     </script>
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}&libraries=places&callback=initializeLocationSearch&v=weekly"
-        async
-        defer
-    ></script>
-
 </head>
 
 
@@ -1751,7 +1745,7 @@ let locationGeocoder = null;
    INITIALIZE LOCATION SEARCH
 ================================================= */
 
-function initializeLocationSearch() {
+window.initializeLocationSearch = function () {
 
     console.log(
         "Google Maps location search loaded."
@@ -1784,7 +1778,17 @@ function initializeLocationSearch() {
                     ]
                 }
             );
+        
+        locationInput.addEventListener(
+            "input",
+            function () {
 
+                delete locationInput.dataset.latitude;
+                delete locationInput.dataset.longitude;
+                delete locationInput.dataset.address;
+
+            }
+        );
 
         locationAutocomplete.addListener(
             "place_changed",
@@ -1853,7 +1857,7 @@ function initializeLocationSearch() {
 
 
     useCurrentLocation();
-}
+};
 
 /* =================================================
    SET SELECTED LOCATION
@@ -2119,22 +2123,19 @@ function reverseGeocodeLocation(
    USE MANUALLY ENTERED LOCATION
 ================================================= */
 
-async function applyTypedLocation() {
+function applyTypedLocation() {
 
     const input =
         document.getElementById(
             "location-search-input"
         );
 
-
     if (!input) {
         return;
     }
 
-
     const typedAddress =
         input.value.trim();
-
 
     if (!typedAddress) {
 
@@ -2146,30 +2147,28 @@ async function applyTypedLocation() {
     }
 
 
-    /* ---------------------------------------------
-       FIRST:
-       Check whether user selected Google suggestion
-    --------------------------------------------- */
+    // If the visitor selected an autocomplete result,
+    // use its stored coordinates immediately.
 
-    const storedLatitude =
+    const selectedLat =
         input.dataset.latitude;
 
-    const storedLongitude =
+    const selectedLng =
         input.dataset.longitude;
 
-    const storedAddress =
+    const selectedAddress =
         input.dataset.address;
 
 
     if (
-        storedLatitude
-        && storedLongitude
+        selectedLat
+        && selectedLng
     ) {
 
         setSelectedLocation(
-            Number(storedLatitude),
-            Number(storedLongitude),
-            storedAddress || typedAddress
+            Number(selectedLat),
+            Number(selectedLng),
+            selectedAddress || typedAddress
         );
 
         clearLocationSearchInput();
@@ -2180,20 +2179,21 @@ async function applyTypedLocation() {
     }
 
 
-    /* ---------------------------------------------
-       USER TYPED TEXT WITHOUT SELECTING SUGGESTION
-
-       Geocode the address.
-    --------------------------------------------- */
+    // Otherwise geocode the manually entered address.
 
     if (
         typeof google === "undefined"
         || !google.maps
+        || !google.maps.Geocoder
     ) {
 
         showLocationMessage(
-            "Google location services are still loading. "
-            + "Please try again."
+            "Google location services have not loaded. "
+            + "Please refresh the page and try again."
+        );
+
+        console.error(
+            "Google Maps JavaScript API is unavailable."
         );
 
         return;
@@ -2213,71 +2213,71 @@ async function applyTypedLocation() {
     );
 
 
-    try {
+    locationGeocoder.geocode(
+        {
+            address: typedAddress,
 
-        const response =
-            await locationGeocoder.geocode({
-                address: typedAddress,
-                componentRestrictions: {
-                    country: "ZA"
-                }
-            });
+            componentRestrictions: {
+                country: "ZA"
+            }
+        },
 
-
-        if (
-            !response.results
-            || !response.results.length
+        function (
+            results,
+            status
         ) {
 
-            showLocationMessage(
-                "The location could not be found. "
-                + "Try a suburb and city, for example "
-                + "Hatfield, Pretoria."
+            console.log(
+                "Geocoding status:",
+                status
             );
 
-            return;
+
+            if (
+                status !== "OK"
+                || !results
+                || !results.length
+            ) {
+
+                showLocationMessage(
+                    "The location could not be found. "
+                    + "Try entering the suburb and city, "
+                    + "for example: Hatfield, Pretoria."
+                );
+
+                console.error(
+                    "Unable to geocode address:",
+                    typedAddress,
+                    status
+                );
+
+                return;
+            }
+
+
+            const result =
+                results[0];
+
+            const latitude =
+                result.geometry.location.lat();
+
+            const longitude =
+                result.geometry.location.lng();
+
+
+            setSelectedLocation(
+                latitude,
+                longitude,
+                result.formatted_address
+            );
+
+
+            clearLocationSearchInput();
+
+            closeLocationModal();
+
         }
-
-
-        const result =
-            response.results[0];
-
-
-        const latitude =
-            result.geometry.location.lat();
-
-        const longitude =
-            result.geometry.location.lng();
-
-
-        setSelectedLocation(
-            latitude,
-            longitude,
-            result.formatted_address
-        );
-
-
-        clearLocationSearchInput();
-
-
-        closeLocationModal();
-
-
-    } catch (error) {
-
-        console.error(
-            "Address geocoding error:",
-            error
-        );
-
-
-        showLocationMessage(
-            "The location could not be found. "
-            + "Try a more complete address, "
-            + "for example Hatfield, Pretoria."
-        );
-
-    }
+    );
 
 }
 
@@ -2896,6 +2896,12 @@ document.addEventListener(
 );
 
 </script>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}&libraries=places&callback=initializeLocationSearch&v=weekly"
+    async
+    defer
+></script>
 
 </body>
 

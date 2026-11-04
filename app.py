@@ -28,20 +28,30 @@ API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 @app.route("/")
 def home():
 
-    email = session.get("email")
+    email = session.get(
+        "email"
+    )
 
     business = None
-    property = None
+    property_listing = None
 
     if email:
 
-        business = Business.query.filter_by(
-            email=email
-        ).first()
+        business = (
+            Business.query
+            .filter_by(
+                email=email
+            )
+            .first()
+        )
 
-        property = Property.query.filter_by(
-            email=email
-        ).first()
+        property_listing = (
+            Property.query
+            .filter_by(
+                email=email
+            )
+            .first()
+        )
 
     featured_business_count = (
         Business.query
@@ -50,7 +60,8 @@ def home():
             Business.is_featured.is_(True),
             or_(
                 Business.featured_expires_at.is_(None),
-                Business.featured_expires_at > utc_now()
+                Business.featured_expires_at
+                > utc_now()
             )
         )
         .count()
@@ -63,7 +74,8 @@ def home():
             Property.is_featured.is_(True),
             or_(
                 Property.featured_expires_at.is_(None),
-                Property.featured_expires_at > utc_now()
+                Property.featured_expires_at
+                > utc_now()
             )
         )
         .count()
@@ -71,12 +83,23 @@ def home():
 
     return render_template(
         "frontend.html",
+
         email=email,
+
         business=business,
-        property=property,
-        featured_business_count=featured_business_count,
-        featured_property_count=featured_property_count
-)
+
+        property=property_listing,
+
+        API_KEY=API_KEY,
+
+        featured_business_count=(
+            featured_business_count
+        ),
+
+        featured_property_count=(
+            featured_property_count
+        )
+    )
 
 COGNITO_USER_POOL_ID = os.getenv(
     "COGNITO_USER_POOL_ID"
