@@ -1,165 +1,214 @@
-function searchNearby() {
-    const query =
-        document.getElementById("search-query").value;
+/* =========================================================
+   WALLAWALLA MAIN.JS
+========================================================= */
 
-    alert("Searching for: " + query);
-}
-/////////////////////////////////////////////////////////////////////////////
-function setSearch(value) {
-        document.getElementById("search-input").value = value;
-}
-function setSearchLocal(value) {
-        document.getElementById("search-input-local").value = value;
-}
-////////////////////////////////////////////////////////////////////////
-function getLocation() {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
 
-            document.getElementById("latitude").value = lat;
-            document.getElementById("longitude").value = lng;
-        },
-        function() {
-            alert("Unable to get your location.");
-        }
-    );
-}
-
-///////////////////////////////////////////////////////////////////////////////////////
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
-
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-
-            document.getElementById("latitude").value = lat;
-            document.getElementById("longitude").value = lng;
-
-            fetch(`/location?lat=${lat}&lng=${lng}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("current-location").textContent =
-                        data.address;
-                });
-        },
-        function(error) {
-            document.getElementById("current-location").textContent =
-                "Location unavailable";
-        }
-    );
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////
-document.querySelector(".search-box").addEventListener("submit", () => {
-    document.getElementById("search-btn").innerText = "Searching...";
-});
+/* =========================================================
+   GOOGLE SEARCH
+========================================================= */
 
 function searchNearby() {
+
+    const searchQuery =
+        document.getElementById(
+            "search-query"
+        );
+
+    if (!searchQuery) {
+        return;
+    }
+
     const query =
-        document.getElementById("search-query").value;
+        searchQuery.value.trim();
 
-    alert("Searching for: " + query);
+    if (!query) {
+        return;
+    }
+
+    window.open(
+        `https://www.google.com/maps/search/${encodeURIComponent(query)}`,
+        "_blank"
+    );
 }
-/////////////////////////////////////////////////////////////////////////////
+
+
+/* =========================================================
+   SET GOOGLE SEARCH VALUE
+========================================================= */
+
 function setSearch(value) {
-        document.getElementById("search-input").value = value;
+
+    const searchInput =
+        document.getElementById(
+            "search-input"
+        );
+
+    if (!searchInput) {
+        return;
+    }
+
+    searchInput.value =
+        value;
 }
+
+
+/* =========================================================
+   SET LOCAL SEARCH VALUE
+========================================================= */
+
 function setSearchLocal(value) {
-        document.getElementById("search-input-local").value = value;
-}
-////////////////////////////////////////////////////////////////////////
-function getLocation() {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
 
-            document.getElementById("latitude").value = lat;
-            document.getElementById("longitude").value = lng;
-        },
-        function() {
-            alert("Unable to get your location.");
+    const searchInput =
+        document.getElementById(
+            "search-input-local"
+        );
+
+    if (!searchInput) {
+        return;
+    }
+
+    searchInput.value =
+        value;
+}
+
+
+/* =========================================================
+   SEARCH FORM LOADING STATE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        /*
+         * Main Google search form
+         */
+
+        const googleSearchForm =
+            document.getElementById(
+                "google-search-form"
+            );
+
+        const searchButton =
+            document.getElementById(
+                "search-btn"
+            );
+
+        if (
+            googleSearchForm
+            && searchButton
+        ) {
+
+            googleSearchForm.addEventListener(
+                "submit",
+                function () {
+
+                    /*
+                     * Do not change selectedLatitude or
+                     * selectedLongitude here.
+                     *
+                     * Location is controlled by the
+                     * location system in frontend.html.
+                     */
+
+                    searchButton.classList.add(
+                        "searching"
+                    );
+
+                }
+            );
+
         }
-    );
-}
-function getLocation() {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
 
-            document.getElementById("latitude-bottom").value = lat;
-            document.getElementById("longitude-bottom").value = lng;
-        },
-        function() {
-            alert("Unable to get your location.");
+
+        /*
+         * Legacy search-box support
+         *
+         * Kept safe in case another Wallawalla page
+         * still uses .search-box.
+         */
+
+        const searchBox =
+            document.querySelector(
+                ".search-box"
+            );
+
+        if (searchBox) {
+
+            searchBox.addEventListener(
+                "submit",
+                function () {
+
+                    const button =
+                        document.getElementById(
+                            "search-btn"
+                        );
+
+                    if (button) {
+
+                        button.classList.add(
+                            "searching"
+                        );
+
+                    }
+
+                }
+            );
+
         }
-    );
-}
-///////////////////////////////////////////////////////////////////////////////////////
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
 
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
 
-            document.getElementById("latitude").value = lat;
-            document.getElementById("longitude").value = lng;
+        /*
+         * Legacy bottom search card support.
+         */
 
-            fetch(`/location?lat=${lat}&lng=${lng}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("current-location").textContent =
-                        data.address;
-                });
-        },
-        function(error) {
-            document.getElementById("current-location").textContent =
-                "Location unavailable";
+        const searchCard =
+            document.querySelector(
+                ".search-card"
+            );
+
+        if (searchCard) {
+
+            searchCard.addEventListener(
+                "submit",
+                function () {
+
+                    const button =
+                        document.getElementById(
+                            "search-btn-bottom"
+                        );
+
+                    if (button) {
+
+                        button.classList.add(
+                            "searching"
+                        );
+
+                    }
+
+                }
+            );
+
         }
-    );
-}
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
 
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-
-            document.getElementById("latitude-bottom").value = lat;
-            document.getElementById("longitude-bottom").value = lng;
-
-            loadBusinessCount(lat, lng);
-
-            fetch(`/location?lat=${lat}&lng=${lng}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("current-location-bottom").textContent =
-                        data.address;
-                });
-        },
-        function(error) {
-            document.getElementById("current-location-bottom").textContent =
-                "Location unavailable";
-        }
-    );
-}
-///////////////////////////////////////////////////////////////////////////////////////////
-document.querySelector(".search-box").addEventListener("submit", () => {
-    document.getElementById("search-btn").innerText = "Searching...";
-});
-document.querySelector(".search-card").addEventListener("submit", () => {
-    document.getElementById("search-btn-bottom").innerText = "Searching...";
-});
-/////////////////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-window.open(
-    `https://www.google.com/maps/search/${query}`,
-    "_blank"
+    }
 );
+
+
+/* =========================================================
+   IMPORTANT
+
+   DO NOT request navigator.geolocation here.
+
+   Location is managed entirely by the location system
+   inside frontend.html:
+
+       initializeLocationSearch()
+       useCurrentLocation()
+       reverseGeocodeLocation()
+       setSelectedLocation()
+       applyTypedLocation()
+
+   This prevents main.js from overwriting a location
+   selected by the visitor.
+========================================================= */
