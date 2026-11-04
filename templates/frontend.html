@@ -42,12 +42,12 @@
         gtag('js', new Date());
         
         gtag('config', 'G-X2V1XS75J9'
-            
+
         );
     </script>
 
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}&libraries=places&callback=initializeLocationSearch"
+        src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}&libraries=places&callback=initializeLocationSearch&v=weekly"
         async
         defer
     ></script>
@@ -57,7 +57,7 @@
 
 <body>
 
-    <div id="location-required" class="location-required">
+    <!-- <div id="location-required" class="location-required">
         <div class="location-box">
             <i class="fa-solid fa-location-crosshairs"></i>
             <h2>Location Required</h2>
@@ -72,7 +72,7 @@
                 Enable Location
             </button>
         </div>
-    </div>
+    </div> -->
 
     <nav class="navbar">
         <a href="https://wallawalla.co.za" style="text-decoration:none; color:inherit;">
@@ -1191,16 +1191,8 @@ document.addEventListener("click", function(e){
 
 </script>
 
-<script>
-function scrollToCards() {
-    document.getElementById("cards-section").scrollIntoView({
-        behavior: "smooth"
-    });
-}
-</script>
 
-
-<script>
+<!-- <script>
 async function checkLocationPermission() {
 
     if (!navigator.geolocation) {
@@ -1254,9 +1246,9 @@ async function checkLocationPermission() {
         ).style.display = "flex";
     }
 }
-</script>
+</script> -->
 
-<script>
+<!-- <script>
 function requestLocation() {
 
     if (!navigator.geolocation) {
@@ -1346,9 +1338,9 @@ window.onload = function () {
 
     );
 };
-</script>
+</script> -->
 
-<script>
+<!-- <script>
 function validateLocationRequired() {
 
     const lat =
@@ -1370,7 +1362,7 @@ function validateLocationRequired() {
 
     return true;
 }
-</script>
+</script> -->
 
 <script>
 
@@ -1761,8 +1753,13 @@ let locationGeocoder = null;
 
 function initializeLocationSearch() {
 
+    console.log(
+        "Google Maps location search loaded."
+    );
+
     locationGeocoder =
         new google.maps.Geocoder();
+
 
     const locationInput =
         document.getElementById(
@@ -1802,33 +1799,20 @@ function initializeLocationSearch() {
                     || !place.geometry.location
                 ) {
 
-                    showLocationMessage(
-                        "Select a location from the suggestions."
-                    );
-
                     return;
                 }
 
 
-                const latitude =
+                locationInput.dataset.latitude =
                     place.geometry.location.lat();
 
-                const longitude =
+                locationInput.dataset.longitude =
                     place.geometry.location.lng();
 
-                const address =
+                locationInput.dataset.address =
                     place.formatted_address
                     || place.name
                     || locationInput.value;
-
-
-                setSelectedLocation(
-                    latitude,
-                    longitude,
-                    address
-                );
-
-                closeLocationModal();
 
             }
         );
@@ -1869,9 +1853,7 @@ function initializeLocationSearch() {
 
 
     useCurrentLocation();
-
 }
-
 
 /* =================================================
    SET SELECTED LOCATION
@@ -1946,8 +1928,41 @@ function setSelectedLocation(
     );
 
 
+    /* Clear previous counts while new area loads */
+
+    const businessWrapper =
+        document.getElementById(
+            "business-count-wrapper"
+        );
+
+    const propertyWrapper =
+        document.getElementById(
+            "property-count-wrapper"
+        );
+
+
+    if (businessWrapper) {
+
+        businessWrapper.style.display =
+            "none";
+
+    }
+
+
+    if (propertyWrapper) {
+
+        propertyWrapper.style.display =
+            "none";
+
+    }
+
+
+    /* Reset Featured results */
+
     resetFeaturedDirectories();
 
+
+    /* Load counts for NEW location */
 
     loadBusinessCount(
         selectedLatitude,
@@ -1959,7 +1974,6 @@ function setSelectedLocation(
         selectedLatitude,
         selectedLongitude
     );
-
 }
 
 
@@ -2105,20 +2119,24 @@ function reverseGeocodeLocation(
    USE MANUALLY ENTERED LOCATION
 ================================================= */
 
-function applyTypedLocation() {
+async function applyTypedLocation() {
 
     const input =
         document.getElementById(
             "location-search-input"
         );
 
-    const address =
-        input
-            ? input.value.trim()
-            : "";
+
+    if (!input) {
+        return;
+    }
 
 
-    if (!address) {
+    const typedAddress =
+        input.value.trim();
+
+
+    if (!typedAddress) {
 
         showLocationMessage(
             "Enter an address, suburb, town or city."
@@ -2128,14 +2146,65 @@ function applyTypedLocation() {
     }
 
 
-    if (!locationGeocoder) {
+    /* ---------------------------------------------
+       FIRST:
+       Check whether user selected Google suggestion
+    --------------------------------------------- */
+
+    const storedLatitude =
+        input.dataset.latitude;
+
+    const storedLongitude =
+        input.dataset.longitude;
+
+    const storedAddress =
+        input.dataset.address;
+
+
+    if (
+        storedLatitude
+        && storedLongitude
+    ) {
+
+        setSelectedLocation(
+            Number(storedLatitude),
+            Number(storedLongitude),
+            storedAddress || typedAddress
+        );
+
+        clearLocationSearchInput();
+
+        closeLocationModal();
+
+        return;
+    }
+
+
+    /* ---------------------------------------------
+       USER TYPED TEXT WITHOUT SELECTING SUGGESTION
+
+       Geocode the address.
+    --------------------------------------------- */
+
+    if (
+        typeof google === "undefined"
+        || !google.maps
+    ) {
 
         showLocationMessage(
-            "Location search is still loading. "
+            "Google location services are still loading. "
             + "Please try again."
         );
 
         return;
+    }
+
+
+    if (!locationGeocoder) {
+
+        locationGeocoder =
+            new google.maps.Geocoder();
+
     }
 
 
@@ -2144,59 +2213,94 @@ function applyTypedLocation() {
     );
 
 
-    locationGeocoder.geocode(
-        {
-            address: address,
+    try {
 
-            componentRestrictions: {
-                country: "ZA"
-            }
-        },
+        const response =
+            await locationGeocoder.geocode({
+                address: typedAddress,
+                componentRestrictions: {
+                    country: "ZA"
+                }
+            });
 
-        function (
-            results,
-            status
+
+        if (
+            !response.results
+            || !response.results.length
         ) {
 
-            if (
-                status !== "OK"
-                || !results
-                || !results.length
-            ) {
-
-                showLocationMessage(
-                    "The location could not be found. "
-                    + "Try a more complete address."
-                );
-
-                return;
-            }
-
-
-            const result =
-                results[0];
-
-            const latitude =
-                result.geometry.location.lat();
-
-            const longitude =
-                result.geometry.location.lng();
-
-
-            setSelectedLocation(
-                latitude,
-                longitude,
-                result.formatted_address
+            showLocationMessage(
+                "The location could not be found. "
+                + "Try a suburb and city, for example "
+                + "Hatfield, Pretoria."
             );
 
-
-            closeLocationModal();
-
+            return;
         }
-    );
+
+
+        const result =
+            response.results[0];
+
+
+        const latitude =
+            result.geometry.location.lat();
+
+        const longitude =
+            result.geometry.location.lng();
+
+
+        setSelectedLocation(
+            latitude,
+            longitude,
+            result.formatted_address
+        );
+
+
+        clearLocationSearchInput();
+
+
+        closeLocationModal();
+
+
+    } catch (error) {
+
+        console.error(
+            "Address geocoding error:",
+            error
+        );
+
+
+        showLocationMessage(
+            "The location could not be found. "
+            + "Try a more complete address, "
+            + "for example Hatfield, Pretoria."
+        );
+
+    }
 
 }
 
+function clearLocationSearchInput() {
+
+    const input =
+        document.getElementById(
+            "location-search-input"
+        );
+
+
+    if (!input) {
+        return;
+    }
+
+
+    input.value = "";
+
+    delete input.dataset.latitude;
+    delete input.dataset.longitude;
+    delete input.dataset.address;
+
+}
 
 /* =================================================
    LOCATION MODAL
@@ -2213,6 +2317,12 @@ function openLocationModal() {
     if (!modal) {
         return;
     }
+
+
+    clearLocationSearchInput();
+
+
+    showLocationMessage("");
 
 
     modal.style.display =
@@ -2233,13 +2343,12 @@ function openLocationModal() {
                 input.focus();
 
             },
-            100
+            150
         );
 
     }
 
 }
-
 
 function closeLocationModal() {
 
