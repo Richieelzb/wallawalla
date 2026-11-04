@@ -2601,19 +2601,31 @@ function openBusinessSearch() {
         openLocationModal();
 
         return;
-
     }
 
 
-    const url =
-        "https://search.wallawalla.co.za"
-        + "/business-search?query=Businesses"
-        + `&latitude=${encodeURIComponent(selectedLatitude)}`
-        + `&longitude=${encodeURIComponent(selectedLongitude)}`;
+    const selectedAddress =
+        localStorage.getItem(
+            "wallawallaAddress"
+        ) || "Selected location";
+
+
+    const parameters =
+        new URLSearchParams({
+            latitude:
+                String(selectedLatitude),
+
+            longitude:
+                String(selectedLongitude),
+
+            address:
+                selectedAddress
+        });
 
 
     window.location.href =
-        url;
+        "https://search.wallawalla.co.za/"
+        + `?${parameters.toString()}`;
 
 }
 
