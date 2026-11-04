@@ -39,8 +39,18 @@
             dataLayer.push(arguments);
         }
 
-        gtag('js', new Date());gtag('config', 'G-X2V1XS75J9');
+        gtag('js', new Date());
+        
+        gtag('config', 'G-X2V1XS75J9'
+            
+        );
     </script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ API_KEY }}&libraries=places&callback=initializeLocationSearch"
+        async
+        defer
+    ></script>
 
 </head>
 
@@ -1061,312 +1071,6 @@
 </div>
 
 
-<script>
-
-let nearbyBusinessCount = 0;
-let nearbyPropertyCount = 0;
-
-
-async function loadBusinessCount(
-    lat,
-    lng
-) {
-
-    try {
-
-        const response = await fetch(
-            `https://search.wallawalla.co.za/api/business-count?lat=${lat}&lng=${lng}`
-        );
-
-        const data = await response.json();
-
-        nearbyBusinessCount =
-            Number(data.count) || 0;
-
-        const countElement =
-            document.getElementById(
-                "business-count-hero"
-            );
-
-        if (!countElement) {
-            return;
-        }
-
-
-        if (nearbyBusinessCount >= 1) {
-
-            countElement.textContent =
-                nearbyBusinessCount;
-
-            countElement.style.display =
-                "inline-flex";
-
-        } else {
-
-            countElement.textContent =
-                "";
-
-            countElement.style.display =
-                "none";
-
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Business count error",
-            error
-        );
-
-        const countElement =
-            document.getElementById(
-                "business-count-hero"
-            );
-
-        if (countElement) {
-
-            countElement.style.display =
-                "none";
-        }
-
-    }
-
-}
-
-
-async function loadPropertyCount(
-    lat,
-    lng
-) {
-
-    try {
-
-        const response = await fetch(
-            `https://property.wallawalla.co.za/api/property-count?lat=${lat}&lng=${lng}`
-        );
-
-        const data = await response.json();
-
-        nearbyPropertyCount =
-            Number(data.count) || 0;
-
-        const countElement =
-            document.getElementById(
-                "property-count-hero"
-            );
-
-        if (!countElement) {
-            return;
-        }
-
-
-        if (nearbyPropertyCount >= 1) {
-
-            countElement.textContent =
-                nearbyPropertyCount;
-
-            countElement.style.display =
-                "inline-flex";
-
-        } else {
-
-            countElement.textContent =
-                "";
-
-            countElement.style.display =
-                "none";
-
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Property count error",
-            error
-        );
-
-        const countElement =
-            document.getElementById(
-                "property-count-hero"
-            );
-
-        if (countElement) {
-
-            countElement.style.display =
-                "none";
-        }
-
-    }
-
-}
-
-
-// let nearbyBusinessCount = 0;
-// let nearbyPropertyCount = 0;
-
-// // function updateLocationStatsVisibility() {
-
-// //     const stats = document.getElementById("location-stats");
-
-// //     if (!stats) return;
-
-// //     if (nearbyBusinessCount >= 1 || nearbyPropertyCount >= 1) {
-// //         stats.style.display = "";
-// //     } else {
-// //         stats.style.display = "none";
-// //     }
-// // }
-
-
-// async function loadBusinessCount(lat, lng) {
-
-//     try {
-
-//         const response = await fetch(
-//             `https://search.wallawalla.co.za/api/business-count?lat=${lat}&lng=${lng}`
-//         );
-
-//         const data = await response.json();
-
-//         nearbyBusinessCount = Number(data.count) || 0;
-
-//         document.getElementById(
-//             "business-count-hero"
-//         ).innerText =
-//             `${nearbyBusinessCount} local ${nearbyBusinessCount === 1 ? "business" : "businesses"}`;
-
-//         updateLocationStatsVisibility();
-
-//     } catch (error) {
-
-//         console.error(
-//             "Business count error",
-//             error
-//         );
-//     }
-// }
-
-
-// async function loadPropertyCount(lat, lng) {
-
-//     try {
-
-//         const response = await fetch(
-//             `https://property.wallawalla.co.za/api/property-count?lat=${lat}&lng=${lng}`
-//         );
-
-//         const data = await response.json();
-
-//         nearbyPropertyCount = Number(data.count) || 0;
-
-//         document.getElementById(
-//             "property-count-hero"
-//         ).innerText =
-//             `${nearbyPropertyCount} ${nearbyPropertyCount === 1 ? "property" : "properties"}`;
-
-//         updateLocationStatsVisibility();
-
-//     } catch (error) {
-
-//         console.error(
-//             "Property count error",
-//             error
-//         );
-//     }
-// }
-
-</script>
-<script>
-// async function loadBusinessCount(lat, lng){
-
-//     try{
-
-//         const response = await fetch(
-//             `https://search.wallawalla.co.za/api/business-count?lat=${lat}&lng=${lng}`
-//         );
-
-//         const data = await response.json();
-
-//         document.getElementById(
-//             "business-count-hero"
-//         ).innerText = `${data.count} local businesses`;
-
-//     }catch(error){
-
-//         console.error(
-//             "Business count error",
-//             error
-//         );
-//     }
-// }
-
-// async function loadPropertyCount(lat, lng){
-
-//     try{
-
-//         const response = await fetch(
-//             `https://property.wallawalla.co.za/api/property-count?lat=${lat}&lng=${lng}`
-//         );
-
-//         const data = await response.json();
-
-//         document.getElementById(
-//             "property-count-hero"
-//         ).innerText = `${data.count} properties`;
-
-//     }catch(error){
-
-//         console.error(
-//             "Property count error",
-//             error
-//         );
-//     }
-// }
-</script>
-<script>
-
-function loadNearbyCounts(){
-
-    if(!navigator.geolocation){
-        return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-
-        function(position){
-
-            const lat =
-                position.coords.latitude;
-
-            const lng =
-                position.coords.longitude;
-
-            loadBusinessCount(
-                lat,
-                lng
-            );
-
-            loadPropertyCount(
-                lat,
-                lng
-            );
-        },
-
-        function(error){
-
-            console.log(error);
-
-        }
-
-    );
-}
-
-window.addEventListener(
-    "load",
-    loadNearbyCounts
-);
-
-</script>
 
 
 <script>
@@ -2039,7 +1743,1050 @@ function createPromotedPropertyCard(property){
 
 </script>
 
+<script>
 
+let selectedLatitude = null;
+let selectedLongitude = null;
+
+let nearbyBusinessCount = 0;
+let nearbyPropertyCount = 0;
+
+let locationAutocomplete = null;
+let locationGeocoder = null;
+
+
+/* =================================================
+   INITIALIZE LOCATION SEARCH
+================================================= */
+
+function initializeLocationSearch() {
+
+    locationGeocoder =
+        new google.maps.Geocoder();
+
+    const locationInput =
+        document.getElementById(
+            "location-search-input"
+        );
+
+
+    if (locationInput) {
+
+        locationAutocomplete =
+            new google.maps.places.Autocomplete(
+                locationInput,
+                {
+                    componentRestrictions: {
+                        country: "za"
+                    },
+
+                    fields: [
+                        "formatted_address",
+                        "geometry",
+                        "name"
+                    ]
+                }
+            );
+
+
+        locationAutocomplete.addListener(
+            "place_changed",
+            function () {
+
+                const place =
+                    locationAutocomplete.getPlace();
+
+
+                if (
+                    !place.geometry
+                    || !place.geometry.location
+                ) {
+
+                    showLocationMessage(
+                        "Select a location from the suggestions."
+                    );
+
+                    return;
+                }
+
+
+                const latitude =
+                    place.geometry.location.lat();
+
+                const longitude =
+                    place.geometry.location.lng();
+
+                const address =
+                    place.formatted_address
+                    || place.name
+                    || locationInput.value;
+
+
+                setSelectedLocation(
+                    latitude,
+                    longitude,
+                    address
+                );
+
+                closeLocationModal();
+
+            }
+        );
+
+    }
+
+
+    const savedLatitude =
+        localStorage.getItem(
+            "wallawallaLatitude"
+        );
+
+    const savedLongitude =
+        localStorage.getItem(
+            "wallawallaLongitude"
+        );
+
+    const savedAddress =
+        localStorage.getItem(
+            "wallawallaAddress"
+        );
+
+
+    if (
+        savedLatitude
+        && savedLongitude
+        && savedAddress
+    ) {
+
+        setSelectedLocation(
+            Number(savedLatitude),
+            Number(savedLongitude),
+            savedAddress
+        );
+
+        return;
+    }
+
+
+    useCurrentLocation();
+
+}
+
+
+/* =================================================
+   SET SELECTED LOCATION
+================================================= */
+
+function setSelectedLocation(
+    latitude,
+    longitude,
+    address
+) {
+
+    selectedLatitude =
+        Number(latitude);
+
+    selectedLongitude =
+        Number(longitude);
+
+
+    const latitudeInput =
+        document.getElementById(
+            "latitude"
+        );
+
+    const longitudeInput =
+        document.getElementById(
+            "longitude"
+        );
+
+    const currentLocation =
+        document.getElementById(
+            "current-location"
+        );
+
+
+    if (latitudeInput) {
+
+        latitudeInput.value =
+            selectedLatitude;
+
+    }
+
+
+    if (longitudeInput) {
+
+        longitudeInput.value =
+            selectedLongitude;
+
+    }
+
+
+    if (currentLocation) {
+
+        currentLocation.textContent =
+            address || "Selected location";
+
+    }
+
+
+    localStorage.setItem(
+        "wallawallaLatitude",
+        String(selectedLatitude)
+    );
+
+    localStorage.setItem(
+        "wallawallaLongitude",
+        String(selectedLongitude)
+    );
+
+    localStorage.setItem(
+        "wallawallaAddress",
+        address || "Selected location"
+    );
+
+
+    resetFeaturedDirectories();
+
+
+    loadBusinessCount(
+        selectedLatitude,
+        selectedLongitude
+    );
+
+
+    loadPropertyCount(
+        selectedLatitude,
+        selectedLongitude
+    );
+
+}
+
+
+/* =================================================
+   CURRENT DEVICE LOCATION
+================================================= */
+
+function useCurrentLocation() {
+
+    if (!navigator.geolocation) {
+
+        openLocationModal();
+
+        showLocationMessage(
+            "Location services are unavailable. "
+            + "Enter an address or suburb instead."
+        );
+
+        return;
+    }
+
+
+    showLocationMessage(
+        "Detecting your current location..."
+    );
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function (position) {
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+
+            reverseGeocodeLocation(
+                latitude,
+                longitude
+            );
+
+        },
+
+        function (error) {
+
+            console.error(
+                "Location error:",
+                error
+            );
+
+
+            openLocationModal();
+
+
+            showLocationMessage(
+                "Your location could not be detected. "
+                + "Enter an address, suburb or city instead."
+            );
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 12000,
+            maximumAge: 300000
+        }
+
+    );
+
+}
+
+
+/* =================================================
+   CONVERT COORDINATES TO ADDRESS
+================================================= */
+
+function reverseGeocodeLocation(
+    latitude,
+    longitude
+) {
+
+    if (!locationGeocoder) {
+
+        setSelectedLocation(
+            latitude,
+            longitude,
+            "Current location"
+        );
+
+        closeLocationModal();
+
+        return;
+    }
+
+
+    locationGeocoder.geocode(
+        {
+            location: {
+                lat: latitude,
+                lng: longitude
+            }
+        },
+
+        function (
+            results,
+            status
+        ) {
+
+            let address =
+                "Current location";
+
+
+            if (
+                status === "OK"
+                && results
+                && results.length
+            ) {
+
+                address =
+                    results[0].formatted_address;
+
+            }
+
+
+            setSelectedLocation(
+                latitude,
+                longitude,
+                address
+            );
+
+
+            closeLocationModal();
+
+        }
+    );
+
+}
+
+
+/* =================================================
+   USE MANUALLY ENTERED LOCATION
+================================================= */
+
+function applyTypedLocation() {
+
+    const input =
+        document.getElementById(
+            "location-search-input"
+        );
+
+    const address =
+        input
+            ? input.value.trim()
+            : "";
+
+
+    if (!address) {
+
+        showLocationMessage(
+            "Enter an address, suburb, town or city."
+        );
+
+        return;
+    }
+
+
+    if (!locationGeocoder) {
+
+        showLocationMessage(
+            "Location search is still loading. "
+            + "Please try again."
+        );
+
+        return;
+    }
+
+
+    showLocationMessage(
+        "Finding location..."
+    );
+
+
+    locationGeocoder.geocode(
+        {
+            address: address,
+
+            componentRestrictions: {
+                country: "ZA"
+            }
+        },
+
+        function (
+            results,
+            status
+        ) {
+
+            if (
+                status !== "OK"
+                || !results
+                || !results.length
+            ) {
+
+                showLocationMessage(
+                    "The location could not be found. "
+                    + "Try a more complete address."
+                );
+
+                return;
+            }
+
+
+            const result =
+                results[0];
+
+            const latitude =
+                result.geometry.location.lat();
+
+            const longitude =
+                result.geometry.location.lng();
+
+
+            setSelectedLocation(
+                latitude,
+                longitude,
+                result.formatted_address
+            );
+
+
+            closeLocationModal();
+
+        }
+    );
+
+}
+
+
+/* =================================================
+   LOCATION MODAL
+================================================= */
+
+function openLocationModal() {
+
+    const modal =
+        document.getElementById(
+            "location-change-modal"
+        );
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.style.display =
+        "flex";
+
+
+    const input =
+        document.getElementById(
+            "location-search-input"
+        );
+
+
+    if (input) {
+
+        setTimeout(
+            function () {
+
+                input.focus();
+
+            },
+            100
+        );
+
+    }
+
+}
+
+
+function closeLocationModal() {
+
+    const modal =
+        document.getElementById(
+            "location-change-modal"
+        );
+
+
+    if (modal) {
+
+        modal.style.display =
+            "none";
+
+    }
+
+
+    showLocationMessage("");
+
+}
+
+
+function showLocationMessage(
+    message
+) {
+
+    const messageElement =
+        document.getElementById(
+            "location-modal-message"
+        );
+
+
+    if (messageElement) {
+
+        messageElement.textContent =
+            message;
+
+    }
+
+}
+
+
+/* =================================================
+   BUSINESS COUNT
+================================================= */
+
+async function loadBusinessCount(
+    latitude,
+    longitude
+) {
+
+    const wrapper =
+        document.getElementById(
+            "business-count-wrapper"
+        );
+
+    const countElement =
+        document.getElementById(
+            "business-count-hero"
+        );
+
+
+    if (
+        !wrapper
+        || !countElement
+    ) {
+
+        return;
+
+    }
+
+
+    wrapper.style.display =
+        "none";
+
+
+    try {
+
+        const response = await fetch(
+            "https://search.wallawalla.co.za"
+            + "/api/business-count"
+            + `?lat=${encodeURIComponent(latitude)}`
+            + `&lng=${encodeURIComponent(longitude)}`
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Business count request failed: ${response.status}`
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        nearbyBusinessCount =
+            Number(data.count) || 0;
+
+
+        if (nearbyBusinessCount >= 1) {
+
+            countElement.textContent =
+                nearbyBusinessCount;
+
+            wrapper.style.display =
+                "inline-flex";
+
+        } else {
+
+            countElement.textContent =
+                "";
+
+            wrapper.style.display =
+                "none";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Business count error:",
+            error
+        );
+
+
+        countElement.textContent =
+            "";
+
+        wrapper.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =================================================
+   PROPERTY COUNT
+================================================= */
+
+async function loadPropertyCount(
+    latitude,
+    longitude
+) {
+
+    const wrapper =
+        document.getElementById(
+            "property-count-wrapper"
+        );
+
+    const countElement =
+        document.getElementById(
+            "property-count-hero"
+        );
+
+
+    if (
+        !wrapper
+        || !countElement
+    ) {
+
+        return;
+
+    }
+
+
+    wrapper.style.display =
+        "none";
+
+
+    try {
+
+        const response = await fetch(
+            "https://property.wallawalla.co.za"
+            + "/api/property-count"
+            + `?lat=${encodeURIComponent(latitude)}`
+            + `&lng=${encodeURIComponent(longitude)}`
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Property count request failed: ${response.status}`
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        nearbyPropertyCount =
+            Number(data.count) || 0;
+
+
+        if (nearbyPropertyCount >= 1) {
+
+            countElement.textContent =
+                nearbyPropertyCount;
+
+            wrapper.style.display =
+                "inline-flex";
+
+        } else {
+
+            countElement.textContent =
+                "";
+
+            wrapper.style.display =
+                "none";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Property count error:",
+            error
+        );
+
+
+        countElement.textContent =
+            "";
+
+        wrapper.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =================================================
+   BUSINESS AND PROPERTY BUTTONS
+================================================= */
+
+function openBusinessSearch() {
+
+    if (
+        selectedLatitude === null
+        || selectedLongitude === null
+    ) {
+
+        openLocationModal();
+
+        return;
+
+    }
+
+
+    const url =
+        "https://search.wallawalla.co.za"
+        + "/business-search?query=Businesses"
+        + `&latitude=${encodeURIComponent(selectedLatitude)}`
+        + `&longitude=${encodeURIComponent(selectedLongitude)}`;
+
+
+    window.location.href =
+        url;
+
+}
+
+
+function openPropertySearch() {
+
+    if (
+        selectedLatitude === null
+        || selectedLongitude === null
+    ) {
+
+        openLocationModal();
+
+        return;
+
+    }
+
+
+    const url =
+        "https://property.wallawalla.co.za"
+        + "/property-search?query=Properties"
+        + `&latitude=${encodeURIComponent(selectedLatitude)}`
+        + `&longitude=${encodeURIComponent(selectedLongitude)}`;
+
+
+    window.location.href =
+        url;
+
+}
+
+
+/* =================================================
+   CATEGORY SEARCH
+================================================= */
+
+function setSearch(
+    query
+) {
+
+    const searchInput =
+        document.getElementById(
+            "search-input"
+        );
+
+
+    if (searchInput) {
+
+        searchInput.value =
+            query;
+
+    }
+
+
+    if (
+        selectedLatitude === null
+        || selectedLongitude === null
+    ) {
+
+        openLocationModal();
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "google-search-form"
+    ).requestSubmit();
+
+}
+
+
+/* =================================================
+   MORE CATEGORIES
+================================================= */
+
+function toggleMoreCategories(
+    button
+) {
+
+    const categories =
+        document.getElementById(
+            "more-categories"
+        );
+
+
+    const opening =
+        categories.style.display === "none"
+        || categories.style.display === "";
+
+
+    categories.style.display =
+        opening
+            ? "grid"
+            : "none";
+
+
+    button.setAttribute(
+        "aria-expanded",
+        opening
+            ? "true"
+            : "false"
+    );
+
+
+    const icon =
+        button.querySelector("i");
+
+
+    if (icon) {
+
+        icon.classList.toggle(
+            "fa-chevron-down",
+            !opening
+        );
+
+        icon.classList.toggle(
+            "fa-chevron-up",
+            opening
+        );
+
+    }
+
+}
+
+
+/* =================================================
+   GOOGLE SEARCH VALIDATION
+================================================= */
+
+function validateLocationRequired() {
+
+    if (
+        selectedLatitude === null
+        || selectedLongitude === null
+    ) {
+
+        openLocationModal();
+
+        return false;
+
+    }
+
+
+    document.getElementById(
+        "latitude"
+    ).value = selectedLatitude;
+
+
+    document.getElementById(
+        "longitude"
+    ).value = selectedLongitude;
+
+
+    return true;
+
+}
+
+
+/* =================================================
+   RESET FEATURED RESULTS WHEN LOCATION CHANGES
+================================================= */
+
+function resetFeaturedDirectories() {
+
+    const businessContent =
+        document.getElementById(
+            "featured-business-content"
+        );
+
+    const propertyContent =
+        document.getElementById(
+            "featured-property-content"
+        );
+
+    const businessButton =
+        document.getElementById(
+            "featured-business-button"
+        );
+
+    const propertyButton =
+        document.getElementById(
+            "featured-directory-button"
+        );
+
+
+    if (businessContent) {
+
+        businessContent.dataset.loaded =
+            "false";
+
+        businessContent.style.display =
+            "none";
+
+    }
+
+
+    if (propertyContent) {
+
+        propertyContent.dataset.loaded =
+            "false";
+
+        propertyContent.style.display =
+            "none";
+
+    }
+
+
+    if (businessButton) {
+
+        businessButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+
+    if (propertyButton) {
+
+        propertyButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+
+    const businessResults =
+        document.getElementById(
+            "featured-business-results"
+        );
+
+    const propertyResults =
+        document.getElementById(
+            "featured-property-results"
+        );
+
+
+    if (businessResults) {
+
+        businessResults.innerHTML = "";
+
+    }
+
+
+    if (propertyResults) {
+
+        propertyResults.innerHTML = "";
+
+    }
+
+}
+
+
+/* =================================================
+   CLOSE MODAL WHEN BACKDROP IS SELECTED
+================================================= */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const modal =
+            document.getElementById(
+                "location-change-modal"
+            );
+
+
+        if (
+            modal
+            && event.target === modal
+        ) {
+
+            closeLocationModal();
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
 
