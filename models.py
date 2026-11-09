@@ -118,6 +118,12 @@ class Business(db.Model):
         nullable=True
     )
 
+    claim_invite_created = db.Column(
+        db.Boolean,
+        nullable=False,
+        default=False
+    )
+
     created_by_admin = db.Column(
         db.Boolean,
         nullable=False,
@@ -636,6 +642,12 @@ class Property(db.Model):
     claimed_at = db.Column(
         db.DateTime,
         nullable=True
+    )
+
+    claim_invite_created = db.Column(
+        db.Boolean,
+        nullable=False,
+        default=False
     )
 
     created_by_admin = db.Column(
