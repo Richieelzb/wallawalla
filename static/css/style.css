@@ -4008,3 +4008,641 @@ body{
         width: 100%;
     }
 }
+
+
+
+/* ==========================================================
+   WALLAWALLA GOOGLE RESULTS PAGE
+   ========================================================== */
+
+.google-results-page {
+    margin: 0;
+    min-height: 100vh;
+    background: #ffffff;
+    color: #14213d;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
+
+.google-results-header {
+    width: 100%;
+    min-height: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 7px 16px;
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.results-back-button {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #07549b;
+    font-size: 19px;
+    text-decoration: none;
+}
+
+.results-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-decoration: none;
+}
+
+.results-brand img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.results-brand-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1;
+}
+
+.results-walla-green,
+.results-walla-blue {
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.results-walla-green {
+    color: #55c900;
+}
+
+.results-walla-blue {
+    color: #1265cc;
+}
+
+.results-brand-text small {
+    color: #1265cc;
+    font-size: 8px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.results-brand-text small span {
+    color: #69cf00;
+}
+
+
+/* ==========================================================
+   SEARCH RESULTS PILL
+   ========================================================== */
+
+.google-results-search-wrapper {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    padding: 4px 15px 12px;
+    background: #ffffff;
+}
+
+.google-results-search-pill {
+    min-width: 142px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 16px;
+    border: 1px solid #d5dbe3;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #39465b;
+    font-size: 11px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.16);
+}
+
+.google-results-search-pill img {
+    width: 14px;
+    height: 14px;
+}
+
+.google-results-search-pill i {
+    color: #18b968;
+    font-size: 12px;
+}
+
+
+/* ==========================================================
+   RESULTS HERO
+   ========================================================== */
+
+.google-results-hero {
+    position: relative;
+    min-height: 93px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px 14px 10px;
+    background: #0660b9;
+}
+
+.google-results-hero::before {
+    content: "";
+    position: absolute;
+    top: -17px;
+    left: -5%;
+    width: 110%;
+    height: 43px;
+    border-radius: 50%;
+    background: #ffffff;
+    transform: rotate(-1deg);
+    z-index: 1;
+}
+
+.google-results-wave-green {
+    position: absolute;
+    left: -5%;
+    top: 0;
+    width: 115%;
+    height: 35px;
+    background: #62dc00;
+    border-radius: 45% 50% 50% 50%;
+    transform: rotate(-4deg);
+}
+
+.google-results-wave-blue {
+    position: absolute;
+    left: -10%;
+    top: 16px;
+    width: 120%;
+    height: 30px;
+    background: #0074df;
+    border-radius: 50%;
+    transform: rotate(4deg);
+}
+
+.google-results-heading {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+}
+
+.google-results-heading h1 {
+    margin: 0 0 5px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.google-results-heading h1 span {
+    color: #a2f900;
+}
+
+.google-results-heading p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 500;
+}
+
+.google-results-heading p i {
+    color: #86e600;
+    font-size: 15px;
+}
+
+
+/* ==========================================================
+   RESULTS LIST
+   ========================================================== */
+
+.google-results-list {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 6px 5px 25px;
+    background: #ffffff;
+}
+
+
+/* ==========================================================
+   RESULT CARD
+   ========================================================== */
+
+.google-result-card {
+    width: 100%;
+    margin: 0 0 12px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: #ffffff;
+    box-shadow: none;
+}
+
+
+/* ==========================================================
+   BUSINESS NAME
+   ========================================================== */
+
+.google-result-name {
+    width: 100%;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow: hidden;
+    padding: 3px 7px;
+    border: 2px solid #91e000;
+    border-radius: 9px;
+    background:
+        linear-gradient(
+            180deg,
+            #0758aa 0%,
+            #003f87 100%
+        );
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow:
+        inset 0 0 5px rgba(255, 255, 255, 0.25);
+}
+
+.google-result-name:hover {
+    color: #ffffff;
+}
+
+.result-globe-icon {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #ffffff;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.result-business-name {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: left;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.result-name-arrow {
+    color: #9afb00;
+    font-size: 12px;
+}
+
+
+/* ==========================================================
+   RESULT PHOTO
+   ========================================================== */
+
+.google-result-photo-wrapper {
+    width: 100%;
+    margin: 5px 0 4px;
+    overflow: hidden;
+    border-radius: 9px;
+}
+
+.google-result-photo {
+    width: 100%;
+    height: 190px;
+    display: block;
+    object-fit: cover;
+    border: 0;
+    border-radius: 9px;
+}
+
+
+/* ==========================================================
+   ADDRESS
+   ========================================================== */
+
+.google-result-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    padding: 1px 7px 3px;
+    color: #26344a;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.google-result-address i {
+    flex: 0 0 auto;
+    margin-top: 1px;
+    color: #55cf00;
+    font-size: 17px;
+}
+
+
+/* ==========================================================
+   RATING + DISTANCE
+   ========================================================== */
+
+.google-result-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-height: 30px;
+    margin-top: 1px;
+    padding: 0 8px;
+}
+
+.google-result-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    background: #f3f7c9;
+    color: #314057;
+    font-size: 10px;
+}
+
+.rating-star {
+    color: #ffd700;
+    font-size: 14px;
+}
+
+.google-results-meta-divider {
+    width: 1px;
+    height: 18px;
+    background: #dbe0e6;
+}
+
+.google-result-distance {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #344054;
+    font-size: 10px;
+}
+
+.google-result-distance i {
+    color: #ff142f;
+    font-size: 13px;
+}
+
+
+/* ==========================================================
+   ACTION BUTTONS
+   ========================================================== */
+
+.google-result-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin-top: 2px;
+    padding: 0 2px 4px;
+}
+
+.google-result-action {
+    min-width: 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.call-action {
+    border: 1px solid #0062ad;
+    background:
+        linear-gradient(
+            180deg,
+            #0876cf,
+            #07509a
+        );
+    color: #ffffff;
+}
+
+.directions-action {
+    border: 1px solid #63b700;
+    background:
+        linear-gradient(
+            180deg,
+            #89db13,
+            #55a900
+        );
+    color: #ffffff;
+}
+
+.save-action {
+    border: 1px solid #1268ce;
+    background: #ffffff;
+    color: #0757a8;
+}
+
+.save-action.saved {
+    background: #0757a8;
+    color: #ffffff;
+}
+
+.disabled-action {
+    cursor: default;
+    opacity: 0.65;
+}
+
+
+/* ==========================================================
+   NO RESULTS
+   ========================================================== */
+
+.google-no-results {
+    padding: 50px 20px;
+    color: #536274;
+    text-align: center;
+}
+
+.google-no-results i {
+    margin-bottom: 9px;
+    color: #70d500;
+    font-size: 30px;
+}
+
+.google-no-results p {
+    color: #536274;
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    .google-results-header {
+        min-height: 55px;
+        padding: 5px 8px;
+    }
+
+    .results-back-button {
+        left: 5px;
+        font-size: 17px;
+    }
+
+    .results-brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .results-walla-green,
+    .results-walla-blue {
+        font-size: 14px;
+    }
+
+    .results-brand-text small {
+        font-size: 7px;
+    }
+
+    .google-results-search-wrapper {
+        padding-bottom: 8px;
+    }
+
+    .google-results-search-pill {
+        height: 29px;
+        min-width: 140px;
+        font-size: 10px;
+    }
+
+    .google-results-hero {
+        min-height: 87px;
+        padding:
+            19px
+            10px
+            8px;
+    }
+
+    .google-results-heading h1 {
+        font-size: 19px;
+    }
+
+    .google-results-heading p {
+        font-size: 9px;
+    }
+
+    .google-results-list {
+        padding:
+            5px
+            3px
+            20px;
+    }
+
+    .google-result-name {
+        min-height: 31px;
+    }
+
+    .result-business-name {
+        font-size: 13px;
+    }
+
+    .google-result-photo {
+        height: 160px;
+    }
+
+    .google-result-address {
+        font-size: 9px;
+    }
+
+    .google-result-actions {
+        gap: 4px;
+    }
+
+    .google-result-action {
+        height: 29px;
+        font-size: 9px;
+    }
+}
+
+
+/* ==========================================================
+   SMALL PHONES
+   ========================================================== */
+
+@media (max-width: 380px) {
+
+    .google-results-heading h1 {
+        font-size: 17px;
+    }
+
+    .result-business-name {
+        font-size: 12px;
+    }
+
+    .google-result-photo {
+        height: 155px;
+    }
+
+    .google-result-meta {
+        gap: 8px;
+    }
+
+    .google-result-action {
+        font-size: 8px;
+    }
+}
+
+
+/* ==========================================================
+   DESKTOP
+   Keep screenshot proportions instead of stretching cards
+   ========================================================== */
+
+@media (min-width: 651px) {
+
+    .google-results-page {
+        background: #edf1f5;
+    }
+
+    .google-results-header,
+    .google-results-search-wrapper,
+    .google-results-hero,
+    .google-results-list {
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .google-results-header {
+        margin-top: 15px;
+    }
+
+    .google-results-list {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    .google-result-photo {
+        height: 280px;
+    }
+}

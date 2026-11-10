@@ -1,130 +1,402 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" type="image/png" sizes="40x40" href="static/images/wallawalla-circular.png">
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="40x40"
+        href="{{ url_for('static', filename='images/wallawalla-circular.png') }}"
+    >
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Search Results</title>
 
-    <link 
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    />
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-</head>
-<body>
-    <nav class="navbar">
-    <a href="https://wallawalla.co.za" style="text-decoration:none; color:inherit;">
-    <div class="logo">
-        <span class="back-arrow">
-            <i class="fa-solid fa-arrow-left"></i>
-        </span>
-        <img src="{{ url_for('static', filename='images/walla-w.png') }}" alt="WallaWalla Logo">
-        <span class="logo-text">
-            <span class="green">WALLA</span><span class="logo-blue">WALLA</span>
-        </span>
-        <span class="tagline">
-          find it<span class="tagline-green"> near you...</span>
-        </span>
-    </div>
-    </a>
-
-    <button class="location-btn" type="button">
-    <img
-        src="https://www.google.com/favicon.ico"
-        alt="Google"
-        class="google-icon"
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     >
-    <i  
-        class="fa-solid fa-magnifying-glass"
-        style="color:#22c55e;"
-        ></i>
-        Search Results
-   </button>
-    </nav>
 
-    <div class="results-container">
-        <h1 class="results-title">
-            <span style="color:#1565c0;">Results for</span>
-            "{{ query }}" ({{ results|length }})
-        </h1>
-        
-        {% if results %}
-            <p class="results-subtitle">
-                <i class="fa-solid fa-location-arrow"></i>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body class="google-results-page">
+
+    <!-- =========================
+         TOP HEADER
+    ========================== -->
+    <header class="google-results-header">
+
+        <a
+            href="https://wallawalla.co.za"
+            class="results-back-button"
+            aria-label="Back to Wallawalla"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <a
+            href="https://wallawalla.co.za"
+            class="results-brand"
+        >
+            <img
+                src="{{ url_for('static', filename='images/walla-w.png') }}"
+                alt="WallaWalla"
+            >
+
+            <div class="results-brand-text">
+                <div>
+                    <span class="results-walla-green">WALLA</span><span class="results-walla-blue">WALLA</span>
+                </div>
+
+                <small>
+                    Find it
+                    <span>near you</span>
+                </small>
+            </div>
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         SEARCH RESULTS PILL
+    ========================== -->
+    <div class="google-results-search-wrapper">
+
+        <div class="google-results-search-pill">
+
+            <img
+                src="https://www.google.com/favicon.ico"
+                alt="Google"
+            >
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <span>Search Results</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         BLUE RESULTS HEADER
+    ========================== -->
+    <section class="google-results-hero">
+
+        <div class="google-results-wave-green"></div>
+
+        <div class="google-results-wave-blue"></div>
+
+        <div class="google-results-heading">
+
+            <h1>
+                Results for
+                <span>"{{ query }}"</span>
+                ({{ results|length }})
+            </h1>
+
+            {% if results %}
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
                 Click on a business name for details and directions
             </p>
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESULTS
+    ========================== -->
+    <main class="google-results-list">
+
+        {% if results %}
+
             {% for place in results %}
 
-                <div
-                    class="place-card"
-                    style="margin-bottom: 20px;"
+            <article class="google-result-card">
+
+
+                <!-- =========================
+                     BUSINESS NAME BAR
+                ========================== -->
+                <a
+                    class="google-result-name"
+                    href="https://www.google.com/maps/search/?api=1&query={{ place.name|urlencode }}%20{{ place.address|urlencode }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
 
-                    <!-- Business Name -->
-                    <h3>
+                    <span class="result-globe-icon">
+                        <i class="fa-solid fa-globe"></i>
+                    </span>
 
-                        <a
-                            href="https://www.google.com/maps/search/?api=1&query={{ place.name|urlencode }}%20{{ place.address|urlencode }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {{ place.name }}
-                        </a>
+                    <span class="result-business-name">
+                        {{ place.name }}
+                    </span>
 
-                    </h3>
+                    <i class="fa-solid fa-location-arrow result-name-arrow"></i>
+
+                </a>
 
 
-                    <!-- Business Photo -->
-                    {% if place.photo_url %}
+                <!-- =========================
+                     PHOTO
+                ========================== -->
+                {% if place.photo_url %}
 
-                        <div class="google-business-photo-container">
+                <div class="google-result-photo-wrapper">
 
-                            <img
-                                src="{{ place.photo_url }}"
-                                alt="{{ place.name }}"
-                                class="google-business-photo"
-                                loading="lazy"
-                            >
+                    <img
+                        src="{{ place.photo_url }}"
+                        alt="{{ place.name }}"
+                        class="google-result-photo"
+                        loading="lazy"
+                    >
 
-                        </div>
+                </div>
+
+                {% endif %}
+
+
+                <!-- =========================
+                     ADDRESS
+                ========================== -->
+                <div class="google-result-address">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+                        {{ place.address or 'Address unavailable' }}
+                    </span>
+
+                </div>
+
+
+                <!-- =========================
+                     RATING + DISTANCE
+                ========================== -->
+                <div class="google-result-meta">
+
+                    <div class="google-result-rating">
+
+                        <span class="rating-star">
+                            <i class="fa-solid fa-star"></i>
+                        </span>
+
+                        <strong>
+                            {{ place.rating }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="google-results-meta-divider"></div>
+
+
+                    <div class="google-result-distance">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <strong>
+                            {{ place.distance }} km away
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     ACTION BUTTONS
+                ========================== -->
+                <div class="google-result-actions">
+
+
+                    <!--
+                    Call requires place.phone to exist.
+                    If your backend provides it,
+                    this button becomes active.
+                    -->
+
+                    {% if place.phone %}
+
+                    <a
+                        href="tel:{{ place.phone }}"
+                        class="google-result-action call-action"
+                    >
+                        <i class="fa-solid fa-phone"></i>
+                        Call
+                    </a>
+
+                    {% else %}
+
+                    <button
+                        type="button"
+                        class="google-result-action call-action disabled-action"
+                        disabled
+                    >
+                        <i class="fa-solid fa-phone"></i>
+                        Call
+                    </button>
 
                     {% endif %}
 
 
-                    <!-- Address -->
-                    <p style="color:white;">
-                        {{ place.address or 'Address unavailable' }}
-                    </p>
+                    <!-- DIRECTIONS -->
+
+                    <a
+                        href="https://www.google.com/maps/dir/?api=1&destination={{ place.name|urlencode }}%20{{ place.address|urlencode }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="google-result-action directions-action"
+                    >
+                        <i class="fa-solid fa-location-arrow"></i>
+                        Directions
+                    </a>
 
 
-                    <!-- Rating -->
-                    <p style="color:white;">
-                        ⭐ {{ place.rating }}
-                    </p>
+                    <!-- SAVE -->
 
-
-                    <!-- Distance -->
-                    <p style="color:white;">
-
-                        <i
-                            class="fa-solid fa-location-dot"
-                            style="color:red;"
-                        ></i>
-
-                        {{ place.distance }} km away
-
-                    </p>
+                    <button
+                        type="button"
+                        class="google-result-action save-action"
+                        data-business-name="{{ place.name }}"
+                    >
+                        <i class="fa-regular fa-bookmark"></i>
+                        Save
+                    </button>
 
                 </div>
 
+            </article>
+
             {% endfor %}
+
+
         {% else %}
-            <p style="text-align:center;color:greenyellow;">No results found close to you...</p>
+
+        <div class="google-no-results">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <p>
+                No results found close to you...
+            </p>
+
+        </div>
+
         {% endif %}
-</div>
+
+    </main>
+
+
+    <script>
+        document.querySelectorAll('.save-action').forEach(button => {
+
+            button.addEventListener('click', function () {
+
+                const businessName =
+                    this.dataset.businessName;
+
+                const key =
+                    'wallawalla-saved-businesses';
+
+                let savedBusinesses = [];
+
+                try {
+                    savedBusinesses =
+                        JSON.parse(
+                            localStorage.getItem(key)
+                        ) || [];
+                } catch (error) {
+                    savedBusinesses = [];
+                }
+
+                if (!savedBusinesses.includes(businessName)) {
+
+                    savedBusinesses.push(businessName);
+
+                    localStorage.setItem(
+                        key,
+                        JSON.stringify(savedBusinesses)
+                    );
+
+                    this.classList.add('saved');
+
+                    this.innerHTML =
+                        '<i class="fa-solid fa-bookmark"></i> Saved';
+
+                } else {
+
+                    savedBusinesses =
+                        savedBusinesses.filter(
+                            name => name !== businessName
+                        );
+
+                    localStorage.setItem(
+                        key,
+                        JSON.stringify(savedBusinesses)
+                    );
+
+                    this.classList.remove('saved');
+
+                    this.innerHTML =
+                        '<i class="fa-regular fa-bookmark"></i> Save';
+                }
+
+            });
+
+        });
+
+
+        /* Restore saved button status */
+        let savedBusinesses = [];
+
+        try {
+
+            savedBusinesses =
+                JSON.parse(
+                    localStorage.getItem(
+                        'wallawalla-saved-businesses'
+                    )
+                ) || [];
+
+        } catch (error) {
+
+            savedBusinesses = [];
+
+        }
+
+
+        document.querySelectorAll('.save-action').forEach(button => {
+
+            if (
+                savedBusinesses.includes(
+                    button.dataset.businessName
+                )
+            ) {
+
+                button.classList.add('saved');
+
+                button.innerHTML =
+                    '<i class="fa-solid fa-bookmark"></i> Saved';
+
+            }
+
+        });
+    </script>
+
 </body>
 </html>
