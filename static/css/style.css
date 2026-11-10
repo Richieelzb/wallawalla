@@ -4653,3 +4653,23 @@ body{
         height: 280px;
     }
 }
+
+
+
+.google-result-photo-wrapper {
+    margin: 5px 0 4px;
+}
+
+.google-result-address {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.google-result-meta {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.google-result-actions {
+    padding: 2px 2px 4px;
+}
