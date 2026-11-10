@@ -4244,15 +4244,30 @@ body{
 
     background: #ffffff;
 
-    /* Green border around entire result */
     border: 2px solid #65d600;
     border-radius: 12px;
 
     overflow: hidden;
 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 1st, 3rd, 5th, 7th... = GREEN */
+.google-result-card:nth-child(odd) {
+    border-color: #65d600;
+
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.08),
-        0 0 4px rgba(101, 214, 0, 0.22);
+        0 0 4px rgba(101, 214, 0, 0.25);
+}
+
+/* 2nd, 4th, 6th, 8th... = BLUE */
+.google-result-card:nth-child(even) {
+    border-color: #1565c0;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 0 4px rgba(21, 101, 192, 0.25);
 }
 
 
