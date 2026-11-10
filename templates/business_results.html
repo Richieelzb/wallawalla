@@ -174,30 +174,57 @@
         </div>
 
         <!-- Business image gallery -->
-        <div
-            id="business-gallery-{{ business.id }}"
-            style="display: none; margin: 15px 0;">
+        <!-- Business Photos -->
+        {% if business.dashboard_images %}
 
-            {% if business.dashboard_images %}
-               
-                <div class="gallery">
- 
-                   {% for image in business.dashboard_images %}
-                        <img 
-                            src="{{ image.image_url }}" 
-                            alt="{{ business.business_name }}"
-                            style="width:300px; height:auto; display:block;"
-                    >
-                     {% endfor %}
-                </div>
+            <!-- First photo always visible -->
+            <div class="business-main-photo-container">
 
-            {% else %}
+                <img
+                    src="{{ business.dashboard_images[0].image_url }}"
+                    alt="{{ business.business_name }}"
+                    class="business-main-photo"
+                    loading="lazy"
+                >
 
-                <p> No images available.</p>
+            </div>
 
-            {% endif %}
 
-        </div>
+            <!-- Remaining photos hidden until business name is clicked -->
+            <div
+                id="business-gallery-{{ business.id }}"
+                style="display:none; margin:15px 0;"
+            >
+
+                {% if business.dashboard_images|length > 1 %}
+
+                    <div class="gallery">
+
+                        {% for image in business.dashboard_images[1:] %}
+
+                            <img
+                                src="{{ image.image_url }}"
+                                alt="{{ business.business_name }}"
+                                loading="lazy"
+                            >
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        {% else %}
+
+            <!-- Keep this ID so toggleBusiness() still works -->
+            <div
+                id="business-gallery-{{ business.id }}"
+                style="display:none;"
+            ></div>
+
+        {% endif %}
 
         <p
             class="

@@ -3956,3 +3956,55 @@ body{
     }
 
 }
+
+/* =====================================================
+   BUSINESS SEARCH RESULT MAIN PHOTO
+===================================================== */
+
+.business-main-photo-container {
+    width: 100%;
+    margin: 12px 0 15px 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.business-main-photo {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+
+/* Remaining gallery images */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.gallery img {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .business-main-photo {
+        width: 100%;
+    }
+
+    .gallery img {
+        width: 100%;
+    }
+}
