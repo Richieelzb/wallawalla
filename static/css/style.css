@@ -4238,14 +4238,21 @@ body{
    ========================================================== */
 
 .google-result-card {
-    width: 100%;
-    margin: 0 0 12px;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
-    border-radius: 0;
+    width: calc(100% - 8px);
+    margin: 6px auto 14px;
+    padding: 5px;
+
     background: #ffffff;
-    box-shadow: none;
+
+    /* Green border around entire result */
+    border: 2px solid #65d600;
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 0 4px rgba(101, 214, 0, 0.22);
 }
 
 
