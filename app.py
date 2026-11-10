@@ -664,6 +664,7 @@ def search():
     query = request.args.get("query")
     latitude = request.args.get("latitude")
     longitude = request.args.get("longitude")
+
     try:
         url = (
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
@@ -673,40 +674,225 @@ def search():
             f"&key={API_KEY}"
         )
 
-        response = requests.get(url)
+        response = requests.get(
+            url,
+            timeout=10
+        )
+
         data = response.json()
 
         results = []
 
         for place in data.get("results", []):
 
-            place_lat = place["geometry"]["location"]["lat"]
-            place_lng = place["geometry"]["location"]["lng"]
+            place_lat = (
+                place["geometry"]
+                ["location"]
+                ["lat"]
+            )
 
-            address = get_address(place_lat, place_lng)
+            place_lng = (
+                place["geometry"]
+                ["location"]
+                ["lng"]
+            )
 
-            distance = calculate_distance(float(latitude), float(longitude), place_lat, place_lng)
+            address = get_address(
+                place_lat,
+                place_lng
+            )
+
+            distance = calculate_distance(
+                float(latitude),
+                float(longitude),
+                place_lat,
+                place_lng
+            )
+
+            # Get the first photo only
+            photo_url = None
+
+            photos = place.get(
+                "photos",
+                []
+            )
+
+            if photos:
+
+                photo_reference = (
+                    photos[0].get(
+                        "photo_reference"
+                    )
+                )
+
+                if photo_reference:
+
+                    photo_url = (
+                        "https://maps.googleapis.com/"
+                        "maps/api/place/photo"
+                        "?maxwidth=600"
+                        f"&photo_reference={photo_reference}"
+                        f"&key={API_KEY}"
+                    )
 
             results.append({
                 "name": place.get("name"),
                 "address": address,
-                # "address": place.get("formatted_address") or place.get("vicinity"),
-                "rating": place.get("rating", "N/A"),
+                "rating": place.get(
+                    "rating",
+                    "N/A"
+                ),
                 "distance": distance,
-                "lat": place_lat,    
-                "lng": place_lng
-                # "raw": place
+                "lat": place_lat,
+                "lng": place_lng,
+                "photo_url": photo_url
             })
-        results.sort(key=lambda x: x["distance"])
+
+        results.sort(
+            key=lambda x: x["distance"]
+        )
+
     except Exception as e:
-                print(e)
-                results = []
+
+        print(e)
+
+        results = []
 
     return render_template(
         "results.html",
         query=query,
         results=results
     )
+
+# @app.route("/search")
+# def search():
+#     query = request.args.get("query")
+#     latitude = request.args.get("latitude")
+#     longitude = request.args.get("longitude")
+
+#     try:
+#         url = (
+#             "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+#             f"?keyword={query}"
+#             f"&location={latitude},{longitude}"
+#             "&radius=10000"
+#             f"&key={API_KEY}"
+#         )
+
+#         response = requests.get(url, timeout=10)
+#         data = response.json()
+
+#         results = []
+
+#         for place in data.get("results", []):
+
+#             place_lat = place["geometry"]["location"]["lat"]
+#             place_lng = place["geometry"]["location"]["lng"]
+
+#             address = get_address(
+#                 place_lat,
+#                 place_lng
+#             )
+
+#             distance = calculate_distance(
+#                 float(latitude),
+#                 float(longitude),
+#                 place_lat,
+#                 place_lng
+#             )
+
+#             # ---------------------------------
+#             # Get ONE Google Places photo
+#             # ---------------------------------
+#             photo_url = None
+
+#             photos = place.get("photos", [])
+
+#             if photos:
+#                 photo_reference = photos[0].get(
+#                     "photo_reference"
+#                 )
+
+#                 if photo_reference:
+#                     photo_url = (
+#                         "https://maps.googleapis.com/maps/api/place/photo"
+#                         "?maxwidth=700"
+#                         f"&photo_reference={photo_reference}"
+#                         f"&key={API_KEY}"
+#                     )
+
+#             results.append({
+#                 "name": place.get("name"),
+#                 "address": address,
+#                 "rating": place.get("rating", "N/A"),
+#                 "distance": distance,
+#                 "lat": place_lat,
+#                 "lng": place_lng,
+#                 "photo_url": photo_url
+#             })
+
+#         results.sort(
+#             key=lambda x: x["distance"]
+#         )
+
+#     except Exception as e:
+#         print(e)
+#         results = []
+
+#     return render_template(
+#         "results.html",
+#         query=query,
+#         results=results
+#     )
+
+# @app.route("/search")
+# def search():
+#     query = request.args.get("query")
+#     latitude = request.args.get("latitude")
+#     longitude = request.args.get("longitude")
+#     try:
+#         url = (
+#             "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+#             f"?keyword={query}"
+#             f"&location={latitude},{longitude}"
+#             "&radius=10000"
+#             f"&key={API_KEY}"
+#         )
+
+#         response = requests.get(url)
+#         data = response.json()
+
+#         results = []
+
+#         for place in data.get("results", []):
+
+#             place_lat = place["geometry"]["location"]["lat"]
+#             place_lng = place["geometry"]["location"]["lng"]
+
+#             address = get_address(place_lat, place_lng)
+
+#             distance = calculate_distance(float(latitude), float(longitude), place_lat, place_lng)
+
+#             results.append({
+#                 "name": place.get("name"),
+#                 "address": address,
+#                 # "address": place.get("formatted_address") or place.get("vicinity"),
+#                 "rating": place.get("rating", "N/A"),
+#                 "distance": distance,
+#                 "lat": place_lat,    
+#                 "lng": place_lng
+#                 # "raw": place
+#             })
+#         results.sort(key=lambda x: x["distance"])
+#     except Exception as e:
+#                 print(e)
+#                 results = []
+
+#     return render_template(
+#         "results.html",
+#         query=query,
+#         results=results
+#     )
 
 # @app.route("/location")
 # def location():

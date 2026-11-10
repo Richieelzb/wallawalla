@@ -58,19 +58,69 @@
                 Click on a business name for details and directions
             </p>
             {% for place in results %}
-                <div class="place-card" style="margin-bottom: 20px;">
+
+                <div
+                    class="place-card"
+                    style="margin-bottom: 20px;"
+                >
+
+                    <!-- Business Name -->
                     <h3>
-                    <a href="https://www.google.com/maps/search/?api=1&query={{ place.name }} {{ place.address }}" target="_blank">
-                        {{ place.name }}
-                    </a>
+
+                        <a
+                            href="https://www.google.com/maps/search/?api=1&query={{ place.name|urlencode }}%20{{ place.address|urlencode }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {{ place.name }}
+                        </a>
+
                     </h3>
-                    <p style="color:white;">{{ place.address or 'Address unavailable' }}</p>
-                    <p style="color:white;">⭐ {{ place.rating }}</p>
+
+
+                    <!-- Business Photo -->
+                    {% if place.photo_url %}
+
+                        <div class="google-business-photo-container">
+
+                            <img
+                                src="{{ place.photo_url }}"
+                                alt="{{ place.name }}"
+                                class="google-business-photo"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- Address -->
                     <p style="color:white;">
-                        <i class="fa-solid fa-location-dot" style="color: red;"></i> 
-                        {{ place.distance }} km away
+                        {{ place.address or 'Address unavailable' }}
                     </p>
+
+
+                    <!-- Rating -->
+                    <p style="color:white;">
+                        ⭐ {{ place.rating }}
+                    </p>
+
+
+                    <!-- Distance -->
+                    <p style="color:white;">
+
+                        <i
+                            class="fa-solid fa-location-dot"
+                            style="color:red;"
+                        ></i>
+
+                        {{ place.distance }} km away
+
+                    </p>
+
                 </div>
+
             {% endfor %}
         {% else %}
             <p style="text-align:center;color:greenyellow;">No results found close to you...</p>
