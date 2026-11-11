@@ -170,8 +170,8 @@ class Business(db.Model):
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
 
-    show_address = db.Column(db.Boolean,default=False)
-    show_whatsapp = db.Column(db.Boolean,default=False)
+    show_address = db.Column(db.Boolean,default=True)
+    show_whatsapp = db.Column(db.Boolean,default=True)
     show_phone = db.Column(db.Boolean,default=True)
 
     status = db.Column(
