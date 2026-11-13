@@ -3694,6 +3694,10 @@ document.addEventListener(
    EXPLORE ON MAP
 ================================================= */
 
+/* =================================================
+   EXPLORE ON MAP
+================================================= */
+
 function openExploreMap() {
 
     if (!hasValidSelectedLocation()) {
@@ -3708,23 +3712,30 @@ function openExploreMap() {
     }
 
 
-    const latitude =
-        Number(selectedLatitude);
-
-    const longitude =
-        Number(selectedLongitude);
-
-
-    const mapUrl =
-        `https://www.google.com/maps/@${latitude},${longitude},14z`;
+    const selectedAddress =
+        localStorage.getItem(
+            "wallawallaAddress"
+        ) || "Selected location";
 
 
-    window.open(
-        mapUrl,
-        "_blank",
-        "noopener,noreferrer"
-    );
+    const parameters =
+        new URLSearchParams({
 
+            latitude:
+                String(selectedLatitude),
+
+            longitude:
+                String(selectedLongitude),
+
+            address:
+                selectedAddress
+
+        });
+
+
+    window.location.href =
+        "/map?"
+        + parameters.toString();
 }
 </script>
 

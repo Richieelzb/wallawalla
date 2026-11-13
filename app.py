@@ -915,6 +915,38 @@ def search():
 
 #     return {"address": address}
 
+@app.route("/map")
+def explore_map():
+
+    latitude = request.args.get(
+        "latitude",
+        type=float
+    )
+
+    longitude = request.args.get(
+        "longitude",
+        type=float
+    )
+
+    address = request.args.get(
+        "address",
+        "Selected location"
+    )
+
+    if latitude is None or longitude is None:
+
+        return redirect(
+            url_for("index")
+        )
+
+    return render_template(
+        "map.html",
+        latitude=latitude,
+        longitude=longitude,
+        address=address,
+        api_key=API_KEY
+    )
+
 @app.route("/property-search")
 def property_search():
 

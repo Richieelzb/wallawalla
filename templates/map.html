@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Explore on Map | Wallawalla</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ url_for('static', filename='images/wallawalla-circular.png') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+
+            margin: 0;
+            padding: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f5f7fa;
+        }
+
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================
+           MAP HEADER
+        ========================================== */
+
+        .map-header {
+            min-height: 74px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 16px;
+
+            padding: 12px 22px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 3px 12px rgba(0, 0, 0, 0.08);
+
+            position: relative;
+
+            z-index: 10;
+        }
+
+
+        .map-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+
+        .map-brand img {
+            width: 47px;
+            height: 47px;
+
+            object-fit: contain;
+        }
+
+
+        .map-brand-text strong {
+            display: block;
+
+            font-size: 20px;
+            font-weight: 900;
+
+            line-height: 1.1;
+        }
+
+
+        .brand-green {
+            color: #68b92e;
+        }
+
+
+        .brand-blue {
+            color: #1478dc;
+        }
+
+
+        .map-brand-text small {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        .map-header-location {
+            flex: 1;
+
+            text-align: center;
+
+            color: #374151;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        .map-header-location i {
+            margin-right: 6px;
+
+            color: #ef4444;
+        }
+
+
+        .back-home-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            padding: 11px 18px;
+
+            border: none;
+            border-radius: 22px;
+
+            color: #ffffff;
+            background: #1478dc;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           FILTERS
+        ========================================== */
+
+        .map-filters {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            padding: 10px 15px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            position: relative;
+
+            z-index: 9;
+        }
+
+
+        .map-filter-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            padding: 9px 16px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+
+            background: #ffffff;
+            color: #4b5563;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .map-filter-button.active {
+            color: #ffffff;
+            border-color: #1478dc;
+            background: #1478dc;
+        }
+
+
+        .map-filter-button.business-filter.active {
+            border-color: #16a34a;
+            background: #16a34a;
+        }
+
+
+        .map-filter-button.property-filter.active {
+            border-color: #1478dc;
+            background: #1478dc;
+        }
+
+
+        /* =========================================
+           MAP
+        ========================================== */
+
+        .map-wrapper {
+            position: relative;
+
+            flex: 1;
+
+            min-height: 400px;
+        }
+
+
+        #wallawalla-map {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* =========================================
+           LOADING
+        ========================================== */
+
+        .map-loading {
+            position: absolute;
+
+            top: 18px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            z-index: 7;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 12px 20px;
+
+            border-radius: 24px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            color: #374151;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            box-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.16);
+        }
+
+
+        /* =========================================
+           MAP SUMMARY
+        ========================================== */
+
+        .map-summary {
+            position: absolute;
+
+            left: 16px;
+            bottom: 24px;
+
+            z-index: 7;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+
+            padding: 13px 16px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.18);
+        }
+
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+
+        .business-summary {
+            color: #15803d;
+        }
+
+
+        .property-summary {
+            color: #1469c7;
+        }
+
+
+        /* =========================================
+           INFO WINDOW
+        ========================================== */
+
+        .wallawalla-info-window {
+            min-width: 210px;
+            max-width: 270px;
+
+            padding: 3px;
+        }
+
+
+        .wallawalla-info-window h3 {
+            margin: 0 0 7px;
+
+            color: #111827;
+
+            font-size: 16px;
+        }
+
+
+        .wallawalla-info-window p {
+            margin: 4px 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+
+        .wallawalla-info-window a {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 9px;
+            padding: 8px 13px;
+
+            border-radius: 17px;
+
+            color: #ffffff;
+            background: #1478dc;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 700px) {
+
+            .map-header {
+                min-height: 65px;
+
+                padding: 9px 11px;
+            }
+
+
+            .map-brand img {
+                width: 39px;
+                height: 39px;
+            }
+
+
+            .map-brand-text strong {
+                font-size: 16px;
+            }
+
+
+            .map-brand-text small {
+                display: none;
+            }
+
+
+            .map-header-location {
+                display: none;
+            }
+
+
+            .back-home-button {
+                padding: 9px 12px;
+
+                font-size: 12px;
+            }
+
+
+            .map-filters {
+                overflow-x: auto;
+
+                justify-content: flex-start;
+
+                padding: 8px 10px;
+            }
+
+
+            .map-filter-button {
+                flex-shrink: 0;
+
+                padding: 8px 13px;
+
+                font-size: 12px;
+            }
+
+
+            .map-summary {
+                left: 10px;
+                bottom: 15px;
+
+                padding: 10px 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="map-header">
+
+    <div class="map-brand">
+
+        <img
+            src="{{ url_for('static', filename='images/walla-w.png') }}"
+            alt="Wallawalla"
+        >
+
+        <div class="map-brand-text">
+
+            <strong>
+                <span class="brand-green">WALLA</span><span class="brand-blue">WALLA</span>
+            </strong>
+
+            <small>
+                Explore businesses and properties
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="map-header-location">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        {{ address }}
+
+    </div>
+
+
+    <a
+        href="/"
+        class="back-home-button"
+    >
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back
+    </a>
+
+</header>
+
+
+<section class="map-filters">
+
+    <button
+        type="button"
+        class="map-filter-button active"
+        id="show-all-button"
+        onclick="showAllMarkers()"
+    >
+        <i class="fa-solid fa-map-location-dot"></i>
+
+        All
+    </button>
+
+
+    <button
+        type="button"
+        class="map-filter-button business-filter"
+        id="show-business-button"
+        onclick="showBusinessMarkers()"
+    >
+        <i class="fa-solid fa-store"></i>
+
+        Businesses
+
+        <span id="business-filter-count">0</span>
+    </button>
+
+
+    <button
+        type="button"
+        class="map-filter-button property-filter"
+        id="show-property-button"
+        onclick="showPropertyMarkers()"
+    >
+        <i class="fa-solid fa-house"></i>
+
+        Properties
+
+        <span id="property-filter-count">0</span>
+    </button>
+
+</section>
+
+
+<main class="map-wrapper">
+
+    <div id="wallawalla-map"></div>
+
+
+    <div
+        id="map-loading"
+        class="map-loading"
+    >
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        Loading businesses and properties...
+    </div>
+
+
+    <div class="map-summary">
+
+        <div class="summary-item business-summary">
+
+            <i class="fa-solid fa-store"></i>
+
+            <span id="business-map-count">0 businesses</span>
+
+        </div>
+
+
+        <div class="summary-item property-summary">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span id="property-map-count">0 properties</span>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+    const selectedLatitude =
+        Number("{{ latitude }}");
+
+    const selectedLongitude =
+        Number("{{ longitude }}");
+
+
+    let wallawallaMap = null;
+
+    let businessMarkers = [];
+
+    let propertyMarkers = [];
+
+    let selectedLocationMarker = null;
+
+    let activeInfoWindow = null;
+
+
+    /* =============================================
+       INITIALIZE MAP
+    ============================================== */
+
+    async function initializeWallawallaMap() {
+
+        const selectedPosition = {
+
+            lat:
+                selectedLatitude,
+
+            lng:
+                selectedLongitude
+
+        };
+
+
+        wallawallaMap =
+            new google.maps.Map(
+
+                document.getElementById(
+                    "wallawalla-map"
+                ),
+
+                {
+                    center:
+                        selectedPosition,
+
+                    zoom:
+                        13,
+
+                    mapTypeControl:
+                        false,
+
+                    streetViewControl:
+                        false,
+
+                    fullscreenControl:
+                        true
+                }
+
+            );
+
+
+        selectedLocationMarker =
+            new google.maps.Marker({
+
+                position:
+                    selectedPosition,
+
+                map:
+                    wallawallaMap,
+
+                title:
+                    "Selected location",
+
+                zIndex:
+                    1000,
+
+                icon: {
+
+                    path:
+                        google.maps.SymbolPath.CIRCLE,
+
+                    fillColor:
+                        "#ef4444",
+
+                    fillOpacity:
+                        1,
+
+                    strokeColor:
+                        "#ffffff",
+
+                    strokeWeight:
+                        4,
+
+                    scale:
+                        10
+                }
+
+            });
+
+
+        const locationInfoWindow =
+            new google.maps.InfoWindow({
+
+                content: `
+                    <div class="wallawalla-info-window">
+                        <h3>Your selected location</h3>
+
+                        <p>
+                            {{ address | e }}
+                        </p>
+                    </div>
+                `
+
+            });
+
+
+        selectedLocationMarker.addListener(
+
+            "click",
+
+            function () {
+
+                closeActiveInfoWindow();
+
+                locationInfoWindow.open({
+
+                    anchor:
+                        selectedLocationMarker,
+
+                    map:
+                        wallawallaMap
+
+                });
+
+
+                activeInfoWindow =
+                    locationInfoWindow;
+
+            }
+
+        );
+
+
+        await Promise.all([
+
+            loadBusinesses(),
+
+            loadProperties()
+
+        ]);
+
+
+        fitMapToMarkers();
+
+
+        document.getElementById(
+            "map-loading"
+        ).style.display = "none";
+
+    }
+
+
+    /* =============================================
+       LOAD BUSINESSES
+    ============================================== */
+
+    async function loadBusinesses() {
+
+        try {
+
+            const parameters =
+                new URLSearchParams({
+
+                    latitude:
+                        String(selectedLatitude),
+
+                    longitude:
+                        String(selectedLongitude)
+
+                });
+
+
+            const response = await fetch(
+
+                "https://search.wallawalla.co.za/api/map-businesses?"
+                + parameters.toString()
+
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `Business request failed: ${response.status}`
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const businesses =
+                Array.isArray(data.businesses)
+                    ? data.businesses
+                    : [];
+
+
+            businesses.forEach(
+
+                function (business) {
+
+                    createBusinessMarker(
+                        business
+                    );
+
+                }
+
+            );
+
+
+            updateBusinessCount(
+                businesses.length
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load map businesses:",
+                error
+            );
+
+
+            updateBusinessCount(0);
+
+        }
+
+    }
+
+
+    /* =============================================
+       LOAD PROPERTIES
+    ============================================== */
+
+    async function loadProperties() {
+
+        try {
+
+            const parameters =
+                new URLSearchParams({
+
+                    latitude:
+                        String(selectedLatitude),
+
+                    longitude:
+                        String(selectedLongitude)
+
+                });
+
+
+            const response = await fetch(
+
+                "https://property.wallawalla.co.za/api/map-properties?"
+                + parameters.toString()
+
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `Property request failed: ${response.status}`
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const properties =
+                Array.isArray(data.properties)
+                    ? data.properties
+                    : [];
+
+
+            properties.forEach(
+
+                function (property) {
+
+                    createPropertyMarker(
+                        property
+                    );
+
+                }
+
+            );
+
+
+            updatePropertyCount(
+                properties.length
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load map properties:",
+                error
+            );
+
+
+            updatePropertyCount(0);
+
+        }
+
+    }
+
+
+    /* =============================================
+       BUSINESS MARKER
+    ============================================== */
+
+    function createBusinessMarker(
+        business
+    ) {
+
+        const latitude =
+            Number(business.latitude);
+
+        const longitude =
+            Number(business.longitude);
+
+
+        if (
+            !Number.isFinite(latitude)
+            || !Number.isFinite(longitude)
+        ) {
+
+            return;
+
+        }
+
+
+        const marker =
+            new google.maps.Marker({
+
+                position: {
+
+                    lat:
+                        latitude,
+
+                    lng:
+                        longitude
+
+                },
+
+                map:
+                    wallawallaMap,
+
+                title:
+                    business.business_name
+                    || "Business",
+
+                icon: {
+
+                    path:
+                        google.maps.SymbolPath.CIRCLE,
+
+                    fillColor:
+                        "#16a34a",
+
+                    fillOpacity:
+                        1,
+
+                    strokeColor:
+                        "#ffffff",
+
+                    strokeWeight:
+                        3,
+
+                    scale:
+                        9
+                }
+
+            });
+
+
+        const businessUrl =
+            business.url
+            || createBusinessSearchUrl(
+                business
+            );
+
+
+        const information =
+            new google.maps.InfoWindow({
+
+                content: `
+
+                    <div class="wallawalla-info-window">
+
+                        <h3>
+                            ${escapeHtml(
+                                business.business_name
+                                || "Business"
+                            )}
+                        </h3>
+
+                        <p>
+                            <strong>
+                                ${escapeHtml(
+                                    business.category
+                                    || "Local business"
+                                )}
+                            </strong>
+                        </p>
+
+                        <p>
+                            ${escapeHtml(
+                                business.address
+                                || ""
+                            )}
+                        </p>
+
+                        <a
+                            href="${businessUrl}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View Business
+
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+
+                    </div>
+
+                `
+
+            });
+
+
+        marker.addListener(
+
+            "click",
+
+            function () {
+
+                closeActiveInfoWindow();
+
+
+                information.open({
+
+                    anchor:
+                        marker,
+
+                    map:
+                        wallawallaMap
+
+                });
+
+
+                activeInfoWindow =
+                    information;
+
+            }
+
+        );
+
+
+        businessMarkers.push(
+            marker
+        );
+
+    }
+
+
+    /* =============================================
+       PROPERTY MARKER
+    ============================================== */
+
+    function createPropertyMarker(
+        property
+    ) {
+
+        const latitude =
+            Number(property.latitude);
+
+        const longitude =
+            Number(property.longitude);
+
+
+        if (
+            !Number.isFinite(latitude)
+            || !Number.isFinite(longitude)
+        ) {
+
+            return;
+
+        }
+
+
+        const marker =
+            new google.maps.Marker({
+
+                position: {
+
+                    lat:
+                        latitude,
+
+                    lng:
+                        longitude
+
+                },
+
+                map:
+                    wallawallaMap,
+
+                title:
+                    property.title
+                    || "Property",
+
+                icon: {
+
+                    path:
+                        google.maps.SymbolPath.CIRCLE,
+
+                    fillColor:
+                        "#1478dc",
+
+                    fillOpacity:
+                        1,
+
+                    strokeColor:
+                        "#ffffff",
+
+                    strokeWeight:
+                        3,
+
+                    scale:
+                        9
+                }
+
+            });
+
+
+        const propertyUrl =
+            property.url
+            || createPropertySearchUrl(
+                property
+            );
+
+
+        const information =
+            new google.maps.InfoWindow({
+
+                content: `
+
+                    <div class="wallawalla-info-window">
+
+                        <h3>
+                            ${escapeHtml(
+                                property.title
+                                || "Property"
+                            )}
+                        </h3>
+
+                        <p>
+                            <strong>
+                                ${escapeHtml(
+                                    property.category
+                                    || "Property"
+                                )}
+                            </strong>
+                        </p>
+
+                        <p>
+                            ${escapeHtml(
+                                property.address
+                                || ""
+                            )}
+                        </p>
+
+                        <a
+                            href="${propertyUrl}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View Property
+
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+
+                    </div>
+
+                `
+
+            });
+
+
+        marker.addListener(
+
+            "click",
+
+            function () {
+
+                closeActiveInfoWindow();
+
+
+                information.open({
+
+                    anchor:
+                        marker,
+
+                    map:
+                        wallawallaMap
+
+                });
+
+
+                activeInfoWindow =
+                    information;
+
+            }
+
+        );
+
+
+        propertyMarkers.push(
+            marker
+        );
+
+    }
+
+
+    /* =============================================
+       CREATE LISTING URLS
+    ============================================== */
+
+    function createBusinessSearchUrl(
+        business
+    ) {
+
+        const parameters =
+            new URLSearchParams({
+
+                query:
+                    business.business_name || "",
+
+                latitude:
+                    String(selectedLatitude),
+
+                longitude:
+                    String(selectedLongitude)
+
+            });
+
+
+        return (
+            "https://search.wallawalla.co.za/business-search?"
+            + parameters.toString()
+        );
+
+    }
+
+
+    function createPropertySearchUrl(
+        property
+    ) {
+
+        const parameters =
+            new URLSearchParams({
+
+                query:
+                    property.title || "",
+
+                latitude:
+                    String(selectedLatitude),
+
+                longitude:
+                    String(selectedLongitude)
+
+            });
+
+
+        return (
+            "https://property.wallawalla.co.za/property-search?"
+            + parameters.toString()
+        );
+
+    }
+
+
+    /* =============================================
+       FILTER MARKERS
+    ============================================== */
+
+    function showAllMarkers() {
+
+        businessMarkers.forEach(
+
+            marker =>
+                marker.setMap(
+                    wallawallaMap
+                )
+
+        );
+
+
+        propertyMarkers.forEach(
+
+            marker =>
+                marker.setMap(
+                    wallawallaMap
+                )
+
+        );
+
+
+        setActiveFilter(
+            "show-all-button"
+        );
+
+
+        fitMapToMarkers();
+
+    }
+
+
+    function showBusinessMarkers() {
+
+        businessMarkers.forEach(
+
+            marker =>
+                marker.setMap(
+                    wallawallaMap
+                )
+
+        );
+
+
+        propertyMarkers.forEach(
+
+            marker =>
+                marker.setMap(
+                    null
+                )
+
+        );
+
+
+        setActiveFilter(
+            "show-business-button"
+        );
+
+
+        fitMapToMarkers(
+            businessMarkers
+        );
+
+    }
+
+
+    function showPropertyMarkers() {
+
+        businessMarkers.forEach(
+
+            marker =>
+                marker.setMap(
+                    null
+                )
+
+        );
+
+
+        propertyMarkers.forEach(
+
+            marker =>
+                marker.setMap(
+                    wallawallaMap
+                )
+
+        );
+
+
+        setActiveFilter(
+            "show-property-button"
+        );
+
+
+        fitMapToMarkers(
+            propertyMarkers
+        );
+
+    }
+
+
+    function setActiveFilter(
+        activeButtonId
+    ) {
+
+        document.querySelectorAll(
+            ".map-filter-button"
+        ).forEach(
+
+            function (button) {
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+
+        );
+
+
+        const activeButton =
+            document.getElementById(
+                activeButtonId
+            );
+
+
+        if (activeButton) {
+
+            activeButton.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    /* =============================================
+       FIT MAP TO MARKERS
+    ============================================== */
+
+    function fitMapToMarkers(
+        markers = null
+    ) {
+
+        const selectedMarkers =
+            Array.isArray(markers)
+                ? markers
+                : [
+                    ...businessMarkers,
+                    ...propertyMarkers
+                ];
+
+
+        const bounds =
+            new google.maps.LatLngBounds();
+
+
+        bounds.extend({
+
+            lat:
+                selectedLatitude,
+
+            lng:
+                selectedLongitude
+
+        });
+
+
+        selectedMarkers.forEach(
+
+            function (marker) {
+
+                if (marker.getMap()) {
+
+                    bounds.extend(
+                        marker.getPosition()
+                    );
+
+                }
+
+            }
+
+        );
+
+
+        wallawallaMap.fitBounds(
+            bounds
+        );
+
+
+        google.maps.event.addListenerOnce(
+
+            wallawallaMap,
+
+            "idle",
+
+            function () {
+
+                if (
+                    wallawallaMap.getZoom() > 15
+                ) {
+
+                    wallawallaMap.setZoom(
+                        15
+                    );
+
+                }
+
+            }
+
+        );
+
+    }
+
+
+    /* =============================================
+       COUNTS
+    ============================================== */
+
+    function updateBusinessCount(
+        count
+    ) {
+
+        document.getElementById(
+            "business-map-count"
+        ).textContent =
+            `${count} ${count === 1 ? "business" : "businesses"}`;
+
+
+        document.getElementById(
+            "business-filter-count"
+        ).textContent =
+            String(count);
+
+    }
+
+
+    function updatePropertyCount(
+        count
+    ) {
+
+        document.getElementById(
+            "property-map-count"
+        ).textContent =
+            `${count} ${count === 1 ? "property" : "properties"}`;
+
+
+        document.getElementById(
+            "property-filter-count"
+        ).textContent =
+            String(count);
+
+    }
+
+
+    /* =============================================
+       UTILITIES
+    ============================================== */
+
+    function closeActiveInfoWindow() {
+
+        if (activeInfoWindow) {
+
+            activeInfoWindow.close();
+
+        }
+
+    }
+
+
+    function escapeHtml(
+        value
+    ) {
+
+        const element =
+            document.createElement(
+                "div"
+            );
+
+
+        element.textContent =
+            value === null
+            || value === undefined
+                ? ""
+                : String(value);
+
+
+        return element.innerHTML;
+
+    }
+
+</script>
+
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initializeWallawallaMap&v=weekly"
+    async
+    defer
+></script>
+
+
+</body>
+
+</html>
