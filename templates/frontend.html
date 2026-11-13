@@ -248,6 +248,62 @@
 
         </div>
 
+        <!-- =========================================
+            EXPLORE ON MAP
+        ========================================== -->
+
+        <section class="explore-map-section">
+
+            <div class="explore-map-info">
+
+                <div class="explore-map-icon">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+
+                <div class="explore-map-text">
+                    <h3>Explore on Map</h3>
+
+                    <p>
+                        View local businesses and properties
+                        on an interactive map.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="explore-map-preview">
+
+                <div class="map-road road-one"></div>
+                <div class="map-road road-two"></div>
+                <div class="map-road road-three"></div>
+
+                <span class="map-marker business-marker">
+                    <i class="fa-solid fa-store"></i>
+                </span>
+
+                <span class="map-marker location-marker">
+                    <i class="fa-solid fa-location-dot"></i>
+                </span>
+
+                <span class="map-marker property-marker">
+                    <i class="fa-solid fa-house"></i>
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="explore-map-button"
+                onclick="openExploreMap()"
+            >
+                Open Map
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </section>
+
 
         <!-- =========================================
              GOOGLE SEARCH
@@ -3621,6 +3677,53 @@ document.addEventListener(
     }
 );
 
+</script>
+
+<script>
+    /* =================================================
+   EXPLORE ON MAP
+================================================= */
+
+function openExploreMap() {
+
+    if (!hasValidSelectedLocation()) {
+
+        openLocationModal();
+
+        showLocationMessage(
+            "A location is required before opening the map."
+        );
+
+        return;
+    }
+
+
+    const selectedAddress =
+        localStorage.getItem(
+            "wallawallaAddress"
+        ) || "Selected location";
+
+
+    const parameters =
+        new URLSearchParams({
+
+            latitude:
+                String(selectedLatitude),
+
+            longitude:
+                String(selectedLongitude),
+
+            address:
+                selectedAddress
+
+        });
+
+
+    window.location.href =
+        "/map?"
+        + parameters.toString();
+
+}
 </script>
 
 <script
