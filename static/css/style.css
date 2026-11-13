@@ -5062,3 +5062,14 @@ body{
     }
 
 }
+
+.explore-map-section {
+    cursor: pointer;
+}
+
+.explore-map-section:hover {
+    border-color: #1688f8;
+
+    box-shadow:
+        0 7px 22px rgba(0, 0, 0, 0.11);
+}

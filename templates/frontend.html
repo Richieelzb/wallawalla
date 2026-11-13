@@ -252,7 +252,12 @@
             EXPLORE ON MAP
         ========================================== -->
 
-        <section class="explore-map-section">
+        <section
+            class="explore-map-section"
+            onclick="openExploreMap()"
+            role="button"
+            tabindex="0"
+        >
 
             <div class="explore-map-info">
 
@@ -296,9 +301,10 @@
             <button
                 type="button"
                 class="explore-map-button"
-                onclick="openExploreMap()"
+                onclick="event.stopPropagation(); openExploreMap();"
             >
                 Open Map
+
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
 
@@ -3684,6 +3690,10 @@ document.addEventListener(
    EXPLORE ON MAP
 ================================================= */
 
+/* =================================================
+   EXPLORE ON MAP
+================================================= */
+
 function openExploreMap() {
 
     if (!hasValidSelectedLocation()) {
@@ -3691,37 +3701,29 @@ function openExploreMap() {
         openLocationModal();
 
         showLocationMessage(
-            "A location is required before opening the map."
+            "Select your location before opening the map."
         );
 
         return;
     }
 
 
-    const selectedAddress =
-        localStorage.getItem(
-            "wallawallaAddress"
-        ) || "Selected location";
+    const latitude =
+        Number(selectedLatitude);
+
+    const longitude =
+        Number(selectedLongitude);
 
 
-    const parameters =
-        new URLSearchParams({
-
-            latitude:
-                String(selectedLatitude),
-
-            longitude:
-                String(selectedLongitude),
-
-            address:
-                selectedAddress
-
-        });
+    const mapUrl =
+        `https://www.google.com/maps/@${latitude},${longitude},14z`;
 
 
-    window.location.href =
-        "/map?"
-        + parameters.toString();
+    window.open(
+        mapUrl,
+        "_blank",
+        "noopener,noreferrer"
+    );
 
 }
 </script>
