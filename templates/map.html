@@ -809,19 +809,41 @@
 
         await Promise.all([
 
-            loadBusinesses(),
+        loadBusinesses(),
 
-            loadProperties()
+        loadProperties()
 
-        ]);
-
-
-        fitMapToMarkers();
+    ]);
 
 
-        document.getElementById(
-            "map-loading"
-        ).style.display = "none";
+    /*
+    * Default map view:
+    * show the complete 50 km Wallawalla radius.
+    */
+
+    fitRadiusCircleToScreen();
+
+
+    document.getElementById(
+        "map-loading"
+    ).style.display = "none";
+
+
+        // await Promise.all([
+
+        //     loadBusinesses(),
+
+        //     loadProperties()
+
+        // ]);
+
+
+        // fitMapToMarkers();
+
+
+        // document.getElementById(
+        //     "map-loading"
+        // ).style.display = "none";
 
     }
 
@@ -1675,6 +1697,37 @@
         wallawallaMap.fitBounds(
             bounds,
             35
+        );
+    }
+
+    /* =============================================
+    FIT 50 KM RADIUS TO SCREEN
+    ============================================== */
+
+    function fitRadiusCircleToScreen() {
+
+        if (
+            !wallawallaMap
+            || !searchRadiusCircle
+        ) {
+            return;
+        }
+
+        const bounds =
+            searchRadiusCircle.getBounds();
+
+        if (!bounds) {
+            return;
+        }
+
+        wallawallaMap.fitBounds(
+            bounds,
+            {
+                top: 35,
+                right: 35,
+                bottom: 35,
+                left: 35
+            }
         );
     }
 
