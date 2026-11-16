@@ -5104,8 +5104,8 @@ body{
 }
 
 /* ==========================================================
-   TOP HEADER
-   ========================================================== */
+   WALLAWALLA TOP HEADER - CLEAN PREMIUM VERSION
+========================================================== */
 
 .wallawalla-homepage .home-top-header {
     position: absolute;
@@ -5114,93 +5114,138 @@ body{
     z-index: 1000;
 
     width: 100%;
-    height: 54px;
+    height: 68px;
 
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
 
-    padding: 5px 10px;
+    padding: 7px 16px;
 
-    background: rgba(1, 41, 75, 0.9);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background:
+        linear-gradient(
+            135deg,
+            #01294b 0%,
+            #00385f 55%,
+            #064b3a 100%
+        );
+
+    border-bottom: 2px solid rgba(153, 212, 32, 0.85);
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.18),
+        0 1px 0 rgba(153, 212, 32, 0.3);
 }
 
 
 /* ==========================================================
-   REGISTER / LOGIN TOP LEFT
-   ========================================================== */
+   ACCOUNT BUTTON
+========================================================== */
 
 .wallawalla-homepage .home-account-button {
     justify-self: start;
 
-    max-width: 104px;
-    min-height: 34px;
+    min-height: 38px;
+    max-width: 125px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
 
-    padding: 5px 8px;
+    padding: 7px 12px;
 
-    border: 1px solid #85e000;
-    border-radius: 8px;
+    border: 1px solid rgba(153, 212, 32, 0.85);
+    border-radius: 20px;
 
-    background: rgba(0, 58, 108, 0.9);
+    background: rgba(255, 255, 255, 0.08);
+
     color: #ffffff;
 
     cursor: pointer;
 
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 800;
-    line-height: 1.05;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.wallawalla-homepage .home-account-button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
 .wallawalla-homepage .home-account-button i {
-    color: #96ef00;
-    font-size: 12px;
+    color: #a3ed23;
+    font-size: 13px;
 }
 
 .wallawalla-homepage .home-account-button:hover {
-    background: #65c900;
-    color: #ffffff;
+    background: #99d420;
+    border-color: #99d420;
+    color: #082133;
+
+    transform: translateY(-1px);
 }
 
-#current-location-bottom {
-    font-weight: bold;
+.wallawalla-homepage .home-account-button:hover i {
+    color: #082133;
 }
+
 
 /* ==========================================================
-   LOGO
-   ========================================================== */
+   WALLAWALLA BRAND / LOGO
+========================================================== */
 
 .wallawalla-homepage .home-brand {
     justify-self: center;
 
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+
+    gap: 7px;
 
     color: #ffffff;
     text-decoration: none;
 }
 
 .wallawalla-homepage .home-brand img {
-    width: 42px;
-    height: 42px;
+    width: 48px;
+    height: 48px;
+
     object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 2px 5px rgba(0, 0, 0, 0.18)
+        );
 }
 
 .wallawalla-homepage .home-brand-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     line-height: 1;
 }
 
+
+/* WALLAWALLA NAME */
+
 .wallawalla-homepage .home-brand-name {
     white-space: nowrap;
-    font-size: 15px;
+
+    font-size: 17px;
     font-weight: 900;
-    letter-spacing: 0.3px;
+
+    letter-spacing: 0.4px;
+
+    line-height: 1;
 }
 
 .wallawalla-homepage .home-brand-name span {
@@ -5208,76 +5253,115 @@ body{
 }
 
 .wallawalla-homepage .home-brand-name strong {
-    color: #9ee900;
+    color: #a1ec19;
 }
+
+
+/* TAGLINE */
 
 .wallawalla-homepage .home-brand-copy small {
     display: block;
-    margin-top: 3px;
 
-    color: #ffffff;
+    margin-top: 5px;
 
-    font-size: 7px;
+    color: rgba(255,255,255,0.9);
+
+    font-size: 8px;
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
     text-align: center;
 }
 
 .wallawalla-homepage .home-brand-copy small span {
-    color: #a0ef00;
+    color: #a1ec19;
 }
 
 
 /* ==========================================================
    MENU BUTTON
-   ========================================================== */
+========================================================== */
 
 .wallawalla-homepage .home-menu-button {
     justify-self: end;
 
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     padding: 0;
 
-    border: 0;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 50%;
 
-    background: transparent;
+    background: rgba(255,255,255,0.08);
+
     color: #ffffff;
 
     cursor: pointer;
+
     font-size: 18px;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.wallawalla-homepage .home-menu-button:hover {
+    background: #99d420;
+    color: #05283a;
+
+    transform: scale(1.05);
 }
 
 
 /* ==========================================================
    DROPDOWN MENU
-   ========================================================== */
+========================================================== */
 
 .wallawalla-homepage .home-dropdown-menu {
     position: absolute;
-    top: 54px;
-    right: 8px;
+
+    top: 62px;
+    right: 12px;
+
     z-index: 9999;
 
-    width: 190px;
+    width: 215px;
 
     display: none;
 
     overflow: hidden;
 
-    border: 1px solid rgba(125, 225, 0, 0.75);
-    border-radius: 11px;
+    border: 1px solid rgba(153, 212, 32, 0.65);
+    border-radius: 14px;
 
-    background: #003863;
+    background:
+        linear-gradient(
+            145deg,
+            #012f55,
+            #034936
+        );
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.32);
+
+    backdrop-filter: blur(15px);
 }
 
 .wallawalla-homepage .home-dropdown-menu.open {
     display: block;
+
+    animation: wallawallaMenuOpen 0.2s ease;
 }
+
+
+/* MENU ITEMS */
 
 .wallawalla-homepage .home-dropdown-menu button,
 .wallawalla-homepage .home-dropdown-menu a {
@@ -5285,24 +5369,209 @@ body{
 
     display: flex;
     align-items: center;
-    gap: 9px;
 
-    padding: 12px 14px;
+    gap: 11px;
+
+    padding: 14px 16px;
 
     border: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
 
     background: transparent;
+
     color: #ffffff;
 
     cursor: pointer;
 
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 600;
+
     text-align: left;
     text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+.wallawalla-homepage .home-dropdown-menu button:last-child,
+.wallawalla-homepage .home-dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+.wallawalla-homepage .home-dropdown-menu button:hover,
+.wallawalla-homepage .home-dropdown-menu a:hover {
+    background: rgba(153, 212, 32, 0.14);
+
+    padding-left: 20px;
 }
 
 .wallawalla-homepage .home-dropdown-menu i {
-    width: 17px;
-    color: #8be000;
+    width: 19px;
+
+    color: #99d420;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   MENU ANIMATION
+========================================================== */
+
+@keyframes wallawallaMenuOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+
+    .wallawalla-homepage .home-top-header {
+        height: 64px;
+
+        padding: 6px 9px;
+
+        grid-template-columns:
+            minmax(90px, 1fr)
+            auto
+            minmax(90px, 1fr);
+    }
+
+
+    /* Account */
+
+    .wallawalla-homepage .home-account-button {
+        min-height: 34px;
+        max-width: 100px;
+
+        padding: 5px 8px;
+
+        border-radius: 18px;
+
+        font-size: 9px;
+    }
+
+    .wallawalla-homepage .home-account-button i {
+        font-size: 11px;
+    }
+
+
+    /* Logo */
+
+    .wallawalla-homepage .home-brand {
+        gap: 4px;
+    }
+
+    .wallawalla-homepage .home-brand img {
+        width: 39px;
+        height: 39px;
+    }
+
+    .wallawalla-homepage .home-brand-name {
+        font-size: 13px;
+        letter-spacing: 0;
+    }
+
+    .wallawalla-homepage .home-brand-copy small {
+        margin-top: 3px;
+        font-size: 6.5px;
+        letter-spacing: 0;
+    }
+
+
+    /* Menu */
+
+    .wallawalla-homepage .home-menu-button {
+        width: 36px;
+        height: 36px;
+
+        font-size: 16px;
+    }
+
+
+    /* Dropdown */
+
+    .wallawalla-homepage .home-dropdown-menu {
+        top: 60px;
+        right: 8px;
+
+        width: 205px;
+    }
+
+    .wallawalla-homepage .home-dropdown-menu button,
+    .wallawalla-homepage .home-dropdown-menu a {
+        padding: 13px 15px;
+
+        font-size: 12px;
+    }
+}
+
+
+/* ==========================================================
+   VERY SMALL PHONES
+========================================================== */
+
+@media (max-width: 380px) {
+
+    .wallawalla-homepage .home-top-header {
+        padding-left: 6px;
+        padding-right: 6px;
+
+        grid-template-columns:
+            minmax(82px, 1fr)
+            auto
+            minmax(82px, 1fr);
+    }
+
+    .wallawalla-homepage .home-account-button {
+        max-width: 90px;
+        padding: 5px 6px;
+
+        font-size: 8px;
+    }
+
+    .wallawalla-homepage .home-brand img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .wallawalla-homepage .home-brand-name {
+        font-size: 12px;
+    }
+
+    .wallawalla-homepage .home-brand-copy small {
+        font-size: 6px;
+    }
+
+    .wallawalla-homepage .home-menu-button {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+.wallawalla-homepage .announcement-banner {
+    margin-top: 68px;
+}
+
+@media (max-width: 600px) {
+
+    .wallawalla-homepage .announcement-banner {
+        margin-top: 64px;
+    }
+
 }
