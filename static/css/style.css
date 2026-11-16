@@ -5080,12 +5080,11 @@ body{
     background: #f97316;
     color: white;
 
-    border-radius: 30px;
+    border-radius: 0 0 15px 15px;
 
     padding: 10px 0;
 
-    margin-top: 5px;
-    margin-bottom: 12px;
+    margin: 0 0 12px 0;
 
     overflow: hidden;
     white-space: nowrap;
@@ -5301,28 +5300,6 @@ body{
 
 
 /* ==========================================================
-   BLUE AREA BELOW HEADER
-========================================================== */
-
-.home-header-bottom {
-    position: relative;
-
-    height: 98px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            180deg,
-            #1f5477,
-            #235b7f
-        );
-}
-
-
-/* ==========================================================
    GOOGLE SEARCH PILL
 ========================================================== */
 
@@ -5528,15 +5505,6 @@ body{
 
         font-size: 24px;
     }
-
-
-    /* LOWER BLUE SECTION */
-
-    .home-header-bottom {
-
-        height: 70px;
-    }
-
 
     /* GOOGLE BUTTON */
 
@@ -5852,18 +5820,6 @@ body{
     }
 }
 
-.wallawalla-homepage .announcement-banner {
-    margin-top: 68px;
-}
-
-@media (max-width: 600px) {
-
-    .wallawalla-homepage .announcement-banner {
-        margin-top: 64px;
-    }
-
-}
-
 /* ==========================================================
    FINAL WALLAWALLA HEADER OVERRIDES
 ========================================================== */
@@ -6062,24 +6018,6 @@ body.wallawalla-homepage {
 
 
 /* ==========================================================
-   LOWER BLUE HEADER
-========================================================== */
-
-.wallawalla-homepage .home-header-bottom {
-    width: 100%;
-    height: 65px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #245a7c;
-
-    box-sizing: border-box;
-}
-
-
-/* ==========================================================
    GOOGLE BUTTON
 ========================================================== */
 
@@ -6195,12 +6133,6 @@ body.wallawalla-homepage {
     .wallawalla-homepage .home-menu-button i {
         font-size: 24px;
     }
-
-
-    .wallawalla-homepage .home-header-bottom {
-        height: 70px;
-    }
-
 
     .wallawalla-homepage .home-google-header-button {
         min-width: 210px;
