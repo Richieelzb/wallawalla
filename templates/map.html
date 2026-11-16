@@ -458,6 +458,14 @@
 
         }
 
+        .radius-summary {
+            color: #1478dc;
+        }
+
+        .radius-summary i {
+            color: #1478dc;
+        }
+
     </style>
 
 </head>
@@ -589,6 +597,17 @@
 
         </div>
 
+        <div class="summary-item radius-summary">
+
+            <i class="fa-solid fa-circle-dot"></i>
+
+            <span>
+                50 km search radius
+            </span>
+
+        </div>
+
+
     </div>
 
 </main>
@@ -610,8 +629,9 @@
     let propertyMarkers = [];
 
     let selectedLocationMarker = null;
-
     let activeInfoWindow = null;
+
+    let searchRadiusCircle = null;
 
 
     /* =============================================
@@ -656,6 +676,44 @@
                 }
 
             );
+        
+        /* =============================================
+           50 KM SEARCH RADIUS
+        ============================================== */
+
+        searchRadiusCircle =
+            new google.maps.Circle({
+
+                map:
+                    wallawallaMap,
+
+                center:
+                    selectedPosition,
+
+                radius:
+                    50000, // Google Maps uses metres = 50 km
+
+                strokeColor:
+                    "#1478dc",
+
+                strokeOpacity:
+                    0.9,
+
+                strokeWeight:
+                    3,
+
+                fillColor:
+                    "#1478dc",
+
+                fillOpacity:
+                    0.08,
+
+                clickable:
+                    false,
+
+                zIndex:
+                    1
+            });
 
 
         selectedLocationMarker =
@@ -1458,6 +1516,10 @@
             new google.maps.LatLngBounds();
 
 
+        /*
+        * Always include the selected location.
+        */
+
         bounds.extend({
 
             lat:
@@ -1468,6 +1530,10 @@
 
         });
 
+
+        /*
+        * Include visible business/property markers.
+        */
 
         selectedMarkers.forEach(
 
@@ -1486,34 +1552,105 @@
         );
 
 
-        wallawallaMap.fitBounds(
-            bounds
-        );
+        /*
+        * Include the entire 50 km search radius.
+        */
 
+        if (searchRadiusCircle) {
 
-        google.maps.event.addListenerOnce(
+            const circleBounds =
+                searchRadiusCircle.getBounds();
 
-            wallawallaMap,
+            if (circleBounds) {
 
-            "idle",
-
-            function () {
-
-                if (
-                    wallawallaMap.getZoom() > 15
-                ) {
-
-                    wallawallaMap.setZoom(
-                        15
-                    );
-
-                }
+                bounds.union(
+                    circleBounds
+                );
 
             }
 
-        );
+        }
 
+
+        wallawallaMap.fitBounds(
+            bounds,
+            35
+        );
     }
+
+    // function fitMapToMarkers(
+    //     markers = null
+    // ) {
+
+    //     const selectedMarkers =
+    //         Array.isArray(markers)
+    //             ? markers
+    //             : [
+    //                 ...businessMarkers,
+    //                 ...propertyMarkers
+    //             ];
+
+
+    //     const bounds =
+    //         new google.maps.LatLngBounds();
+
+
+    //     bounds.extend({
+
+    //         lat:
+    //             selectedLatitude,
+
+    //         lng:
+    //             selectedLongitude
+
+    //     });
+
+
+    //     selectedMarkers.forEach(
+
+    //         function (marker) {
+
+    //             if (marker.getMap()) {
+
+    //                 bounds.extend(
+    //                     marker.getPosition()
+    //                 );
+
+    //             }
+
+    //         }
+
+    //     );
+
+
+    //     wallawallaMap.fitBounds(
+    //         bounds
+    //     );
+
+
+    //     google.maps.event.addListenerOnce(
+
+    //         wallawallaMap,
+
+    //         "idle",
+
+    //         function () {
+
+    //             if (
+    //                 wallawallaMap.getZoom() > 15
+    //             ) {
+
+    //                 wallawallaMap.setZoom(
+    //                     15
+    //                 );
+
+    //             }
+
+    //         }
+
+    //     );
+
+    // }
 
 
     /* =============================================
