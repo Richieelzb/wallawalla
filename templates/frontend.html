@@ -50,25 +50,98 @@
 
 
 <body>
+    <header class="home-top-header">
 
-    <!-- <div id="location-required" class="location-required">
-        <div class="location-box">
-            <i class="fa-solid fa-location-crosshairs"></i>
-            <h2>Location Required</h2>
-            <p>
-                Wallawalla requires access to your location to find businesses and properties near you.
-            </p>
+        <button
+            type="button"
+            class="home-account-button"
+            onclick="openHomepageAccount()"
+            aria-label="Register or login"
+        >
+            <span>
+                {% if email %}
+                    <i class="fa-solid fa-user"></i>
+                    Account
+                {% else %}
+                    <i class="fa-solid fa-user-plus"></i>
+                    Register / Login
+                {% endif %}
+            </span>
+        </button>
 
-            <button
-                type="button"
-                onclick="requestLocation()"
-                class="register-btn">
-                Enable Location
-            </button>
-        </div>
-    </div> -->
 
-    <nav class="navbar">
+        <a
+            href="https://wallawalla.co.za"
+            class="home-brand"
+        >
+            <img
+                src="{{ url_for('static', filename='images/walla-w.png') }}"
+                alt="WallaWalla Logo"
+            >
+
+            <div class="home-brand-copy">
+
+                <div class="home-brand-name">
+                    <span>WALLA</span><strong>WALLA</strong>
+                </div>
+
+                <small>
+                    Find it
+                    <span>near you...</span>
+                </small>
+
+            </div>
+        </a>
+
+
+        <button
+            type="button"
+            class="home-menu-button"
+            onclick="toggleHomepageMenu()"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         DROPDOWN MENU
+    ====================================================== -->
+
+    <nav
+        id="homepageMenu"
+        class="home-dropdown-menu"
+        aria-label="Homepage menu"
+    >
+        <button
+            type="button"
+            onclick="goToLocalBusinessSearch(); closeHomepageMenu();"
+        >
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search Businesses
+        </button>
+
+        <button
+            type="button"
+            onclick="openHomepageAccount(); closeHomepageMenu();"
+        >
+            <i class="fa-solid fa-user-plus"></i>
+            Register / Login
+        </button>
+
+        <a
+            href="#features"
+            onclick="closeHomepageMenu()"
+        >
+            <i class="fa-solid fa-circle-info"></i>
+            Why Wallawalla
+        </a>
+    </nav>
+
+    <!-- <nav class="navbar">
         <a href="https://wallawalla.co.za" style="text-decoration:none; color:inherit;">
         <div class="logo">
             <img src="{{ url_for('static', filename='/images/walla-w.png') }}" alt="WallaWalla Logo">
@@ -90,7 +163,7 @@
                 Powered By Google
         </button>
 
-    </nav>
+    </nav> -->
 
     <div class="announcement-banner">
         <div class="announcement-text">
@@ -3694,6 +3767,86 @@ document.addEventListener(
 
     }
 );
+
+</script>
+<script>
+    function openHomepageAccount() {
+            const section =
+                document.getElementById("accountSection");
+
+            if (!section) {
+                window.location.href =
+                    "https://owners.wallawalla.co.za";
+
+                return;
+            }
+
+            section.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+            setTimeout(function () {
+                if (
+                    document.getElementById(
+                        "loginForm"
+                    )
+                ) {
+                    showLoginForm();
+                }
+            }, 500);
+        }
+
+
+        function toggleHomepageMenu() {
+            const menu =
+                document.getElementById(
+                    "homepageMenu"
+                );
+
+            const button =
+                document.querySelector(
+                    ".home-menu-button"
+                );
+
+            if (!menu) {
+                return;
+            }
+
+            const isOpen =
+                menu.classList.toggle("open");
+
+            if (button) {
+                button.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
+            }
+        }
+
+        
+        function closeHomepageMenu() {
+            const menu =
+                document.getElementById(
+                    "homepageMenu"
+                );
+
+            const button =
+                document.querySelector(
+                    ".home-menu-button"
+                );
+
+            if (menu) {
+                menu.classList.remove("open");
+            }
+
+            if (button) {
+                button.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+            }
+        }        
 
 </script>
 
