@@ -425,7 +425,10 @@
              GOOGLE SEARCH
         ========================================== -->
 
-        <section class="home-google-search">
+        <section
+            class="home-google-search"
+            id="home-google-search"
+        >
 
             <div class="home-google-title">
 
@@ -996,7 +999,7 @@
      APP BANNER
 ========================= -->
 
-<section class="app-banner">
+<section class="app-banner" id="app-banner">
 
     <div class="banner-content">
 
@@ -3771,82 +3774,99 @@ document.addEventListener(
 </script>
 <script>
     function openHomepageAccount() {
-            const section =
-                document.getElementById("accountSection");
 
-            if (!section) {
-                window.location.href =
-                    "https://owners.wallawalla.co.za";
+            const appBanner =
+                document.getElementById("app-banner");
 
+            if (!appBanner) {
                 return;
             }
 
-            section.scrollIntoView({
+            appBanner.scrollIntoView({
                 behavior: "smooth",
-                block: "start"
+                block: "center"
             });
-
-            setTimeout(function () {
-                if (
-                    document.getElementById(
-                        "loginForm"
-                    )
-                ) {
-                    showLoginForm();
-                }
-            }, 500);
         }
 
+    function toggleHomepageMenu() {
+        const menu =
+            document.getElementById(
+                "homepageMenu"
+            );
 
-        function toggleHomepageMenu() {
-            const menu =
-                document.getElementById(
-                    "homepageMenu"
-                );
+        const button =
+            document.querySelector(
+                ".home-menu-button"
+            );
 
-            const button =
-                document.querySelector(
-                    ".home-menu-button"
-                );
-
-            if (!menu) {
-                return;
-            }
-
-            const isOpen =
-                menu.classList.toggle("open");
-
-            if (button) {
-                button.setAttribute(
-                    "aria-expanded",
-                    String(isOpen)
-                );
-            }
+        if (!menu) {
+            return;
         }
 
-        
-        function closeHomepageMenu() {
-            const menu =
+        const isOpen =
+            menu.classList.toggle("open");
+
+        if (button) {
+            button.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+        }
+    }
+
+    
+    function closeHomepageMenu() {
+        const menu =
+            document.getElementById(
+                "homepageMenu"
+            );
+
+        const button =
+            document.querySelector(
+                ".home-menu-button"
+            );
+
+        if (menu) {
+            menu.classList.remove("open");
+        }
+
+        if (button) {
+            button.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+        }
+    } 
+    
+    function goToLocalBusinessSearch() {
+
+        const googleSearch =
+            document.getElementById(
+                "home-google-search"
+            );
+
+        if (!googleSearch) {
+            return;
+        }
+
+        googleSearch.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        setTimeout(function () {
+
+            const searchInput =
                 document.getElementById(
-                    "homepageMenu"
+                    "search-input"
                 );
 
-            const button =
-                document.querySelector(
-                    ".home-menu-button"
-                );
-
-            if (menu) {
-                menu.classList.remove("open");
+            if (searchInput) {
+                searchInput.focus();
             }
 
-            if (button) {
-                button.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-            }
-        }        
+        }, 500);
+    }
 
 </script>
 
