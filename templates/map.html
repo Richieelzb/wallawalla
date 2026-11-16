@@ -632,6 +632,7 @@
     let activeInfoWindow = null;
 
     let searchRadiusCircle = null;
+    let markerPositionCounts = {};
 
 
     /* =============================================
@@ -714,6 +715,14 @@
                 zIndex:
                     1
             });
+        
+        /* Reserve the user's selected position */
+        const selectedLocationKey =
+            `${selectedLatitude.toFixed(5)},${selectedLongitude.toFixed(5)}`;
+
+        markerPositionCounts[
+            selectedLocationKey
+        ] = 1;
 
 
         selectedLocationMarker =
@@ -980,7 +989,100 @@
 
     }
 
+    /* =============================================
+    PREVENT OVERLAPPING MARKERS
+    ============================================== */
 
+    function getVisibleMarkerPosition(
+        latitude,
+        longitude
+    ) {
+
+        /*
+        * Group coordinates that are effectively
+        * in the same location.
+        */
+        const key =
+            `${latitude.toFixed(5)},${longitude.toFixed(5)}`;
+
+        if (
+            markerPositionCounts[key]
+            === undefined
+        ) {
+            markerPositionCounts[key] = 0;
+        }
+
+
+        const markerIndex =
+            markerPositionCounts[key];
+
+        markerPositionCounts[key]++;
+
+
+        /*
+        * First marker stays exactly at the
+        * real location.
+        */
+        if (markerIndex === 0) {
+
+            return {
+                lat: latitude,
+                lng: longitude
+            };
+
+        }
+
+
+        /*
+        * Additional markers are arranged
+        * in circles around the real location.
+        */
+
+        const markersPerRing = 8;
+
+        const ring =
+            Math.floor(
+                (markerIndex - 1)
+                / markersPerRing
+            ) + 1;
+
+        const positionInRing =
+            (markerIndex - 1)
+            % markersPerRing;
+
+
+        const angle =
+            (
+                positionInRing
+                / markersPerRing
+            )
+            * Math.PI
+            * 2;
+
+
+        /*
+        * Approximately 10-12 metres for ring 1.
+        * Additional rings move slightly farther out.
+        */
+
+        const offset =
+            0.00010 * ring;
+
+
+        return {
+
+            lat:
+                latitude
+                + Math.sin(angle)
+                * offset,
+
+            lng:
+                longitude
+                + Math.cos(angle)
+                * offset
+
+        };
+    }
     /* =============================================
        BUSINESS MARKER
     ============================================== */
@@ -994,6 +1096,12 @@
 
         const longitude =
             Number(business.longitude);
+        
+        const visiblePosition =
+            getVisibleMarkerPosition(
+                latitude,
+                longitude
+            );
 
 
         if (
@@ -1009,15 +1117,8 @@
         const marker =
             new google.maps.Marker({
 
-                position: {
-
-                    lat:
-                        latitude,
-
-                    lng:
-                        longitude
-
-                },
+                position:
+                    visiblePosition,
 
                 map:
                     wallawallaMap,
@@ -1152,6 +1253,12 @@
 
         const longitude =
             Number(property.longitude);
+        
+        const visiblePosition =
+            getVisibleMarkerPosition(
+                latitude,
+                longitude
+            );
 
 
         if (
@@ -1167,15 +1274,8 @@
         const marker =
             new google.maps.Marker({
 
-                position: {
-
-                    lat:
-                        latitude,
-
-                    lng:
-                        longitude
-
-                },
+                position:
+                    visiblePosition,
 
                 map:
                     wallawallaMap,
