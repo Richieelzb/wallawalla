@@ -6219,3 +6219,357 @@ body.wallawalla-homepage {
     }
 
 }
+
+/* ==========================================================
+   FINAL FOUR HOMEPAGE LISTING CARDS
+========================================================== */
+
+.wallawalla-homepage .home-listing-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.wallawalla-homepage .home-listing-card {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border: 2px solid #ffffff;
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.16);
+}
+
+
+/* BUSINESS */
+
+.wallawalla-homepage .business-listing-card {
+    box-shadow:
+        0 8px 25px rgba(34, 197, 94, 0.28);
+}
+
+
+/* PROPERTY */
+
+.wallawalla-homepage .property-listing-card {
+    box-shadow:
+        0 8px 25px rgba(37, 99, 235, 0.28);
+}
+
+
+/* CAR DEALERS */
+
+.wallawalla-homepage .car-listing-card {
+    box-shadow:
+        0 8px 25px rgba(124, 58, 237, 0.30);
+}
+
+
+/* JOBS */
+
+.wallawalla-homepage .job-listing-card {
+    box-shadow:
+        0 8px 25px rgba(249, 115, 22, 0.30);
+}
+
+
+/* ==========================================================
+   CARD IMAGE
+========================================================== */
+
+.wallawalla-homepage .home-listing-image {
+    position: relative;
+
+    height: 170px;
+
+    overflow: visible;
+}
+
+.wallawalla-homepage .home-listing-image::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.02),
+            rgba(0, 0, 0, 0.42)
+        );
+}
+
+.wallawalla-homepage .home-listing-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* ==========================================================
+   CARD ICONS
+========================================================== */
+
+.wallawalla-homepage .home-listing-icon {
+    z-index: 2;
+}
+
+.wallawalla-homepage .car-listing-icon {
+    background:
+        linear-gradient(
+            180deg,
+            #8b5cf6,
+            #5b21b6
+        );
+}
+
+.wallawalla-homepage .job-listing-icon {
+    background:
+        linear-gradient(
+            180deg,
+            #fb923c,
+            #c2410c
+        );
+}
+
+
+/* ==========================================================
+   CARD BODY
+========================================================== */
+
+.wallawalla-homepage .home-listing-body {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding:
+        34px
+        12px
+        14px;
+
+    text-align: center;
+}
+
+.wallawalla-homepage .home-listing-body h2 {
+    margin: 0 0 5px;
+
+    color: #111827;
+
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.wallawalla-homepage .home-listing-description {
+    min-height: 34px;
+
+    margin: 0 auto 9px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+
+/* ==========================================================
+   CAR COUNT
+========================================================== */
+
+.wallawalla-homepage .car-count-pill {
+    border: 1px solid #c4b5fd;
+
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.wallawalla-homepage .car-count-icon {
+    background: #7c3aed;
+}
+
+
+/* ==========================================================
+   JOB COUNT
+========================================================== */
+
+.wallawalla-homepage .job-count-pill {
+    border: 1px solid #fdba74;
+
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+.wallawalla-homepage .job-count-icon {
+    background: #f97316;
+}
+
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.wallawalla-homepage .home-find-button {
+    margin-top: auto;
+}
+
+
+/* CAR DEALERS BUTTON */
+
+.wallawalla-homepage .car-find-button {
+    background:
+        linear-gradient(
+            180deg,
+            #a855f7,
+            #6d16d9
+        );
+}
+
+.wallawalla-homepage .car-find-button:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #9333ea,
+            #581c87
+        );
+}
+
+
+/* JOBS BUTTON */
+
+.wallawalla-homepage .job-find-button {
+    background:
+        linear-gradient(
+            180deg,
+            #ff8a1e,
+            #e34b00
+        );
+}
+
+.wallawalla-homepage .job-find-button:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #f97316,
+            #c2410c
+        );
+}
+
+
+/* ==========================================================
+   MOBILE FOUR-CARD LAYOUT
+========================================================== */
+
+@media (max-width: 650px) {
+
+    .wallawalla-homepage .home-listing-grid {
+        gap: 9px;
+    }
+
+    .wallawalla-homepage .home-listing-card {
+        border-radius: 19px;
+    }
+
+    .wallawalla-homepage .home-listing-image {
+        height: 125px;
+    }
+
+    .wallawalla-homepage .home-listing-body {
+        padding:
+            31px
+            8px
+            10px;
+    }
+
+    .wallawalla-homepage .home-listing-body h2 {
+        margin-bottom: 4px;
+
+        font-size: 17px;
+    }
+
+    .wallawalla-homepage .home-listing-description {
+        min-height: 31px;
+
+        margin-bottom: 7px;
+
+        font-size: 9px;
+        line-height: 1.2;
+    }
+
+    .wallawalla-homepage .home-find-button {
+        min-height: 38px;
+
+        gap: 7px;
+
+        font-size: 12px;
+    }
+}
+
+
+/* ==========================================================
+   VERY SMALL PHONES
+========================================================== */
+
+@media (max-width: 380px) {
+
+    .wallawalla-homepage .home-listing-body h2 {
+        font-size: 15px;
+    }
+
+    .wallawalla-homepage .home-listing-description {
+        min-height: 30px;
+
+        font-size: 8px;
+    }
+
+    .wallawalla-homepage .home-find-button {
+        padding: 7px 3px;
+
+        font-size: 10px;
+    }
+}
+
+
+.car-marker {
+    left: 35px;
+    bottom: 12px;
+
+    background: #7c3aed;
+}
+
+
+.job-marker {
+    right: 34px;
+    bottom: 12px;
+
+    background: #f97316;
+}
+
+
+@media (max-width: 700px) {
+
+    .car-marker {
+        left: 14px;
+        bottom: 8px;
+    }
+
+
+    .job-marker {
+        right: 11px;
+        bottom: 8px;
+    }
+
+}

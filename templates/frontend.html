@@ -56,7 +56,7 @@
             type="button"
             class="home-account-button"
             onclick="openHomepageAccount()"
-            aria-label="Add your business or property"
+            aria-label="Add your listing"
         >
             <span>
                 {% if email %}
@@ -64,7 +64,7 @@
                     Account
                 {% else %}
                     <i class="fa-solid fa-user-plus"></i>
-                    Add Business / Property
+                    Add Your Listing
                 {% endif %}
             </span>
         </button>
@@ -129,7 +129,7 @@
             onclick="openHomepageAccount(); closeHomepageMenu();"
         >
             <i class="fa-solid fa-user-plus"></i>
-            Add Business / Property
+            Add Your Listing
         </button>
 
         <a
@@ -192,8 +192,8 @@
             </h1>
 
             <p>
-                Discover local businesses and properties
-                in your area.
+                Discover local businesses, properties,
+                car dealers and jobs in your area.
             </p>
 
             <!-- <div class="home-heading-line"></div> -->
@@ -214,9 +214,16 @@
         <div class="home-listing-grid">
 
 
-            <!-- BUSINESS CARD -->
+            <!-- =========================================
+                BUSINESS CARD
+            ========================================== -->
 
-            <article class="home-listing-card business-listing-card">
+            <article
+                class="
+                    home-listing-card
+                    business-listing-card
+                "
+            >
 
                 <div class="home-listing-image">
 
@@ -225,10 +232,13 @@
                         alt="Local businesses"
                     >
 
-                    <div class="home-listing-icon business-listing-icon">
-
+                    <div
+                        class="
+                            home-listing-icon
+                            business-listing-icon
+                        "
+                    >
                         <i class="fa-solid fa-store"></i>
-
                     </div>
 
                 </div>
@@ -240,13 +250,26 @@
                         Local Businesses
                     </h2>
 
+                    <p class="home-listing-description">
+                        Find and connect with local
+                        businesses and services.
+                    </p>
+
                     <div
                         id="business-count-wrapper"
-                        class="home-count-pill business-count-pill"
+                        class="
+                            home-count-pill
+                            business-count-pill
+                        "
                         style="display:none;"
                     >
 
-                        <span class="home-count-icon business-count-icon">
+                        <span
+                            class="
+                                home-count-icon
+                                business-count-icon
+                            "
+                        >
                             <i class="fa-solid fa-store"></i>
                         </span>
 
@@ -258,14 +281,15 @@
 
                     <button
                         type="button"
-                        class="home-find-button business-find-button"
+                        class="
+                            home-find-button
+                            business-find-button
+                        "
                         onclick="openBusinessSearch()"
                     >
-
                         Find Businesses
 
                         <i class="fa-solid fa-chevron-right"></i>
-
                     </button>
 
                 </div>
@@ -273,9 +297,16 @@
             </article>
 
 
-            <!-- PROPERTY CARD -->
+            <!-- =========================================
+                PROPERTY CARD
+            ========================================== -->
 
-            <article class="home-listing-card property-listing-card">
+            <article
+                class="
+                    home-listing-card
+                    property-listing-card
+                "
+            >
 
                 <div class="home-listing-image">
 
@@ -284,10 +315,13 @@
                         alt="Properties"
                     >
 
-                    <div class="home-listing-icon property-listing-icon">
-
+                    <div
+                        class="
+                            home-listing-icon
+                            property-listing-icon
+                        "
+                    >
                         <i class="fa-solid fa-house"></i>
-
                     </div>
 
                 </div>
@@ -299,13 +333,26 @@
                         Properties
                     </h2>
 
+                    <p class="home-listing-description">
+                        Find houses, flats, land
+                        and commercial properties.
+                    </p>
+
                     <div
                         id="property-count-wrapper"
-                        class="home-count-pill property-count-pill"
+                        class="
+                            home-count-pill
+                            property-count-pill
+                        "
                         style="display:none;"
                     >
 
-                        <span class="home-count-icon property-count-icon">
+                        <span
+                            class="
+                                home-count-icon
+                                property-count-icon
+                            "
+                        >
                             <i class="fa-solid fa-house"></i>
                         </span>
 
@@ -317,19 +364,187 @@
 
                     <button
                         type="button"
-                        class="home-find-button property-find-button"
+                        class="
+                            home-find-button
+                            property-find-button
+                        "
                         onclick="openPropertySearch()"
                     >
-
                         Find Properties
 
                         <i class="fa-solid fa-chevron-right"></i>
-
                     </button>
 
                 </div>
 
             </article>
+
+
+            <!-- =========================================
+                CAR DEALERS CARD
+            ========================================== -->
+
+            <article
+                class="
+                    home-listing-card
+                    car-listing-card
+                "
+            >
+
+                <div class="home-listing-image">
+
+                    <img
+                        src="{{ url_for('static', filename='images/car-dealers.png') }}"
+                        alt="Car dealers"
+                    >
+
+                    <div
+                        class="
+                            home-listing-icon
+                            car-listing-icon
+                        "
+                    >
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="home-listing-body">
+
+                    <h2>
+                        Car Dealers
+                    </h2>
+
+                    <p class="home-listing-description">
+                        Discover car dealerships
+                        and cars for sale near you.
+                    </p>
+
+                    <div
+                        id="car-count-wrapper"
+                        class="
+                            home-count-pill
+                            car-count-pill
+                        "
+                        style="display:none;"
+                    >
+
+                        <span
+                            class="
+                                home-count-icon
+                                car-count-icon
+                            "
+                        >
+                            <i class="fa-solid fa-car-side"></i>
+                        </span>
+
+                        <strong id="car-count-hero">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="
+                            home-find-button
+                            car-find-button
+                        "
+                        onclick="openCarDealerSearch()"
+                    >
+                        Find Cars
+
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- =========================================
+                JOBS CARD
+            ========================================== -->
+
+            <article
+                class="
+                    home-listing-card
+                    job-listing-card
+                "
+            >
+
+                <div class="home-listing-image">
+
+                    <img
+                        src="{{ url_for('static', filename='images/jobs.png') }}"
+                        alt="Jobs"
+                    >
+
+                    <div
+                        class="
+                            home-listing-icon
+                            job-listing-icon
+                        "
+                    >
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="home-listing-body">
+
+                    <h2>
+                        Jobs
+                    </h2>
+
+                    <p class="home-listing-description">
+                        Find local job opportunities
+                        in your area.
+                    </p>
+
+                    <div
+                        id="job-count-wrapper"
+                        class="
+                            home-count-pill
+                            job-count-pill
+                        "
+                        style="display:none;"
+                    >
+
+                        <span
+                            class="
+                                home-count-icon
+                                job-count-icon
+                            "
+                        >
+                            <i class="fa-solid fa-briefcase"></i>
+                        </span>
+
+                        <strong id="job-count-hero">
+                            0
+                        </strong>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="
+                            home-find-button
+                            job-find-button
+                        "
+                        onclick="openJobSearch()"
+                    >
+                        Find Jobs
+
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </article>
+
 
         </div>
 
@@ -379,9 +594,10 @@
                     <h3>Explore on Map</h3>
 
                     <p>
-                        View local businesses and properties
-                        on an interactive map.
+                        View local businessess, properties,
+                        car dealers and jobs on an interactive map.
                     </p>
+                    
                 </div>
 
             </div>
@@ -403,6 +619,14 @@
 
                 <span class="map-marker property-marker">
                     <i class="fa-solid fa-house"></i>
+                </span>
+
+                <span class="map-marker car-marker">
+                    <i class="fa-solid fa-car-side"></i>
+                </span>
+
+                <span class="map-marker job-marker">
+                    <i class="fa-solid fa-briefcase"></i>
                 </span>
 
             </div>
@@ -691,7 +915,8 @@
 
         <p>
             Enter an address, suburb, city or area to
-            view businesses and properties near that location.
+            view businesses, properties, car dealers and
+            jobs near that location.
         </p>
 
 
@@ -1010,7 +1235,9 @@
             </div>
 
             <div class="banner-text">
-                <h2>Local businesses & properties near you</h2>
+                <h2>
+                    Local businesses, properties, cars and jobs near you
+                </h2>
                 <p>Support local • Grow together</p>
             </div>
 
@@ -1070,8 +1297,9 @@
                     <h2>About Wallawalla</h2>
 
                     <p>
-                        Wallawalla is a proudly South African location-based platform
-                        designed to help people discover businesses, services, properties,
+                        Wallawalla is a proudly South African location-based
+                        platform designed to help people discover businesses,
+                        services, properties, car dealers, vehicles, job
                         opportunities and essential information near them.
                     </p>
 
@@ -1089,6 +1317,13 @@
                         <li>Promote your business to local customers.</li>
                         <li>List properties and reach interested buyers or tenants.</li>
                         <li>Use real-time location features powered by Google Maps.</li>
+                        <li>
+                            Discover local car dealers and cars for sale near you.
+                        </li>
+
+                        <li>
+                            Find job opportunities available in your area.
+                        </li>
                     </ul>
 
                     <h3>For Businesses</h3>
@@ -2364,6 +2599,16 @@ function setSelectedLocation(
             "property-count-wrapper"
         );
 
+    const carWrapper =
+        document.getElementById(
+            "car-count-wrapper"
+        );
+
+    const jobWrapper =
+        document.getElementById(
+            "job-count-wrapper"
+        );
+
 
     if (businessWrapper) {
 
@@ -2376,6 +2621,21 @@ function setSelectedLocation(
     if (propertyWrapper) {
 
         propertyWrapper.style.display =
+            "none";
+
+    }
+
+    if (carWrapper) {
+
+        carWrapper.style.display =
+            "none";
+
+    }
+
+
+    if (jobWrapper) {
+
+        jobWrapper.style.display =
             "none";
 
     }
@@ -2393,6 +2653,17 @@ function setSelectedLocation(
 
 
     loadPropertyCount(
+        selectedLatitude,
+        selectedLongitude
+    );
+
+    loadCarCount(
+        selectedLatitude,
+        selectedLongitude
+    );
+
+
+    loadJobCount(
         selectedLatitude,
         selectedLongitude
     );
@@ -3341,6 +3612,242 @@ async function loadPropertyCount(
 
 }
 
+async function loadCarCount(
+    latitude,
+    longitude
+) {
+
+    const wrapper =
+        document.getElementById(
+            "car-count-wrapper"
+        );
+
+    const countElement =
+        document.getElementById(
+            "car-count-hero"
+        );
+
+
+    if (
+        !wrapper
+        || !countElement
+    ) {
+        return;
+    }
+
+
+    if (
+        !carDealerPlatformUrl
+        || carDealerPlatformUrl
+            === "YOUR_CAR_DEALERS_URL"
+    ) {
+        return;
+    }
+
+
+    wrapper.style.display =
+        "none";
+
+
+    try {
+
+        const parameters =
+            new URLSearchParams({
+
+                lat:
+                    String(latitude),
+
+                lng:
+                    String(longitude)
+
+            });
+
+
+        const endpoint =
+            carDealerPlatformUrl.replace(
+                /\/+$/,
+                ""
+            )
+            + "/api/car-count?"
+            + parameters.toString();
+
+
+        const response =
+            await fetch(endpoint);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Car count request failed: ${response.status}`
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        nearbyCarCount =
+            Number(data.count) || 0;
+
+
+        if (nearbyCarCount >= 1) {
+
+            countElement.textContent =
+                String(nearbyCarCount);
+
+            wrapper.style.display =
+                "inline-flex";
+
+        } else {
+
+            countElement.textContent =
+                "";
+
+            wrapper.style.display =
+                "none";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Car count error:",
+            error
+        );
+
+
+        countElement.textContent =
+            "";
+
+        wrapper.style.display =
+            "none";
+
+    }
+
+}
+
+
+async function loadJobCount(
+    latitude,
+    longitude
+) {
+
+    const wrapper =
+        document.getElementById(
+            "job-count-wrapper"
+        );
+
+    const countElement =
+        document.getElementById(
+            "job-count-hero"
+        );
+
+
+    if (
+        !wrapper
+        || !countElement
+    ) {
+        return;
+    }
+
+
+    if (
+        !jobsPlatformUrl
+        || jobsPlatformUrl
+            === "YOUR_JOBS_URL"
+    ) {
+        return;
+    }
+
+
+    wrapper.style.display =
+        "none";
+
+
+    try {
+
+        const parameters =
+            new URLSearchParams({
+
+                lat:
+                    String(latitude),
+
+                lng:
+                    String(longitude)
+
+            });
+
+
+        const endpoint =
+            jobsPlatformUrl.replace(
+                /\/+$/,
+                ""
+            )
+            + "/api/job-count?"
+            + parameters.toString();
+
+
+        const response =
+            await fetch(endpoint);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Job count request failed: ${response.status}`
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        nearbyJobCount =
+            Number(data.count) || 0;
+
+
+        if (nearbyJobCount >= 1) {
+
+            countElement.textContent =
+                String(nearbyJobCount);
+
+            wrapper.style.display =
+                "inline-flex";
+
+        } else {
+
+            countElement.textContent =
+                "";
+
+            wrapper.style.display =
+                "none";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Job count error:",
+            error
+        );
+
+
+        countElement.textContent =
+            "";
+
+        wrapper.style.display =
+            "none";
+
+    }
+
+}
+
+
 
 /* =================================================
    BUSINESS AND PROPERTY BUTTONS
@@ -3422,6 +3929,127 @@ function openPropertySearch() {
     window.location.href =
         "https://property.wallawalla.co.za/"
         + `?${parameters.toString()}`;
+
+}
+
+function openCarDealerSearch() {
+
+    if (!hasValidSelectedLocation()) {
+
+        openLocationModal();
+
+        showLocationMessage(
+            "A location is required before viewing car dealers."
+        );
+
+        return;
+    }
+
+
+    if (
+        !carDealerPlatformUrl
+        || carDealerPlatformUrl
+            === "YOUR_CAR_DEALERS_URL"
+    ) {
+
+        console.error(
+            "The Car Dealers URL has not been configured."
+        );
+
+        return;
+    }
+
+
+    const selectedAddress =
+        localStorage.getItem(
+            "wallawallaAddress"
+        ) || "Selected location";
+
+
+    const parameters =
+        new URLSearchParams({
+
+            latitude:
+                String(selectedLatitude),
+
+            longitude:
+                String(selectedLongitude),
+
+            address:
+                selectedAddress
+
+        });
+
+
+    window.location.href =
+        carDealerPlatformUrl
+        + (
+            carDealerPlatformUrl.includes("?")
+                ? "&"
+                : "?"
+        )
+        + parameters.toString();
+
+}
+
+
+function openJobSearch() {
+
+    if (!hasValidSelectedLocation()) {
+
+        openLocationModal();
+
+        showLocationMessage(
+            "A location is required before viewing jobs."
+        );
+
+        return;
+    }
+
+
+    if (
+        !jobsPlatformUrl
+        || jobsPlatformUrl
+            === "YOUR_JOBS_URL"
+    ) {
+
+        console.error(
+            "The Jobs URL has not been configured."
+        );
+
+        return;
+    }
+
+
+    const selectedAddress =
+        localStorage.getItem(
+            "wallawallaAddress"
+        ) || "Selected location";
+
+
+    const parameters =
+        new URLSearchParams({
+
+            latitude:
+                String(selectedLatitude),
+
+            longitude:
+                String(selectedLongitude),
+
+            address:
+                selectedAddress
+
+        });
+
+
+    window.location.href =
+        jobsPlatformUrl
+        + (
+            jobsPlatformUrl.includes("?")
+                ? "&"
+                : "?"
+        )
+        + parameters.toString();
 
 }
 
