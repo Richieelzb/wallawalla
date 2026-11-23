@@ -558,7 +558,37 @@
         Properties
 
         <span id="property-filter-count">0</span>
-    </button>
+            </button>
+
+            <div
+            id="business-category-wrapper"
+            class="category-filter-wrapper"
+        >
+            <select
+                id="business-category-select"
+                class="category-filter-select"
+                onchange="filterBusinessMarkersByCategory()"
+            >
+                <option value="">
+                    All business categories
+                </option>
+            </select>
+        </div>
+
+        <div
+            id="property-category-wrapper"
+            class="category-filter-wrapper"
+        >
+            <select
+                id="property-category-select"
+                class="category-filter-select"
+                onchange="filterPropertyMarkersByCategory()"
+            >
+                <option value="">
+                    All property categories
+                </option>
+            </select>
+        </div>
 
 </section>
 
@@ -633,6 +663,8 @@
 
     let searchRadiusCircle = null;
     let markerPositionCounts = {};
+    let businessCategories = new Set();
+    let propertyCategories = new Set();
 
 
     /* =============================================
@@ -1112,28 +1144,24 @@
     function createBusinessMarker(
         business
     ) {
-
         const latitude =
             Number(business.latitude);
 
         const longitude =
             Number(business.longitude);
-        
-        const visiblePosition =
-            getVisibleMarkerPosition(
-                latitude,
-                longitude
-            );
-
 
         if (
             !Number.isFinite(latitude)
             || !Number.isFinite(longitude)
         ) {
-
             return;
-
         }
+
+        const visiblePosition =
+            getVisibleMarkerPosition(
+                latitude,
+                longitude
+            );
 
 
         const marker =
@@ -1171,6 +1199,21 @@
                 }
 
             });
+        
+        const businessCategory =
+            String(
+                business.category
+                || "Other"
+            ).trim();
+
+        marker.listingCategory =
+            businessCategory;
+
+        businessCategories.add(
+            businessCategory
+        );
+
+        updateBusinessCategoryOptions();
 
 
         const businessUrl =
@@ -1269,28 +1312,24 @@
     function createPropertyMarker(
         property
     ) {
-
         const latitude =
             Number(property.latitude);
 
         const longitude =
             Number(property.longitude);
-        
-        const visiblePosition =
-            getVisibleMarkerPosition(
-                latitude,
-                longitude
-            );
-
 
         if (
             !Number.isFinite(latitude)
             || !Number.isFinite(longitude)
         ) {
-
             return;
-
         }
+
+        const visiblePosition =
+            getVisibleMarkerPosition(
+                latitude,
+                longitude
+            );
 
 
         const marker =
@@ -1328,6 +1367,21 @@
                 }
 
             });
+        
+        const propertyCategory =
+            String(
+                property.category
+                || "Other"
+            ).trim();
+
+        marker.listingCategory =
+            propertyCategory;
+
+        propertyCategories.add(
+            propertyCategory
+        );
+
+        updatePropertyCategoryOptions();
 
 
         const propertyUrl =
@@ -1482,102 +1536,408 @@
     ============================================== */
 
     function showAllMarkers() {
+        closeActiveInfoWindow();
 
         businessMarkers.forEach(
-
-            marker =>
+            function (marker) {
                 marker.setMap(
                     wallawallaMap
-                )
-
+                );
+            }
         );
-
 
         propertyMarkers.forEach(
-
-            marker =>
+            function (marker) {
                 marker.setMap(
                     wallawallaMap
-                )
-
+                );
+            }
         );
 
+        hideCategoryFilters();
+
+        document.getElementById(
+            "business-category-select"
+        ).value = "";
+
+        document.getElementById(
+            "property-category-select"
+        ).value = "";
 
         setActiveFilter(
             "show-all-button"
         );
 
+        updateBusinessCount(
+            businessMarkers.length
+        );
 
-        fitMapToMarkers();
+        updatePropertyCount(
+            propertyMarkers.length
+        );
 
+        fitRadiusCircleToScreen();
     }
 
 
     function showBusinessMarkers() {
-
-        businessMarkers.forEach(
-
-            marker =>
-                marker.setMap(
-                    wallawallaMap
-                )
-
-        );
-
+        closeActiveInfoWindow();
 
         propertyMarkers.forEach(
-
-            marker =>
-                marker.setMap(
-                    null
-                )
-
+            function (marker) {
+                marker.setMap(null);
+            }
         );
 
+        document.getElementById(
+            "property-category-select"
+        ).value = "";
+
+        showBusinessCategoryFilter();
 
         setActiveFilter(
             "show-business-button"
         );
 
-
-        fitMapToMarkers(
-            businessMarkers
-        );
-
+        filterBusinessMarkersByCategory();
     }
 
 
     function showPropertyMarkers() {
+        closeActiveInfoWindow();
 
         businessMarkers.forEach(
-
-            marker =>
-                marker.setMap(
-                    null
-                )
-
+            function (marker) {
+                marker.setMap(null);
+            }
         );
 
+        document.getElementById(
+            "business-category-select"
+        ).value = "";
 
-        propertyMarkers.forEach(
-
-            marker =>
-                marker.setMap(
-                    wallawallaMap
-                )
-
-        );
-
+        showPropertyCategoryFilter();
 
         setActiveFilter(
             "show-property-button"
         );
 
+        filterPropertyMarkersByCategory();
+    }
 
-        fitMapToMarkers(
-            propertyMarkers
+    function showBusinessCategoryFilter() {
+        document.getElementById(
+            "business-category-wrapper"
+        ).classList.add(
+            "visible"
         );
 
+        document.getElementById(
+            "property-category-wrapper"
+        ).classList.remove(
+            "visible"
+        );
+    }
+
+
+    function showPropertyCategoryFilter() {
+        document.getElementById(
+            "business-category-wrapper"
+        ).classList.remove(
+            "visible"
+        );
+
+        document.getElementById(
+            "property-category-wrapper"
+        ).classList.add(
+            "visible"
+        );
+    }
+
+
+    function hideCategoryFilters() {
+        document.getElementById(
+            "business-category-wrapper"
+        ).classList.remove(
+            "visible"
+        );
+
+        document.getElementById(
+            "property-category-wrapper"
+        ).classList.remove(
+            "visible"
+        );
+    }
+
+
+    function updateBusinessCategoryOptions() {
+        const select =
+            document.getElementById(
+                "business-category-select"
+            );
+
+        const selectedValue =
+            select.value;
+
+        const sortedCategories =
+            Array.from(
+                businessCategories
+            ).sort(
+                function (firstCategory, secondCategory) {
+                    return firstCategory.localeCompare(
+                        secondCategory
+                    );
+                }
+            );
+
+        select.innerHTML = `
+            <option value="">
+                All business categories
+            </option>
+        `;
+
+        sortedCategories.forEach(
+            function (category) {
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    category;
+
+                option.textContent =
+                    category;
+
+                select.appendChild(
+                    option
+                );
+            }
+        );
+
+        if (
+            sortedCategories.includes(
+                selectedValue
+            )
+        ) {
+            select.value =
+                selectedValue;
+        }
+    }
+
+
+    function updatePropertyCategoryOptions() {
+        const select =
+            document.getElementById(
+                "property-category-select"
+            );
+
+        const selectedValue =
+            select.value;
+
+        const sortedCategories =
+            Array.from(
+                propertyCategories
+            ).sort(
+                function (firstCategory, secondCategory) {
+                    return firstCategory.localeCompare(
+                        secondCategory
+                    );
+                }
+            );
+
+        select.innerHTML = `
+            <option value="">
+                All property categories
+            </option>
+        `;
+
+        sortedCategories.forEach(
+            function (category) {
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    category;
+
+                option.textContent =
+                    category;
+
+                select.appendChild(
+                    option
+                );
+            }
+        );
+
+        if (
+            sortedCategories.includes(
+                selectedValue
+            )
+        ) {
+            select.value =
+                selectedValue;
+        }
+    }
+
+
+    function filterBusinessMarkersByCategory() {
+        closeActiveInfoWindow();
+
+        const selectedCategory =
+            document.getElementById(
+                "business-category-select"
+            ).value;
+
+        const visibleMarkers = [];
+
+        businessMarkers.forEach(
+            function (marker) {
+                const shouldShow =
+                    selectedCategory === ""
+                    || marker.listingCategory
+                        === selectedCategory;
+
+                marker.setMap(
+                    shouldShow
+                        ? wallawallaMap
+                        : null
+                );
+
+                if (shouldShow) {
+                    visibleMarkers.push(
+                        marker
+                    );
+                }
+            }
+        );
+
+        propertyMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+        updateBusinessCount(
+            visibleMarkers.length
+        );
+
+        updatePropertyCount(0);
+
+        fitFilteredMarkers(
+            visibleMarkers
+        );
+    }
+
+
+    function filterPropertyMarkersByCategory() {
+        closeActiveInfoWindow();
+
+        const selectedCategory =
+            document.getElementById(
+                "property-category-select"
+            ).value;
+
+        const visibleMarkers = [];
+
+        propertyMarkers.forEach(
+            function (marker) {
+                const shouldShow =
+                    selectedCategory === ""
+                    || marker.listingCategory
+                        === selectedCategory;
+
+                marker.setMap(
+                    shouldShow
+                        ? wallawallaMap
+                        : null
+                );
+
+                if (shouldShow) {
+                    visibleMarkers.push(
+                        marker
+                    );
+                }
+            }
+        );
+
+        businessMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+        updateBusinessCount(0);
+
+        updatePropertyCount(
+            visibleMarkers.length
+        );
+
+        fitFilteredMarkers(
+            visibleMarkers
+        );
+    }
+
+
+    function fitFilteredMarkers(
+        markers
+    ) {
+        if (
+            !Array.isArray(markers)
+            || markers.length === 0
+        ) {
+            fitRadiusCircleToScreen();
+            return;
+        }
+
+        const bounds =
+            new google.maps.LatLngBounds();
+
+        bounds.extend({
+            lat:
+                selectedLatitude,
+
+            lng:
+                selectedLongitude
+        });
+
+        markers.forEach(
+            function (marker) {
+                const position =
+                    marker.getPosition();
+
+                if (position) {
+                    bounds.extend(
+                        position
+                    );
+                }
+            }
+        );
+
+        wallawallaMap.fitBounds(
+            bounds,
+            {
+                top: 55,
+                right: 55,
+                bottom: 55,
+                left: 55
+            }
+        );
+
+        google.maps.event.addListenerOnce(
+            wallawallaMap,
+            "idle",
+            function () {
+                if (
+                    wallawallaMap.getZoom() > 15
+                ) {
+                    wallawallaMap.setZoom(
+                        15
+                    );
+                }
+            }
+        );
     }
 
 
