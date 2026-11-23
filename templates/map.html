@@ -234,6 +234,102 @@
             background: #1478dc;
         }
 
+        .map-filters {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 9px 15px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            position: relative;
+
+            z-index: 9;
+        }
+
+
+        .map-filter-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            width: 100%;
+        }
+
+
+        .map-category-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+        }
+
+
+        .category-filter-wrapper {
+            display: none;
+
+            width: 100%;
+            max-width: 380px;
+        }
+
+
+        .category-filter-wrapper.visible {
+            display: flex;
+        }
+
+
+        .category-filter-select {
+            width: 100%;
+
+            padding: 9px 35px 9px 14px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+
+            background: #ffffff;
+            color: #374151;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+            outline: none;
+        }
+
+
+        #business-category-wrapper .category-filter-select {
+            border-color: #16a34a;
+        }
+
+
+        #business-category-wrapper .category-filter-select:focus {
+            border-color: #16a34a;
+
+            box-shadow:
+                0 0 0 3px rgba(22, 163, 74, 0.12);
+        }
+
+
+        #property-category-wrapper .category-filter-select {
+            border-color: #1478dc;
+        }
+
+
+        #property-category-wrapper .category-filter-select:focus {
+            border-color: #1478dc;
+
+            box-shadow:
+                0 0 0 3px rgba(20, 120, 220, 0.12);
+        }
+
 
         /* =========================================
            MAP
@@ -432,11 +528,20 @@
 
 
             .map-filters {
+                padding: 8px 10px;
+
+                overflow: visible;
+            }
+
+
+            .map-filter-buttons {
                 overflow-x: auto;
 
                 justify-content: flex-start;
 
-                padding: 8px 10px;
+                width: 100%;
+
+                padding-bottom: 1px;
             }
 
 
@@ -448,6 +553,25 @@
                 font-size: 12px;
             }
 
+
+            .map-category-row {
+                width: 100%;
+            }
+
+
+            .category-filter-wrapper {
+                width: 100%;
+                max-width: none;
+            }
+
+
+            .category-filter-select {
+                width: 100%;
+
+                padding: 9px 34px 9px 13px;
+
+                font-size: 12px;
+            }
 
             .map-summary {
                 left: 10px;
@@ -521,46 +645,50 @@
 
 <section class="map-filters">
 
-    <button
-        type="button"
-        class="map-filter-button active"
-        id="show-all-button"
-        onclick="showAllMarkers()"
-    >
-        <i class="fa-solid fa-map-location-dot"></i>
+    <div class="map-filter-buttons">
 
-        All
-    </button>
+        <button
+            type="button"
+            class="map-filter-button active"
+            id="show-all-button"
+            onclick="showAllMarkers()"
+        >
+            <i class="fa-solid fa-map-location-dot"></i>
+            All
+        </button>
+
+        <button
+            type="button"
+            class="map-filter-button business-filter"
+            id="show-business-button"
+            onclick="showBusinessMarkers()"
+        >
+            <i class="fa-solid fa-store"></i>
+
+            Businesses
+
+            <span id="business-filter-count">0</span>
+        </button>
+
+        <button
+            type="button"
+            class="map-filter-button property-filter"
+            id="show-property-button"
+            onclick="showPropertyMarkers()"
+        >
+            <i class="fa-solid fa-house"></i>
+
+            Properties
+
+            <span id="property-filter-count">0</span>
+        </button>
+
+    </div>
 
 
-    <button
-        type="button"
-        class="map-filter-button business-filter"
-        id="show-business-button"
-        onclick="showBusinessMarkers()"
-    >
-        <i class="fa-solid fa-store"></i>
+    <div class="map-category-row">
 
-        Businesses
-
-        <span id="business-filter-count">0</span>
-    </button>
-
-
-    <button
-        type="button"
-        class="map-filter-button property-filter"
-        id="show-property-button"
-        onclick="showPropertyMarkers()"
-    >
-        <i class="fa-solid fa-house"></i>
-
-        Properties
-
-        <span id="property-filter-count">0</span>
-            </button>
-
-            <div
+        <div
             id="business-category-wrapper"
             class="category-filter-wrapper"
         >
@@ -574,6 +702,7 @@
                 </option>
             </select>
         </div>
+
 
         <div
             id="property-category-wrapper"
@@ -589,6 +718,8 @@
                 </option>
             </select>
         </div>
+
+    </div>
 
 </section>
 
