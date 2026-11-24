@@ -8294,7 +8294,7 @@ body.wallawalla-homepage {
     }
 
 }
-
+/* 
 @media (max-width: 380px) {
 
     .wallawalla-homepage .home-listing-card {
@@ -8356,4 +8356,364 @@ body.wallawalla-homepage {
         min-height: 32px !important;
         font-size: 10px !important;
     }
+} */
+
+/* ==========================================================
+   FINAL MOBILE CARD ALIGNMENT
+   Balanced square layout matching reference
+========================================================== */
+
+@media (max-width: 650px) {
+
+    /* ======================================================
+       CARD
+    ====================================================== */
+
+    .wallawalla-homepage .home-listing-card {
+        position: relative !important;
+
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+
+        aspect-ratio: 1 / 1.06 !important;
+
+        border-radius: 20px !important;
+
+        overflow: hidden !important;
+    }
+
+
+    /* ======================================================
+       BACKGROUND IMAGE
+    ====================================================== */
+
+    .wallawalla-homepage .home-listing-image {
+        position: absolute !important;
+        inset: 0 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        overflow: hidden !important;
+    }
+
+
+    .wallawalla-homepage .home-listing-image img {
+        position: absolute !important;
+        inset: 0 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        object-fit: cover !important;
+        object-position: center !important;
+    }
+
+
+    /* ======================================================
+       LARGE ICON
+
+       Move slightly down from the top.
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon {
+
+        position: absolute !important;
+
+        top: 13px !important;
+        left: 50% !important;
+        bottom: auto !important;
+
+        width: 50px !important;
+        height: 48px !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        z-index: 20 !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        border: 0 !important;
+        border-radius: 0 !important;
+
+        background: transparent !important;
+
+        box-shadow: none !important;
+    }
+
+
+    /* ICON SIZE */
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon i {
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        color: #ffffff !important;
+
+        font-size: 43px !important;
+        line-height: 1 !important;
+
+        filter:
+            drop-shadow(
+                0 2px 2px
+                rgba(0,0,0,.30)
+            ) !important;
+    }
+
+
+    /* Property icon slightly larger */
+
+    .wallawalla-homepage
+    .property-listing-card
+    .home-listing-icon i {
+
+        font-size: 45px !important;
+    }
+
+
+    /* ======================================================
+       ENTIRE CONTENT AREA
+    ====================================================== */
+
+    .wallawalla-homepage .home-listing-body {
+
+        position: relative !important;
+
+        z-index: 10 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        min-height: 0 !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+
+        padding:
+            67px
+            8px
+            8px !important;
+
+        background: transparent !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ======================================================
+       TITLE
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-body h2 {
+
+        margin:
+            0
+            auto
+            6px !important;
+
+        color: #ffffff !important;
+
+        font-size: 17px !important;
+        font-weight: 900 !important;
+
+        line-height: 1.02 !important;
+
+        text-align: center !important;
+
+        text-shadow:
+            0 2px 4px
+            rgba(0,0,0,.38);
+    }
+
+
+    /* ======================================================
+       DESCRIPTION
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-description {
+
+        min-height: 28px !important;
+        max-width: 150px !important;
+
+        margin:
+            0
+            auto
+            8px !important;
+
+        color: #ffffff !important;
+
+        font-size: 9px !important;
+        font-weight: 500 !important;
+
+        line-height: 1.16 !important;
+
+        text-align: center !important;
+
+        text-shadow:
+            0 1px 2px
+            rgba(0,0,0,.45);
+    }
+
+
+    /* ======================================================
+       COUNT
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-count-pill {
+
+        position: static !important;
+
+        width: fit-content !important;
+        min-width: 78px !important;
+
+        height: 30px !important;
+
+        margin:
+            0
+            auto !important;
+
+        padding:
+            3px
+            10px
+            3px
+            4px !important;
+
+        gap: 7px !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        border: 0 !important;
+        border-radius: 999px !important;
+
+        background: #ffffff !important;
+
+        box-shadow:
+            0 2px 6px
+            rgba(0,0,0,.20) !important;
+    }
+
+
+    /* ======================================================
+       SMALL COUNT ICON
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon {
+
+        position: static !important;
+
+        width: 23px !important;
+        height: 23px !important;
+
+        flex:
+            0
+            0
+            23px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        margin: 0 !important;
+
+        transform: none !important;
+
+        border: 0 !important;
+        border-radius: 50% !important;
+
+        box-shadow: none !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon i {
+
+        margin: 0 !important;
+
+        color: #ffffff !important;
+
+        font-size: 10px !important;
+
+        filter: none !important;
+    }
+
+
+    /* ======================================================
+       COUNT NUMBER
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-count-pill strong {
+
+        font-size: 13px !important;
+        font-weight: 900 !important;
+        line-height: 1 !important;
+    }
+
+
+    /* ======================================================
+       BUTTON
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-find-button {
+
+        width: 100% !important;
+
+        height: 36px !important;
+        min-height: 36px !important;
+
+        margin-top: auto !important;
+
+        padding:
+            4px
+            8px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        gap: 8px !important;
+
+        border:
+            2px solid
+            #ffffff !important;
+
+        border-radius:
+            999px !important;
+
+        color: #ffffff !important;
+
+        font-size: 11px !important;
+        font-weight: 900 !important;
+
+        line-height: 1 !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-find-button i {
+
+        font-size: 11px !important;
+    }
+
 }
