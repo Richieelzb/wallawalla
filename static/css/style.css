@@ -7890,3 +7890,470 @@ body.wallawalla-homepage {
     }
 
 }
+
+/* ==========================================================
+   FINAL MOBILE HOMEPAGE CARDS
+   SQUARE 2 x 2 LAYOUT
+========================================================== */
+
+@media (max-width: 650px) {
+
+    /* GRID */
+
+    .wallawalla-homepage .home-listing-grid {
+        display: grid !important;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        gap: 9px !important;
+    }
+
+
+    /* ======================================================
+       SQUARE CARD
+    ====================================================== */
+
+    .wallawalla-homepage .home-listing-card {
+        position: relative !important;
+
+        width: 100% !important;
+
+        min-height: 0 !important;
+        height: auto !important;
+
+        aspect-ratio: 1 / 1 !important;
+
+        overflow: hidden !important;
+
+        border: 2px solid #ffffff !important;
+        border-radius: 20px !important;
+    }
+
+
+    /* ======================================================
+       FULL BACKGROUND IMAGE
+    ====================================================== */
+
+    .wallawalla-homepage .home-listing-image {
+        position: absolute !important;
+
+        inset: 0 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        overflow: hidden !important;
+    }
+
+
+    .wallawalla-homepage .home-listing-image img {
+        position: absolute !important;
+
+        inset: 0 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        object-fit: cover !important;
+        object-position: center !important;
+    }
+
+
+    /* ======================================================
+       MAIN ICON
+       Keep it ABOVE the heading
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon {
+
+        position: absolute !important;
+
+        top: 10px !important;
+        left: 50% !important;
+        bottom: auto !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        z-index: 20 !important;
+
+        width: 50px !important;
+        height: 48px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        border: 0 !important;
+        border-radius: 0 !important;
+
+        background:
+            transparent !important;
+
+        box-shadow:
+            none !important;
+    }
+
+
+    /* LARGE WHITE ICON */
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon i {
+
+        margin: 0 !important;
+
+        color: #ffffff !important;
+
+        font-size: 43px !important;
+        line-height: 1 !important;
+
+        filter:
+            drop-shadow(
+                0 2px 2px
+                rgba(0,0,0,.30)
+            ) !important;
+    }
+
+
+    /* PROPERTY */
+
+    .wallawalla-homepage
+    .property-listing-card
+    .home-listing-icon i {
+
+        font-size: 45px !important;
+    }
+
+
+    /* ======================================================
+       CONTENT
+    ====================================================== */
+
+    .wallawalla-homepage .home-listing-body {
+
+        position: relative !important;
+
+        z-index: 10 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        min-height: 0 !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+
+        padding:
+            59px
+            7px
+            7px !important;
+
+        background:
+            transparent !important;
+
+        text-align:
+            center !important;
+    }
+
+
+    /* ======================================================
+       HEADING
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-body h2 {
+
+        margin:
+            0
+            auto
+            4px !important;
+
+        color:
+            #ffffff !important;
+
+        font-size:
+            17px !important;
+
+        font-weight:
+            900 !important;
+
+        line-height:
+            0.98 !important;
+
+        text-align:
+            center !important;
+
+        text-shadow:
+            0 2px 3px
+            rgba(0,0,0,.40);
+    }
+
+
+    /* ======================================================
+       DESCRIPTION
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-description {
+
+        min-height:
+            28px !important;
+
+        max-width:
+            155px !important;
+
+        margin:
+            0
+            auto
+            5px !important;
+
+        color:
+            #ffffff !important;
+
+        font-size:
+            9px !important;
+
+        font-weight:
+            500 !important;
+
+        line-height:
+            1.12 !important;
+
+        text-align:
+            center !important;
+    }
+
+
+    /* ======================================================
+       COUNT
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-count-pill {
+
+        position: static !important;
+
+        min-width:
+            78px !important;
+
+        width:
+            fit-content !important;
+
+        height:
+            30px !important;
+
+        margin:
+            0
+            auto
+            5px !important;
+
+        padding:
+            3px
+            10px
+            3px
+            4px !important;
+
+        gap:
+            7px !important;
+
+        border:
+            0 !important;
+
+        border-radius:
+            999px !important;
+
+        background:
+            #ffffff !important;
+    }
+
+
+    /* SMALL COUNT ICON */
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon {
+
+        position:
+            static !important;
+
+        width:
+            23px !important;
+
+        height:
+            23px !important;
+
+        flex:
+            0 0
+            23px !important;
+
+        transform:
+            none !important;
+
+        display:
+            flex !important;
+
+        align-items:
+            center !important;
+
+        justify-content:
+            center !important;
+
+        margin:
+            0 !important;
+
+        border-radius:
+            50% !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon i {
+
+        font-size:
+            10px !important;
+
+        color:
+            #ffffff !important;
+
+        filter:
+            none !important;
+    }
+
+
+    /* COUNT NUMBER */
+
+    .wallawalla-homepage
+    .home-count-pill strong {
+
+        font-size:
+            13px !important;
+
+        line-height:
+            1 !important;
+
+        font-weight:
+            900 !important;
+    }
+
+
+    /* ======================================================
+       BUTTON
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-find-button {
+
+        width:
+            100% !important;
+
+        min-height:
+            35px !important;
+
+        height:
+            35px !important;
+
+        margin-top:
+            auto !important;
+
+        padding:
+            4px
+            5px !important;
+
+        gap:
+            7px !important;
+
+        border:
+            2px solid
+            #ffffff !important;
+
+        border-radius:
+            999px !important;
+
+        font-size:
+            11px !important;
+
+        font-weight:
+            900 !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-find-button i {
+
+        font-size:
+            10px !important;
+    }
+
+}
+
+@media (max-width: 380px) {
+
+    .wallawalla-homepage .home-listing-card {
+        min-height: 0 !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
+    }
+
+    .wallawalla-homepage .home-listing-body {
+        min-height: 0 !important;
+        height: 100% !important;
+
+        padding:
+            54px
+            5px
+            6px !important;
+    }
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon {
+        top: 8px !important;
+    }
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon i {
+        font-size: 39px !important;
+    }
+
+    .wallawalla-homepage
+    .home-listing-body h2 {
+        font-size: 15px !important;
+    }
+
+    .wallawalla-homepage
+    .home-listing-description {
+        min-height: 25px !important;
+        font-size: 8px !important;
+    }
+
+    .wallawalla-homepage
+    .home-count-pill {
+        height: 27px !important;
+        min-width: 72px !important;
+    }
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon {
+        width: 21px !important;
+        height: 21px !important;
+        flex-basis: 21px !important;
+    }
+
+    .wallawalla-homepage
+    .home-find-button {
+        height: 32px !important;
+        min-height: 32px !important;
+        font-size: 10px !important;
+    }
+}
