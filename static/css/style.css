@@ -8717,3 +8717,62 @@ body.wallawalla-homepage {
     }
 
 }
+
+/* ==========================================================
+   MOBILE CARD HEIGHT FIX
+   Slightly taller than square so button stays visible
+========================================================== */
+
+@media (max-width: 650px) {
+
+    .wallawalla-homepage .home-listing-card {
+        width: 100% !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+
+        /* Slightly taller than square */
+        aspect-ratio: 1 / 1.15 !important;
+
+        overflow: hidden !important;
+    }
+
+
+    .wallawalla-homepage .home-listing-body {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+
+        padding:
+            67px
+            8px
+            9px !important;
+    }
+
+
+    /* Keep button fully inside bottom of card */
+
+    .wallawalla-homepage .home-find-button {
+        width: 100% !important;
+
+        height: 36px !important;
+        min-height: 36px !important;
+
+        flex-shrink: 0 !important;
+
+        margin-top: auto !important;
+        margin-bottom: 0 !important;
+    }
+
+}
+
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+
+    .wallawalla-homepage .home-listing-card {
+        aspect-ratio: 1 / 1.18 !important;
+    }
+
+}
