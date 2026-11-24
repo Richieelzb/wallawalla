@@ -6573,3 +6573,217 @@ body.wallawalla-homepage {
     }
 
 }
+
+/* =========================================================
+   WALLAWALLA HOME CARD ICONS
+   LARGE WHITE ICONS LIKE REFERENCE IMAGE
+========================================================= */
+
+.home-listing-card .home-listing-icon {
+    position: absolute;
+
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: auto;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    color: #ffffff !important;
+
+    z-index: 5;
+}
+
+
+/* ICON ITSELF */
+
+.home-listing-card .home-listing-icon i {
+    color: #ffffff !important;
+
+    font-size: 52px;
+    line-height: 1;
+
+    margin: 0;
+    padding: 0;
+
+    filter:
+        drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+}
+
+
+/* =========================================================
+   INDIVIDUAL ICON SIZES
+========================================================= */
+
+.business-listing-icon i {
+    font-size: 55px !important;
+}
+
+.property-listing-icon i {
+    font-size: 57px !important;
+}
+
+.car-listing-icon i {
+    font-size: 55px !important;
+}
+
+.job-listing-icon i {
+    font-size: 56px !important;
+}
+
+
+/* =========================================================
+   MAKE SURE IMAGE AREA CAN POSITION ICON
+========================================================= */
+
+.home-listing-image {
+    position: relative;
+}
+
+.home-listing-body {
+    text-align: center;
+}
+
+.home-listing-body h2 {
+    color: #ffffff;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.05;
+}
+
+.home-listing-description {
+    color: #ffffff;
+    text-align: center;
+}
+
+/* =========================================================
+   NUMBER PILLS
+========================================================= */
+
+.home-count-pill {
+    min-width: 118px;
+    height: 44px;
+
+    padding: 5px 18px 5px 8px;
+
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    background: #ffffff;
+
+    border-radius: 999px;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ROUND COLOURED ICON INSIDE COUNT */
+
+.home-count-icon {
+    width: 32px;
+    height: 32px;
+
+    flex: 0 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #ffffff;
+}
+
+.home-count-icon i {
+    color: #ffffff;
+    font-size: 15px;
+}
+
+
+/* BUSINESS */
+
+.business-count-icon {
+    background: #10b92b;
+}
+
+.business-count-pill strong {
+    color: #178628;
+}
+
+
+/* PROPERTY */
+
+.property-count-icon {
+    background: #168ee8;
+}
+
+.property-count-pill strong {
+    color: #126eb9;
+}
+
+
+/* CAR */
+
+.car-count-icon {
+    background: #7429e8;
+}
+
+.car-count-pill strong {
+    color: #5220a9;
+}
+
+
+/* JOB */
+
+.job-count-icon {
+    background: #ff6a00;
+}
+
+.job-count-pill strong {
+    color: #dc5100;
+}
+
+.home-listing-body .home-listing-icon {
+    position: static;
+    transform: none;
+
+    width: 100%;
+    height: auto;
+
+    margin: 0 auto 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+
+    color: white !important;
+}
+
+.home-listing-body .home-listing-icon i {
+    font-size: 55px;
+    color: white !important;
+
+    filter:
+        drop-shadow(0 2px 3px rgba(0, 0, 0, 0.30));
+}
