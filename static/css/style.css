@@ -9205,3 +9205,56 @@ body.wallawalla-homepage {
         top: 4px;
     }
 }
+
+/* =========================================================
+   ANNOUNCEMENT BANNER -> HERO
+   REMOVE WHITE SPACE ON DESKTOP AND MOBILE
+========================================================= */
+
+.announcement-banner {
+    margin-bottom: 0 !important;
+}
+
+.wallawalla-home-hero {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.home-hero-background {
+    position: relative;
+    margin-top: 0 !important;
+}
+
+
+/* =========================================================
+   SEARCH ON GOOGLE - DESKTOP
+========================================================= */
+
+.hero-google-search-button {
+    top: 3px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .announcement-banner {
+        margin-bottom: 0 !important;
+    }
+
+    .wallawalla-home-hero {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .home-hero-background {
+        margin-top: 0 !important;
+    }
+
+    .hero-google-search-button {
+        top: 3px;
+    }
+}
