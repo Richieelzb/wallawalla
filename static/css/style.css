@@ -8776,3 +8776,84 @@ body.wallawalla-homepage {
     }
 
 }
+
+/* ==========================================================
+   FINAL MOBILE CARD HEIGHT
+   Slightly taller + button fully visible
+========================================================== */
+
+@media (max-width: 650px) {
+
+    .wallawalla-homepage .home-listing-card {
+        aspect-ratio: auto !important;
+
+        width: 100% !important;
+
+        height: 205px !important;
+        min-height: 205px !important;
+
+        overflow: hidden !important;
+    }
+
+
+    .wallawalla-homepage .home-listing-body {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+
+        padding:
+            67px
+            8px
+            8px !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+
+    /* Prevent description from pushing button out */
+
+    .wallawalla-homepage .home-listing-description {
+        flex-shrink: 0 !important;
+    }
+
+
+    /* Prevent count from shrinking */
+
+    .wallawalla-homepage .home-count-pill {
+        flex-shrink: 0 !important;
+    }
+
+
+    /* Keep button completely inside card */
+
+    .wallawalla-homepage .home-find-button {
+        width: 100% !important;
+
+        height: 35px !important;
+        min-height: 35px !important;
+
+        flex: 0 0 35px !important;
+
+        margin-top: auto !important;
+        margin-bottom: 0 !important;
+
+        box-sizing: border-box !important;
+    }
+
+}
+
+
+/* ==========================================================
+   VERY SMALL PHONES
+========================================================== */
+
+@media (max-width: 380px) {
+
+    .wallawalla-homepage .home-listing-card {
+        height: 195px !important;
+        min-height: 195px !important;
+    }
+
+}
