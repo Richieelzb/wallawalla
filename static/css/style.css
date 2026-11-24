@@ -6574,17 +6574,197 @@ body.wallawalla-homepage {
 
 }
 
-/* =========================================================
-   WALLAWALLA HOME CARD ICONS
-   LARGE WHITE ICONS LIKE REFERENCE IMAGE
-========================================================= */
+/* ==========================================================
+   FINAL FULL-PICTURE HOMEPAGE CARDS
+   IMAGE FILLS THE ENTIRE CARD
+========================================================== */
 
-.home-listing-card .home-listing-icon {
+.wallawalla-homepage .home-listing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+
+/* ==========================================================
+   CARD CONTAINER
+========================================================== */
+
+.wallawalla-homepage .home-listing-card {
+    position: relative;
+
+    min-width: 0;
+    min-height: 430px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    overflow: hidden;
+
+    border: 3px solid #ffffff;
+    border-radius: 28px;
+
+    background: #0f172a;
+
+    box-shadow:
+        0 9px 24px rgba(15, 23, 42, 0.20);
+}
+
+
+/* BUSINESS SHADOW */
+
+.wallawalla-homepage .business-listing-card {
+    box-shadow:
+        0 8px 22px rgba(20, 190, 45, 0.35);
+}
+
+
+/* PROPERTY SHADOW */
+
+.wallawalla-homepage .property-listing-card {
+    box-shadow:
+        0 8px 22px rgba(20, 115, 235, 0.35);
+}
+
+
+/* CAR SHADOW */
+
+.wallawalla-homepage .car-listing-card {
+    box-shadow:
+        0 8px 22px rgba(112, 35, 225, 0.35);
+}
+
+
+/* JOB SHADOW */
+
+.wallawalla-homepage .job-listing-card {
+    box-shadow:
+        0 8px 22px rgba(255, 105, 0, 0.35);
+}
+
+
+/* ==========================================================
+   FULL-CARD IMAGE
+========================================================== */
+
+.wallawalla-homepage .home-listing-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+
+/* IMAGE FILLS COMPLETE CARD */
+
+.wallawalla-homepage .home-listing-image img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    border: none;
+    border-radius: 0;
+}
+
+
+/* ==========================================================
+   COLOURED IMAGE OVERLAYS
+========================================================== */
+
+.wallawalla-homepage .home-listing-image::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+/* BUSINESS GREEN OVERLAY */
+
+.wallawalla-homepage
+.business-listing-card
+.home-listing-image::after {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 78, 27, 0.50) 0%,
+            rgba(0, 115, 34, 0.76) 48%,
+            rgba(0, 85, 18, 0.94) 100%
+        );
+}
+
+
+/* PROPERTY BLUE OVERLAY */
+
+.wallawalla-homepage
+.property-listing-card
+.home-listing-image::after {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 72, 160, 0.45) 0%,
+            rgba(0, 91, 190, 0.75) 48%,
+            rgba(0, 55, 145, 0.94) 100%
+        );
+}
+
+
+/* CAR PURPLE OVERLAY */
+
+.wallawalla-homepage
+.car-listing-card
+.home-listing-image::after {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(31, 23, 120, 0.42) 0%,
+            rgba(62, 18, 155, 0.75) 48%,
+            rgba(35, 5, 105, 0.95) 100%
+        );
+}
+
+
+/* JOB ORANGE OVERLAY */
+
+.wallawalla-homepage
+.job-listing-card
+.home-listing-image::after {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(195, 91, 0, 0.40) 0%,
+            rgba(218, 91, 0, 0.73) 48%,
+            rgba(156, 53, 0, 0.95) 100%
+        );
+}
+
+
+/* ==========================================================
+   LARGE WHITE ICON
+========================================================== */
+
+.wallawalla-homepage .home-listing-icon {
     position: absolute;
 
-    top: 18px;
+    top: 28px;
     left: 50%;
-    transform: translateX(-50%);
+
+    z-index: 3;
 
     width: auto;
     height: auto;
@@ -6596,111 +6776,169 @@ body.wallawalla-homepage {
     padding: 0;
     margin: 0;
 
-    background: transparent !important;
+    transform: translateX(-50%);
+
     border: none !important;
     border-radius: 0 !important;
-    box-shadow: none !important;
+
+    background: transparent !important;
 
     color: #ffffff !important;
 
-    z-index: 5;
+    box-shadow: none !important;
 }
 
 
-/* ICON ITSELF */
+/* MAIN ICON */
 
-.home-listing-card .home-listing-icon i {
-    color: #ffffff !important;
-
-    font-size: 52px;
-    line-height: 1;
-
+.wallawalla-homepage .home-listing-icon i {
     margin: 0;
     padding: 0;
 
+    color: #ffffff !important;
+
+    font-size: 66px;
+    line-height: 1;
+
     filter:
-        drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+        drop-shadow(0 3px 3px rgba(0, 0, 0, 0.30));
 }
 
 
-/* =========================================================
-   INDIVIDUAL ICON SIZES
-========================================================= */
+/* INDIVIDUAL ICON SIZES */
 
-.business-listing-icon i {
-    font-size: 55px !important;
+.wallawalla-homepage .business-listing-icon i {
+    font-size: 67px !important;
 }
 
-.property-listing-icon i {
-    font-size: 57px !important;
+.wallawalla-homepage .property-listing-icon i {
+    font-size: 69px !important;
 }
 
-.car-listing-icon i {
-    font-size: 55px !important;
+.wallawalla-homepage .car-listing-icon i {
+    font-size: 66px !important;
 }
 
-.job-listing-icon i {
-    font-size: 56px !important;
+.wallawalla-homepage .job-listing-icon i {
+    font-size: 67px !important;
 }
 
 
-/* =========================================================
-   MAKE SURE IMAGE AREA CAN POSITION ICON
-========================================================= */
+/* ==========================================================
+   CARD CONTENT OVER THE PICTURE
+========================================================== */
 
-.home-listing-image {
+.wallawalla-homepage .home-listing-body {
     position: relative;
-}
 
-.home-listing-body {
+    z-index: 2;
+
+    width: 100%;
+    min-height: 430px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding:
+        118px
+        20px
+        18px;
+
+    background: transparent !important;
+
     text-align: center;
 }
 
+
+/* ==========================================================
+   CARD HEADING
+========================================================== */
+
+.wallawalla-homepage .home-listing-body h2 {
+    margin: 0 0 10px;
+
+    color: #ffffff !important;
+
+    font-size: 31px;
+    font-weight: 900;
+    line-height: 1.02;
+
+    text-align: center;
+
+    text-shadow:
+        0 3px 5px rgba(0, 0, 0, 0.40);
+}
+
+
+/* Force business heading onto two lines like reference */
+
+.wallawalla-homepage
+.business-listing-card
 .home-listing-body h2 {
-    color: #ffffff;
-    font-weight: 800;
-    text-align: center;
-    line-height: 1.05;
+    max-width: 260px;
 }
 
-.home-listing-description {
-    color: #ffffff;
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.wallawalla-homepage .home-listing-description {
+    min-height: 50px;
+    max-width: 310px;
+
+    margin: 0 auto 14px;
+
+    color: #ffffff !important;
+
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+
     text-align: center;
+
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.45);
 }
 
-/* =========================================================
-   NUMBER PILLS
-========================================================= */
 
-.home-count-pill {
-    min-width: 118px;
-    height: 44px;
+/* ==========================================================
+   COUNT PILL
+========================================================== */
 
+.wallawalla-homepage .home-count-pill {
+    width: fit-content;
+    min-width: 122px;
+    height: 47px;
+
+    margin: 0 auto 16px;
     padding: 5px 18px 5px 8px;
 
     align-items: center;
     justify-content: center;
     gap: 14px;
 
-    background: #ffffff;
-
+    border: none !important;
     border-radius: 999px;
 
+    background: #ffffff !important;
+
     font-size: 20px;
-    font-weight: 800;
+    font-weight: 900;
 
     box-shadow:
-        0 3px 8px rgba(0, 0, 0, 0.15);
+        0 4px 10px rgba(0, 0, 0, 0.22);
 }
 
 
-/* ROUND COLOURED ICON INSIDE COUNT */
+/* SMALL ROUND ICON */
 
-.home-count-icon {
-    width: 32px;
-    height: 32px;
+.wallawalla-homepage .home-count-icon {
+    width: 34px;
+    height: 34px;
 
-    flex: 0 0 32px;
+    flex: 0 0 34px;
 
     display: flex;
     align-items: center;
@@ -6711,79 +6949,354 @@ body.wallawalla-homepage {
     color: #ffffff;
 }
 
-.home-count-icon i {
-    color: #ffffff;
-    font-size: 15px;
+
+/* SMALL ICON GLYPH */
+
+.wallawalla-homepage .home-count-icon i {
+    color: #ffffff !important;
+    font-size: 16px;
 }
 
 
-/* BUSINESS */
+/* COUNT NUMBER */
 
-.business-count-icon {
+.wallawalla-homepage .home-count-pill strong {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+
+/* BUSINESS COUNT */
+
+.wallawalla-homepage .business-count-icon {
     background: #10b92b;
 }
 
-.business-count-pill strong {
-    color: #178628;
+.wallawalla-homepage .business-count-pill strong {
+    color: #16872a;
 }
 
 
-/* PROPERTY */
+/* PROPERTY COUNT */
 
-.property-count-icon {
+.wallawalla-homepage .property-count-icon {
     background: #168ee8;
 }
 
-.property-count-pill strong {
-    color: #126eb9;
+.wallawalla-homepage .property-count-pill strong {
+    color: #126ebb;
 }
 
 
-/* CAR */
+/* CAR COUNT */
 
-.car-count-icon {
+.wallawalla-homepage .car-count-icon {
     background: #7429e8;
 }
 
-.car-count-pill strong {
-    color: #5220a9;
+.wallawalla-homepage .car-count-pill strong {
+    color: #5721b5;
 }
 
 
-/* JOB */
+/* JOB COUNT */
 
-.job-count-icon {
+.wallawalla-homepage .job-count-icon {
     background: #ff6a00;
 }
 
-.job-count-pill strong {
-    color: #dc5100;
+.wallawalla-homepage .job-count-pill strong {
+    color: #d95300;
 }
 
-.home-listing-body .home-listing-icon {
-    position: static;
-    transform: none;
 
+/* ==========================================================
+   BOTTOM BUTTON
+========================================================== */
+
+.wallawalla-homepage .home-find-button {
     width: 100%;
-    height: auto;
+    min-height: 57px;
 
-    margin: 0 auto 8px;
+    margin-top: auto;
+    padding: 10px 20px;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 17px;
 
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
+    border: 3px solid #ffffff;
+    border-radius: 32px;
 
-    color: white !important;
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 22px;
+    font-weight: 900;
+
+    text-shadow:
+        0 2px 3px rgba(0, 0, 0, 0.18);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.22);
 }
 
-.home-listing-body .home-listing-icon i {
-    font-size: 55px;
-    color: white !important;
 
-    filter:
-        drop-shadow(0 2px 3px rgba(0, 0, 0, 0.30));
+/* BUTTON ARROW */
+
+.wallawalla-homepage .home-find-button i {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+
+/* BUSINESS BUTTON */
+
+.wallawalla-homepage .business-find-button {
+    background:
+        linear-gradient(
+            180deg,
+            #17df31,
+            #05a91d
+        );
+}
+
+
+/* PROPERTY BUTTON */
+
+.wallawalla-homepage .property-find-button {
+    background:
+        linear-gradient(
+            180deg,
+            #18a1ff,
+            #1160dc
+        );
+}
+
+
+/* CAR BUTTON */
+
+.wallawalla-homepage .car-find-button {
+    background:
+        linear-gradient(
+            180deg,
+            #9a38ff,
+            #6716dc
+        );
+}
+
+
+/* JOB BUTTON */
+
+.wallawalla-homepage .job-find-button {
+    background:
+        linear-gradient(
+            180deg,
+            #ff8d16,
+            #ff5300
+        );
+}
+
+
+/* ==========================================================
+   MOBILE LAYOUT
+========================================================== */
+
+@media (max-width: 650px) {
+
+    .wallawalla-homepage .home-listing-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 9px;
+    }
+
+
+    .wallawalla-homepage .home-listing-card {
+        min-height: 335px;
+
+        border-width: 2px;
+        border-radius: 20px;
+    }
+
+
+    .wallawalla-homepage .home-listing-body {
+        min-height: 335px;
+
+        padding:
+            85px
+            10px
+            10px;
+    }
+
+
+    .wallawalla-homepage .home-listing-icon {
+        top: 20px;
+    }
+
+
+    .wallawalla-homepage .home-listing-icon i {
+        font-size: 49px;
+    }
+
+
+    .wallawalla-homepage .business-listing-icon i {
+        font-size: 50px !important;
+    }
+
+
+    .wallawalla-homepage .property-listing-icon i {
+        font-size: 52px !important;
+    }
+
+
+    .wallawalla-homepage .car-listing-icon i {
+        font-size: 49px !important;
+    }
+
+
+    .wallawalla-homepage .job-listing-icon i {
+        font-size: 50px !important;
+    }
+
+
+    .wallawalla-homepage .home-listing-body h2 {
+        margin-bottom: 7px;
+
+        font-size: 22px;
+        line-height: 1;
+    }
+
+
+    .wallawalla-homepage .home-listing-description {
+        min-height: 43px;
+
+        margin-bottom: 10px;
+
+        font-size: 13px;
+        line-height: 1.18;
+    }
+
+
+    .wallawalla-homepage .home-count-pill {
+        min-width: 94px;
+        height: 38px;
+
+        margin-bottom: 11px;
+        padding: 4px 13px 4px 5px;
+
+        gap: 10px;
+    }
+
+
+    .wallawalla-homepage .home-count-icon {
+        width: 28px;
+        height: 28px;
+
+        flex-basis: 28px;
+    }
+
+
+    .wallawalla-homepage .home-count-icon i {
+        font-size: 13px;
+    }
+
+
+    .wallawalla-homepage .home-count-pill strong {
+        font-size: 16px;
+    }
+
+
+    .wallawalla-homepage .home-find-button {
+        min-height: 45px;
+
+        padding: 7px 8px;
+
+        border-width: 2px;
+
+        font-size: 15px;
+        gap: 10px;
+    }
+
+
+    .wallawalla-homepage .home-find-button i {
+        font-size: 14px;
+    }
+
+}
+
+
+/* ==========================================================
+   VERY SMALL PHONES
+========================================================== */
+
+@media (max-width: 380px) {
+
+    .wallawalla-homepage .home-listing-card {
+        min-height: 310px;
+    }
+
+
+    .wallawalla-homepage .home-listing-body {
+        min-height: 310px;
+
+        padding:
+            74px
+            7px
+            8px;
+    }
+
+
+    .wallawalla-homepage .home-listing-icon {
+        top: 17px;
+    }
+
+
+    .wallawalla-homepage .home-listing-icon i {
+        font-size: 43px;
+    }
+
+
+    .wallawalla-homepage .home-listing-body h2 {
+        font-size: 18px;
+    }
+
+
+    .wallawalla-homepage .home-listing-description {
+        min-height: 38px;
+
+        font-size: 10px;
+    }
+
+
+    .wallawalla-homepage .home-count-pill {
+        min-width: 86px;
+        height: 34px;
+
+        margin-bottom: 9px;
+    }
+
+
+    .wallawalla-homepage .home-count-icon {
+        width: 25px;
+        height: 25px;
+
+        flex-basis: 25px;
+    }
+
+
+    .wallawalla-homepage .home-count-pill strong {
+        font-size: 14px;
+    }
+
+
+    .wallawalla-homepage .home-find-button {
+        min-height: 40px;
+
+        font-size: 12px;
+    }
+
 }
