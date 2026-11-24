@@ -3941,32 +3941,16 @@ function openCarDealerSearch() {
         openLocationModal();
 
         showLocationMessage(
-            "A location is required before viewing car dealers."
+            "A location is required before viewing cars."
         );
 
         return;
     }
-
-
-    if (
-        !carDealerPlatformUrl
-        || carDealerPlatformUrl
-            === "YOUR_CAR_DEALERS_URL"
-    ) {
-
-        console.error(
-            "The Car Dealers URL has not been configured."
-        );
-
-        return;
-    }
-
 
     const selectedAddress =
         localStorage.getItem(
             "wallawallaAddress"
         ) || "Selected location";
-
 
     const parameters =
         new URLSearchParams({
@@ -3982,16 +3966,9 @@ function openCarDealerSearch() {
 
         });
 
-
     window.location.href =
-        carDealerPlatformUrl
-        + (
-            carDealerPlatformUrl.includes("?")
-                ? "&"
-                : "?"
-        )
-        + parameters.toString();
-
+        "https://cars.wallawalla.co.za/"
+        + `?${parameters.toString()}`;
 }
 
 
