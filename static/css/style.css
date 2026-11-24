@@ -7300,3 +7300,593 @@ body.wallawalla-homepage {
     }
 
 }
+
+/* ==========================================================
+   FINAL FIX - ICON ABOVE HEADING
+   EXACT CARD CONTENT ORDER:
+
+   ICON
+   HEADING
+   DESCRIPTION
+   COUNT
+   BUTTON
+========================================================== */
+
+.wallawalla-homepage .home-listing-card {
+    position: relative !important;
+}
+
+
+/* ==========================================================
+   LARGE MAIN ICON
+========================================================== */
+
+.wallawalla-homepage .home-listing-card .home-listing-icon {
+
+    position: absolute !important;
+
+    top: 22px !important;
+    left: 50% !important;
+    bottom: auto !important;
+
+    transform: translateX(-50%) !important;
+
+    z-index: 20 !important;
+
+    width: 78px !important;
+    height: 70px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: transparent !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+
+    color: #ffffff !important;
+}
+
+
+/* ACTUAL ICON */
+
+.wallawalla-homepage
+.home-listing-card
+.home-listing-icon i {
+
+    display: block !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #ffffff !important;
+
+    font-size: 65px !important;
+    line-height: 1 !important;
+
+    filter:
+        drop-shadow(
+            0 3px 3px
+            rgba(0,0,0,.25)
+        );
+}
+
+
+/* ==========================================================
+   INDIVIDUAL MAIN ICON SIZES
+========================================================== */
+
+.wallawalla-homepage
+.business-listing-card
+.home-listing-icon i {
+
+    font-size: 65px !important;
+}
+
+
+.wallawalla-homepage
+.property-listing-card
+.home-listing-icon i {
+
+    font-size: 67px !important;
+}
+
+
+.wallawalla-homepage
+.car-listing-card
+.home-listing-icon i {
+
+    font-size: 65px !important;
+}
+
+
+.wallawalla-homepage
+.job-listing-card
+.home-listing-icon i {
+
+    font-size: 65px !important;
+}
+
+
+/* ==========================================================
+   BODY
+
+   Start below the icon.
+========================================================== */
+
+.wallawalla-homepage .home-listing-body {
+
+    position: relative !important;
+
+    z-index: 10 !important;
+
+    width: 100% !important;
+    min-height: 430px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+
+    padding:
+        107px
+        18px
+        17px !important;
+
+    background: transparent !important;
+
+    text-align: center !important;
+}
+
+
+/* ==========================================================
+   HEADING DIRECTLY BELOW ICON
+========================================================== */
+
+.wallawalla-homepage .home-listing-body h2 {
+
+    order: 1;
+
+    margin:
+        0
+        auto
+        8px !important;
+
+    color: #ffffff !important;
+
+    font-size: 31px !important;
+    font-weight: 900 !important;
+    line-height: 1.02 !important;
+
+    text-align: center !important;
+
+    text-shadow:
+        0 2px 4px
+        rgba(0,0,0,.40);
+}
+
+
+/* ==========================================================
+   DESCRIPTION BELOW HEADING
+========================================================== */
+
+.wallawalla-homepage .home-listing-description {
+
+    order: 2;
+
+    min-height: 48px !important;
+    max-width: 320px !important;
+
+    margin:
+        0
+        auto
+        12px !important;
+
+    color: #ffffff !important;
+
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+
+    text-align: center !important;
+
+    text-shadow:
+        0 2px 3px
+        rgba(0,0,0,.45);
+}
+
+
+/* ==========================================================
+   COUNT BELOW DESCRIPTION
+========================================================== */
+
+.wallawalla-homepage .home-count-pill {
+
+    order: 3;
+
+    position: static !important;
+
+    width: fit-content !important;
+    min-width: 120px !important;
+    height: 44px !important;
+
+    margin:
+        0
+        auto
+        14px !important;
+
+    padding:
+        5px
+        17px
+        5px
+        7px !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 13px !important;
+
+    background: #ffffff !important;
+
+    border: 0 !important;
+    border-radius: 999px !important;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.20) !important;
+}
+
+
+/* ==========================================================
+   IMPORTANT:
+   KEEP SMALL COUNT ICON SMALL
+
+   This prevents the MAIN ICON CSS from affecting the
+   tiny icon inside the count.
+========================================================== */
+
+.wallawalla-homepage .home-count-pill .home-count-icon {
+
+    position: static !important;
+
+    width: 31px !important;
+    height: 31px !important;
+
+    flex:
+        0
+        0
+        31px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    transform: none !important;
+
+    margin: 0 !important;
+
+    border: 0 !important;
+    border-radius: 50% !important;
+
+    box-shadow: none !important;
+}
+
+
+.wallawalla-homepage
+.home-count-pill
+.home-count-icon i {
+
+    font-size: 14px !important;
+
+    margin: 0 !important;
+
+    color: #ffffff !important;
+
+    filter: none !important;
+}
+
+
+/* BUSINESS SMALL ICON */
+
+.wallawalla-homepage .business-count-icon {
+    background: #10b92b !important;
+}
+
+
+/* PROPERTY SMALL ICON */
+
+.wallawalla-homepage .property-count-icon {
+    background: #168ee8 !important;
+}
+
+
+/* CAR SMALL ICON */
+
+.wallawalla-homepage .car-count-icon {
+    background: #7429e8 !important;
+}
+
+
+/* JOB SMALL ICON */
+
+.wallawalla-homepage .job-count-icon {
+    background: #ff6a00 !important;
+}
+
+
+/* ==========================================================
+   COUNT NUMBER
+========================================================== */
+
+.wallawalla-homepage .home-count-pill strong {
+
+    font-size: 19px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+}
+
+
+.wallawalla-homepage
+.business-count-pill strong {
+
+    color: #128627 !important;
+}
+
+
+.wallawalla-homepage
+.property-count-pill strong {
+
+    color: #126eb9 !important;
+}
+
+
+.wallawalla-homepage
+.car-count-pill strong {
+
+    color: #5520b0 !important;
+}
+
+
+.wallawalla-homepage
+.job-count-pill strong {
+
+    color: #cf4d00 !important;
+}
+
+
+/* ==========================================================
+   BUTTON ALWAYS AT BOTTOM
+========================================================== */
+
+.wallawalla-homepage .home-find-button {
+
+    order: 4;
+
+    width: 100% !important;
+    min-height: 57px !important;
+
+    margin-top: auto !important;
+
+    border:
+        3px
+        solid
+        #ffffff !important;
+
+    border-radius:
+        32px !important;
+
+    font-size:
+        21px !important;
+
+    font-weight:
+        900 !important;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 650px) {
+
+    .wallawalla-homepage
+    .home-listing-card {
+
+        min-height:
+            325px !important;
+    }
+
+
+    /* MAIN ICON */
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon {
+
+        top:
+            15px !important;
+
+        width:
+            58px !important;
+
+        height:
+            55px !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon i {
+
+        font-size:
+            49px !important;
+    }
+
+
+    .wallawalla-homepage
+    .business-listing-card
+    .home-listing-icon i {
+
+        font-size:
+            49px !important;
+    }
+
+
+    .wallawalla-homepage
+    .property-listing-card
+    .home-listing-icon i {
+
+        font-size:
+            51px !important;
+    }
+
+
+    .wallawalla-homepage
+    .car-listing-card
+    .home-listing-icon i {
+
+        font-size:
+            49px !important;
+    }
+
+
+    .wallawalla-homepage
+    .job-listing-card
+    .home-listing-icon i {
+
+        font-size:
+            49px !important;
+    }
+
+
+    /* BODY */
+
+    .wallawalla-homepage
+    .home-listing-body {
+
+        min-height:
+            325px !important;
+
+        padding:
+            73px
+            9px
+            10px !important;
+    }
+
+
+    /* HEADING */
+
+    .wallawalla-homepage
+    .home-listing-body h2 {
+
+        margin-bottom:
+            6px !important;
+
+        font-size:
+            21px !important;
+
+        line-height:
+            1 !important;
+    }
+
+
+    /* DESCRIPTION */
+
+    .wallawalla-homepage
+    .home-listing-description {
+
+        min-height:
+            39px !important;
+
+        max-width:
+            160px !important;
+
+        margin-bottom:
+            8px !important;
+
+        font-size:
+            11px !important;
+
+        line-height:
+            1.17 !important;
+    }
+
+
+    /* COUNT */
+
+    .wallawalla-homepage
+    .home-count-pill {
+
+        min-width:
+            92px !important;
+
+        height:
+            36px !important;
+
+        margin-bottom:
+            10px !important;
+
+        padding:
+            4px
+            12px
+            4px
+            5px !important;
+
+        gap:
+            9px !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon {
+
+        width:
+            27px !important;
+
+        height:
+            27px !important;
+
+        flex-basis:
+            27px !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon i {
+
+        font-size:
+            12px !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-count-pill strong {
+
+        font-size:
+            15px !important;
+    }
+
+
+    /* BUTTON */
+
+    .wallawalla-homepage
+    .home-find-button {
+
+        min-height:
+            44px !important;
+
+        border-width:
+            2px !important;
+
+        font-size:
+            15px !important;
+    }
+
+}
