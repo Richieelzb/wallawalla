@@ -9258,3 +9258,24 @@ body.wallawalla-homepage {
         top: 3px;
     }
 }
+
+#search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    white-space: nowrap;
+}
+
+#search-btn:disabled {
+    cursor: wait;
+}
+
+#search-btn .fa-spinner {
+    font-size: 14px;
+}
+
+#search-btn span {
+    font-size: 12px;
+    font-weight: 700;
+}

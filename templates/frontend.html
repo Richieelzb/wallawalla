@@ -697,9 +697,14 @@
                         id="search-btn"
                         aria-label="Search"
                     >
-
                         <i class="fa-solid fa-magnifying-glass"></i>
 
+                        <span
+                            id="search-btn-text"
+                            style="display:none;"
+                        >
+                            Searching...
+                        </span>
                     </button>
 
                 </div>
@@ -4164,9 +4169,7 @@ function validateLocationRequired() {
             "Your current location is required before searching."
         );
 
-        useCurrentLocation(
-            true
-        );
+        useCurrentLocation(true);
 
         return false;
     }
@@ -4184,24 +4187,43 @@ function validateLocationRequired() {
 
 
     if (latitudeInput) {
-
         latitudeInput.value =
             String(selectedLatitude);
+    }
 
+    if (longitudeInput) {
+        longitudeInput.value =
+            String(selectedLongitude);
     }
 
 
-    if (longitudeInput) {
+    /* =========================================
+       SEARCHING BUTTON
+    ========================================= */
 
-        longitudeInput.value =
-            String(selectedLongitude);
+    const searchButton =
+        document.getElementById(
+            "search-btn"
+        );
 
+    if (searchButton) {
+
+        searchButton.disabled = true;
+
+        searchButton.innerHTML = `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span>Searching...</span>
+        `;
+
+        searchButton.setAttribute(
+            "aria-label",
+            "Searching"
+        );
     }
 
 
     return true;
 }
-
 
 /* =================================================
    RESET FEATURED RESULTS WHEN LOCATION CHANGES
