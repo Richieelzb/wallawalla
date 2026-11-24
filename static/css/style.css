@@ -9171,3 +9171,37 @@ body.wallawalla-homepage {
         padding-top: 38px;
     }
 }
+
+/* =========================================================
+   DESKTOP HERO - REMOVE GAP BELOW ANNOUNCEMENT
+========================================================= */
+
+@media (min-width: 769px) {
+
+    .announcement-banner {
+        margin-bottom: 0 !important;
+    }
+
+    .wallawalla-home-hero {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .home-hero-background {
+        position: relative;
+        margin-top: 0 !important;
+    }
+
+    .home-discovery-content {
+        margin-top: 0;
+    }
+
+
+    /* =====================================================
+       SEARCH ON GOOGLE - MOVE UP
+    ===================================================== */
+
+    .hero-google-search-button {
+        top: 4px;
+    }
+}
