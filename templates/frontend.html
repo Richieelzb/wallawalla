@@ -184,6 +184,21 @@
 
     <div class="home-hero-background">
 
+        <button
+            type="button"
+            class="hero-google-search-button"
+            onclick="goToGoogleSearch()"
+        >
+            <img
+                src="https://www.google.com/favicon.ico"
+                alt="Google"
+            >
+
+            <span>
+                Search on Google
+            </span>
+        </button>
+
         <div class="home-hero-heading">
 
             <h1>
@@ -4520,6 +4535,41 @@ function openExploreMap() {
     window.location.href =
         "/map?"
         + parameters.toString();
+}
+</script>
+
+<script>
+function goToGoogleSearch() {
+
+    const googleField =
+        document.querySelector(
+            ".home-google-field"
+        );
+
+    if (!googleField) {
+        return;
+    }
+
+    googleField.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    setTimeout(
+        function () {
+
+            const searchInput =
+                document.getElementById(
+                    "search-input"
+                );
+
+            if (searchInput) {
+                searchInput.focus();
+            }
+
+        },
+        500
+    );
 }
 </script>
 

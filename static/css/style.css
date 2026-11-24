@@ -3148,6 +3148,7 @@ body{
 
 .home-hero-background {
     min-height: 300px;
+    position: relative;
 
     display: flex;
     align-items: flex-start;
@@ -9071,4 +9072,102 @@ body.wallawalla-homepage {
         font-size: 15px;
     }
 
+}
+
+/* =========================================
+   HERO SEARCH ON GOOGLE BUTTON
+========================================= */
+
+.hero-google-search-button {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 10;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-width: 175px;
+    height: 34px;
+
+    padding: 0 18px;
+
+    background: rgba(0, 70, 110, 0.92);
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.9
+    );
+
+    border-radius: 999px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0, 0, 0, 0.15);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.hero-google-search-button img {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+
+.hero-google-search-button:hover {
+    background: #005b96;
+
+    transform:
+        translateX(-50%)
+        translateY(-1px);
+}
+
+
+.hero-google-search-button:active {
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+@media (max-width: 768px) {
+
+    .hero-google-search-button {
+        top: 10px;
+
+        min-width: 160px;
+        height: 32px;
+
+        padding: 0 14px;
+
+        font-size: 11px;
+    }
+
+    .hero-google-search-button img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .home-hero-heading {
+        padding-top: 38px;
+    }
 }
