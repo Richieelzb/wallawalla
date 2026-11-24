@@ -2308,6 +2308,8 @@ let selectedLongitude = null;
 
 let nearbyBusinessCount = 0;
 let nearbyPropertyCount = 0;
+let nearbyCarCount = 0;
+let nearbyJobCount = 0;
 
 let locationAutocomplete = null;
 let locationGeocoder = null;
@@ -3629,7 +3631,6 @@ async function loadCarCount(
             "car-count-hero"
         );
 
-
     if (
         !wrapper
         || !countElement
@@ -3637,63 +3638,56 @@ async function loadCarCount(
         return;
     }
 
-
-    if (
-        !carDealerPlatformUrl
-        || carDealerPlatformUrl
-            === "YOUR_CAR_DEALERS_URL"
-    ) {
-        return;
-    }
-
-
     wrapper.style.display =
         "none";
 
+    countElement.textContent =
+        "";
 
     try {
 
         const parameters =
             new URLSearchParams({
-
-                lat:
-                    String(latitude),
-
-                lng:
-                    String(longitude)
-
+                lat: String(latitude),
+                lng: String(longitude)
             });
 
-
         const endpoint =
-            carDealerPlatformUrl.replace(
-                /\/+$/,
-                ""
-            )
-            + "/api/car-count?"
+            "https://cars.wallawalla.co.za/api/car-count?"
             + parameters.toString();
 
+        console.log(
+            "Loading car count:",
+            endpoint
+        );
 
         const response =
-            await fetch(endpoint);
-
+            await fetch(
+                endpoint,
+                {
+                    method: "GET",
+                    mode: "cors",
+                    credentials: "omit"
+                }
+            );
 
         if (!response.ok) {
 
             throw new Error(
                 `Car count request failed: ${response.status}`
             );
-
         }
-
 
         const data =
             await response.json();
 
-
         nearbyCarCount =
             Number(data.count) || 0;
 
+        console.log(
+            "Nearby car count:",
+            nearbyCarCount
+        );
 
         if (nearbyCarCount >= 1) {
 
@@ -3710,7 +3704,6 @@ async function loadCarCount(
 
             wrapper.style.display =
                 "none";
-
         }
 
     } catch (error) {
@@ -3720,15 +3713,14 @@ async function loadCarCount(
             error
         );
 
+        nearbyCarCount = 0;
 
         countElement.textContent =
             "";
 
         wrapper.style.display =
             "none";
-
     }
-
 }
 
 
