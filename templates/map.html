@@ -330,6 +330,76 @@
                 0 0 0 3px rgba(20, 120, 220, 0.12);
         }
 
+        /* =========================================
+        CARS AND JOBS FILTER COLOURS
+        ========================================== */
+
+        .map-filter-button.car-filter.active {
+            border-color: #7c3aed;
+            background: #7c3aed;
+            color: #ffffff;
+        }
+
+        .map-filter-button.job-filter.active {
+            border-color: #f97316;
+            background: #f97316;
+            color: #ffffff;
+        }
+
+
+        /* =========================================
+        CATEGORY DROPDOWN BORDERS
+        ========================================== */
+
+        /* Cars - Purple */
+
+        #car-category-wrapper .category-filter-select {
+            border-color: #7c3aed;
+        }
+
+        #car-category-wrapper .category-filter-select:focus {
+            border-color: #7c3aed;
+
+            box-shadow:
+                0 0 0 3px rgba(124, 58, 237, 0.12);
+        }
+
+
+        /* Jobs - Orange */
+
+        #job-category-wrapper .category-filter-select {
+            border-color: #f97316;
+        }
+
+        #job-category-wrapper .category-filter-select:focus {
+            border-color: #f97316;
+
+            box-shadow:
+                0 0 0 3px rgba(249, 115, 22, 0.12);
+        }
+
+
+        /* =========================================
+        MAP SUMMARY COLOURS
+        ========================================== */
+
+        .car-summary {
+            color: #7c3aed;
+        }
+
+        .car-summary i {
+            color: #7c3aed;
+        }
+
+
+        .job-summary {
+            color: #ea580c;
+        }
+
+        .job-summary i {
+            color: #f97316;
+        }
+
 
         /* =========================================
            MAP
@@ -582,6 +652,103 @@
 
         }
 
+        @media (max-width: 700px) {
+
+            .map-filters {
+                padding: 8px 10px;
+                overflow: visible;
+            }
+
+
+            .map-filter-buttons {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(6, minmax(0, 1fr));
+
+                gap: 7px;
+
+                width: 100%;
+
+                overflow: visible;
+
+                padding-bottom: 1px;
+            }
+
+
+            /*
+            * First row:
+            * All | Businesses | Properties
+            */
+
+            #show-all-button,
+            #show-business-button,
+            #show-property-button {
+                grid-column: span 2;
+            }
+
+
+            /*
+            * Second row:
+            * Cars | Jobs
+            */
+
+            #show-car-button {
+                grid-column: 2 / span 2;
+            }
+
+            #show-job-button {
+                grid-column: 4 / span 2;
+            }
+
+
+            .map-filter-button {
+                width: 100%;
+                min-width: 0;
+
+                flex-shrink: 1;
+
+                padding: 8px 5px;
+
+                gap: 4px;
+
+                font-size: 10px;
+
+                white-space: nowrap;
+            }
+
+
+            .map-filter-button i {
+                font-size: 11px;
+            }
+
+
+            .map-filter-button span {
+                font-size: 10px;
+            }
+
+
+            .map-category-row {
+                width: 100%;
+            }
+
+
+            .category-filter-wrapper {
+                width: 100%;
+                max-width: none;
+            }
+
+
+            .category-filter-select {
+                width: 100%;
+
+                padding: 9px 34px 9px 13px;
+
+                font-size: 12px;
+            }
+
+        }
+
         .radius-summary {
             color: #1478dc;
         }
@@ -589,6 +756,8 @@
         .radius-summary i {
             color: #1478dc;
         }
+
+    
 
     </style>
 
@@ -614,7 +783,7 @@
             </strong>
 
             <small>
-                Explore businesses and properties
+                Explore businesses, properties, cars and jobs
             </small>
 
         </div>
@@ -657,6 +826,7 @@
             All
         </button>
 
+
         <button
             type="button"
             class="map-filter-button business-filter"
@@ -670,6 +840,7 @@
             <span id="business-filter-count">0</span>
         </button>
 
+
         <button
             type="button"
             class="map-filter-button property-filter"
@@ -681,6 +852,34 @@
             Properties
 
             <span id="property-filter-count">0</span>
+        </button>
+
+
+        <button
+            type="button"
+            class="map-filter-button car-filter"
+            id="show-car-button"
+            onclick="showCarMarkers()"
+        >
+            <i class="fa-solid fa-car-side"></i>
+
+            Cars
+
+            <span id="car-filter-count">0</span>
+        </button>
+
+
+        <button
+            type="button"
+            class="map-filter-button job-filter"
+            id="show-job-button"
+            onclick="showJobMarkers()"
+        >
+            <i class="fa-solid fa-briefcase"></i>
+
+            Jobs
+
+            <span id="job-filter-count">0</span>
         </button>
 
     </div>
@@ -715,6 +914,37 @@
             >
                 <option value="">
                     All property categories
+                </option>
+            </select>
+        </div>
+
+        <div
+            id="car-category-wrapper"
+            class="category-filter-wrapper"
+        >
+            <select
+                id="car-category-select"
+                class="category-filter-select"
+                onchange="filterCarMarkersByCategory()"
+            >
+                <option value="">
+                    All car categories
+                </option>
+            </select>
+        </div>
+
+
+        <div
+            id="job-category-wrapper"
+            class="category-filter-wrapper"
+        >
+            <select
+                id="job-category-select"
+                class="category-filter-select"
+                onchange="filterJobMarkersByCategory()"
+            >
+                <option value="">
+                    All job categories
                 </option>
             </select>
         </div>
@@ -758,6 +988,27 @@
 
         </div>
 
+        <div class="summary-item car-summary">
+
+            <i class="fa-solid fa-car-side"></i>
+
+            <span id="car-map-count">
+                0 cars
+            </span>
+
+        </div>
+
+
+        <div class="summary-item job-summary">
+
+            <i class="fa-solid fa-briefcase"></i>
+
+            <span id="job-map-count">
+                0 jobs
+            </span>
+
+        </div>
+
         <div class="summary-item radius-summary">
 
             <i class="fa-solid fa-circle-dot"></i>
@@ -781,6 +1032,17 @@
 
     const selectedLongitude =
         Number("{{ longitude }}");
+    
+        /*
+    * Replace these two values with the final
+    * Cars and Jobs platform URLs.
+    */
+
+    const carPlatformUrl =
+       "YOUR_CAR_PLATFORM_URL";
+
+    const jobsPlatformUrl =
+        "YOUR_JOBS_PLATFORM_URL";
 
 
     let wallawallaMap = null;
@@ -789,6 +1051,10 @@
 
     let propertyMarkers = [];
 
+    let carMarkers = [];
+
+    let jobMarkers = [];
+
     let selectedLocationMarker = null;
     let activeInfoWindow = null;
 
@@ -796,6 +1062,8 @@
     let markerPositionCounts = {};
     let businessCategories = new Set();
     let propertyCategories = new Set();
+    let carCategories = new Set();
+    let jobCategories = new Set();
 
 
     /* =============================================
@@ -972,11 +1240,15 @@
 
         await Promise.all([
 
-        loadBusinesses(),
+            loadBusinesses(),
 
-        loadProperties()
+            loadProperties(),
 
-    ]);
+            loadCars(),
+
+            loadJobs()
+
+        ]);
 
 
     /*
@@ -1169,6 +1441,210 @@
 
 
             updatePropertyCount(0);
+
+        }
+
+    }
+
+    /* =============================================
+    LOAD CARS
+    ============================================== */
+
+    async function loadCars() {
+
+        if (
+            !carPlatformUrl
+            || carPlatformUrl
+                === "YOUR_CAR_PLATFORM_URL"
+        ) {
+
+            console.warn(
+                "Cars map URL has not been configured."
+            );
+
+            updateCarCount(0);
+
+            return;
+        }
+
+
+        try {
+
+            const parameters =
+                new URLSearchParams({
+
+                    latitude:
+                        String(selectedLatitude),
+
+                    longitude:
+                        String(selectedLongitude),
+
+                    radius:
+                        "50"
+
+                });
+
+
+            const endpoint =
+                carPlatformUrl.replace(
+                    /\/+$/,
+                    ""
+                )
+                + "/api/map-cars?"
+                + parameters.toString();
+
+
+            const response =
+                await fetch(endpoint);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `Cars request failed: ${response.status}`
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const cars =
+                Array.isArray(data.cars)
+                    ? data.cars
+                    : [];
+
+
+            cars.forEach(
+
+                function (car) {
+
+                    createCarMarker(
+                        car
+                    );
+
+                }
+
+            );
+
+
+            updateCarCount(
+                cars.length
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load map cars:",
+                error
+            );
+
+
+            updateCarCount(0);
+
+        }
+
+    }
+
+    /* =============================================
+    LOAD JOBS
+    ============================================== */
+
+    async function loadJobs() {
+
+        if (
+            !jobsPlatformUrl
+            || jobsPlatformUrl
+                === "YOUR_JOBS_PLATFORM_URL"
+        ) {
+
+            console.warn(
+                "Jobs map URL has not been configured."
+            );
+
+            updateJobCount(0);
+
+            return;
+        }
+
+
+        try {
+
+            const parameters =
+                new URLSearchParams({
+
+                    latitude:
+                        String(selectedLatitude),
+
+                    longitude:
+                        String(selectedLongitude),
+
+                    radius:
+                        "50"
+
+                });
+
+
+            const endpoint =
+                jobsPlatformUrl.replace(
+                    /\/+$/,
+                    ""
+                )
+                + "/api/map-jobs?"
+                + parameters.toString();
+
+
+            const response =
+                await fetch(endpoint);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `Jobs request failed: ${response.status}`
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const jobs =
+                Array.isArray(data.jobs)
+                    ? data.jobs
+                    : [];
+
+
+            jobs.forEach(
+
+                function (job) {
+
+                    createJobMarker(
+                        job
+                    );
+
+                }
+
+            );
+
+
+            updateJobCount(
+                jobs.length
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load map jobs:",
+                error
+            );
+
+
+            updateJobCount(0);
 
         }
 
@@ -1603,6 +2079,374 @@
 
     }
 
+    /* =============================================
+    CAR MARKER
+    ============================================== */
+
+    function createCarMarker(
+        car
+    ) {
+
+        const latitude =
+            Number(car.latitude);
+
+        const longitude =
+            Number(car.longitude);
+
+
+        if (
+            !Number.isFinite(latitude)
+            || !Number.isFinite(longitude)
+        ) {
+            return;
+        }
+
+
+        const visiblePosition =
+            getVisibleMarkerPosition(
+                latitude,
+                longitude
+            );
+
+
+        const marker =
+            new google.maps.Marker({
+
+                position:
+                    visiblePosition,
+
+                map:
+                    wallawallaMap,
+
+                title:
+                    car.title
+                    || car.vehicle_name
+                    || car.dealer_name
+                    || "Car",
+
+                icon: {
+
+                    path:
+                        google.maps.SymbolPath.CIRCLE,
+
+                    fillColor:
+                        "#7c3aed",
+
+                    fillOpacity:
+                        1,
+
+                    strokeColor:
+                        "#ffffff",
+
+                    strokeWeight:
+                        3,
+
+                    scale:
+                        9
+                }
+
+            });
+
+
+        const carCategory =
+            String(
+                car.category
+                || car.vehicle_type
+                || car.make
+                || "Other"
+            ).trim();
+
+
+        marker.listingCategory =
+            carCategory;
+
+
+        carCategories.add(
+            carCategory
+        );
+
+
+        updateCarCategoryOptions();
+
+
+        const carName =
+            car.title
+            || car.vehicle_name
+            || car.dealer_name
+            || "Car";
+
+
+        const carUrl =
+            car.url
+            || createCarSearchUrl(
+                car
+            );
+
+
+        const information =
+            new google.maps.InfoWindow({
+
+                content: `
+
+                    <div class="wallawalla-info-window">
+
+                        <h3>
+                            ${escapeHtml(carName)}
+                        </h3>
+
+                        <p>
+                            <strong>
+                                ${escapeHtml(carCategory)}
+                            </strong>
+                        </p>
+
+                        <p>
+                            ${escapeHtml(
+                                car.address
+                                || car.location
+                                || ""
+                            )}
+                        </p>
+
+                        <a
+                            href="${carUrl}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="background:#7c3aed;"
+                        >
+                            View Car
+
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+
+                    </div>
+
+                `
+
+            });
+
+
+        marker.addListener(
+
+            "click",
+
+            function () {
+
+                closeActiveInfoWindow();
+
+
+                information.open({
+
+                    anchor:
+                        marker,
+
+                    map:
+                        wallawallaMap
+
+                });
+
+
+                activeInfoWindow =
+                    information;
+
+            }
+
+        );
+
+
+        carMarkers.push(
+            marker
+        );
+
+    }
+
+    /* =============================================
+    JOB MARKER
+    ============================================== */
+
+    function createJobMarker(
+        job
+    ) {
+
+        const latitude =
+            Number(job.latitude);
+
+        const longitude =
+            Number(job.longitude);
+
+
+        if (
+            !Number.isFinite(latitude)
+            || !Number.isFinite(longitude)
+        ) {
+            return;
+        }
+
+
+        const visiblePosition =
+            getVisibleMarkerPosition(
+                latitude,
+                longitude
+            );
+
+
+        const marker =
+            new google.maps.Marker({
+
+                position:
+                    visiblePosition,
+
+                map:
+                    wallawallaMap,
+
+                title:
+                    job.title
+                    || job.job_title
+                    || "Job",
+
+                icon: {
+
+                    path:
+                        google.maps.SymbolPath.CIRCLE,
+
+                    fillColor:
+                        "#f97316",
+
+                    fillOpacity:
+                        1,
+
+                    strokeColor:
+                        "#ffffff",
+
+                    strokeWeight:
+                        3,
+
+                    scale:
+                        9
+                }
+
+            });
+
+
+        const jobCategory =
+            String(
+                job.category
+                || job.job_category
+                || job.employment_type
+                || "Other"
+            ).trim();
+
+
+        marker.listingCategory =
+            jobCategory;
+
+
+        jobCategories.add(
+            jobCategory
+        );
+
+
+        updateJobCategoryOptions();
+
+
+        const jobName =
+            job.title
+            || job.job_title
+            || "Job";
+
+
+        const jobUrl =
+            job.url
+            || createJobSearchUrl(
+                job
+            );
+
+
+        const information =
+            new google.maps.InfoWindow({
+
+                content: `
+
+                    <div class="wallawalla-info-window">
+
+                        <h3>
+                            ${escapeHtml(jobName)}
+                        </h3>
+
+                        <p>
+                            <strong>
+                                ${escapeHtml(jobCategory)}
+                            </strong>
+                        </p>
+
+                        <p>
+                            ${escapeHtml(
+                                job.company_name
+                                || job.company
+                                || ""
+                            )}
+                        </p>
+
+                        <p>
+                            ${escapeHtml(
+                                job.address
+                                || job.location
+                                || ""
+                            )}
+                        </p>
+
+                        <a
+                            href="${jobUrl}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="background:#f97316;"
+                        >
+                            View Job
+
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+
+                    </div>
+
+                `
+
+            });
+
+
+        marker.addListener(
+
+            "click",
+
+            function () {
+
+                closeActiveInfoWindow();
+
+
+                information.open({
+
+                    anchor:
+                        marker,
+
+                    map:
+                        wallawallaMap
+
+                });
+
+
+                activeInfoWindow =
+                    information;
+
+            }
+
+        );
+
+
+        jobMarkers.push(
+            marker
+        );
+
+    }
+
 
     /* =============================================
        CREATE LISTING URLS
@@ -1661,13 +2505,81 @@
 
     }
 
+    function createCarSearchUrl(
+        car
+    ) {
+
+        const parameters =
+            new URLSearchParams({
+
+                query:
+                    car.title
+                    || car.vehicle_name
+                    || car.dealer_name
+                    || "",
+
+                latitude:
+                    String(selectedLatitude),
+
+                longitude:
+                    String(selectedLongitude)
+
+            });
+
+
+        return (
+            carPlatformUrl.replace(
+                /\/+$/,
+                ""
+            )
+            + "/car-search?"
+            + parameters.toString()
+        );
+
+    }
+
+
+    function createJobSearchUrl(
+        job
+    ) {
+
+        const parameters =
+            new URLSearchParams({
+
+                query:
+                    job.title
+                    || job.job_title
+                    || "",
+
+                latitude:
+                    String(selectedLatitude),
+
+                longitude:
+                    String(selectedLongitude)
+
+            });
+
+
+        return (
+            jobsPlatformUrl.replace(
+                /\/+$/,
+                ""
+            )
+            + "/job-search?"
+            + parameters.toString()
+        );
+
+    }
+
 
     /* =============================================
        FILTER MARKERS
     ============================================== */
 
     function showAllMarkers() {
+
         closeActiveInfoWindow();
+
 
         businessMarkers.forEach(
             function (marker) {
@@ -1677,6 +2589,7 @@
             }
         );
 
+
         propertyMarkers.forEach(
             function (marker) {
                 marker.setMap(
@@ -1685,29 +2598,75 @@
             }
         );
 
+
+        carMarkers.forEach(
+            function (marker) {
+                marker.setMap(
+                    wallawallaMap
+                );
+            }
+        );
+
+
+        jobMarkers.forEach(
+            function (marker) {
+                marker.setMap(
+                    wallawallaMap
+                );
+            }
+        );
+
+
         hideCategoryFilters();
+
 
         document.getElementById(
             "business-category-select"
         ).value = "";
 
+
         document.getElementById(
             "property-category-select"
         ).value = "";
+
+
+        document.getElementById(
+            "car-category-select"
+        ).value = "";
+
+
+        document.getElementById(
+            "job-category-select"
+        ).value = "";
+
 
         setActiveFilter(
             "show-all-button"
         );
 
+
         updateBusinessCount(
             businessMarkers.length
         );
+
 
         updatePropertyCount(
             propertyMarkers.length
         );
 
+
+        updateCarCount(
+            carMarkers.length
+        );
+
+
+        updateJobCount(
+            jobMarkers.length
+        );
+
+
         fitRadiusCircleToScreen();
+
     }
 
 
@@ -1715,6 +2674,18 @@
         closeActiveInfoWindow();
 
         propertyMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+        carMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+        jobMarkers.forEach(
             function (marker) {
                 marker.setMap(null);
             }
@@ -1743,6 +2714,18 @@
             }
         );
 
+        carMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+        jobMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
         document.getElementById(
             "business-category-select"
         ).value = "";
@@ -1756,48 +2739,193 @@
         filterPropertyMarkersByCategory();
     }
 
-    function showBusinessCategoryFilter() {
-        document.getElementById(
-            "business-category-wrapper"
-        ).classList.add(
-            "visible"
+    function showCarMarkers() {
+
+        closeActiveInfoWindow();
+
+
+        businessMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
         );
 
-        document.getElementById(
-            "property-category-wrapper"
-        ).classList.remove(
-            "visible"
+
+        propertyMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
         );
+
+
+        jobMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        document.getElementById(
+            "business-category-select"
+        ).value = "";
+
+
+        document.getElementById(
+            "property-category-select"
+        ).value = "";
+
+
+        document.getElementById(
+            "job-category-select"
+        ).value = "";
+
+
+        showCarCategoryFilter();
+
+
+        setActiveFilter(
+            "show-car-button"
+        );
+
+
+        filterCarMarkersByCategory();
+
+    }
+
+
+    function showJobMarkers() {
+
+        closeActiveInfoWindow();
+
+
+        businessMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        propertyMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        carMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        document.getElementById(
+            "business-category-select"
+        ).value = "";
+
+
+        document.getElementById(
+            "property-category-select"
+        ).value = "";
+
+
+        document.getElementById(
+            "car-category-select"
+        ).value = "";
+
+
+        showJobCategoryFilter();
+
+
+        setActiveFilter(
+            "show-job-button"
+        );
+
+
+        filterJobMarkersByCategory();
+
+    }
+
+    function setVisibleCategoryFilter(
+        wrapperId = null
+    ) {
+
+        document.querySelectorAll(
+            ".category-filter-wrapper"
+        ).forEach(
+
+            function (wrapper) {
+
+                wrapper.classList.remove(
+                    "visible"
+                );
+
+            }
+
+        );
+
+
+        if (wrapperId) {
+
+            const selectedWrapper =
+                document.getElementById(
+                    wrapperId
+                );
+
+
+            if (selectedWrapper) {
+
+                selectedWrapper.classList.add(
+                    "visible"
+                );
+
+            }
+
+        }
+
+    }
+
+
+    function showBusinessCategoryFilter() {
+
+        setVisibleCategoryFilter(
+            "business-category-wrapper"
+        );
+
     }
 
 
     function showPropertyCategoryFilter() {
-        document.getElementById(
-            "business-category-wrapper"
-        ).classList.remove(
-            "visible"
+
+        setVisibleCategoryFilter(
+            "property-category-wrapper"
         );
 
-        document.getElementById(
-            "property-category-wrapper"
-        ).classList.add(
-            "visible"
+    }
+
+
+    function showCarCategoryFilter() {
+
+        setVisibleCategoryFilter(
+            "car-category-wrapper"
         );
+
+    }
+
+
+    function showJobCategoryFilter() {
+
+        setVisibleCategoryFilter(
+            "job-category-wrapper"
+        );
+
     }
 
 
     function hideCategoryFilters() {
-        document.getElementById(
-            "business-category-wrapper"
-        ).classList.remove(
-            "visible"
-        );
 
-        document.getElementById(
-            "property-category-wrapper"
-        ).classList.remove(
-            "visible"
-        );
+        setVisibleCategoryFilter();
+
     }
 
 
@@ -1912,6 +3040,157 @@
         }
     }
 
+    function updateCarCategoryOptions() {
+
+        const select =
+            document.getElementById(
+                "car-category-select"
+            );
+
+
+        const selectedValue =
+            select.value;
+
+
+        const sortedCategories =
+            Array.from(
+                carCategories
+            ).sort(
+                function (
+                    firstCategory,
+                    secondCategory
+                ) {
+
+                    return firstCategory.localeCompare(
+                        secondCategory
+                    );
+
+                }
+            );
+
+
+        select.innerHTML = `
+            <option value="">
+                All car categories
+            </option>
+        `;
+
+
+        sortedCategories.forEach(
+
+            function (category) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    category;
+
+                option.textContent =
+                    category;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
+
+        );
+
+
+        if (
+            sortedCategories.includes(
+                selectedValue
+            )
+        ) {
+
+            select.value =
+                selectedValue;
+
+        }
+
+    }
+
+
+    function updateJobCategoryOptions() {
+
+        const select =
+            document.getElementById(
+                "job-category-select"
+            );
+
+
+        const selectedValue =
+            select.value;
+
+
+        const sortedCategories =
+            Array.from(
+                jobCategories
+            ).sort(
+                function (
+                    firstCategory,
+                    secondCategory
+                ) {
+
+                    return firstCategory.localeCompare(
+                        secondCategory
+                    );
+
+                }
+            );
+
+
+        select.innerHTML = `
+            <option value="">
+                All job categories
+            </option>
+        `;
+
+
+        sortedCategories.forEach(
+
+            function (category) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    category;
+
+                option.textContent =
+                    category;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
+
+        );
+
+
+        if (
+            sortedCategories.includes(
+                selectedValue
+            )
+        ) {
+
+            select.value =
+                selectedValue;
+
+        }
+
+    }
+
 
     function filterBusinessMarkersByCategory() {
         closeActiveInfoWindow();
@@ -1950,11 +3229,27 @@
             }
         );
 
+        carMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+        jobMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
         updateBusinessCount(
             visibleMarkers.length
         );
 
         updatePropertyCount(0);
+
+        updateCarCount(0);
+
+        updateJobCount(0);
 
         fitFilteredMarkers(
             visibleMarkers
@@ -1999,7 +3294,23 @@
             }
         );
 
+        carMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+        jobMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
         updateBusinessCount(0);
+
+        updateCarCount(0);
+
+        updateJobCount(0);
 
         updatePropertyCount(
             visibleMarkers.length
@@ -2008,6 +3319,171 @@
         fitFilteredMarkers(
             visibleMarkers
         );
+    }
+
+    function filterCarMarkersByCategory() {
+
+        closeActiveInfoWindow();
+
+
+        const selectedCategory =
+            document.getElementById(
+                "car-category-select"
+            ).value;
+
+
+        const visibleMarkers = [];
+
+
+        carMarkers.forEach(
+
+            function (marker) {
+
+                const shouldShow =
+                    selectedCategory === ""
+                    || marker.listingCategory
+                        === selectedCategory;
+
+
+                marker.setMap(
+                    shouldShow
+                        ? wallawallaMap
+                        : null
+                );
+
+
+                if (shouldShow) {
+
+                    visibleMarkers.push(
+                        marker
+                    );
+
+                }
+
+            }
+
+        );
+
+
+        businessMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        propertyMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        jobMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        updateBusinessCount(0);
+
+        updatePropertyCount(0);
+
+        updateCarCount(
+            visibleMarkers.length
+        );
+
+        updateJobCount(0);
+
+
+        fitFilteredMarkers(
+            visibleMarkers
+        );
+
+    }
+
+
+    function filterJobMarkersByCategory() {
+
+        closeActiveInfoWindow();
+
+
+        const selectedCategory =
+            document.getElementById(
+                "job-category-select"
+            ).value;
+
+
+        const visibleMarkers = [];
+
+
+        jobMarkers.forEach(
+
+            function (marker) {
+
+                const shouldShow =
+                    selectedCategory === ""
+                    || marker.listingCategory
+                        === selectedCategory;
+
+
+                marker.setMap(
+                    shouldShow
+                        ? wallawallaMap
+                        : null
+                );
+
+
+                if (shouldShow) {
+
+                    visibleMarkers.push(
+                        marker
+                    );
+
+                }
+
+            }
+
+        );
+
+
+        businessMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        propertyMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        carMarkers.forEach(
+            function (marker) {
+                marker.setMap(null);
+            }
+        );
+
+
+        updateBusinessCount(0);
+
+        updatePropertyCount(0);
+
+        updateCarCount(0);
+
+        updateJobCount(
+            visibleMarkers.length
+        );
+
+
+        fitFilteredMarkers(
+            visibleMarkers
+        );
+
     }
 
 
@@ -2121,9 +3597,10 @@
                 ? markers
                 : [
                     ...businessMarkers,
-                    ...propertyMarkers
+                    ...propertyMarkers,
+                    ...carMarkers,
+                    ...jobMarkers
                 ];
-
 
         const bounds =
             new google.maps.LatLngBounds();
@@ -2331,6 +3808,41 @@
 
         document.getElementById(
             "property-filter-count"
+        ).textContent =
+            String(count);
+
+    }
+
+    function updateCarCount(
+        count
+    ) {
+
+        document.getElementById(
+            "car-map-count"
+        ).textContent =
+            `${count} ${count === 1 ? "car" : "cars"}`;
+
+
+        document.getElementById(
+            "car-filter-count"
+        ).textContent =
+            String(count);
+
+    }
+
+
+    function updateJobCount(
+        count
+    ) {
+
+        document.getElementById(
+            "job-map-count"
+        ).textContent =
+            `${count} ${count === 1 ? "job" : "jobs"}`;
+
+
+        document.getElementById(
+            "job-filter-count"
         ).textContent =
             String(count);
 
