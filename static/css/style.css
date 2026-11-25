@@ -10028,3 +10028,240 @@ body.wallawalla-homepage {
     }
 }
 
+
+/* ==========================================================
+   MAIN HOMEPAGE FOOTER
+   DESKTOP FIX ONLY
+   MOBILE LEFT UNCHANGED
+========================================================== */
+
+@media (min-width: 651px) {
+
+    /* ==============================================
+       OUTER FOOTER
+
+       Critical:
+       undo the earlier display:grid applied to footer.
+    ============================================== */
+
+    body.wallawalla-homepage footer.footer {
+        width: 100% !important;
+        max-width: none !important;
+
+        display: block !important;
+
+        margin: 0 !important;
+        padding: 35px 5% !important;
+
+        box-sizing: border-box !important;
+
+        background: #003f67 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ==============================================
+       FOOTER CONTENT CONTAINER
+    ============================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-container {
+        width: 100% !important;
+        max-width: 1000px !important;
+
+        display: block !important;
+
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+
+
+    /* ==============================================
+       BRAND + QUICK LINKS + SOCIALS
+
+       These are the actual three footer columns.
+    ============================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    #footer-default {
+        width: 100% !important;
+        max-width: 900px !important;
+
+        display: grid !important;
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(220px, 1fr)
+            ) !important;
+
+        align-items: start !important;
+        justify-content: center !important;
+        justify-items: center !important;
+
+        column-gap: 55px !important;
+        row-gap: 0 !important;
+
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+
+
+    /* The BR between brand and links must not become
+       an accidental fourth grid item. */
+
+    body.wallawalla-homepage
+    footer.footer
+    #footer-default > br {
+        display: none !important;
+    }
+
+
+    /* ==============================================
+       INDIVIDUAL COLUMNS
+    ============================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-brand,
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links,
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-social {
+        width: 100% !important;
+        max-width: 260px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-brand {
+        display: block !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links,
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-social {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+
+    /* ==============================================
+       QUICK LINKS
+    ============================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links > br {
+        display: none !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links > a {
+        display: block !important;
+
+        margin: 0 0 12px !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ==============================================
+       SOCIAL ICONS
+       Keep Facebook / X / WhatsApp / TikTok
+       on ONE ROW.
+    ============================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .social-icons {
+        width: auto !important;
+
+        display: flex !important;
+
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        gap: 15px !important;
+
+        margin: 0 auto !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .social-icons a {
+        flex:
+            0
+            0
+            45px !important;
+
+        width: 45px !important;
+        height: 45px !important;
+
+        margin: 0 !important;
+    }
+
+
+    /* ==============================================
+       COPYRIGHT
+
+       Must remain UNDER the three columns,
+       never alongside them.
+    ============================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-bottom {
+        width: 100% !important;
+        max-width: 1000px !important;
+
+        display: block !important;
+
+        margin:
+            30px
+            auto
+            0 !important;
+
+        padding:
+            15px
+            0
+            0 !important;
+
+        border-top:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                0.18
+            ) !important;
+
+        text-align: center !important;
+    }
+
+}
