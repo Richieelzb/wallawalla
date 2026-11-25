@@ -1273,8 +1273,10 @@
                 Sell your car
             </a>
 
-            <a href="#"
-            class="job-btn">
+            <a
+                href="https://jobs.wallawalla.co.za/advertise"
+                class="job-btn"
+            >
                 <i class="fa-solid fa-briefcase"></i>
                 Advertise a Job
             </a>
@@ -2335,6 +2337,7 @@ let locationAutocomplete = null;
 let locationGeocoder = null;
 
 let locationRequestInProgress = false;
+const jobsPlatformUrl = "https://jobs.wallawalla.co.za";
 
 
 /* =================================================
@@ -3759,7 +3762,6 @@ async function loadJobCount(
             "job-count-hero"
         );
 
-
     if (
         !wrapper
         || !countElement
@@ -3767,63 +3769,57 @@ async function loadJobCount(
         return;
     }
 
-
-    if (
-        !jobsPlatformUrl
-        || jobsPlatformUrl
-            === "YOUR_JOBS_URL"
-    ) {
-        return;
-    }
-
-
     wrapper.style.display =
         "none";
 
+    countElement.textContent =
+        "";
 
     try {
 
         const parameters =
             new URLSearchParams({
-
-                lat:
-                    String(latitude),
-
-                lng:
-                    String(longitude)
-
+                lat: String(latitude),
+                lng: String(longitude)
             });
 
-
         const endpoint =
-            jobsPlatformUrl.replace(
-                /\/+$/,
-                ""
-            )
+            jobsPlatformUrl.replace(/\/+$/, "")
             + "/api/job-count?"
             + parameters.toString();
 
+        console.log(
+            "Loading job count:",
+            endpoint
+        );
 
         const response =
-            await fetch(endpoint);
-
+            await fetch(
+                endpoint,
+                {
+                    method: "GET",
+                    mode: "cors",
+                    credentials: "omit"
+                }
+            );
 
         if (!response.ok) {
 
             throw new Error(
                 `Job count request failed: ${response.status}`
             );
-
         }
-
 
         const data =
             await response.json();
 
-
         nearbyJobCount =
             Number(data.count) || 0;
 
+        console.log(
+            "Nearby job count:",
+            nearbyJobCount
+        );
 
         if (nearbyJobCount >= 1) {
 
@@ -3840,7 +3836,6 @@ async function loadJobCount(
 
             wrapper.style.display =
                 "none";
-
         }
 
     } catch (error) {
@@ -3850,17 +3845,15 @@ async function loadJobCount(
             error
         );
 
+        nearbyJobCount = 0;
 
         countElement.textContent =
             "";
 
         wrapper.style.display =
             "none";
-
     }
-
 }
-
 
 
 /* =================================================
@@ -3997,30 +3990,13 @@ function openJobSearch() {
         return;
     }
 
-
-    if (
-        !jobsPlatformUrl
-        || jobsPlatformUrl
-            === "YOUR_JOBS_URL"
-    ) {
-
-        console.error(
-            "The Jobs URL has not been configured."
-        );
-
-        return;
-    }
-
-
     const selectedAddress =
         localStorage.getItem(
             "wallawallaAddress"
         ) || "Selected location";
 
-
     const parameters =
         new URLSearchParams({
-
             latitude:
                 String(selectedLatitude),
 
@@ -4029,19 +4005,12 @@ function openJobSearch() {
 
             address:
                 selectedAddress
-
         });
 
-
     window.location.href =
-        jobsPlatformUrl
-        + (
-            jobsPlatformUrl.includes("?")
-                ? "&"
-                : "?"
-        )
+        jobsPlatformUrl.replace(/\/+$/, "")
+        + "/?"
         + parameters.toString();
-
 }
 
 
