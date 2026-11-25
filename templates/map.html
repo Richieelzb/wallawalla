@@ -965,7 +965,7 @@
     >
         <i class="fa-solid fa-spinner fa-spin"></i>
 
-        Loading businesses and properties...
+        Loading businesses, properties, cars and jobs...
     </div>
 
 
@@ -1039,10 +1039,10 @@
     */
 
     const carPlatformUrl =
-           "https://cars.wallawalla.co.za";
+        "https://cars.wallawalla.co.za";
 
     const jobsPlatformUrl =
-        "YOUR_JOBS_PLATFORM_URL";
+        "https://jobs.wallawalla.co.za";
 
 
     let wallawallaMap = null;
@@ -2360,6 +2360,32 @@
             || createJobSearchUrl(
                 job
             );
+        
+        const jobLocation =
+            [
+                job.address,
+                job.suburb,
+                job.city,
+                job.province
+            ]
+            .filter(
+                function (value) {
+                    return Boolean(
+                        String(value || "").trim()
+                    );
+                }
+            )
+            .filter(
+                function (
+                    value,
+                    index,
+                    values
+                ) {
+                    return values.indexOf(value)
+                        === index;
+                }
+            )
+            .join(", ");
 
 
         const information =
@@ -2388,11 +2414,7 @@
                         </p>
 
                         <p>
-                            ${escapeHtml(
-                                job.address
-                                || job.location
-                                || ""
-                            )}
+                            ${escapeHtml(jobLocation)}
                         </p>
 
                         <a
