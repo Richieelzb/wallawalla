@@ -11057,3 +11057,770 @@ h3:nth-of-type(8) + p strong {
         top: 10px;
     }
 }
+
+/* ==========================================================
+   FINAL MOBILE HOMEPAGE FIT
+   TARGET: HEADER -> EXPLORE MAP VISIBLE WITHOUT SCROLL
+   DESKTOP UNCHANGED
+========================================================== */
+
+@media (max-width: 650px) {
+
+    /* ======================================================
+       PAGE
+    ====================================================== */
+
+    html,
+    body,
+    body.wallawalla-homepage {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        overflow-x: hidden !important;
+    }
+
+
+    /* ======================================================
+       HEADER
+       Screenshot target: approximately 54px
+    ====================================================== */
+
+    .wallawalla-homepage .home-top-header {
+        width: 100% !important;
+        height: 54px !important;
+
+        padding: 3px 8px !important;
+
+        grid-template-columns:
+            minmax(85px, 1fr)
+            auto
+            minmax(38px, 1fr) !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* ADD YOUR LISTING */
+
+    .wallawalla-homepage .home-account-button {
+        min-width: 82px !important;
+        width: 82px !important;
+        height: 34px !important;
+        min-height: 34px !important;
+
+        padding: 3px 6px !important;
+
+        border-radius: 9px !important;
+
+        font-size: 8px !important;
+        line-height: 1 !important;
+    }
+
+
+    .wallawalla-homepage .home-account-button span {
+        gap: 4px !important;
+    }
+
+
+    .wallawalla-homepage .home-account-button i {
+        font-size: 10px !important;
+    }
+
+
+    /* ======================================================
+       HEADER LOGO
+    ====================================================== */
+
+    .wallawalla-homepage .home-brand {
+        position: static !important;
+
+        left: auto !important;
+
+        gap: 3px !important;
+
+        transform: none !important;
+    }
+
+
+    .wallawalla-homepage .home-brand img {
+        width: 38px !important;
+        height: 38px !important;
+
+        max-width: 38px !important;
+        max-height: 38px !important;
+    }
+
+
+    .wallawalla-homepage .home-brand-name {
+        font-size: 14px !important;
+        letter-spacing: 0 !important;
+    }
+
+
+    .wallawalla-homepage .home-brand-copy small {
+        margin-top: 2px !important;
+
+        font-size: 5.5px !important;
+    }
+
+
+    /* MENU */
+
+    .wallawalla-homepage .home-menu-button {
+        width: 32px !important;
+        height: 32px !important;
+
+        padding: 0 !important;
+    }
+
+
+    .wallawalla-homepage .home-menu-button i {
+        font-size: 21px !important;
+    }
+
+
+    /* ======================================================
+       ANNOUNCEMENT
+       Screenshot target: thin orange strip
+    ====================================================== */
+
+    .wallawalla-homepage .announcement-banner,
+    .announcement-banner {
+        width: 100% !important;
+
+        margin: 0 !important;
+        padding: 5px 0 !important;
+
+        min-height: 25px !important;
+
+        border-radius:
+            0
+            0
+            12px
+            12px !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    .wallawalla-homepage .announcement-text,
+    .announcement-text {
+        font-size: 8px !important;
+        line-height: 15px !important;
+    }
+
+
+    /* ======================================================
+       MAIN HOMEPAGE WRAPPER
+    ====================================================== */
+
+    .wallawalla-homepage .wallawalla-home-hero {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 7px 8px !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* ======================================================
+       HERO IMAGE
+       Much shorter than existing 205px configuration
+    ====================================================== */
+
+    .wallawalla-homepage .home-hero-background {
+        width: calc(100% + 14px) !important;
+
+        min-height: 145px !important;
+        height: 145px !important;
+
+        margin-left: -7px !important;
+
+        padding:
+            31px
+            10px
+            16px !important;
+
+        box-sizing: border-box !important;
+
+        background-position:
+            center center !important;
+    }
+
+
+    /* GOOGLE PILL */
+
+    .wallawalla-homepage
+    .hero-google-search-button {
+        top: 3px !important;
+
+        min-width: 130px !important;
+        height: 24px !important;
+
+        padding: 0 10px !important;
+
+        gap: 5px !important;
+
+        font-size: 8px !important;
+    }
+
+
+    .wallawalla-homepage
+    .hero-google-search-button img {
+        width: 12px !important;
+        height: 12px !important;
+    }
+
+
+    /* HERO HEADING */
+
+    .wallawalla-homepage .home-hero-heading {
+        width: 100% !important;
+
+        padding-top: 0 !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-hero-heading h1 {
+        margin: 0 !important;
+
+        font-size: 31px !important;
+        line-height: 0.95 !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-hero-heading p {
+        max-width: 290px !important;
+
+        margin:
+            5px
+            auto
+            0 !important;
+
+        font-size: 10px !important;
+        line-height: 1.15 !important;
+    }
+
+
+    /* ======================================================
+       CARD AREA
+       Pull cards upward onto hero image
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-discovery-content {
+        width: 100% !important;
+
+        margin-top: -36px !important;
+
+        padding: 0 !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* ======================================================
+       2 x 2 GRID
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-grid {
+        width: 100% !important;
+
+        display: grid !important;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            ) !important;
+
+        gap: 6px !important;
+
+        margin: 0 !important;
+    }
+
+
+    /* ======================================================
+       COMPACT CARDS
+
+       Your existing mobile CSS currently ends at 205px.
+       Drop this to 145px.
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-card {
+        width: 100% !important;
+
+        height: 145px !important;
+        min-height: 145px !important;
+
+        aspect-ratio: auto !important;
+
+        border-width: 2px !important;
+        border-radius: 14px !important;
+
+        overflow: hidden !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* BACKGROUND IMAGE */
+
+    .wallawalla-homepage
+    .home-listing-image {
+        position: absolute !important;
+
+        inset: 0 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-listing-image img {
+        width: 100% !important;
+        height: 100% !important;
+
+        object-fit: cover !important;
+    }
+
+
+    /* ======================================================
+       MAIN CARD ICON
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon {
+        top: 7px !important;
+        left: 50% !important;
+
+        width: 35px !important;
+        height: 34px !important;
+
+        transform:
+            translateX(-50%) !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-listing-card
+    .home-listing-icon i,
+
+    .wallawalla-homepage
+    .business-listing-card
+    .home-listing-icon i,
+
+    .wallawalla-homepage
+    .car-listing-card
+    .home-listing-icon i,
+
+    .wallawalla-homepage
+    .job-listing-card
+    .home-listing-icon i {
+        font-size: 30px !important;
+    }
+
+
+    .wallawalla-homepage
+    .property-listing-card
+    .home-listing-icon i {
+        font-size: 31px !important;
+    }
+
+
+    /* ======================================================
+       CARD CONTENT
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-listing-body {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+
+        padding:
+            39px
+            5px
+            5px !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* TITLE */
+
+    .wallawalla-homepage
+    .home-listing-body h2 {
+        margin:
+            0
+            auto
+            2px !important;
+
+        font-size: 14px !important;
+        line-height: 1 !important;
+    }
+
+
+    /* DESCRIPTION */
+
+    .wallawalla-homepage
+    .home-listing-description {
+        min-height: 19px !important;
+        max-width: 140px !important;
+
+        margin:
+            0
+            auto
+            3px !important;
+
+        font-size: 6.5px !important;
+        line-height: 1.08 !important;
+    }
+
+
+    /* ======================================================
+       COUNT PILL
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-count-pill {
+        min-width: 61px !important;
+        width: fit-content !important;
+
+        height: 22px !important;
+
+        margin:
+            0
+            auto
+            3px !important;
+
+        padding:
+            2px
+            7px
+            2px
+            3px !important;
+
+        gap: 5px !important;
+
+        border-radius: 999px !important;
+
+        flex-shrink: 0 !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon {
+        width: 17px !important;
+        height: 17px !important;
+
+        flex:
+            0
+            0
+            17px !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-count-pill
+    .home-count-icon i {
+        font-size: 7px !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-count-pill strong {
+        font-size: 10px !important;
+    }
+
+
+    /* ======================================================
+       CARD BUTTONS
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-find-button {
+        width: 100% !important;
+
+        height: 24px !important;
+        min-height: 24px !important;
+
+        flex:
+            0
+            0
+            24px !important;
+
+        margin:
+            auto
+            0
+            0 !important;
+
+        padding: 2px 4px !important;
+
+        gap: 5px !important;
+
+        border-width: 1.5px !important;
+        border-radius: 999px !important;
+
+        font-size: 8px !important;
+        line-height: 1 !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-find-button i {
+        font-size: 7px !important;
+    }
+
+
+    /* ======================================================
+       CURRENT LOCATION
+    ====================================================== */
+
+    .wallawalla-homepage
+    .home-active-location {
+        width: 100% !important;
+
+        min-height: 38px !important;
+
+        grid-template-columns:
+            auto
+            minmax(0, 1fr)
+            auto !important;
+
+        gap: 6px !important;
+
+        margin-top: 7px !important;
+
+        padding:
+            6px
+            9px !important;
+
+        border-radius: 10px !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    .wallawalla-homepage
+    .home-active-location > i {
+        font-size: 14px !important;
+    }
+
+
+    .wallawalla-homepage
+    .current-location-text {
+        min-width: 0 !important;
+
+        font-size: 8px !important;
+
+        white-space: nowrap !important;
+
+        overflow: hidden !important;
+
+        text-overflow: ellipsis !important;
+    }
+
+
+    .wallawalla-homepage
+    .change-location-button {
+        padding: 2px !important;
+
+        font-size: 8px !important;
+    }
+
+
+    /* ======================================================
+       EXPLORE ON MAP
+       Entire card fits within the screen
+    ====================================================== */
+
+    .wallawalla-homepage
+    .explore-map-section {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        min-height: 62px !important;
+        height: 62px !important;
+
+        margin:
+            7px
+            0
+            0 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: space-between !important;
+
+        border-radius: 11px !important;
+
+        overflow: hidden !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    .wallawalla-homepage
+    .explore-map-info {
+        min-width: 0 !important;
+
+        flex: 1 1 auto !important;
+
+        gap: 5px !important;
+
+        padding:
+            5px
+            6px !important;
+    }
+
+
+    .wallawalla-homepage
+    .explore-map-icon {
+        width: 29px !important;
+        height: 29px !important;
+
+        flex:
+            0
+            0
+            29px !important;
+
+        font-size: 20px !important;
+    }
+
+
+    .wallawalla-homepage
+    .explore-map-text {
+        min-width: 0 !important;
+    }
+
+
+    .wallawalla-homepage
+    .explore-map-text h3 {
+        margin:
+            0
+            0
+            2px !important;
+
+        font-size: 11px !important;
+        line-height: 1 !important;
+
+        white-space: nowrap !important;
+    }
+
+
+    .wallawalla-homepage
+    .explore-map-text p {
+        max-width: 115px !important;
+
+        margin: 0 !important;
+
+        font-size: 6px !important;
+        line-height: 1.1 !important;
+    }
+
+
+    /* MAP PREVIEW */
+
+    .wallawalla-homepage
+    .explore-map-preview {
+        width: 75px !important;
+        height: 62px !important;
+
+        flex:
+            0
+            0
+            75px !important;
+    }
+
+
+    .wallawalla-homepage
+    .map-marker {
+        width: 18px !important;
+        height: 18px !important;
+
+        border-width: 2px !important;
+
+        font-size: 7px !important;
+    }
+
+
+    .wallawalla-homepage
+    .business-marker {
+        left: 8px !important;
+        top: 10px !important;
+    }
+
+
+    .wallawalla-homepage
+    .property-marker {
+        right: 7px !important;
+        top: 8px !important;
+    }
+
+
+    .wallawalla-homepage
+    .car-marker {
+        left: 9px !important;
+        bottom: 6px !important;
+    }
+
+
+    .wallawalla-homepage
+    .job-marker {
+        right: 7px !important;
+        bottom: 6px !important;
+    }
+
+
+    .wallawalla-homepage
+    .location-marker {
+        left: 29px !important;
+        bottom: 5px !important;
+
+        font-size: 9px !important;
+    }
+
+
+    /* MAP BUTTON */
+
+    .wallawalla-homepage
+    .explore-map-button {
+        flex-shrink: 0 !important;
+
+        margin:
+            0
+            6px !important;
+
+        padding:
+            7px
+            9px !important;
+
+        border-radius: 999px !important;
+
+        font-size: 7px !important;
+    }
+
+
+    .wallawalla-homepage
+    .explore-map-button i {
+        margin-left: 2px !important;
+
+        font-size: 6px !important;
+    }
+}
