@@ -9700,3 +9700,92 @@ body {
         max-width: 100%;
     }
 }
+
+/* ==========================================================
+   MAIN WALLAWALLA FOOTER
+   EXACT SAME FORMAT AS JOBS FOOTER
+   ========================================================== */
+
+.wallawalla-homepage footer {
+    width: 100%;
+    max-width: none;
+
+    display: grid;
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 25px;
+
+    margin: 0;
+    padding: 35px 5%;
+
+    background: #00385f;
+    color: #dce9f3;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   FOOTER HEADINGS
+   ========================================================== */
+
+.wallawalla-homepage footer h3,
+.wallawalla-homepage footer h4 {
+    margin-bottom: 9px;
+
+    color: #ffffff;
+}
+
+
+/* ==========================================================
+   FOOTER TEXT
+   ========================================================== */
+
+.wallawalla-homepage footer p {
+    margin: 6px 0;
+
+    color: #c8dae8;
+}
+
+
+/* ==========================================================
+   FOOTER LINKS
+   ========================================================== */
+
+.wallawalla-homepage footer a {
+    color: #9ee900;
+
+    text-decoration: none;
+}
+
+
+.wallawalla-homepage footer a:hover {
+    color: #ffffff;
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   MAIN WALLAWALLA FOOTER MOBILE
+   EXACT SAME BREAKPOINT AS JOBS
+   ========================================================== */
+
+@media (max-width: 650px) {
+
+    .wallawalla-homepage footer {
+        width: 100%;
+        max-width: none;
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        margin: 0;
+        padding: 30px 18px;
+    }
+}
