@@ -9789,3 +9789,193 @@ body {
         padding: 30px 18px;
     }
 }
+
+/* ==========================================================
+   MAIN PAGE FOOTER - LAYOUT FIX ONLY
+   KEEP EXISTING CONTENT
+========================================================== */
+
+.main-footer {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 35px 5%;
+
+    box-sizing: border-box;
+
+    background: #003f68;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   FOOTER MAIN CONTENT
+========================================================== */
+
+.main-footer .footer-content {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 80px;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   EACH FOOTER COLUMN
+========================================================== */
+
+.main-footer .footer-section {
+    flex: 1;
+
+    min-width: 0;
+    max-width: 320px;
+
+    margin: 0;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   BRAND
+========================================================== */
+
+.main-footer .footer-section h2,
+.main-footer .footer-section h3,
+.main-footer .footer-section h4 {
+    text-align: center;
+}
+
+
+.main-footer .footer-section p {
+    text-align: center;
+}
+
+
+/* ==========================================================
+   QUICK LINKS
+========================================================== */
+
+.main-footer .footer-links,
+.main-footer ul {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    text-align: center;
+}
+
+
+.main-footer .footer-links li,
+.main-footer li {
+    margin: 10px 0;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   SOCIAL ICONS
+========================================================== */
+
+.main-footer .social-links,
+.main-footer .social-icons {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 15px;
+}
+
+
+/* ==========================================================
+   COPYRIGHT
+========================================================== */
+
+.main-footer .footer-bottom {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 25px auto 0;
+    padding-top: 12px;
+
+    border-top: 1px solid rgba(255,255,255,0.15);
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 650px) {
+
+    .main-footer {
+        width: 100%;
+
+        padding: 30px 18px;
+
+        box-sizing: border-box;
+    }
+
+
+    .main-footer .footer-content {
+        width: 100%;
+
+        flex-direction: column;
+        align-items: center;
+
+        gap: 25px;
+    }
+
+
+    .main-footer .footer-section {
+        width: 100%;
+        max-width: 100%;
+
+        text-align: center;
+    }
+
+
+    .main-footer .footer-links,
+    .main-footer ul,
+    .main-footer .footer-section h2,
+    .main-footer .footer-section h3,
+    .main-footer .footer-section h4,
+    .main-footer .footer-section p {
+        text-align: center;
+    }
+
+
+    .main-footer .social-links,
+    .main-footer .social-icons {
+        justify-content: center;
+    }
+
+
+    .main-footer .footer-bottom {
+        width: 100%;
+
+        margin-top: 20px;
+
+        text-align: center;
+    }
+}
