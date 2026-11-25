@@ -11824,3 +11824,169 @@ h3:nth-of-type(8) + p strong {
         font-size: 6px !important;
     }
 }
+
+/* ==========================================================
+   ABOUT + CONTACT PANELS
+   WIDER ON DESKTOP ONLY
+   FOOTER LAYOUT UNCHANGED
+========================================================== */
+
+@media (min-width: 651px) {
+
+    /* ======================================================
+       EXPANDED ABOUT / CONTACT PANELS
+
+       Break out wider than the Quick Links column while
+       keeping the panel centred.
+    ====================================================== */
+
+    .wallawalla-homepage
+    .footer-links
+    .about-panel {
+
+        width: 700px !important;
+        max-width: 700px !important;
+
+        position: relative !important;
+
+        left: 50% !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        margin:
+            18px
+            0
+            22px !important;
+
+        padding:
+            30px
+            35px !important;
+
+        box-sizing:
+            border-box !important;
+
+        border-radius:
+            18px !important;
+
+        text-align:
+            center !important;
+    }
+
+
+    /* ======================================================
+       PARAGRAPHS
+    ====================================================== */
+
+    .wallawalla-homepage
+    .footer-links
+    .about-panel p {
+
+        width: 100% !important;
+        max-width: 620px !important;
+
+        margin:
+            10px
+            auto !important;
+
+        line-height:
+            1.7 !important;
+
+        text-align:
+            center !important;
+    }
+
+
+    /* ======================================================
+       HEADINGS
+    ====================================================== */
+
+    .wallawalla-homepage
+    .footer-links
+    .about-panel h2 {
+
+        max-width: 620px !important;
+
+        margin:
+            0
+            auto
+            20px !important;
+
+        text-align:
+            center !important;
+    }
+
+
+    .wallawalla-homepage
+    .footer-links
+    .about-panel h3 {
+
+        max-width: 620px !important;
+
+        margin:
+            25px
+            auto
+            10px !important;
+
+        text-align:
+            center !important;
+    }
+
+
+    /* ======================================================
+       ABOUT LIST
+    ====================================================== */
+
+    .wallawalla-homepage
+    .footer-links
+    .about-panel ul {
+
+        width: 100% !important;
+        max-width: 620px !important;
+
+        margin:
+            16px
+            auto !important;
+
+        box-sizing:
+            border-box !important;
+    }
+
+
+    .wallawalla-homepage
+    .footer-links
+    .about-panel li {
+
+        width: 100% !important;
+
+        box-sizing:
+            border-box !important;
+    }
+
+
+    /* ======================================================
+       CONTACT PANEL
+       Same width as About
+    ====================================================== */
+
+    .wallawalla-homepage
+    #contact-panel {
+
+        width: 700px !important;
+        max-width: 700px !important;
+
+        position: relative !important;
+
+        left: 50% !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        padding:
+            30px
+            35px !important;
+
+        box-sizing:
+            border-box !important;
+    }
+}
