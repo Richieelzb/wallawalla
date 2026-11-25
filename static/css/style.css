@@ -9280,112 +9280,6 @@ body.wallawalla-homepage {
     font-weight: 700;
 }
 
-/* ==========================================================
-   MAIN WALLAWALLA PAGE
-   FULL-WIDTH FOOTER + MOBILE SCREEN FIT
-   ========================================================== */
-
-
-/* ----------------------------------------------------------
-   GLOBAL WIDTH PROTECTION
----------------------------------------------------------- */
-
-html,
-body {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-
-/* ==========================================================
-   MAIN PAGE FOOTER
-   ========================================================== */
-
-.wallawalla-homepage footer {
-    width: 100%;
-    max-width: none;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            3,
-            minmax(0, 1fr)
-        );
-
-    gap: 25px;
-
-    margin: 0;
-    padding: 35px 5%;
-
-    background: #00385f;
-    color: #dce9f3;
-
-    text-align: center;
-
-    box-sizing: border-box;
-}
-
-
-/* ----------------------------------------------------------
-   FOOTER COLUMNS
----------------------------------------------------------- */
-
-.wallawalla-homepage footer > div {
-    width: 100%;
-    min-width: 0;
-
-    margin: 0;
-    padding: 0;
-}
-
-
-/* ----------------------------------------------------------
-   FOOTER HEADINGS
----------------------------------------------------------- */
-
-.wallawalla-homepage footer h3,
-.wallawalla-homepage footer h4 {
-    margin: 0 0 9px;
-
-    color: #ffffff;
-}
-
-
-/* ----------------------------------------------------------
-   FOOTER TEXT
----------------------------------------------------------- */
-
-.wallawalla-homepage footer p {
-    margin: 6px 0;
-
-    color: #c8dae8;
-
-    overflow-wrap: anywhere;
-}
-
-
-/* ----------------------------------------------------------
-   FOOTER LINKS
----------------------------------------------------------- */
-
-.wallawalla-homepage footer a {
-    color: #9ee900;
-
-    text-decoration: none;
-
-    overflow-wrap: anywhere;
-}
-
-.wallawalla-homepage footer a:hover {
-    color: #ffffff;
-
-    text-decoration: underline;
-}
-
 
 /* ==========================================================
    DESKTOP
@@ -9771,97 +9665,132 @@ body {
 
 
 /* ==========================================================
-   MAIN WALLAWALLA FOOTER MOBILE
-   EXACT SAME BREAKPOINT AS JOBS
-   ========================================================== */
-
-@media (max-width: 650px) {
-
-    .wallawalla-homepage footer {
-        width: 100%;
-        max-width: none;
-
-        grid-template-columns: 1fr;
-
-        gap: 18px;
-
-        margin: 0;
-        padding: 30px 18px;
-    }
-}
-
-/* ==========================================================
-   MAIN PAGE FOOTER - LAYOUT FIX ONLY
-   KEEP EXISTING CONTENT
+   MAIN HOMEPAGE FOOTER
+   FINAL CORRECT LAYOUT
 ========================================================== */
 
-.main-footer {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 35px 5%;
+/*
+ * The footer background fills the entire desktop screen.
+ */
+.wallawalla-homepage .footer {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+    padding: 35px 5% !important;
+
+    background: #003f67 !important;
+    color: #ffffff;
 
     box-sizing: border-box;
 
-    background: #003f68;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
     text-align: center;
 }
 
 
 /* ==========================================================
-   FOOTER MAIN CONTENT
+   OUTER FOOTER CONTENT WRAPPER
 ========================================================== */
 
-.main-footer .footer-content {
-    width: 100%;
-    max-width: 1100px;
+.wallawalla-homepage .footer-container {
+    width: 100% !important;
+    max-width: 1100px !important;
 
-    margin: 0 auto;
+    display: block !important;
 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    margin: 0 auto !important;
+    padding: 0 !important;
 
-    gap: 80px;
-
-    text-align: center;
+    text-align: center !important;
 }
 
 
 /* ==========================================================
-   EACH FOOTER COLUMN
+   ACTUAL THREE-COLUMN FOOTER CONTENT
+
+   The three columns are children of #footer-default,
+   not direct children of the footer element.
 ========================================================== */
 
-.main-footer .footer-section {
-    flex: 1;
+.wallawalla-homepage #footer-default {
+    width: 100% !important;
 
-    min-width: 0;
-    max-width: 320px;
+    display: grid !important;
 
-    margin: 0;
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        ) !important;
 
-    text-align: center;
+    align-items: start !important;
+    justify-items: center !important;
+
+    gap: 40px !important;
+
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    text-align: center !important;
+}
+
+
+/*
+ * Hide the standalone line break between the brand
+ * and Quick Links. Otherwise, the BR becomes an extra
+ * grid item and breaks the three-column alignment.
+ */
+.wallawalla-homepage #footer-default > br {
+    display: none !important;
 }
 
 
 /* ==========================================================
-   BRAND
+   THREE FOOTER SECTIONS
 ========================================================== */
 
-.main-footer .footer-section h2,
-.main-footer .footer-section h3,
-.main-footer .footer-section h4 {
-    text-align: center;
+.wallawalla-homepage #footer-default > .footer-brand,
+.wallawalla-homepage #footer-default > .footer-links,
+.wallawalla-homepage #footer-default > .footer-social {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 320px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    text-align: center !important;
 }
 
 
-.main-footer .footer-section p {
-    text-align: center;
+/* ==========================================================
+   FOOTER BRAND
+========================================================== */
+
+.wallawalla-homepage .footer-brand h2 {
+    margin: 0 0 8px !important;
+
+    color: #ffffff !important;
+
+    font-size: 2rem;
+    font-weight: 700;
+
+    text-align: center !important;
+}
+
+
+.wallawalla-homepage .footer-brand p {
+    margin: 0 !important;
+
+    color: #cfcfcf !important;
+
+    font-size: 1rem;
+
+    text-align: center !important;
 }
 
 
@@ -9869,22 +9798,47 @@ body {
    QUICK LINKS
 ========================================================== */
 
-.main-footer .footer-links,
-.main-footer ul {
-    margin: 0;
-    padding: 0;
+.wallawalla-homepage .footer-links h3,
+.wallawalla-homepage .footer-social h3 {
+    margin: 0 0 16px !important;
 
-    list-style: none;
+    color: #ffffff !important;
 
-    text-align: center;
+    font-size: 1.2rem;
+
+    text-align: center !important;
 }
 
 
-.main-footer .footer-links li,
-.main-footer li {
-    margin: 10px 0;
+.wallawalla-homepage .footer-links > a {
+    display: block !important;
 
-    text-align: center;
+    margin: 0 0 12px !important;
+
+    color: #99d420 !important;
+
+    font-size: 0.95rem;
+
+    text-align: center !important;
+    text-decoration: none;
+}
+
+
+.wallawalla-homepage .footer-links > a:hover {
+    color: #ffffff !important;
+
+    transform: none !important;
+
+    text-decoration: underline;
+}
+
+
+/*
+ * Existing BR elements inside Quick Links are unnecessary
+ * because each link already has its own bottom margin.
+ */
+.wallawalla-homepage .footer-links > br {
+    display: none !important;
 }
 
 
@@ -9892,16 +9846,55 @@ body {
    SOCIAL ICONS
 ========================================================== */
 
-.main-footer .social-links,
-.main-footer .social-icons {
+.wallawalla-homepage .footer-social {
+    align-items: center !important;
+}
+
+
+.wallawalla-homepage .social-icons {
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    flex-wrap: wrap;
+
+    gap: 15px !important;
+
+    margin: 0 !important;
+}
+
+
+.wallawalla-homepage .social-icons a {
+    width: 45px;
+    height: 45px;
+
     display: flex;
-
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    gap: 14px;
+    margin: 0 !important;
 
-    margin-top: 15px;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.10);
+    color: #99d420 !important;
+
+    font-size: 20px;
+    text-decoration: none;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.wallawalla-homepage .social-icons a:hover {
+    background: #99d420;
+    color: #003f67 !important;
+
+    transform: translateY(-4px);
 }
 
 
@@ -9909,73 +9902,129 @@ body {
    COPYRIGHT
 ========================================================== */
 
-.main-footer .footer-bottom {
-    width: 100%;
-    max-width: 1100px;
+.wallawalla-homepage .footer-bottom {
+    width: 100% !important;
+    max-width: 1100px !important;
 
-    margin: 25px auto 0;
-    padding-top: 12px;
+    display: block !important;
 
-    border-top: 1px solid rgba(255,255,255,0.15);
+    margin: 30px auto 0 !important;
+    padding: 15px 0 0 !important;
 
-    text-align: center;
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.18);
+
+    color: #cfcfcf !important;
+
+    font-size: 0.9rem;
+
+    text-align: center !important;
 }
 
 
 /* ==========================================================
-   MOBILE
+   ABOUT AND CONTACT PANELS
+========================================================== */
+
+.wallawalla-homepage .footer-links .about-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    margin: 15px auto 20px !important;
+    padding: 18px !important;
+
+    box-sizing: border-box;
+
+    text-align: center !important;
+}
+
+
+.wallawalla-homepage .footer-links .about-panel ul {
+    margin: 12px 0 0 !important;
+    padding: 0 !important;
+
+    list-style-position: inside;
+
+    text-align: center !important;
+}
+
+
+/* ==========================================================
+   MOBILE FOOTER
 ========================================================== */
 
 @media (max-width: 650px) {
 
-    .main-footer {
-        width: 100%;
+    .wallawalla-homepage .footer {
+        width: 100% !important;
 
-        padding: 30px 18px;
+        margin: 0 !important;
+        padding: 30px 18px !important;
 
         box-sizing: border-box;
     }
 
 
-    .main-footer .footer-content {
-        width: 100%;
+    .wallawalla-homepage .footer-container {
+        width: 100% !important;
+        max-width: 100% !important;
 
-        flex-direction: column;
-        align-items: center;
-
-        gap: 25px;
+        margin: 0 auto !important;
     }
 
 
-    .main-footer .footer-section {
-        width: 100%;
-        max-width: 100%;
+    .wallawalla-homepage #footer-default {
+        width: 100% !important;
 
-        text-align: center;
+        grid-template-columns: 1fr !important;
+
+        justify-items: center !important;
+
+        gap: 26px !important;
     }
 
 
-    .main-footer .footer-links,
-    .main-footer ul,
-    .main-footer .footer-section h2,
-    .main-footer .footer-section h3,
-    .main-footer .footer-section h4,
-    .main-footer .footer-section p {
-        text-align: center;
+    .wallawalla-homepage
+    #footer-default > .footer-brand,
+
+    .wallawalla-homepage
+    #footer-default > .footer-links,
+
+    .wallawalla-homepage
+    #footer-default > .footer-social {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        align-items: center !important;
+
+        text-align: center !important;
     }
 
 
-    .main-footer .social-links,
-    .main-footer .social-icons {
-        justify-content: center;
+    .wallawalla-homepage .footer-brand h2,
+    .wallawalla-homepage .footer-brand p,
+    .wallawalla-homepage .footer-links h3,
+    .wallawalla-homepage .footer-links > a,
+    .wallawalla-homepage .footer-social h3 {
+        text-align: center !important;
     }
 
 
-    .main-footer .footer-bottom {
-        width: 100%;
+    .wallawalla-homepage .social-icons {
+        width: 100% !important;
 
-        margin-top: 20px;
+        justify-content: center !important;
+    }
 
-        text-align: center;
+
+    .wallawalla-homepage .footer-bottom {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin-top: 25px !important;
+
+        text-align: center !important;
     }
 }
+
