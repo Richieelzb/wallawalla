@@ -10265,3 +10265,420 @@ body.wallawalla-homepage {
     }
 
 }
+
+/* ==========================================================
+   MAIN HOMEPAGE FOOTER
+   FINAL MOBILE FIX
+========================================================== */
+
+@media (max-width: 650px) {
+
+    /* ======================================================
+       OUTER FOOTER
+    ====================================================== */
+
+    body.wallawalla-homepage footer.footer {
+        width: 100% !important;
+        max-width: none !important;
+
+        display: block !important;
+
+        margin: 0 !important;
+
+        padding:
+            30px
+            18px !important;
+
+        box-sizing: border-box !important;
+
+        background: #003f67 !important;
+
+        color: #ffffff !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ======================================================
+       MAIN CONTENT WRAPPER
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-container {
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        display: block !important;
+
+        margin: 0 auto !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ======================================================
+       BRAND / QUICK LINKS / FOLLOW US
+
+       Stack vertically on mobile.
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    #footer-default {
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        gap: 24px !important;
+
+        margin: 0 auto !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* Remove HTML BR that interferes with spacing */
+
+    body.wallawalla-homepage
+    footer.footer
+    #footer-default > br {
+
+        display: none !important;
+    }
+
+
+    /* ======================================================
+       ALL THREE SECTIONS
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-brand,
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links,
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-social {
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ======================================================
+       WALLAWALLA BRAND
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-brand h2 {
+
+        margin:
+            0
+            0
+            7px !important;
+
+        color: #ffffff !important;
+
+        font-size: 1.7rem !important;
+
+        line-height: 1 !important;
+
+        text-align: center !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-brand p {
+
+        margin: 0 !important;
+
+        color: #cfcfcf !important;
+
+        font-size: 0.9rem !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ======================================================
+       QUICK LINKS
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links h3 {
+
+        margin:
+            0
+            0
+            12px !important;
+
+        color: #ffffff !important;
+
+        font-size: 1.1rem !important;
+
+        text-align: center !important;
+    }
+
+
+    /* Don't let BR tags create big gaps */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links > br {
+
+        display: none !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links > a {
+
+        display: block !important;
+
+        margin:
+            0
+            auto
+            10px !important;
+
+        padding: 0 !important;
+
+        color: #99d420 !important;
+
+        font-size: 0.95rem !important;
+
+        text-align: center !important;
+
+        text-decoration: none !important;
+
+        transform: none !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links > a:last-of-type {
+
+        margin-bottom: 0 !important;
+    }
+
+
+    /* ======================================================
+       FOLLOW US
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-social h3 {
+
+        margin:
+            0
+            0
+            13px !important;
+
+        color: #ffffff !important;
+
+        font-size: 1.1rem !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ======================================================
+       SOCIAL ICONS
+
+       Force all 4 onto one centered row.
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .social-icons {
+
+        width: 100% !important;
+
+        display: flex !important;
+
+        flex-direction: row !important;
+
+        flex-wrap: nowrap !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        gap: 14px !important;
+
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .social-icons a {
+
+        width: 43px !important;
+        height: 43px !important;
+
+        flex:
+            0
+            0
+            43px !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        border-radius: 50% !important;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.10
+            ) !important;
+
+        color: #99d420 !important;
+
+        font-size: 19px !important;
+    }
+
+
+    /* ======================================================
+       COPYRIGHT
+
+       Full row underneath everything.
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-bottom {
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        display: block !important;
+
+        margin:
+            26px
+            auto
+            0 !important;
+
+        padding:
+            15px
+            0
+            0 !important;
+
+        border-top:
+            1px
+            solid
+            rgba(
+                255,
+                255,
+                255,
+                0.18
+            ) !important;
+
+        color: #cfcfcf !important;
+
+        font-size: 0.78rem !important;
+
+        line-height: 1.4 !important;
+
+        text-align: center !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* ======================================================
+       ABOUT / CONTACT EXPANDED PANELS
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    .about-panel {
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin:
+            15px
+            auto
+            10px !important;
+
+        padding:
+            18px
+            12px !important;
+
+        box-sizing: border-box !important;
+
+        text-align: center !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .about-panel p {
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin:
+            10px
+            auto !important;
+
+        text-align: center !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    .about-panel ul {
+
+        width: 100% !important;
+
+        margin:
+            12px
+            auto !important;
+
+        padding: 0 !important;
+
+        list-style-position: inside !important;
+
+        text-align: center !important;
+    }
+}
