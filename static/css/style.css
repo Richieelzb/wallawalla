@@ -11990,3 +11990,116 @@ h3:nth-of-type(8) + p strong {
             border-box !important;
     }
 }
+
+/* ==========================================================
+   ABOUT + CONTACT
+   TRUE CENTER ON DESKTOP
+========================================================== */
+
+@media (min-width: 651px) {
+
+    /*
+     * Quick Links is the middle of the 3-column footer.
+     * Allow the expanded panel to overflow that column
+     * equally on both sides.
+     */
+    .wallawalla-homepage
+    #footer-default {
+        overflow: visible !important;
+    }
+
+
+    .wallawalla-homepage
+    .footer-links {
+        position: relative !important;
+
+        overflow: visible !important;
+    }
+
+
+    /* ABOUT AND CONTACT PANELS */
+
+    .wallawalla-homepage
+    .footer-links
+    #about-panel,
+
+    .wallawalla-homepage
+    .footer-links
+    #contact-panel {
+
+        width: 700px !important;
+        max-width: 700px !important;
+
+        /*
+         * The Quick Links column is already the centre
+         * column, so centre the panel on that column.
+         */
+        position: relative !important;
+
+        left: 50% !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        margin:
+            20px
+            0
+            25px !important;
+
+        padding:
+            30px
+            35px !important;
+
+        box-sizing: border-box !important;
+
+        text-align: center !important;
+    }
+
+
+    /* PANEL CONTENT */
+
+    .wallawalla-homepage
+    #about-panel > h2,
+
+    .wallawalla-homepage
+    #contact-panel > h2 {
+
+        text-align: center !important;
+    }
+
+
+    .wallawalla-homepage
+    #about-panel > h3,
+
+    .wallawalla-homepage
+    #contact-panel > h3 {
+
+        text-align: center !important;
+    }
+
+
+    .wallawalla-homepage
+    #about-panel > p,
+
+    .wallawalla-homepage
+    #contact-panel > p {
+
+        max-width: 620px !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        text-align: center !important;
+    }
+
+
+    .wallawalla-homepage
+    #about-panel ul {
+
+        width: 100% !important;
+        max-width: 620px !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
