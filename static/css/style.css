@@ -9279,3 +9279,424 @@ body.wallawalla-homepage {
     font-size: 12px;
     font-weight: 700;
 }
+
+/* ==========================================================
+   MAIN WALLAWALLA PAGE
+   FULL-WIDTH FOOTER + MOBILE SCREEN FIT
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   GLOBAL WIDTH PROTECTION
+---------------------------------------------------------- */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
+/* ==========================================================
+   MAIN PAGE FOOTER
+   ========================================================== */
+
+.wallawalla-homepage footer {
+    width: 100%;
+    max-width: none;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 25px;
+
+    margin: 0;
+    padding: 35px 5%;
+
+    background: #00385f;
+    color: #dce9f3;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER COLUMNS
+---------------------------------------------------------- */
+
+.wallawalla-homepage footer > div {
+    width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER HEADINGS
+---------------------------------------------------------- */
+
+.wallawalla-homepage footer h3,
+.wallawalla-homepage footer h4 {
+    margin: 0 0 9px;
+
+    color: #ffffff;
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER TEXT
+---------------------------------------------------------- */
+
+.wallawalla-homepage footer p {
+    margin: 6px 0;
+
+    color: #c8dae8;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER LINKS
+---------------------------------------------------------- */
+
+.wallawalla-homepage footer a {
+    color: #9ee900;
+
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+}
+
+.wallawalla-homepage footer a:hover {
+    color: #ffffff;
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   DESKTOP
+   REMOVE SIDE GAPS COMPLETELY
+   ========================================================== */
+
+@media (min-width: 651px) {
+
+    .wallawalla-homepage {
+        width: 100%;
+        max-width: none;
+
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .wallawalla-homepage footer {
+        width: 100%;
+        max-width: none;
+
+        margin: 0;
+
+        padding:
+            35px
+            5%;
+    }
+}
+
+
+/* ==========================================================
+   MOBILE
+   KEEP MAIN PAGE INSIDE VIEWPORT
+   ========================================================== */
+
+@media (max-width: 650px) {
+
+    html,
+    body,
+    .wallawalla-homepage {
+        width: 100%;
+        max-width: 100%;
+
+        margin: 0;
+        padding: 0;
+
+        overflow-x: hidden;
+    }
+
+
+    /* ---------------------------------------------
+       HEADER
+    --------------------------------------------- */
+
+    .wallawalla-homepage .home-top-header {
+        width: 100%;
+        max-width: 100%;
+
+        left: 0;
+        right: 0;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ---------------------------------------------
+       HERO
+    --------------------------------------------- */
+
+    .wallawalla-homepage .home-hero {
+        width: 100%;
+        max-width: 100%;
+
+        margin-left: 0;
+        margin-right: 0;
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage .home-hero-content {
+        width: 100%;
+        max-width: 100%;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ---------------------------------------------
+       HERO IMAGE
+    --------------------------------------------- */
+
+    .wallawalla-homepage .property-hero-house {
+        width: 100%;
+        max-width: 100%;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage .property-hero-house img {
+        display: block;
+
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+
+        object-fit: cover;
+    }
+
+
+    /* ---------------------------------------------
+       THREE HERO CARDS
+    --------------------------------------------- */
+
+    .wallawalla-homepage .home-action-grid {
+        width: 100%;
+        max-width: 100%;
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage .home-action-card {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ---------------------------------------------
+       BENEFIT STRIP
+    --------------------------------------------- */
+
+    .wallawalla-homepage .home-benefit-strip {
+        width: 100%;
+        max-width: 100%;
+
+        grid-template-columns:
+            repeat(
+                4,
+                minmax(0, 1fr)
+            );
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage .home-benefit {
+        min-width: 0;
+    }
+
+
+    /* ---------------------------------------------
+       BUSINESS SEARCH SECTION
+    --------------------------------------------- */
+
+    .wallawalla-homepage .home-local-search {
+        width: calc(100% - 8px);
+        max-width: calc(100% - 8px);
+
+        margin-left: auto;
+        margin-right: auto;
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage .home-search-form {
+        width: 100%;
+        max-width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage .home-search-input-wrapper {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage
+    .home-search-input-wrapper input {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+
+    /* ---------------------------------------------
+       CATEGORY ROW
+    --------------------------------------------- */
+
+    .wallawalla-homepage .home-category-row {
+        width: 100%;
+        max-width: 100%;
+
+        grid-template-columns:
+            repeat(
+                6,
+                minmax(0, 1fr)
+            );
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage .home-category-item {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ---------------------------------------------
+       FEATURED / PREMIUM
+    --------------------------------------------- */
+
+    .wallawalla-homepage .promoted-directory {
+        width: calc(100% - 12px);
+        max-width: calc(100% - 12px);
+
+        margin-left: auto;
+        margin-right: auto;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ---------------------------------------------
+       REGISTER / ACCOUNT
+    --------------------------------------------- */
+
+    .wallawalla-homepage .register-business {
+        width: calc(100% - 12px);
+        max-width: calc(100% - 12px);
+
+        margin-left: auto;
+        margin-right: auto;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ======================================================
+       EXPLORE MAP SECTION
+       KEEP COMPLETELY INSIDE MOBILE SCREEN
+       ====================================================== */
+
+    .wallawalla-homepage .explore-map-section,
+    .wallawalla-homepage #explore-map {
+        width: 100%;
+        max-width: 100%;
+
+        margin-left: 0;
+        margin-right: 0;
+
+        box-sizing: border-box;
+
+        overflow-x: hidden;
+    }
+
+
+    .wallawalla-homepage .explore-map-section > *,
+    .wallawalla-homepage #explore-map > * {
+        max-width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
+    /* ---------------------------------------------
+       FOOTER
+    --------------------------------------------- */
+
+    .wallawalla-homepage footer {
+        width: 100%;
+        max-width: 100%;
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        margin: 0;
+        padding: 30px 18px;
+
+        box-sizing: border-box;
+    }
+
+
+    .wallawalla-homepage footer > div {
+        width: 100%;
+        max-width: 100%;
+    }
+}
