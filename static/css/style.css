@@ -12103,3 +12103,169 @@ h3:nth-of-type(8) + p strong {
         margin-right: auto !important;
     }
 }
+
+/* ==========================================================
+   ABOUT + CONTACT
+   TRUE DESKTOP SCREEN CENTER
+========================================================== */
+
+@media (min-width: 651px) {
+
+    /* Allow the expanded panels to extend outside
+       the Quick Links column */
+    body.wallawalla-homepage
+    footer.footer,
+    
+    body.wallawalla-homepage
+    footer.footer
+    .footer-container,
+
+    body.wallawalla-homepage
+    footer.footer
+    #footer-default,
+
+    body.wallawalla-homepage
+    footer.footer
+    .footer-links {
+        overflow: visible !important;
+    }
+
+
+    /* ======================================================
+       ABOUT PANEL
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel {
+        position: relative !important;
+
+        /*
+         * 100vw makes the positioning relative to the
+         * actual browser width rather than the Quick Links
+         * column.
+         */
+        width: min(800px, calc(100vw - 80px)) !important;
+        max-width: 800px !important;
+
+        /*
+         * Move the panel's centre to the centre
+         * of the browser viewport.
+         */
+        left: 50% !important;
+
+        margin-left:
+            calc(
+                50vw
+                - 50%
+            ) !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        margin-top: 20px !important;
+        margin-bottom: 25px !important;
+
+        padding:
+            30px
+            40px !important;
+
+        box-sizing: border-box !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ======================================================
+       CONTACT PANEL
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    #contact-panel {
+        position: relative !important;
+
+        width: min(800px, calc(100vw - 80px)) !important;
+        max-width: 800px !important;
+
+        left: 50% !important;
+
+        margin-left:
+            calc(
+                50vw
+                - 50%
+            ) !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        margin-top: 20px !important;
+        margin-bottom: 25px !important;
+
+        padding:
+            30px
+            40px !important;
+
+        box-sizing: border-box !important;
+
+        text-align: center !important;
+    }
+
+
+    /* ======================================================
+       INNER CONTENT
+    ====================================================== */
+
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel > p,
+
+    body.wallawalla-homepage
+    footer.footer
+    #contact-panel > p {
+        width: 100% !important;
+        max-width: 700px !important;
+
+        margin:
+            10px
+            auto !important;
+
+        text-align: center !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel > h2,
+
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel > h3,
+
+    body.wallawalla-homepage
+    footer.footer
+    #contact-panel > h2,
+
+    body.wallawalla-homepage
+    footer.footer
+    #contact-panel > h3 {
+        width: 100% !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        text-align: center !important;
+    }
+
+
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel ul {
+        width: 100% !important;
+        max-width: 700px !important;
+
+        margin:
+            16px
+            auto !important;
+    }
+}
