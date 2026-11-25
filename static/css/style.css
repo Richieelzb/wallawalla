@@ -3614,7 +3614,7 @@ body{
 }
 
 .home-active-location > i {
-    color: #16a34a;
+    color: red;
     font-size: 21px;
 }
 
