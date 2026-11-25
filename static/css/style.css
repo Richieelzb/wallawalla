@@ -11993,228 +11993,151 @@ h3:nth-of-type(8) + p strong {
 
 /* ==========================================================
    ABOUT + CONTACT
-   TRUE CENTER ON DESKTOP
+   EXACT DESKTOP CENTER FIX
 ========================================================== */
 
 @media (min-width: 651px) {
 
-    /*
-     * Quick Links is the middle of the 3-column footer.
-     * Allow the expanded panel to overflow that column
-     * equally on both sides.
-     */
-    .wallawalla-homepage
+    /* ------------------------------------------------------
+       Footer three-column grid
+    ------------------------------------------------------ */
+
+    body.wallawalla-homepage
+    footer.footer
     #footer-default {
-        overflow: visible !important;
-    }
-
-
-    .wallawalla-homepage
-    .footer-links {
         position: relative !important;
-
-        overflow: visible !important;
-    }
-
-
-    /* ABOUT AND CONTACT PANELS */
-
-    .wallawalla-homepage
-    .footer-links
-    #about-panel,
-
-    .wallawalla-homepage
-    .footer-links
-    #contact-panel {
-
-        width: 700px !important;
-        max-width: 700px !important;
-
-        /*
-         * The Quick Links column is already the centre
-         * column, so centre the panel on that column.
-         */
-        position: relative !important;
-
-        left: 50% !important;
-
-        transform:
-            translateX(-50%) !important;
-
-        margin:
-            20px
-            0
-            25px !important;
-
-        padding:
-            30px
-            35px !important;
-
-        box-sizing: border-box !important;
-
-        text-align: center !important;
-    }
-
-
-    /* PANEL CONTENT */
-
-    .wallawalla-homepage
-    #about-panel > h2,
-
-    .wallawalla-homepage
-    #contact-panel > h2 {
-
-        text-align: center !important;
-    }
-
-
-    .wallawalla-homepage
-    #about-panel > h3,
-
-    .wallawalla-homepage
-    #contact-panel > h3 {
-
-        text-align: center !important;
-    }
-
-
-    .wallawalla-homepage
-    #about-panel > p,
-
-    .wallawalla-homepage
-    #contact-panel > p {
-
-        max-width: 620px !important;
-
-        margin-left: auto !important;
-        margin-right: auto !important;
-
-        text-align: center !important;
-    }
-
-
-    .wallawalla-homepage
-    #about-panel ul {
 
         width: 100% !important;
-        max-width: 620px !important;
+        max-width: 1000px !important;
 
         margin-left: auto !important;
         margin-right: auto !important;
-    }
-}
 
-/* ==========================================================
-   ABOUT + CONTACT
-   TRUE DESKTOP SCREEN CENTER
-========================================================== */
-
-@media (min-width: 651px) {
-
-    /* Allow the expanded panels to extend outside
-       the Quick Links column */
-    body.wallawalla-homepage
-    footer.footer,
-    
-    body.wallawalla-homepage
-    footer.footer
-    .footer-container,
-
-    body.wallawalla-homepage
-    footer.footer
-    #footer-default,
-
-    body.wallawalla-homepage
-    footer.footer
-    .footer-links {
         overflow: visible !important;
     }
 
 
-    /* ======================================================
-       ABOUT PANEL
-    ====================================================== */
+    /* ------------------------------------------------------
+       Quick Links
+    ------------------------------------------------------ */
 
     body.wallawalla-homepage
     footer.footer
-    #about-panel {
-        position: relative !important;
+    .footer-links {
+        position: static !important;
 
-        /*
-         * 100vw makes the positioning relative to the
-         * actual browser width rather than the Quick Links
-         * column.
-         */
-        width: min(800px, calc(100vw - 80px)) !important;
-        max-width: 800px !important;
-
-        /*
-         * Move the panel's centre to the centre
-         * of the browser viewport.
-         */
-        left: 50% !important;
-
-        margin-left:
-            calc(
-                50vw
-                - 50%
-            ) !important;
-
-        transform:
-            translateX(-50%) !important;
-
-        margin-top: 20px !important;
-        margin-bottom: 25px !important;
-
-        padding:
-            30px
-            40px !important;
-
-        box-sizing: border-box !important;
-
-        text-align: center !important;
+        overflow: visible !important;
     }
 
 
-    /* ======================================================
-       CONTACT PANEL
-    ====================================================== */
+    /* ------------------------------------------------------
+       ABOUT + CONTACT
+
+       Position relative to #footer-default instead of
+       relative to the narrow Quick Links column.
+    ------------------------------------------------------ */
+
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel,
 
     body.wallawalla-homepage
     footer.footer
     #contact-panel {
-        position: relative !important;
-
-        width: min(800px, calc(100vw - 80px)) !important;
-        max-width: 800px !important;
+        position: absolute !important;
 
         left: 50% !important;
 
-        margin-left:
-            calc(
-                50vw
-                - 50%
-            ) !important;
+        width: 800px !important;
+        max-width: calc(100vw - 80px) !important;
 
-        transform:
-            translateX(-50%) !important;
-
-        margin-top: 20px !important;
-        margin-bottom: 25px !important;
+        margin: 0 !important;
 
         padding:
             30px
             40px !important;
 
+        transform:
+            translateX(-50%) !important;
+
         box-sizing: border-box !important;
+
+        text-align: center !important;
+
+        z-index: 20 !important;
+    }
+
+
+    /* About / Contact start below footer headings */
+
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel,
+
+    body.wallawalla-homepage
+    footer.footer
+    #contact-panel {
+        top: 105px !important;
+    }
+
+
+    /* ------------------------------------------------------
+       IMPORTANT
+
+       Because the panel is absolute, make space underneath
+       while About/Contact is open.
+    ------------------------------------------------------ */
+
+    body.wallawalla-homepage
+    footer.footer
+    #footer-default:has(#about-panel[style*="display: block"]),
+
+    body.wallawalla-homepage
+    footer.footer
+    #footer-default:has(#contact-panel[style*="display: block"]) {
+        padding-bottom: 650px !important;
+    }
+
+
+    /* ------------------------------------------------------
+       PANEL CONTENT
+    ------------------------------------------------------ */
+
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel > h2,
+
+    body.wallawalla-homepage
+    footer.footer
+    #contact-panel > h2 {
+        width: 100% !important;
+
+        margin:
+            0
+            auto
+            20px !important;
 
         text-align: center !important;
     }
 
 
-    /* ======================================================
-       INNER CONTENT
-    ====================================================== */
+    body.wallawalla-homepage
+    footer.footer
+    #about-panel > h3,
+
+    body.wallawalla-homepage
+    footer.footer
+    #contact-panel > h3 {
+        width: 100% !important;
+
+        margin:
+            25px
+            auto
+            10px !important;
+
+        text-align: center !important;
+    }
+
 
     body.wallawalla-homepage
     footer.footer
@@ -12229,30 +12152,6 @@ h3:nth-of-type(8) + p strong {
         margin:
             10px
             auto !important;
-
-        text-align: center !important;
-    }
-
-
-    body.wallawalla-homepage
-    footer.footer
-    #about-panel > h2,
-
-    body.wallawalla-homepage
-    footer.footer
-    #about-panel > h3,
-
-    body.wallawalla-homepage
-    footer.footer
-    #contact-panel > h2,
-
-    body.wallawalla-homepage
-    footer.footer
-    #contact-panel > h3 {
-        width: 100% !important;
-
-        margin-left: auto !important;
-        margin-right: auto !important;
 
         text-align: center !important;
     }
