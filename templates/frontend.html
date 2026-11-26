@@ -1133,6 +1133,89 @@
 
 {% endif %}
 
+{% if featured_car_count > 0 %}
+
+<section class="promoted-directory featured-directory">
+
+    <button
+        type="button"
+        class="promoted-directory-header"
+        id="featured-car-button"
+        aria-expanded="false"
+        aria-controls="featured-car-content"
+        onclick="toggleFeaturedCars(this)"
+    >
+
+        <span class="promoted-directory-title">
+
+            <span class="promoted-directory-icon featured-icon">
+                <i class="fa-solid fa-car-side"></i>
+            </span>
+
+            <span>
+                <strong>Featured Cars</strong>
+
+                <small>
+                    Featured cars near you
+                </small>
+            </span>
+
+        </span>
+
+        <span class="promoted-directory-summary">
+
+            <span class="promoted-car-count">
+                {{ featured_car_count }}
+            </span>
+
+            <span class="promoted-count-label">
+                {% if featured_car_count == 1 %}
+                    car
+                {% else %}
+                    cars
+                {% endif %}
+            </span>
+
+            <i
+                class="fa-solid fa-chevron-down promoted-toggle-icon"
+            ></i>
+
+        </span>
+
+    </button>
+
+    <div
+        id="featured-car-content"
+        class="promoted-directory-content"
+        data-loaded="false"
+        style="display:none;"
+    >
+
+        <div
+            id="featured-car-loading"
+            class="promoted-loading"
+            style="display:none;"
+        >
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Loading Featured cars...
+        </div>
+
+        <div
+            id="featured-car-message"
+            class="promoted-message"
+        ></div>
+
+        <div
+            id="featured-car-results"
+            class="promoted-car-grid"
+        ></div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
 <!-- =============================
      BUSINESS & PROPERTY
 =================================== -->
@@ -4262,123 +4345,93 @@ function validateLocationRequired() {
 
 function resetFeaturedDirectories() {
 
-    const businessContent =
-        document.getElementById(
-            "featured-business-content"
-        );
+    const directoryItems = [
+        {
+            content:
+                "featured-business-content",
+            button:
+                "featured-business-button",
+            results:
+                "featured-business-results",
+            message:
+                "featured-business-message"
+        },
+        {
+            content:
+                "featured-property-content",
+            button:
+                "featured-directory-button",
+            results:
+                "featured-property-results",
+            message:
+                "featured-property-message"
+        },
+        {
+            content:
+                "featured-car-content",
+            button:
+                "featured-car-button",
+            results:
+                "featured-car-results",
+            message:
+                "featured-car-message"
+        }
+    ];
 
-    const propertyContent =
-        document.getElementById(
-            "featured-property-content"
-        );
+    directoryItems.forEach(
+        function (item) {
 
-    const businessButton =
-        document.getElementById(
-            "featured-business-button"
-        );
+            const content =
+                document.getElementById(
+                    item.content
+                );
 
-    const propertyButton =
-        document.getElementById(
-            "featured-directory-button"
-        );
+            const button =
+                document.getElementById(
+                    item.button
+                );
 
+            const results =
+                document.getElementById(
+                    item.results
+                );
 
-    if (businessContent) {
+            const message =
+                document.getElementById(
+                    item.message
+                );
 
-        businessContent.dataset.loaded =
-            "false";
+            if (content) {
 
-        businessContent.style.display =
-            "none";
+                content.dataset.loaded =
+                    "false";
 
-    }
+                content.style.display =
+                    "none";
+            }
 
+            if (button) {
 
-    if (propertyContent) {
+                button.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
 
-        propertyContent.dataset.loaded =
-            "false";
+                button.classList.remove(
+                    "active"
+                );
+            }
 
-        propertyContent.style.display =
-            "none";
+            if (results) {
+                results.innerHTML = "";
+            }
 
-    }
-
-
-    if (businessButton) {
-
-        businessButton.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-    }
-
-
-    if (propertyButton) {
-
-        propertyButton.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-    }
-
-
-    const businessResults =
-        document.getElementById(
-            "featured-business-results"
-        );
-
-    const propertyResults =
-        document.getElementById(
-            "featured-property-results"
-        );
-
-    const businessMessage =
-        document.getElementById(
-            "featured-business-message"
-        );
-
-    const propertyMessage =
-        document.getElementById(
-            "featured-property-message"
-        );
-
-
-    if (businessResults) {
-
-        businessResults.innerHTML =
-            "";
-
-    }
-
-
-    if (propertyResults) {
-
-        propertyResults.innerHTML =
-            "";
-
-    }
-
-
-    if (businessMessage) {
-
-        businessMessage.textContent =
-            "";
-
-    }
-
-
-    if (propertyMessage) {
-
-        propertyMessage.textContent =
-            "";
-
-    }
-
+            if (message) {
+                message.textContent = "";
+            }
+        }
+    );
 }
-
 
 /* =================================================
    CLOSE MODAL WHEN BACKDROP IS SELECTED
@@ -4624,6 +4677,358 @@ function goToGoogleSearch() {
         500
     );
 }
+</script>
+
+<script>
+
+let featuredCarsLoading = false;
+
+
+async function toggleFeaturedCars(button) {
+
+    const content =
+        document.getElementById(
+            "featured-car-content"
+        );
+
+    if (!content) {
+        return;
+    }
+
+    const isOpen =
+        content.style.display === "block";
+
+    if (isOpen) {
+
+        content.style.display = "none";
+
+        button.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        button.classList.remove(
+            "active"
+        );
+
+        return;
+    }
+
+    content.style.display = "block";
+
+    button.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+    button.classList.add(
+        "active"
+    );
+
+    if (content.dataset.loaded !== "true") {
+        await loadFeaturedCars();
+    }
+}
+
+
+async function loadFeaturedCars() {
+
+    if (featuredCarsLoading) {
+        return;
+    }
+
+    const latitudeElement =
+        document.getElementById(
+            "latitude"
+        );
+
+    const longitudeElement =
+        document.getElementById(
+            "longitude"
+        );
+
+    const loading =
+        document.getElementById(
+            "featured-car-loading"
+        );
+
+    const message =
+        document.getElementById(
+            "featured-car-message"
+        );
+
+    const results =
+        document.getElementById(
+            "featured-car-results"
+        );
+
+    const content =
+        document.getElementById(
+            "featured-car-content"
+        );
+
+    if (
+        !latitudeElement
+        || !longitudeElement
+        || !loading
+        || !message
+        || !results
+        || !content
+    ) {
+        return;
+    }
+
+    const latitude =
+        latitudeElement.value;
+
+    const longitude =
+        longitudeElement.value;
+
+    if (!latitude || !longitude) {
+
+        message.textContent =
+            "Enable location to view nearby Featured cars.";
+
+        return;
+    }
+
+    featuredCarsLoading = true;
+
+    loading.style.display = "block";
+    message.textContent = "";
+    results.innerHTML = "";
+
+    try {
+
+        const parameters =
+            new URLSearchParams({
+                latitude: latitude,
+                longitude: longitude
+            });
+
+        const response = await fetch(
+            "https://cars.wallawalla.co.za"
+            + "/api/featured-cars?"
+            + parameters.toString(),
+            {
+                method: "GET",
+                mode: "cors",
+                credentials: "omit"
+            }
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Featured cars request failed: ${response.status}`
+            );
+        }
+
+        const data =
+            await response.json();
+
+        const cars =
+            Array.isArray(data.cars)
+                ? data.cars
+                : [];
+
+        cars.forEach(
+            function (car) {
+
+                results.insertAdjacentHTML(
+                    "beforeend",
+                    createFeaturedCarCard(
+                        car
+                    )
+                );
+            }
+        );
+
+        content.dataset.loaded = "true";
+
+        message.textContent =
+            cars.length
+                ? `Showing ${cars.length} Featured cars nearest to you`
+                : "No Featured cars are currently available.";
+
+    } catch (error) {
+
+        console.error(
+            "Featured Cars error:",
+            error
+        );
+
+        message.textContent =
+            "Unable to load Featured cars.";
+
+    } finally {
+
+        loading.style.display = "none";
+
+        featuredCarsLoading = false;
+    }
+}
+
+
+function createFeaturedCarCard(car) {
+
+    const title =
+        escapeHomepageText(
+            car.title
+            || car.display_title
+            || [
+                car.year,
+                car.make,
+                car.model,
+                car.variant
+            ]
+                .filter(Boolean)
+                .join(" ")
+            || "Car"
+        );
+
+    const category =
+        escapeHomepageText(
+            car.category
+            || car.body_type
+            || car.condition
+            || "Car"
+        );
+
+    const description =
+        escapeHomepageText(
+            car.description
+            || "View this Featured vehicle on Wallawalla Cars."
+        );
+
+    const carId =
+        encodeURIComponent(
+            String(
+                car.id || ""
+            )
+        );
+
+    const latitude =
+        document.getElementById(
+            "latitude"
+        )?.value || "";
+
+    const longitude =
+        document.getElementById(
+            "longitude"
+        )?.value || "";
+
+    const address =
+        localStorage.getItem(
+            "wallawallaAddress"
+        ) || "Selected location";
+
+    const parameters =
+        new URLSearchParams({
+            latitude: latitude,
+            longitude: longitude,
+            address: address
+        });
+
+    const carUrl =
+        "https://cars.wallawalla.co.za"
+        + `/car/${carId}?`
+        + parameters.toString();
+
+    const distanceText =
+        car.distance === null
+        || car.distance === undefined
+            ? "Distance unavailable"
+            : `${Number(car.distance).toFixed(1)} km away`;
+
+    const priceText =
+        car.price === null
+        || car.price === undefined
+            ? "Price on request"
+            : `R${Number(car.price).toLocaleString(
+                "en-ZA",
+                {
+                    maximumFractionDigits: 0
+                }
+            )}`;
+
+    return `
+
+        <article class="promoted-car-card">
+
+            <div class="promoted-car-badges">
+
+                <span class="featured-badge">
+                    <i class="fa-solid fa-star"></i>
+                    Featured
+                </span>
+
+                ${
+                    car.is_verified
+                        ? `
+                            <span class="verified-badge">
+                                <i class="fa-solid fa-circle-check"></i>
+                                Verified
+                            </span>
+                        `
+                        : ""
+                }
+
+            </div>
+
+            <h3>
+                ${title}
+            </h3>
+
+            <p class="promoted-car-category">
+                ${category}
+            </p>
+
+            <p class="promoted-car-distance">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                ${distanceText}
+
+            </p>
+
+            <p class="promoted-car-description">
+                ${description}
+            </p>
+
+            <p class="promoted-car-price">
+                ${priceText}
+            </p>
+
+            <button
+                type="button"
+                class="promoted-view-button"
+                onclick="window.location.href='${carUrl}'"
+            >
+                View Car
+
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </article>
+
+    `;
+}
+
+
+function escapeHomepageText(value) {
+
+    const element =
+        document.createElement(
+            "div"
+        );
+
+    element.textContent =
+        String(value || "");
+
+    return element.innerHTML;
+}
+
 </script>
 
 <script
