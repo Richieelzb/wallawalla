@@ -975,7 +975,11 @@
 
 {% if featured_business_count > 0 %}
 
-<section class="promoted-directory featured-directory">
+<section
+    id="featured-car-directory"
+    class="promoted-directory featured-directory"
+    style="display:none;"
+>
 
     <button
         type="button"
@@ -1169,12 +1173,11 @@
                 0
             </span>
 
-            <span class="promoted-count-label">
-                {% if featured_car_count == 1 %}
-                    car
-                {% else %}
-                    cars
-                {% endif %}
+            <span
+                id="featured-car-label"
+                class="promoted-count-label"
+            >
+                cars
             </span>
 
             <i
@@ -5075,9 +5078,29 @@ async function checkFeaturedCars(
             "featured-car-total"
         );
 
-    if (!directory) {
+    const labelElement =
+        document.getElementById(
+            "featured-car-label"
+        );
+
+    if (
+        !directory
+        || !totalElement
+    ) {
+
+        console.error(
+            "Featured Cars HTML elements "
+            + "could not be found."
+        );
+
         return;
     }
+
+    totalElement.textContent =
+        "0";
+
+    directory.style.display =
+        "none";
 
     try {
 
@@ -5090,43 +5113,84 @@ async function checkFeaturedCars(
                     String(longitude)
             });
 
-        const response = await fetch(
+        const endpoint =
             "https://cars.wallawalla.co.za"
             + "/api/featured-cars?"
-            + parameters.toString(),
-            {
-                method: "GET",
-                mode: "cors",
-                credentials: "omit"
-            }
+            + parameters.toString();
+
+        console.log(
+            "Checking Featured Cars:",
+            endpoint
         );
 
+        const response =
+            await fetch(
+                endpoint,
+                {
+                    method: "GET",
+                    mode: "cors",
+                    credentials: "omit"
+                }
+            );
+
         if (!response.ok) {
+
             throw new Error(
-                `Featured cars check failed: ${response.status}`
+                "Featured Cars request failed: "
+                + response.status
             );
         }
 
         const data =
             await response.json();
 
-        const total =
-            Number(data.total)
-            || (
-                Array.isArray(data.cars)
-                    ? data.cars.length
-                    : 0
+        console.log(
+            "Featured Cars API response:",
+            data
+        );
+
+        const cars =
+            Array.isArray(
+                data.cars
+            )
+                ? data.cars
+                : [];
+
+        const apiTotal =
+            Number(
+                data.total
             );
 
-        if (totalElement) {
-            totalElement.textContent =
-                String(total);
+        const total =
+            Number.isFinite(
+                apiTotal
+            )
+                ? apiTotal
+                : cars.length;
+
+        totalElement.textContent =
+            String(total);
+
+        if (labelElement) {
+
+            labelElement.textContent =
+                total === 1
+                    ? "car"
+                    : "cars";
         }
+
+        window.wallawallaFeaturedCars =
+            cars;
 
         directory.style.display =
             total > 0
                 ? "block"
                 : "none";
+
+        console.log(
+            "Featured Cars count displayed:",
+            total
+        );
 
     } catch (error) {
 
@@ -5134,6 +5198,14 @@ async function checkFeaturedCars(
             "Featured Cars availability error:",
             error
         );
+
+        totalElement.textContent =
+            "0";
+
+        if (labelElement) {
+            labelElement.textContent =
+                "cars";
+        }
 
         directory.style.display =
             "none";
