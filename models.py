@@ -3366,6 +3366,17 @@ class Job(db.Model):
 class JobApplication(db.Model):
     __tablename__ = "job_applications"
 
+    __table_args__ = (
+        db.UniqueConstraint(
+            "job_id",
+            "email",
+            name=(
+                "uq_job_application_"
+                "job_email"
+            )
+        ),
+    )
+
     id = db.Column(
         db.Integer,
         primary_key=True
@@ -3404,11 +3415,21 @@ class JobApplication(db.Model):
 
     phone = db.Column(
         db.String(30),
-        nullable=True
+        nullable=False
     )
 
     whatsapp = db.Column(
         db.String(30),
+        nullable=True
+    )
+
+    location = db.Column(
+        db.String(255),
+        nullable=True
+    )
+
+    linkedin_url = db.Column(
+        db.String(500),
         nullable=True
     )
 
@@ -3422,8 +3443,60 @@ class JobApplication(db.Model):
         nullable=True
     )
 
+    cv_s3_key = db.Column(
+        db.String(1000),
+        nullable=False
+    )
+
+    cv_original_filename = db.Column(
+        db.String(255),
+        nullable=False
+    )
+
+    cv_content_type = db.Column(
+        db.String(150),
+        nullable=True
+    )
+
+    cv_size = db.Column(
+        db.Integer,
+        nullable=True
+    )
+
     supporting_document_url = db.Column(
         db.String(1000),
+        nullable=True
+    )
+
+    supporting_document_s3_key = db.Column(
+        db.String(1000),
+        nullable=True
+    )
+
+    supporting_document_original_filename = db.Column(
+        db.String(255),
+        nullable=True
+    )
+
+    supporting_document_content_type = db.Column(
+        db.String(150),
+        nullable=True
+    )
+
+    supporting_document_size = db.Column(
+        db.Integer,
+        nullable=True
+    )
+
+    consent_given = db.Column(
+        db.Boolean,
+        nullable=False,
+        default=False,
+        server_default="false"
+    )
+
+    consent_at = db.Column(
+        db.DateTime,
         nullable=True
     )
 
@@ -3434,17 +3507,6 @@ class JobApplication(db.Model):
         server_default="submitted",
         index=True
     )
-
-    # Suggested status values:
-    #
-    # submitted
-    # viewed
-    # shortlisted
-    # interview
-    # offered
-    # hired
-    # rejected
-    # withdrawn
 
     employer_notes = db.Column(
         db.Text,
@@ -3475,6 +3537,23 @@ class JobApplication(db.Model):
         onupdate=datetime.utcnow
     )
 
+    @property
+    def application_reference(self):
+        if not self.id:
+            return None
+
+        return (
+            f"WA-JOB-"
+            f"{self.job_id}-"
+            f"{self.id}"
+        )
+
+    @property
+    def is_new(self):
+        return (
+            self.status
+            == "submitted"
+        )
 
 class JobClaim(db.Model):
     __tablename__ = "job_claims"
