@@ -11,7 +11,7 @@ from flask import (
 from sqlalchemy import or_, func
 from sqlalchemy import cast, String
 from flask_sqlalchemy import SQLAlchemy
-from models import db, Business, Property
+from models import db, Business, Property, Car
 from math import radians, sin, cos, sqrt, atan2
 from datetime import datetime, timedelta
 
@@ -53,6 +53,10 @@ def home():
             .first()
         )
 
+    # ==================================================
+    # FEATURED BUSINESSES
+    # ==================================================
+
     featured_business_count = (
         Business.query
         .filter(
@@ -67,6 +71,10 @@ def home():
         .count()
     )
 
+    # ==================================================
+    # FEATURED PROPERTIES
+    # ==================================================
+
     featured_property_count = (
         Property.query
         .filter(
@@ -75,6 +83,26 @@ def home():
             or_(
                 Property.featured_expires_at.is_(None),
                 Property.featured_expires_at
+                > utc_now()
+            )
+        )
+        .count()
+    )
+
+    # ==================================================
+    # FEATURED CARS
+    # Same pattern as Business and Property
+    # ==================================================
+
+    featured_car_count = (
+        Car.query
+        .filter(
+            Car.status == "approved",
+            Car.listing_status == "available",
+            Car.is_featured.is_(True),
+            or_(
+                Car.featured_expires_at.is_(None),
+                Car.featured_expires_at
                 > utc_now()
             )
         )
@@ -98,6 +126,10 @@ def home():
 
         featured_property_count=(
             featured_property_count
+        ),
+
+        featured_car_count=(
+            featured_car_count
         )
     )
 
